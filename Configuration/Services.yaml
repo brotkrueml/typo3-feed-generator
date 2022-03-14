@@ -1,0 +1,13 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Brotkrueml\FeedGenerator\:
+    resource: '../Classes/*'
+    exclude: '../Classes/{Attributes,Configuration/FeedConfiguration,Item}'
+
+  Brotkrueml\FeedGenerator\Configuration\FeedRegistry:
+    arguments:
+      - !tagged_iterator tx_feed_generator.feed

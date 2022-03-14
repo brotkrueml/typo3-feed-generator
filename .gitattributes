@@ -1,0 +1,8 @@
+/Documentation/ export-ignore
+/Tests/ export-ignore
+/.editorconfig export-ignore
+/.gitattributes export-ignore
+/.github export-ignore
+/ecs.php export-ignore
+/Makefile export-ignore
+/README.md export-ignore
