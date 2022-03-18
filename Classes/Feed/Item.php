@@ -9,12 +9,12 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\FeedGenerator\Item;
+namespace Brotkrueml\FeedGenerator\Feed;
 
 /**
  * @api
  */
-class Item implements ItemInterface
+final class Item implements ItemInterface
 {
     public function __construct(
         private readonly string $title = '',

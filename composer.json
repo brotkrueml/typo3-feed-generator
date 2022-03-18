@@ -27,6 +27,7 @@
 	"require-dev": {
 		"brotkrueml/coding-standards": "~1.2.0",
 		"ergebnis/composer-normalize": "~2.24.0",
+		"phpunit/phpunit": "^9.5",
 		"symfony/yaml": "^5.4 || ^6.0"
 	},
 	"autoload": {

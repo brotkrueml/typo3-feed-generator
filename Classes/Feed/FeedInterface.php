@@ -11,20 +11,34 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Feed;
 
-use Brotkrueml\FeedGenerator\Item\ItemInterface;
-
 /**
  * @api
  */
-interface FeedInterface
+interface FeedInterface extends NodeInterface
 {
+    /**
+     * Get the format of the feed
+     */
     public function getFormat(): FeedFormat;
 
-    public function getTitle(): string;
-
+    /**
+     * Get the description of the feed, return empty string to omit description in feed
+     */
     public function getDescription(): string;
 
     /**
+     * Get the language, return empty string to omit language in feed
+     */
+    public function getLanguage(): string;
+
+    /**
+     * Get the logo, return empty string to omit logo in feed
+     */
+    public function getLogo(): string;
+
+    /**
+     * Get the items of the feed
+     *
      * @return ItemInterface[]
      */
     public function getItems(): array;

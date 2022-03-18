@@ -38,7 +38,7 @@ final class FeedMiddleware implements MiddlewareInterface
         $path = $request->getRequestTarget();
         $feed = $this->feedRegistry->getFeedBySiteIdentifierAndPath($siteIdentifier, $path);
         if ($feed instanceof FeedInterface) {
-            $feedString = $this->feedBuilder->build($feed, $request->getAttribute('normalizedParams')->getRequestUrl());
+            $feedString = $this->feedBuilder->build($feed);
 
             $response = $this->responseFactory->createResponse()
                 ->withHeader('Content-Type', $feed->getFormat()->contentType() . '; charset=utf-8');

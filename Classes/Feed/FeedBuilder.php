@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Feed;
 
-use Brotkrueml\FeedGenerator\Item\ItemInterface;
 use FeedIo\Feed\Item;
 
 /**
@@ -26,12 +25,18 @@ final class FeedBuilder
         $this->feedIo = \FeedIo\Factory::create()->getFeedIo();
     }
 
-    public function build(FeedInterface $feed, string $url): string
+    public function build(FeedInterface $feed): string
     {
         $theFeed = new \FeedIo\Feed();
         $theFeed->setTitle($feed->getTitle());
         $theFeed->setDescription($feed->getDescription());
-        $theFeed->setUrl($url);
+        $theFeed->setPublicId($feed->getPublicId());
+        $lastModified = $feed->getLastModified();
+        $lastModified = $lastModified instanceof \DateTimeImmutable ? \DateTime::createFromImmutable($lastModified) : $lastModified;
+        $theFeed->setLastModified($lastModified);
+        $theFeed->setLink($feed->getLink());
+        $theFeed->setLanguage($feed->getLanguage());
+        $theFeed->setLogo($feed->getLogo());
 
         foreach ($feed->getItems() as $item) {
             $theFeed->add($this->buildFeedIoItem($item));
