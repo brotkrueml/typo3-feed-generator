@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Configuration;
 
+use Brotkrueml\FeedGenerator\Attributes\Path;
+use Brotkrueml\FeedGenerator\Attributes\Site;
 use Brotkrueml\FeedGenerator\Feed\FeedInterface;
 
 /**
@@ -31,15 +33,28 @@ final class FeedRegistry
         $configurations = [];
         foreach ($configuredFeeds as $configuredFeed) {
             $reflectionClass = new \ReflectionClass($configuredFeed);
-            $attributes = $reflectionClass->getAttributes(\Brotkrueml\FeedGenerator\Attributes\Feed::class);
-            foreach ($attributes as $attribute) {
-                $feed = $attribute->newInstance();
-                $configurations[] = new FeedConfiguration(
-                    $configuredFeed,
-                    $feed->path,
-                    $feed->siteIdentifiers,
-                );
-            }
+            $path = \array_map(
+                static fn (\ReflectionAttribute $attrib): string => $attrib->newInstance()->path,
+                $reflectionClass->getAttributes(Path::class)
+            )[0] ?? throw new \DomainException(
+                \sprintf(
+                    'Mandatory attribute "%s" is missing for class "%s" which implements "%s"',
+                    Path::class,
+                    $configuredFeed::class,
+                    FeedInterface::class,
+                ),
+                1647595664
+            );
+            $siteIdentifiers = \array_map(
+                static fn (\ReflectionAttribute $attrib): array => $attrib->newInstance()->siteIdentifiers,
+                $reflectionClass->getAttributes(Site::class)
+            )[0] ?? [];
+
+            $configurations[] = new FeedConfiguration(
+                $configuredFeed,
+                $path,
+                $siteIdentifiers,
+            );
         }
 
         $this->configurations = $configurations;

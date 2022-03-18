@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
+use Rector\Php74\Rector\LNumber\AddLiteralSeparatorToNumberRector;
 use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
@@ -31,4 +32,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::AUTOLOAD_PATHS, [__DIR__ . '/.Build/vendor/autoload.php']);
 
     $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_81);
+
+    $parameters->set(Option::SKIP, [
+        AddLiteralSeparatorToNumberRector::class,
+    ]);
 };

@@ -14,14 +14,15 @@ namespace Brotkrueml\FeedGenerator\Attributes;
 use Attribute;
 
 #[Attribute(Attribute::TARGET_CLASS)]
-final class Feed
+final class Site
 {
     /**
-     * @param string[] $siteIdentifiers
+     * @var string[]
      */
-    public function __construct(
-        public readonly string $path,
-        public readonly array $siteIdentifiers = []
-    ) {
+    public readonly array $siteIdentifiers;
+
+    public function __construct(string ...$siteIdentifiers)
+    {
+        $this->siteIdentifiers = $siteIdentifiers;
     }
 }
