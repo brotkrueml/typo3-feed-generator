@@ -18,6 +18,9 @@ use Brotkrueml\FeedGenerator\Feed\FeedInterface;
  */
 final class FeedConfiguration
 {
+    /**
+     * @param string[] $siteIdentifiers
+     */
     public function __construct(
         public readonly FeedInterface $instance,
         public readonly string $path,

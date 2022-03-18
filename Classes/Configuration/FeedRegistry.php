@@ -18,8 +18,14 @@ use Brotkrueml\FeedGenerator\Feed\FeedInterface;
  */
 final class FeedRegistry
 {
+    /**
+     * @var FeedConfiguration[]
+     */
     private readonly array $configurations;
 
+    /**
+     * @param iterable<FeedInterface> $configuredFeeds
+     */
     public function __construct(iterable $configuredFeeds)
     {
         $configurations = [];

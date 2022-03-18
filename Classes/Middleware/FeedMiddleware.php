@@ -19,6 +19,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use TYPO3\CMS\Core\Site\Entity\Site;
 
 /**
  * @internal
@@ -34,7 +35,9 @@ final class FeedMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $siteIdentifier = $request->getAttribute('site')->getIdentifier();
+        /** @var Site $site */
+        $site = $request->getAttribute('site');
+        $siteIdentifier = $site->getIdentifier();
         $path = $request->getRequestTarget();
         $feed = $this->feedRegistry->getFeedBySiteIdentifierAndPath($siteIdentifier, $path);
         if ($feed instanceof FeedInterface) {
