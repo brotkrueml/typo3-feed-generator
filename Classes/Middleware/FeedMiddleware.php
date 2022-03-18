@@ -14,6 +14,7 @@ namespace Brotkrueml\FeedGenerator\Middleware;
 use Brotkrueml\FeedGenerator\Configuration\FeedRegistry;
 use Brotkrueml\FeedGenerator\Feed\FeedBuilder;
 use Brotkrueml\FeedGenerator\Feed\FeedInterface;
+use Brotkrueml\FeedGenerator\Feed\RequestAwareInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -40,16 +41,20 @@ final class FeedMiddleware implements MiddlewareInterface
         $siteIdentifier = $site->getIdentifier();
         $path = $request->getRequestTarget();
         $feed = $this->feedRegistry->getFeedBySiteIdentifierAndPath($siteIdentifier, $path);
-        if ($feed instanceof FeedInterface) {
-            $feedString = $this->feedBuilder->build($feed);
 
-            $response = $this->responseFactory->createResponse()
-                ->withHeader('Content-Type', $feed->getFormat()->contentType() . '; charset=utf-8');
-            $response->getBody()->write($feedString);
-
-            return $response;
+        if (! $feed instanceof FeedInterface) {
+            return $handler->handle($request);
         }
 
-        return $handler->handle($request);
+        if ($feed instanceof RequestAwareInterface) {
+            $feed->setRequest($request);
+        }
+        $feedString = $this->feedBuilder->build($feed);
+
+        $response = $this->responseFactory->createResponse()
+            ->withHeader('Content-Type', $feed->getFormat()->contentType() . '; charset=utf-8');
+        $response->getBody()->write($feedString);
+
+        return $response;
     }
 }
