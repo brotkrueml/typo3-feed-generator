@@ -18,7 +18,7 @@ use FeedIo\Feed\Item;
  */
 final class FeedBuilder
 {
-    private \FeedIo\FeedIo $feedIo;
+    private readonly \FeedIo\FeedIo $feedIo;
 
     public function __construct()
     {

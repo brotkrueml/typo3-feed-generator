@@ -1,5 +1,5 @@
 .PHONY: qa
-qa: cs tests phpstan yaml-lint
+qa: cs tests phpstan rector-dry yaml-lint
 
 .PHONY: cs
 cs: vendor
@@ -8,6 +8,14 @@ cs: vendor
 .PHONY: phpstan
 phpstan: vendor
 	.Build/bin/phpstan analyse
+
+.PHONY: rector
+rector: vendor
+	.Build/bin/rector
+
+.PHONY: rector-dry
+rector-dry: vendor
+	.Build/bin/rector --dry-run
 
 .PHONY: tests
 tests: vendor
