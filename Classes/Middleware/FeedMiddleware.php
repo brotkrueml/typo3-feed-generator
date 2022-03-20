@@ -14,6 +14,7 @@ namespace Brotkrueml\FeedGenerator\Middleware;
 use Brotkrueml\FeedGenerator\Configuration\FeedConfiguration;
 use Brotkrueml\FeedGenerator\Configuration\FeedRegistry;
 use Brotkrueml\FeedGenerator\Feed\FeedBuilder;
+use Brotkrueml\FeedGenerator\Feed\FeedFormatAwareInterface;
 use Brotkrueml\FeedGenerator\Feed\RequestAwareInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -49,6 +50,9 @@ final class FeedMiddleware implements MiddlewareInterface
         $feed = $configuration->instance;
         if ($feed instanceof RequestAwareInterface) {
             $feed->setRequest($request);
+        }
+        if ($feed instanceof FeedFormatAwareInterface) {
+            $feed->setFormat($configuration->format);
         }
         $feedString = $this->feedBuilder->build($feed, $configuration->format);
 
