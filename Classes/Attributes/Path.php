@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Attributes;
 
 use Attribute;
+use Brotkrueml\FeedGenerator\Feed\FeedFormat;
 
 #[Attribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
 final class Path
@@ -21,6 +22,7 @@ final class Path
      */
     public function __construct(
         public readonly string $path,
+        public readonly FeedFormat $format,
         public readonly array $siteIdentifiers = [],
     ) {
     }

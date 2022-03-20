@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Configuration;
 
+use Brotkrueml\FeedGenerator\Feed\FeedFormat;
 use Brotkrueml\FeedGenerator\Feed\FeedInterface;
 
 /**
@@ -24,6 +25,7 @@ final class FeedConfiguration
     public function __construct(
         public readonly FeedInterface $instance,
         public readonly string $path,
+        public readonly FeedFormat $format,
         public readonly array $siteIdentifiers,
     ) {
     }

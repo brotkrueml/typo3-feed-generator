@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Middleware;
 
+use Brotkrueml\FeedGenerator\Configuration\FeedConfiguration;
 use Brotkrueml\FeedGenerator\Configuration\FeedRegistry;
 use Brotkrueml\FeedGenerator\Feed\FeedBuilder;
-use Brotkrueml\FeedGenerator\Feed\FeedInterface;
 use Brotkrueml\FeedGenerator\Feed\RequestAwareInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -40,19 +40,20 @@ final class FeedMiddleware implements MiddlewareInterface
         $site = $request->getAttribute('site');
         $siteIdentifier = $site->getIdentifier();
         $path = $request->getRequestTarget();
-        $feed = $this->feedRegistry->getFeedBySiteIdentifierAndPath($siteIdentifier, $path);
+        $configuration = $this->feedRegistry->getConfigurationBySiteIdentifierAndPath($siteIdentifier, $path);
 
-        if (! $feed instanceof FeedInterface) {
+        if (! $configuration instanceof FeedConfiguration) {
             return $handler->handle($request);
         }
 
+        $feed = $configuration->instance;
         if ($feed instanceof RequestAwareInterface) {
             $feed->setRequest($request);
         }
-        $feedString = $this->feedBuilder->build($feed);
+        $feedString = $this->feedBuilder->build($feed, $configuration->format);
 
         $response = $this->responseFactory->createResponse()
-            ->withHeader('Content-Type', $feed->getFormat()->contentType() . '; charset=utf-8');
+            ->withHeader('Content-Type', $configuration->format->contentType() . '; charset=utf-8');
         $response->getBody()->write($feedString);
 
         return $response;

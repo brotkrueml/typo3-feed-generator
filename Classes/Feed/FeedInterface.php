@@ -17,11 +17,6 @@ namespace Brotkrueml\FeedGenerator\Feed;
 interface FeedInterface extends NodeInterface
 {
     /**
-     * Get the format of the feed
-     */
-    public function getFormat(): FeedFormat;
-
-    /**
      * Get the description of the feed, return empty string to omit description in feed
      */
     public function getDescription(): string;

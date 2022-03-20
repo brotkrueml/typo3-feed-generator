@@ -48,6 +48,7 @@ final class FeedRegistry
                 $configurations[] = new FeedConfiguration(
                     $configuredFeed,
                     $attribute->path,
+                    $attribute->format,
                     $attribute->siteIdentifiers,
                 );
             }
@@ -56,7 +57,7 @@ final class FeedRegistry
         $this->configurations = $configurations;
     }
 
-    public function getFeedBySiteIdentifierAndPath(string $siteIdentifier, string $path): ?FeedInterface
+    public function getConfigurationBySiteIdentifierAndPath(string $siteIdentifier, string $path): ?FeedConfiguration
     {
         $filteredConfigurations = \array_filter(
             $this->configurations,
@@ -71,8 +72,6 @@ final class FeedRegistry
             return null;
         }
 
-        $configuration = \array_shift($filteredConfigurations);
-
-        return $configuration->instance;
+        return \array_shift($filteredConfigurations);
     }
 }

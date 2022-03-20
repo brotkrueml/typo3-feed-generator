@@ -25,7 +25,7 @@ final class FeedBuilder
         $this->feedIo = \FeedIo\Factory::create()->getFeedIo();
     }
 
-    public function build(FeedInterface $feed): string
+    public function build(FeedInterface $feed, FeedFormat $format): string
     {
         $theFeed = new \FeedIo\Feed();
         $theFeed->setTitle($feed->getTitle());
@@ -42,7 +42,7 @@ final class FeedBuilder
             $theFeed->add($this->buildFeedIoItem($item));
         }
 
-        return $this->feedIo->format($theFeed, $feed->getFormat()->format());
+        return $this->feedIo->format($theFeed, $format->format());
     }
 
     private function buildFeedIoItem(ItemInterface $item): \FeedIo\Feed\Item
