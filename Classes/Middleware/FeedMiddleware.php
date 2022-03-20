@@ -16,6 +16,7 @@ use Brotkrueml\FeedGenerator\Configuration\FeedRegistry;
 use Brotkrueml\FeedGenerator\Feed\FeedBuilder;
 use Brotkrueml\FeedGenerator\Feed\FeedFormatAwareInterface;
 use Brotkrueml\FeedGenerator\Feed\RequestAwareInterface;
+use Brotkrueml\FeedGenerator\Feed\StyleSheetAwareInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -56,8 +57,9 @@ final class FeedMiddleware implements MiddlewareInterface
         }
         $feedString = $this->feedBuilder->build($feed, $configuration->format);
 
+        $styleSheet = (string)($feed instanceof StyleSheetAwareInterface && $feed->getStyleSheet());
         $response = $this->responseFactory->createResponse()
-            ->withHeader('Content-Type', $configuration->format->contentType() . '; charset=utf-8');
+            ->withHeader('Content-Type', $configuration->format->contentType((bool)$styleSheet) . '; charset=utf-8');
         $response->getBody()->write($feedString);
 
         return $response;

@@ -12,6 +12,9 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Feed;
 
 use FeedIo\Feed\Item;
+use FeedIo\Feed\StyleSheet;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\PathUtility;
 
 /**
  * @internal
@@ -27,22 +30,29 @@ final class FeedBuilder
 
     public function build(FeedInterface $feed, FeedFormat $format): string
     {
-        $theFeed = new \FeedIo\Feed();
-        $theFeed->setTitle($feed->getTitle());
-        $theFeed->setDescription($feed->getDescription());
-        $theFeed->setPublicId($feed->getPublicId());
+        $feedIo = new \FeedIo\Feed();
+        $feedIo->setTitle($feed->getTitle());
+        $feedIo->setDescription($feed->getDescription());
+        $feedIo->setPublicId($feed->getPublicId());
         $lastModified = $feed->getLastModified();
         $lastModified = $lastModified instanceof \DateTimeImmutable ? \DateTime::createFromImmutable($lastModified) : $lastModified;
-        $theFeed->setLastModified($lastModified);
-        $theFeed->setLink($feed->getLink());
-        $theFeed->setLanguage($feed->getLanguage());
-        $theFeed->setLogo($feed->getLogo());
+        $feedIo->setLastModified($lastModified);
+        $feedIo->setLink($feed->getLink());
+        $feedIo->setLanguage($feed->getLanguage());
+        $feedIo->setLogo($feed->getLogo());
 
-        foreach ($feed->getItems() as $item) {
-            $theFeed->add($this->buildFeedIoItem($item));
+        if ($feed instanceof StyleSheetAwareInterface) {
+            $styleSheet = $feed->getStyleSheet();
+            if ($styleSheet !== '') {
+                $feedIo->setStyleSheet(new StyleSheet($this->resolveExtensionPath($styleSheet)));
+            }
         }
 
-        return $this->feedIo->format($theFeed, $format->format());
+        foreach ($feed->getItems() as $item) {
+            $feedIo->add($this->buildFeedIoItem($item));
+        }
+
+        return $this->feedIo->format($feedIo, $format->format());
     }
 
     private function buildFeedIoItem(ItemInterface $item): \FeedIo\Feed\Item
@@ -57,5 +67,20 @@ final class FeedBuilder
         $feedIoItem->setContent($item->getContent());
 
         return $feedIoItem;
+    }
+
+    private function resolveExtensionPath(string $path): string
+    {
+        if (! \str_starts_with($path, 'EXT:')) {
+            throw new \InvalidArgumentException(
+                \sprintf(
+                    'The style sheet must be an extension path starting with "EXT:", "%s" given',
+                    $path
+                ),
+                1647367323
+            );
+        }
+
+        return PathUtility::getAbsoluteWebPath(GeneralUtility::getFileAbsFileName($path));
     }
 }
