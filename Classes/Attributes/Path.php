@@ -13,11 +13,15 @@ namespace Brotkrueml\FeedGenerator\Attributes;
 
 use Attribute;
 
-#[Attribute(Attribute::TARGET_CLASS)]
+#[Attribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
 final class Path
 {
+    /**
+     * @param string[] $siteIdentifiers
+     */
     public function __construct(
         public readonly string $path,
+        public readonly array $siteIdentifiers = [],
     ) {
     }
 }
