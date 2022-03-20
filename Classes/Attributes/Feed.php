@@ -15,7 +15,7 @@ use Attribute;
 use Brotkrueml\FeedGenerator\Feed\FeedFormat;
 
 #[Attribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
-final class Path
+final class Feed
 {
     /**
      * @param string[] $siteIdentifiers
