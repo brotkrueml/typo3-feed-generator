@@ -1,6 +1,6 @@
 {
 	"name": "brotkrueml/typo3-feed-generator",
-	"description": "Generator for ATOM, JSON and RSS feeds in TYPO3",
+	"description": "Generator for Atom, JSON and RSS feeds in TYPO3",
 	"license": "GPL-2.0-or-later",
 	"type": "typo3-cms-extension",
 	"keywords": [

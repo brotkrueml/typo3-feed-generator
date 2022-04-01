@@ -6,5 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2022-04-01
 
-[Unreleased]: https://github.com/brotkrueml/typo3-feed-generator/commits/main
+First preview release
+
+[Unreleased]: https://github.com/brotkrueml/typo3-matomo-widgets/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/brotkrueml/typo3-matomo-widgets/releases/tag/v0.1.0

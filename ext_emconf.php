@@ -1,12 +1,12 @@
 <?php
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Feed Generator',
-    'description' => 'Generator for ATOM, JSON and RSS feeds',
+    'description' => 'Generator for Atom, JSON and RSS feeds',
     'category' => 'fe',
     'author' => 'Chris Müller',
     'author_email' => 'typo3@krue.ml',
     'state' => 'experimental',
-    'version' => '0.1.0-dev',
+    'version' => '0.1.0',
     'constraints' => [
         'depends' => [
             'typo3' => '11.5.0-11.5.99',
