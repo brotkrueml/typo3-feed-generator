@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE stylesheet [<!ENTITY css SYSTEM "../Css/xsl.css">]>
 <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:atom="http://www.w3.org/2005/Atom">
     <xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
     <xsl:template match="/atom:feed">
@@ -10,7 +9,90 @@
                 </title>
                 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-                <style>&css;</style>
+                <style>
+                    * {
+                    box-sizing: border-box;
+                    }
+
+                    html {
+                    font-size: 62.5%;
+                    }
+
+                    body {
+                    font-family: sans-serif;
+                    font-size: 1.8rem;
+                    margin: 0;
+                    }
+
+                    article {
+                    border-bottom: 1px solid lightgray;
+                    }
+
+                    article:last-child {
+                    border: none;
+                    }
+
+                    aside {
+                    padding: 1rem;
+                    background: aliceblue;
+                    text-align: center;
+                    }
+
+                    dt {
+                    font-weight: bold;
+                    margin-bottom: .5rem;
+                    }
+
+                    dt::after {
+                    content: ":";
+                    }
+
+                    dd {
+                    margin-bottom: .5rem;
+                    }
+
+                    dd p {
+                    margin: .5rem 0;
+                    }
+
+                    dd p:first-child {
+                    margin-top: 0;
+                    }
+
+                    dd p:last-child {
+                    margin-bottom: 0;
+                    }
+
+                    img {
+                    float: right;
+                    max-width: 100px;
+                    }
+
+                    h1 {
+                    font-size: 3.5rem;
+                    font-weight: normal;
+                    margin: 0;
+                    }
+
+                    h2 {
+                    font-size: 2.2rem;
+                    font-weight: normal;
+                    }
+
+                    .feed {
+                    max-width: 80rem;
+                    margin: 2rem auto;
+                    padding: 0 1rem;
+                    }
+
+                    .summary {
+                    margin-bottom: 2rem;
+                    }
+
+                    .summary::after {
+                    clear: both;
+                    }
+                </style>
             </head>
             <body>
                 <aside>
