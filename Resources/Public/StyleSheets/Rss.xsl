@@ -124,48 +124,51 @@
                             </p>
                         </xsl:if>
                     </section>
-                    <xsl:for-each select="item">
+                    <xsl:apply-templates select="item">
                         <xsl:sort select="pubDate" order="descending"/>
-                        <article>
-                            <h2>
-                                <a target="_blank">
-                                    <xsl:attribute name="href">
-                                        <xsl:value-of select="link"/>
-                                    </xsl:attribute>
-                                    <xsl:value-of select="title"/>
-                                </a>
-                            </h2>
-                            <dl>
-                                <dt>Publication date</dt>
-                                <dd>
-                                    <xsl:value-of select="pubDate"/>
-                                </dd>
-                                <xsl:if test="author">
-                                    <dt>Author</dt>
-                                    <dd>
-                                        <xsl:value-of select="author"/>
-                                    </dd>
-                                </xsl:if>
-                                <xsl:if test="description">
-                                    <dt>Description</dt>
-                                    <dd>
-                                        <xsl:value-of select="description" disable-output-escaping="yes"/>
-                                    </dd>
-                                </xsl:if>
-                                <xsl:if test="enclosure">
-                                    <dt>Media</dt>
-                                    <dd>
-                                        <ul>
-                                            <xsl:apply-templates select="enclosure"/>
-                                        </ul>
-                                    </dd>
-                                </xsl:if>
-                            </dl>
-                        </article>
-                    </xsl:for-each>
+                    </xsl:apply-templates>
                 </div>
             </body>
         </html>
+    </xsl:template>
+
+    <xsl:template match="item">
+        <article>
+            <h2>
+                <a target="_blank">
+                    <xsl:attribute name="href">
+                        <xsl:value-of select="link"/>
+                    </xsl:attribute>
+                    <xsl:value-of select="title"/>
+                </a>
+            </h2>
+            <dl>
+                <dt>Publication date</dt>
+                <dd>
+                    <xsl:value-of select="pubDate"/>
+                </dd>
+                <xsl:if test="author">
+                    <dt>Author</dt>
+                    <dd>
+                        <xsl:value-of select="author"/>
+                    </dd>
+                </xsl:if>
+                <xsl:if test="description">
+                    <dt>Description</dt>
+                    <dd>
+                        <xsl:value-of select="description" disable-output-escaping="yes"/>
+                    </dd>
+                </xsl:if>
+                <xsl:if test="enclosure">
+                    <dt>Media</dt>
+                    <dd>
+                        <ul>
+                            <xsl:apply-templates select="enclosure"/>
+                        </ul>
+                    </dd>
+                </xsl:if>
+            </dl>
+        </article>
     </xsl:template>
 
     <xsl:template match="enclosure">

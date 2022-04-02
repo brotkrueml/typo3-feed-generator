@@ -129,54 +129,57 @@
                             </p>
                         </xsl:if>
                     </section>
-                    <xsl:for-each select="atom:entry">
+                    <xsl:apply-templates select="atom:entry">
                         <xsl:sort select="atom:updated" order="descending"/>
-                        <article>
-                            <h2>
-                                <a target="_blank">
-                                    <xsl:attribute name="href">
-                                        <xsl:value-of select="atom:link/@href"/>
-                                    </xsl:attribute>
-                                    <xsl:value-of select="atom:title"/>
-                                </a>
-                            </h2>
-                            <dl>
-                                <dt>Updated</dt>
-                                <dd>
-                                    <xsl:value-of select="atom:updated"/>
-                                </dd>
-                                <xsl:if test="atom:author/atom:name">
-                                    <dt>Author</dt>
-                                    <dd>
-                                        <xsl:value-of select="atom:author/atom:name"/>
-                                    </dd>
-                                </xsl:if>
-                                <xsl:if test="atom:summary">
-                                    <dt>Summary</dt>
-                                    <dd>
-                                        <xsl:value-of select="atom:summary" disable-output-escaping="yes"/>
-                                    </dd>
-                                </xsl:if>
-                                <xsl:if test="atom:content">
-                                    <dt>Content</dt>
-                                    <dd>
-                                        <xsl:value-of select="atom:content" disable-output-escaping="yes"/>
-                                    </dd>
-                                </xsl:if>
-                                <xsl:if test="atom:link/@rel='enclosure'">
-                                    <dt>Media</dt>
-                                    <dd>
-                                        <ul>
-                                            <xsl:apply-templates select="atom:link[@rel='enclosure']"/>
-                                        </ul>
-                                    </dd>
-                                </xsl:if>
-                            </dl>
-                        </article>
-                    </xsl:for-each>
+                    </xsl:apply-templates>
                 </div>
             </body>
         </html>
+    </xsl:template>
+
+    <xsl:template match="atom:entry">
+        <article>
+            <h2>
+                <a target="_blank">
+                    <xsl:attribute name="href">
+                        <xsl:value-of select="atom:link/@href"/>
+                    </xsl:attribute>
+                    <xsl:value-of select="atom:title"/>
+                </a>
+            </h2>
+            <dl>
+                <dt>Updated</dt>
+                <dd>
+                    <xsl:value-of select="atom:updated"/>
+                </dd>
+                <xsl:if test="atom:author/atom:name">
+                    <dt>Author</dt>
+                    <dd>
+                        <xsl:value-of select="atom:author/atom:name"/>
+                    </dd>
+                </xsl:if>
+                <xsl:if test="atom:summary">
+                    <dt>Summary</dt>
+                    <dd>
+                        <xsl:value-of select="atom:summary" disable-output-escaping="yes"/>
+                    </dd>
+                </xsl:if>
+                <xsl:if test="atom:content">
+                    <dt>Content</dt>
+                    <dd>
+                        <xsl:value-of select="atom:content" disable-output-escaping="yes"/>
+                    </dd>
+                </xsl:if>
+                <xsl:if test="atom:link/@rel='enclosure'">
+                    <dt>Media</dt>
+                    <dd>
+                        <ul>
+                            <xsl:apply-templates select="atom:link[@rel='enclosure']"/>
+                        </ul>
+                    </dd>
+                </xsl:if>
+            </dl>
+        </article>
     </xsl:template>
 
     <xsl:template match="atom:link">
