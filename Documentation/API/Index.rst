@@ -20,6 +20,32 @@ Interfaces
 
 .. php:namespace:: Brotkrueml\FeedGenerator\Feed
 
+.. php:interface:: AuthorInterface
+
+   Has to be implemented to provide an author to a feed or an item. The
+   extension provides already an implementation
+   (:php:`Brotkrueml\FeedGenerator\Feed\Author`) which can be used. However, if
+   you have special needs you can use this interface to implement a custom
+   author class.
+
+   .. php:method:: getName()
+
+      :returntype: string
+      :returns: The name of the author.
+
+   .. php:method:: getUri()
+
+      :returntype: string
+      :returns: The URI of the author. Return an empty string to omit the
+                property.
+
+   .. php:method:: getEmail()
+
+      :returntype: string
+      :returns: The email address of the author. Return an empty string to omit
+                the property.
+
+
 .. php:interface:: FeedInterface
 
    Has to be implemented to provide a feed. It extends
@@ -93,7 +119,7 @@ Interfaces
 
 .. php:interface:: MediaInterface
 
-   Has to be implemented to provide one or media assets (like image, video,
+   Has to be implemented to provide one or more media assets (like image, video,
    audio) to an item. The extension provides already an implementation
    (:php:`Brotkrueml\FeedGenerator\Feed\Media`) which can be used. However, if
    you have special needs you can use this interface to implement a custom media
@@ -180,6 +206,35 @@ Classes
 =======
 
 .. php:namespace:: Brotkrueml\FeedGenerator\Feed
+
+.. php:class:: Author
+
+   The class implements the :php:`Brotkrueml\FeedGenerator\Feed\AuthorInterface`
+   and can be used to define an author for a feed or a feed item.
+
+   .. php:method:: __construct
+
+      :param string $name: The name of the author.
+      :param string $uri: The URI of the author. Used in Atom and JSON formats
+                          only.
+      :param string $email: The email address of the author. Used in Atom format
+                            only.
+
+   .. php:method:: getName()
+
+      :returntype: string
+      :returns: The name of the author.
+
+   .. php:method:: getUri()
+
+      :returntype: string
+      :returns: The URI of the author.
+
+   .. php:method:: getEmail()
+
+      :returntype: string
+      :returns: The email address of the author.
+
 
 .. php:class:: Item
 

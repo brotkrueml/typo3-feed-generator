@@ -40,6 +40,7 @@ final class FeedBuilder
         $feedIo->setLink($feed->getLink());
         $feedIo->setLanguage($feed->getLanguage());
         $feedIo->setLogo($feed->getLogo());
+        $feedIo->setAuthor($this->buildFeedIoAuthor($feed->getAuthor()));
 
         if ($feed instanceof StyleSheetAwareInterface) {
             $styleSheet = $feed->getStyleSheet();
@@ -65,6 +66,7 @@ final class FeedBuilder
         $feedIoItem->setLink($item->getLink());
         $feedIoItem->setSummary($item->getSummary());
         $feedIoItem->setContent($item->getContent());
+        $feedIoItem->setAuthor($this->buildFeedIoAuthor($item->getAuthor()));
         foreach ($item->getMedias() as $media) {
             $feedIoItem->addMedia($this->buildFeedIoMedia($media));
         }
@@ -81,6 +83,20 @@ final class FeedBuilder
         $feedIoMedia->setTitle($media->getTitle());
 
         return $feedIoMedia;
+    }
+
+    private function buildFeedIoAuthor(?AuthorInterface $author): ?Item\Author
+    {
+        if ($author === null) {
+            return null;
+        }
+
+        $feedIoAuthor = new Item\Author();
+        $feedIoAuthor->setName($author->getName());
+        $feedIoAuthor->setUri($author->getUri());
+        $feedIoAuthor->setEmail($author->getEmail());
+
+        return $feedIoAuthor;
     }
 
     private function resolveExtensionPath(string $path): string

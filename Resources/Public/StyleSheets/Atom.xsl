@@ -123,6 +123,11 @@
                                 <xsl:value-of select="atom:description"/>
                             </p>
                         </xsl:if>
+                        <xsl:if test="atom:author/atom:name">
+                            <p>
+                                by <xsl:value-of select="atom:author/atom:name"/>
+                            </p>
+                        </xsl:if>
                     </section>
                     <xsl:for-each select="atom:entry">
                         <xsl:sort select="atom:updated" order="descending"/>
@@ -140,6 +145,12 @@
                                 <dd>
                                     <xsl:value-of select="atom:updated"/>
                                 </dd>
+                                <xsl:if test="atom:author/atom:name">
+                                    <dt>Author</dt>
+                                    <dd>
+                                        <xsl:value-of select="atom:author/atom:name"/>
+                                    </dd>
+                                </xsl:if>
                                 <xsl:if test="atom:summary">
                                     <dt>Summary</dt>
                                     <dd>

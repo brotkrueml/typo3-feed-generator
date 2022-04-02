@@ -140,6 +140,12 @@
                                 <dd>
                                     <xsl:value-of select="pubDate"/>
                                 </dd>
+                                <xsl:if test="author">
+                                    <dt>Author</dt>
+                                    <dd>
+                                        <xsl:value-of select="author"/>
+                                    </dd>
+                                </xsl:if>
                                 <xsl:if test="description">
                                     <dt>Description</dt>
                                     <dd>

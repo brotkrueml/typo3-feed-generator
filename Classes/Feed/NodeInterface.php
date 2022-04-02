@@ -32,4 +32,9 @@ interface NodeInterface
      * Get the URL of the website/page, return empty string to omit link in feed
      */
     public function getLink(): string;
+
+    /**
+     * Get the author of the feed/item, return null to omit author in feed
+     */
+    public function getAuthor(): ?AuthorInterface;
 }

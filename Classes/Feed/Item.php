@@ -26,6 +26,7 @@ final class Item implements ItemInterface
         private readonly string $link = '',
         private readonly string $summary = '',
         private readonly string $content = '',
+        private readonly ?AuthorInterface $author = null,
         private readonly iterable $medias = [],
     ) {
     }
@@ -58,6 +59,11 @@ final class Item implements ItemInterface
     public function getContent(): string
     {
         return $this->content;
+    }
+
+    public function getAuthor(): ?AuthorInterface
+    {
+        return $this->author;
     }
 
     /**

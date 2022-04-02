@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Feed;
 
+use Brotkrueml\FeedGenerator\Feed\Author;
 use Brotkrueml\FeedGenerator\Feed\Item;
 use Brotkrueml\FeedGenerator\Feed\Media;
 use PHPUnit\Framework\TestCase;
@@ -24,6 +25,7 @@ final class ItemTest extends TestCase
         self::assertSame('', $subject->getLink());
         self::assertSame('', $subject->getSummary());
         self::assertSame('', $subject->getContent());
+        self::assertNull($subject->getAuthor());
         self::assertSame([], $subject->getMedias());
     }
 
@@ -87,6 +89,18 @@ final class ItemTest extends TestCase
         $subject = new Item(content: 'some content');
 
         self::assertSame('some content', $subject->getContent());
+    }
+
+    /**
+     * @test
+     */
+    public function getAuthorReturnsAuthorCorrectly(): void
+    {
+        $author = new Author('Some Author');
+
+        $subject = new Item(author: $author);
+
+        self::assertSame($author, $subject->getAuthor());
     }
 
     /**

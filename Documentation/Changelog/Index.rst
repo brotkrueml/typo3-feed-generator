@@ -16,6 +16,7 @@ Added
 
 
 * Media (like images, videos, audios) can be attached to a feed item
+* Author can be attached to a feed or to a feed item
 
 `0.1.0 <https://github.com/brotkrueml/typo3-feed-generator/releases/tag/v0.1.0>`_ - 2022-04-01
 --------------------------------------------------------------------------------------------------
