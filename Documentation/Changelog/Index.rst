@@ -11,6 +11,12 @@ and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0
 `Unreleased <https://github.com/brotkrueml/typo3-feed-generator/compare/v0.1.0...HEAD>`_
 --------------------------------------------------------------------------------------------
 
+Added
+^^^^^
+
+
+* Media (like images, videos, audios) can be attached to a feed item
+
 `0.1.0 <https://github.com/brotkrueml/typo3-feed-generator/releases/tag/v0.1.0>`_ - 2022-04-01
 --------------------------------------------------------------------------------------------------
 

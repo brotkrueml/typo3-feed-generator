@@ -79,6 +79,11 @@
                     font-weight: normal;
                     }
 
+                    ul {
+                    margin: 0;
+                    padding-left: 2rem;
+                    }
+
                     .feed {
                     max-width: 80rem;
                     margin: 2rem auto;
@@ -141,11 +146,31 @@
                                         <xsl:value-of select="description" disable-output-escaping="yes"/>
                                     </dd>
                                 </xsl:if>
+                                <xsl:if test="enclosure">
+                                    <dt>Media</dt>
+                                    <dd>
+                                        <ul>
+                                            <xsl:apply-templates select="enclosure"/>
+                                        </ul>
+                                    </dd>
+                                </xsl:if>
                             </dl>
                         </article>
                     </xsl:for-each>
                 </div>
             </body>
         </html>
+    </xsl:template>
+
+    <xsl:template match="enclosure">
+        <li>
+            <a target="_blank" rel="noreferrer">
+                <xsl:attribute name="href">
+                    <xsl:value-of select="@url"/>
+                </xsl:attribute>
+                <xsl:value-of select="@url"/>
+            </a>
+            (<xsl:value-of select="@type"/>, <xsl:value-of select="format-number(@length,'#,#00')"/> bytes)
+        </li>
     </xsl:template>
 </xsl:stylesheet>

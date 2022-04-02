@@ -55,7 +55,7 @@ final class FeedBuilder
         return $this->feedIo->format($feedIo, $format->format());
     }
 
-    private function buildFeedIoItem(ItemInterface $item): \FeedIo\Feed\Item
+    private function buildFeedIoItem(ItemInterface $item): Item
     {
         $feedIoItem = new Item();
         $feedIoItem->setTitle($item->getTitle());
@@ -65,8 +65,22 @@ final class FeedBuilder
         $feedIoItem->setLink($item->getLink());
         $feedIoItem->setSummary($item->getSummary());
         $feedIoItem->setContent($item->getContent());
+        foreach ($item->getMedias() as $media) {
+            $feedIoItem->addMedia($this->buildFeedIoMedia($media));
+        }
 
         return $feedIoItem;
+    }
+
+    private function buildFeedIoMedia(MediaInterface $media): Item\Media
+    {
+        $feedIoMedia = new Item\Media();
+        $feedIoMedia->setType($media->getType());
+        $feedIoMedia->setUrl($media->getUrl());
+        $feedIoMedia->setLength((string)$media->getLength());
+        $feedIoMedia->setTitle($media->getTitle());
+
+        return $feedIoMedia;
     }
 
     private function resolveExtensionPath(string $path): string

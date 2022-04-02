@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Media (like images, videos, audios) can be attached to a feed item
+
 ## [0.1.0] - 2022-04-01
 
 First preview release

@@ -16,6 +16,9 @@ namespace Brotkrueml\FeedGenerator\Feed;
  */
 final class Item implements ItemInterface
 {
+    /**
+     * @param iterable<MediaInterface> $medias
+     */
     public function __construct(
         private readonly string $title = '',
         private readonly string $publicId = '',
@@ -23,6 +26,7 @@ final class Item implements ItemInterface
         private readonly string $link = '',
         private readonly string $summary = '',
         private readonly string $content = '',
+        private readonly iterable $medias = [],
     ) {
     }
 
@@ -54,5 +58,13 @@ final class Item implements ItemInterface
     public function getContent(): string
     {
         return $this->content;
+    }
+
+    /**
+     * @return iterable<MediaInterface>
+     */
+    public function getMedias(): iterable
+    {
+        return $this->medias;
     }
 }

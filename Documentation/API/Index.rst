@@ -91,6 +91,35 @@ Interfaces
       the content is used for the description tag of an item.
 
 
+.. php:interface:: MediaInterface
+
+   Has to be implemented to provide one or media assets (like image, video,
+   audio) to an item. The extension provides already an implementation
+   (:php:`Brotkrueml\FeedGenerator\Feed\Media`) which can be used. However, if
+   you have special needs you can use this interface to implement a custom media
+   class.
+
+   .. php:method:: getType()
+
+      :returntype: string
+      :returns: Get the mime type of the media.
+
+   .. php:method:: getUrl()
+
+      :returntype: string
+      :returns: Get the URL of the media.
+
+   .. php:method:: getLength()
+
+      :returntype: int
+      :returns: Get the length (in bytes) of the media.
+
+   .. php:method:: getTitle()
+
+      :returntype: string
+      :returns: Get the title of the media. It is used only in a JSON feed.
+
+
 .. php:interface:: NodeInterface
 
    This interface is extended by the
@@ -155,7 +184,7 @@ Classes
 .. php:class:: Item
 
    The class implements the :php:`Brotkrueml\FeedGenerator\Feed\ItemInterface`
-   and can be used to collect the items for a feed.
+   and can be used to define an item for a feed.
 
    .. php:method:: __construct
 
@@ -205,6 +234,39 @@ Classes
 
       :returntype: string
       :returns: The content of the item.
+
+
+.. php:class:: Media
+
+   The class implements the :php:`Brotkrueml\FeedGenerator\Feed\MediaInterface`
+   and can be used to define a media asset for a feed item.
+
+   .. php:method:: __construct
+
+      :param string $type: The mime type of the media.
+      :param string $url: The URL of the media.
+      :param int $length: The length (in bytes) of the media.
+      :param string $title: The title of the media. Use only in a JSON feed.
+
+   .. php:method:: getType()
+
+      :returntype: string
+      :returns: The type of the media.
+
+   .. php:method:: getUrl()
+
+      :returntype: string
+      :returns: The URL of the media.
+
+   .. php:method:: getLength()
+
+      :returntype: int
+      :returns: The length (in bytes) of the media.
+
+   .. php:method:: getTitle()
+
+      :returntype: string
+      :returns: The title of the media.
 
 
 Enumerations

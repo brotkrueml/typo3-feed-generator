@@ -22,7 +22,13 @@ interface ItemInterface extends NodeInterface
     public function getSummary(): string;
 
     /**
-     * Returns the item's content. Used in JSON and Atom formats only
+     * Returns the item's content.
      */
     public function getContent(): string;
+
+    /**
+     * Return the item's medias.
+     * @return iterable<MediaInterface>
+     */
+    public function getMedias(): iterable;
 }

@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Feed;
 
 use Brotkrueml\FeedGenerator\Feed\Item;
+use Brotkrueml\FeedGenerator\Feed\Media;
 use PHPUnit\Framework\TestCase;
 
 final class ItemTest extends TestCase
@@ -23,6 +24,7 @@ final class ItemTest extends TestCase
         self::assertSame('', $subject->getLink());
         self::assertSame('', $subject->getSummary());
         self::assertSame('', $subject->getContent());
+        self::assertSame([], $subject->getMedias());
     }
 
     /**
@@ -85,5 +87,32 @@ final class ItemTest extends TestCase
         $subject = new Item(content: 'some content');
 
         self::assertSame('some content', $subject->getContent());
+    }
+
+    /**
+     * @test
+     */
+    public function getMediasReturnsMediasAsArrayCorrectly(): void
+    {
+        $media1 = new Media('some type', 'some url');
+        $media2 = new Media('another type', 'another url');
+
+        $subject = new Item(medias: [$media1, $media2]);
+
+        self::assertSame([$media1, $media2], $subject->getMedias());
+    }
+
+    /**
+     * @test
+     */
+    public function getMediasReturnMediasAsArrayIteratorCorrectly(): void
+    {
+        $media1 = new Media('some type', 'some url');
+        $media2 = new Media('another type', 'another url');
+        $iterator = new \ArrayIterator([$media1, $media2]);
+
+        $subject = new Item(medias: $iterator);
+
+        self::assertSame($iterator, $subject->getMedias());
     }
 }

@@ -14,7 +14,7 @@ services:
         class: Symplify\PHPStanRules\CognitiveComplexity\Rules\ClassLikeCognitiveComplexityRule
         tags: [phpstan.rules.rule]
         arguments:
-            maxClassCognitiveComplexity: 7
+            maxClassCognitiveComplexity: 8
     -
         class: Symplify\PHPStanRules\Rules\ForbiddenFuncCallRule
         tags: [phpstan.rules.rule]
