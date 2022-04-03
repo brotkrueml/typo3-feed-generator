@@ -13,10 +13,10 @@ namespace Brotkrueml\FeedGenerator\Middleware;
 
 use Brotkrueml\FeedGenerator\Configuration\FeedConfiguration;
 use Brotkrueml\FeedGenerator\Configuration\FeedRegistry;
-use Brotkrueml\FeedGenerator\Feed\FeedBuilder;
 use Brotkrueml\FeedGenerator\Feed\FeedFormatAwareInterface;
 use Brotkrueml\FeedGenerator\Feed\RequestAwareInterface;
 use Brotkrueml\FeedGenerator\Feed\StyleSheetAwareInterface;
+use Brotkrueml\FeedGenerator\Formatter\FeedFormatter;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -30,7 +30,7 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 final class FeedMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly FeedBuilder $feedBuilder,
+        private readonly FeedFormatter $feedFormatter,
         private readonly FeedRegistry $feedRegistry,
         private readonly ResponseFactoryInterface $responseFactory,
     ) {
@@ -55,12 +55,12 @@ final class FeedMiddleware implements MiddlewareInterface
         if ($feed instanceof FeedFormatAwareInterface) {
             $feed->setFormat($configuration->format);
         }
-        $feedString = $this->feedBuilder->build($feed, $configuration->format);
+        $result = $this->feedFormatter->format($feed, $configuration->format);
 
-        $styleSheet = (string)($feed instanceof StyleSheetAwareInterface && $feed->getStyleSheet());
+        $hasStyleSheet = $feed instanceof StyleSheetAwareInterface && ($feed->getStyleSheet() !== '');
         $response = $this->responseFactory->createResponse()
-            ->withHeader('Content-Type', $configuration->format->contentType((bool)$styleSheet) . '; charset=utf-8');
-        $response->getBody()->write($feedString);
+            ->withHeader('Content-Type', $configuration->format->contentType($hasStyleSheet) . '; charset=utf-8');
+        $response->getBody()->write($result);
 
         return $response;
     }
