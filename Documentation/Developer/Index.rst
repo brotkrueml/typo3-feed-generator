@@ -15,7 +15,7 @@ Introduction
 
 This extension provides classes and interfaces to implement feeds in different
 formats. You don't have to worry about the details of the feeds and how they are
-build, you only have to collect the according data from your model.
+build, you only have to provide the data from your model.
 
 Example
 -------
@@ -25,26 +25,26 @@ Let's start with an example on how this is done::
    <?php
    declare(strict_types=1);
 
-   namespace MyVender\MyExtension\Feed;
+   namespace YourVender\YourExtension\Feed;
 
    use Brotkrueml\FeedGenerator\Attributes\Feed;
    use Brotkrueml\FeedGenerator\Feed\FeedFormat;
    use Brotkrueml\FeedGenerator\Feed\FeedInterface;
-   use MyVender\MyExtension\Domain\Repository\MyRepository;
+   use YourVender\YourExtension\Domain\Repository\YourRepository;
 
    #[Feed('/feed.atom', FeedFormat::ATOM)]
    #[Feed('/feed.json', FeedFormat::JSON)]
    #[Feed('/feed.rss', FeedFormat::RSS)]
-   final class MyFeed implements FeedInterface
+   final class YourFeed implements FeedInterface
    {
       public function __construct(
-         private readonly MyRepository $repository,
+         private readonly YourRepository $repository,
       ) {
       }
 
       public function getTitle(): string
       {
-         return 'My Website';
+         return 'Your Website';
       }
 
       public function getDescription(): string
@@ -120,6 +120,18 @@ methods necessary for the :php:`Brotkrueml\FeedGenerator\Feed\FeedInterface`
 interface. When returning an empty value the feed property is not available
 in the resulting feed.
 
+.. note::
+   Based on the :php:`FeedInterface` the feed is automatically registered if
+   :yaml:`autoconfigure` is enabled in :file:`Services.yaml`. Alternatively,
+   one can manually tag a feed with the :yaml:`tx_feed_generator.feed` tag:
+
+   .. code-block:: yaml
+
+      services:
+         YourVender\YourExtension\Feed\YourFeed:
+            tags:
+               - name: tx_feed_generator.feed
+
 As you see in the above example, the link is hardcoded by now and the item's
 link is also not implemented. Also no logo is given. To provide dynamic values
 for these properties we need an instance of the current request object. This can
@@ -130,9 +142,9 @@ easily be achieved by implementing the
    // use Psr\Http\Message\ServerRequestInterface;
 
    // ... the attributes like above
-   final class MyFeed implements FeedInterface, RequestAwareInterface
+   final class YourFeed implements FeedInterface, RequestAwareInterface
    {
-      private const PATH_LOGO = 'EXT:my_extension/Resources/Public/Images/logo.png';
+      private const PATH_LOGO = 'EXT:your_extension/Resources/Public/Images/logo.png';
 
       private ServerRequestInterface $request;
 
@@ -174,5 +186,5 @@ feed in the according format.
    item is only available in an Atom feed and not in an RSS feed.
 
 .. tip::
-   Have a look into the :ref:`api` chapter to see this different interfaces
+   Have a look into the :ref:`api` chapter to see the different interfaces
    and classes.
