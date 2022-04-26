@@ -132,6 +132,10 @@ in the resulting feed.
             tags:
                - name: tx_feed_generator.feed
 
+.. important::
+   After adding a class which implements :php:`FeedInterface` or adjusting
+   the class attributes the DI cache has to be flushed.
+
 As you see in the above example, the link is hardcoded by now and the item's
 link is also not implemented. Also no logo is given. To provide dynamic values
 for these properties we need an instance of the current request object. This can
