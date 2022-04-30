@@ -14,6 +14,7 @@ namespace Brotkrueml\FeedGenerator\Mapper;
 use Brotkrueml\FeedGenerator\Feed\AuthorInterface;
 use Brotkrueml\FeedGenerator\Feed\FeedInterface;
 use Brotkrueml\FeedGenerator\Feed\StyleSheetAwareInterface;
+use FeedIo\Feed as FeedIoFeed;
 use FeedIo\Feed\StyleSheet;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
@@ -29,14 +30,14 @@ final class FeedMapper
     ) {
     }
 
-    public function map(FeedInterface $feed): \FeedIo\Feed
+    public function map(FeedInterface $feed): FeedIoFeed
     {
         $lastModified = $feed->getLastModified();
         $lastModified = $lastModified instanceof \DateTimeImmutable
             ? \DateTime::createFromImmutable($lastModified)
             : $lastModified;
 
-        $feedIo = new \FeedIo\Feed();
+        $feedIo = new FeedIoFeed();
         $feedIo->setTitle($feed->getTitle());
         $feedIo->setDescription($feed->getDescription());
         $feedIo->setPublicId($feed->getPublicId());

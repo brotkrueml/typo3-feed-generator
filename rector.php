@@ -2,38 +2,39 @@
 
 declare(strict_types=1);
 
-use Rector\Core\Configuration\Option;
+use Rector\Config\RectorConfig;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\Php74\Rector\LNumber\AddLiteralSeparatorToNumberRector;
 use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->import(LevelSetList::UP_TO_PHP_81);
-    $containerConfigurator->import(SetList::CODE_QUALITY);
-    $containerConfigurator->import(SetList::DEAD_CODE);
-    $containerConfigurator->import(SetList::EARLY_RETURN);
-    $containerConfigurator->import(SetList::TYPE_DECLARATION);
-    $containerConfigurator->import(PHPUnitSetList::PHPUNIT_CODE_QUALITY);
-    $containerConfigurator->import(PHPUnitSetList::PHPUNIT_EXCEPTION);
-    $containerConfigurator->import(PHPUnitSetList::PHPUNIT_MOCK);
-    $containerConfigurator->import(PHPUnitSetList::PHPUNIT_SPECIFIC_METHOD);
-    $containerConfigurator->import(PHPUnitSetList::PHPUNIT_YIELD_DATA_PROVIDER);
+return static function (RectorConfig $rectorConfig): void {
+    $rectorConfig->phpVersion(PhpVersion::PHP_81);
 
-    $parameters = $containerConfigurator->parameters();
+    $rectorConfig->sets([
+        LevelSetList::UP_TO_PHP_81,
+        PHPUnitSetList::PHPUNIT_CODE_QUALITY,
+        PHPUnitSetList::PHPUNIT_EXCEPTION,
+        PHPUnitSetList::PHPUNIT_MOCK,
+        PHPUnitSetList::PHPUNIT_SPECIFIC_METHOD,
+        PHPUnitSetList::PHPUNIT_YIELD_DATA_PROVIDER,
+        SetList::CODE_QUALITY,
+        SetList::DEAD_CODE,
+        SetList::EARLY_RETURN,
+        SetList::TYPE_DECLARATION,
+    ]);
 
-    $parameters->set(Option::PATHS, [
+    $rectorConfig->autoloadPaths([
+        __DIR__ . '/.Build/vendor/autoload.php',
+    ]);
+    $rectorConfig->disableImportShortClasses();
+    $rectorConfig->importNames();
+    $rectorConfig->paths([
         __DIR__ . '/Classes',
         __DIR__ . '/Tests',
     ]);
-
-    $parameters->set(Option::AUTOLOAD_PATHS, [__DIR__ . '/.Build/vendor/autoload.php']);
-
-    $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_81);
-
-    $parameters->set(Option::SKIP, [
+    $rectorConfig->skip([
         AddLiteralSeparatorToNumberRector::class,
     ]);
 };

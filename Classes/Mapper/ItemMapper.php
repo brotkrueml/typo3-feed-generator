@@ -13,7 +13,7 @@ namespace Brotkrueml\FeedGenerator\Mapper;
 
 use Brotkrueml\FeedGenerator\Feed\AuthorInterface;
 use Brotkrueml\FeedGenerator\Feed\ItemInterface;
-use FeedIo\Feed\Item;
+use FeedIo\Feed\Item as FeedIoItem;
 
 /**
  * @internal
@@ -26,14 +26,14 @@ class ItemMapper
     ) {
     }
 
-    public function map(ItemInterface $item): \FeedIo\Feed\Item
+    public function map(ItemInterface $item): FeedIoItem
     {
         $lastModified = $item->getLastModified();
         $lastModified = $lastModified instanceof \DateTimeImmutable
             ? \DateTime::createFromImmutable($lastModified)
             : $lastModified;
 
-        $feedIoItem = new Item();
+        $feedIoItem = new FeedIoItem();
         $feedIoItem->setTitle($item->getTitle());
         $feedIoItem->setPublicId($item->getPublicId());
         $feedIoItem->setLastModified($lastModified);

@@ -14,18 +14,20 @@ namespace Brotkrueml\FeedGenerator\Formatter;
 use Brotkrueml\FeedGenerator\Feed\FeedFormat;
 use Brotkrueml\FeedGenerator\Feed\FeedInterface;
 use Brotkrueml\FeedGenerator\Mapper\FeedMapper;
+use FeedIo\Factory as FeedIoFactory;
+use FeedIo\FeedIo;
 
 /**
  * @internal
  */
 final class FeedFormatter
 {
-    private readonly \FeedIo\FeedIo $feedIo;
+    private readonly FeedIo $feedIo;
 
     public function __construct(
         private readonly FeedMapper $feedMapper,
     ) {
-        $this->feedIo = \FeedIo\Factory::create()->getFeedIo();
+        $this->feedIo = FeedIoFactory::create()->getFeedIo();
     }
 
     public function format(FeedInterface $feed, FeedFormat $format): string
