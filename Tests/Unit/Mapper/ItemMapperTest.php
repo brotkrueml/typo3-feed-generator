@@ -17,6 +17,7 @@ use Brotkrueml\FeedGenerator\Feed\Media;
 use Brotkrueml\FeedGenerator\Mapper\AuthorMapper;
 use Brotkrueml\FeedGenerator\Mapper\ItemMapper;
 use Brotkrueml\FeedGenerator\Mapper\MediaMapper;
+use FeedIo\Feed\Item\AuthorInterface as FeedIoAuthorInterface;
 use PHPUnit\Framework\TestCase;
 
 final class ItemMapperTest extends TestCase
@@ -96,7 +97,7 @@ final class ItemMapperTest extends TestCase
 
         $actual = $this->subject->map($item);
 
-        self::assertInstanceOf(\FeedIo\Feed\Item\AuthorInterface::class, $actual->getAuthor());
+        self::assertInstanceOf(FeedIoAuthorInterface::class, $actual->getAuthor());
         self::assertSame('some name', $actual->getAuthor()->getName());
     }
 
