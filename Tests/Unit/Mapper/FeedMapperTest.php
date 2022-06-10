@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the "feed_generator" extension for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ */
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Mapper;
 
@@ -129,15 +135,13 @@ final class FeedMapperTest extends TestCase
         array $items = [],
         ?\DateTimeInterface $lastModified = null,
         ?AuthorInterface $author = null,
-    ): FeedInterface
-    {
+    ): FeedInterface {
         return new class($items, $lastModified, $author) implements FeedInterface {
             public function __construct(
                 private readonly array $items,
                 private readonly ?\DateTimeInterface $lastModified,
                 private readonly ?AuthorInterface $author,
-            )
-            {
+            ) {
             }
 
             public function getDescription(): string

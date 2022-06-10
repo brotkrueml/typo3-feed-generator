@@ -2,15 +2,18 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the "feed_generator" extension for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ */
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Mapper;
 
 use Brotkrueml\FeedGenerator\Feed\Author;
-use Brotkrueml\FeedGenerator\Feed\AuthorInterface;
 use Brotkrueml\FeedGenerator\Feed\Item;
-use Brotkrueml\FeedGenerator\Feed\ItemInterface;
 use Brotkrueml\FeedGenerator\Feed\Media;
-use Brotkrueml\FeedGenerator\Feed\MediaInterface;
 use Brotkrueml\FeedGenerator\Mapper\AuthorMapper;
 use Brotkrueml\FeedGenerator\Mapper\ItemMapper;
 use Brotkrueml\FeedGenerator\Mapper\MediaMapper;
@@ -115,7 +118,6 @@ final class ItemMapperTest extends TestCase
         self::assertSame('some type', $actual->getMedias()->current()->getType());
     }
 
-
     /**
      * @test
      */
@@ -139,5 +141,3 @@ final class ItemMapperTest extends TestCase
         self::assertSame('some type 2', $medias->current()->getType());
     }
 }
-
-
