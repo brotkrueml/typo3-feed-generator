@@ -14,8 +14,9 @@ namespace Brotkrueml\FeedGenerator\Formatter;
 use Brotkrueml\FeedGenerator\Feed\FeedFormat;
 use Brotkrueml\FeedGenerator\Feed\FeedInterface;
 use Brotkrueml\FeedGenerator\Mapper\FeedMapper;
-use FeedIo\Factory as FeedIoFactory;
+use FeedIo\Adapter\NullClient;
 use FeedIo\FeedIo;
+use Psr\Log\LoggerInterface;
 
 /**
  * @internal
@@ -26,8 +27,9 @@ final class FeedFormatter
 
     public function __construct(
         private readonly FeedMapper $feedMapper,
+        LoggerInterface $logger,
     ) {
-        $this->feedIo = FeedIoFactory::create()->getFeedIo();
+        $this->feedIo = new FeedIo(new NullClient(), $logger);
     }
 
     public function format(FeedInterface $feed, FeedFormat $format): string
