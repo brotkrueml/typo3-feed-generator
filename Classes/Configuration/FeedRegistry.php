@@ -17,7 +17,7 @@ use Brotkrueml\FeedGenerator\Feed\FeedInterface;
 /**
  * @internal
  */
-final class FeedRegistry
+final class FeedRegistry implements FeedRegistryInterface
 {
     /**
      * @var FeedConfiguration[]
@@ -73,5 +73,13 @@ final class FeedRegistry
         }
 
         return \array_shift($filteredConfigurations);
+    }
+
+    /**
+     * @return FeedConfiguration[]
+     */
+    public function getAllConfigurations(): array
+    {
+        return $this->configurations;
     }
 }

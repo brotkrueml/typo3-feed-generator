@@ -192,3 +192,27 @@ feed in the according format.
 .. tip::
    Have a look into the :ref:`api` chapter to see the different interfaces
    and classes.
+
+
+List of configured feeds
+========================
+
+An overview of the configured feeds can be found in the
+:guilabel:`System > Configuration` module.
+
+.. note::
+   The :guilabel:`System > Configuration` module is available when the lowlevel
+   system extension is installed.
+
+To open the Configuration module, navigate to the
+:guilabel:`System > Configuration` module. In the upper menu bar, select
+:guilabel:`Feed Generator: Feeds`.
+
+.. figure:: /Images/ConfigurationModule.png
+   :alt: Configured feeds in the Configuration module
+
+   Configured feeds in the :guilabel:`Configuration` module
+
+The feeds are grouped by the name of the class that implements a feed.
+
+You can quickly look up the feeds using the search box.

@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Overview of feeds in Configurations module
+
 ### Updated
 - debril/feed-io to version 6
 

@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Middleware;
 
 use Brotkrueml\FeedGenerator\Configuration\FeedConfiguration;
-use Brotkrueml\FeedGenerator\Configuration\FeedRegistry;
+use Brotkrueml\FeedGenerator\Configuration\FeedRegistryInterface;
 use Brotkrueml\FeedGenerator\Feed\FeedFormatAwareInterface;
 use Brotkrueml\FeedGenerator\Feed\RequestAwareInterface;
 use Brotkrueml\FeedGenerator\Feed\StyleSheetAwareInterface;
@@ -31,7 +31,7 @@ final class FeedMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private readonly FeedFormatter $feedFormatter,
-        private readonly FeedRegistry $feedRegistry,
+        private readonly FeedRegistryInterface $feedRegistry,
         private readonly ResponseFactoryInterface $responseFactory,
     ) {
     }
