@@ -17,6 +17,12 @@ Added
 
 * Overview of feeds in Configurations module
 
+Changed
+^^^^^^^
+
+
+* Position of middleware in frontend stack
+
 Updated
 ^^^^^^^
 
