@@ -15,12 +15,17 @@ Introduction
 
 This extension provides classes and interfaces to implement feeds in different
 formats. You don't have to worry about the details of the feeds and how they are
-build, you only have to provide the data from your model.
+build, you only have to provide the data from your concrete model.
+
+.. _developer-example:
 
 Example
 -------
 
-Let's start with an example on how this is done::
+Let's start with an example to warm up.
+
+.. code-block:: php
+   :caption: EXT:your_extension/Classes/Feed/YourFeed.php
 
    <?php
    declare(strict_types=1);
@@ -28,28 +33,22 @@ Let's start with an example on how this is done::
    namespace YourVender\YourExtension\Feed;
 
    use Brotkrueml\FeedGenerator\Attributes\Feed;
+   use Brotkrueml\FeedGenerator\Feed\Author;
    use Brotkrueml\FeedGenerator\Feed\FeedFormat;
    use Brotkrueml\FeedGenerator\Feed\FeedInterface;
-   use YourVender\YourExtension\Domain\Repository\YourRepository;
+   use Brotkrueml\FeedGenerator\Feed\Item;
 
-   #[Feed('/feed.atom', FeedFormat::ATOM)]
-   #[Feed('/feed.json', FeedFormat::JSON)]
-   #[Feed('/feed.rss', FeedFormat::RSS)]
+   #[Feed('/your-feed.atom', FeedFormat::ATOM)]
    final class YourFeed implements FeedInterface
    {
-      public function __construct(
-         private readonly YourRepository $repository,
-      ) {
-      }
-
       public function getTitle(): string
       {
-         return 'Your Website';
+         return 'Your website title';
       }
 
       public function getDescription(): string
       {
-         return '';
+         return 'Here comes the Atom feed for your website.';
       }
 
       public function getLanguage(): string
@@ -59,7 +58,7 @@ Let's start with an example on how this is done::
 
       public function getLogo(): string
       {
-         return '';
+         return 'https://example.com/fileadmin/your-logo.png';
       }
 
       public function getLastModified(): ?\DateTimeInterface
@@ -79,53 +78,48 @@ Let's start with an example on how this is done::
 
       public function getItems(): array
       {
-         $items = [];
-         $records = $this->repository->findAll();
-         foreach ($records as $record) {
-            $lastModified = (new \DateTimeImmutable())->setTimestamp($record['lastModified']);
-            $items[] = new Item(
-               title: $record['title'],
-               publicId: $record['uid'],
-               lastModified: $lastModified,
-               link: $this->buildLink($record['uid']),
-               summary: $record['summary'] ?? '',
-               content: $record['content'] ?? '',
-            );
-         }
-
-        return $items;
+         return [
+            new Item(
+               title: 'Another awesome article',
+               lastModified: '2022-06-07T18:22:00+02:00',
+               link: 'https://example.com/another-awesome-article',
+            ),
+            new Item(
+               title: 'Some awesome article',
+               lastModified: '2022-02-20T20:06:00+01:00',
+               link: 'https://example.com/some-awesome-article',
+            ),
+         ];
       }
 
-      private function buildLink(int $uid): string
+      public function getAuthor(): ?AuthorInterface
       {
-         // This has to be implemented, we'll come back to this in a moment
-         return '';
+         return new Author('Your Company');
       }
    }
 
 First, a class which provides the data for one or more feeds must implement
-the :php:`Brotkrueml\FeedGenerator\Feed\FeedInterface` interface. This marks
-the class as a feed data provider.
+the :any:`Brotkrueml\\FeedGenerator\\Feed\\FeedInterface` interface. This marks
+the class as a feed data provider and requires some methods to be implemented.
+Of course, you can use dependency injection to inject service classes, for
+example, a repository that provides the needed items.
 
 To define under which URL a feed is available and which format should be used
-you add one or more :php:`Brotkrueml\FeedGenerator\Attributes\Feed` attributes
-to the class. The attribute can be assigned multiple times, like in the example
-above. As format a name of the :php:`Brotkrueml\FeedGenerator\Attributes\Feed`
-enum is used which defines the according format. Optionally it is also possible
-to define one or more site identifiers when you have a multiple site
-installation.
+you have to provide at least one :php:`Brotkrueml\FeedGenerator\Attributes\Feed`
+class attribute. As format a name of the
+:php:`Brotkrueml\FeedGenerator\Attributes\Feed` enum is used which defines the
+according format.
 
-You can use constructor injection to add inject service classes. Implement the
-methods necessary for the :php:`Brotkrueml\FeedGenerator\Feed\FeedInterface`
-interface. When returning an empty value the feed property is not available
-in the resulting feed.
+The :php:`getItems()` method returns an array of
+:any:`Brotkrueml\\FeedGenerator\\Feed\\Item` value objects.
 
 .. note::
    Based on the :php:`FeedInterface` the feed is automatically registered if
-   :yaml:`autoconfigure` is enabled in :file:`Services.yaml`. Alternatively,
-   one can manually tag a feed with the :yaml:`tx_feed_generator.feed` tag:
+   :yaml:`autoconfigure` is enabled in :file:`Configuration/Services.yaml`.
+   Alternatively, you can manually tag a feed:
 
    .. code-block:: yaml
+      :caption: EXT:your_extension/Configuration/Services.yaml
 
       services:
          YourVender\YourExtension\Feed\YourFeed:
@@ -136,20 +130,88 @@ in the resulting feed.
    After adding a class which implements :php:`FeedInterface` or adjusting
    the class attributes the DI cache has to be flushed.
 
-As you see in the above example, the link is hardcoded by now and the item's
-link is also not implemented. Also no logo is given. To provide dynamic values
-for these properties we need an instance of the current request object. This can
-easily be achieved by implementing the
-:php:`Brotkrueml\FeedGenerator\Feed\RequestAwareInterface` interface::
+.. note::
+   Not all properties are used in every format. For example, the content of an
+   item is only available in an Atom feed and not in an RSS feed.
+
+A list of all configured feeds is available in the :ref:`Configurations
+<configurations-module>` module.
+
+
+Interfaces
+==========
+
+Four interfaces are available and of interest:
+
+.. _developer-FeedInterface:
+
+FeedInterface
+-------------
+
+The :any:`Brotkrueml\\FeedGenerator\\Feed\\FeedInterface` marks the feed –
+well – as a feed and requires the implementation of some methods like in the
+:ref:`example <developer-example>` above.
+
+.. _developer-FeedFormatAwareInterface:
+
+FeedFormatAwareInterface
+------------------------
+
+When implementing the :any:`Brotkrueml\\FeedGenerator\\Feed\\FeedFormatAwareInterface`,
+you can access the feed format of the current request. This is helpful if you
+define a feed implementation with different formats and want to adjust some
+values according to the format.
+
+.. code-block:: php
+   :caption: EXT:your_extension/Classes/Feed/YourFeed.php
+
+   // use Brotkrueml\FeedGenerator\Feed\FeedFormat
+   // use Brotkrueml\FeedGenerator\Feed\FeedFormatAwareInterface
+
+   #[Feed('/your-feed.atom', FeedFormat::ATOM)]
+   #[Feed('/your-feed.rss', FeedFormat::RSS)]
+   final class YourFeed implements FeedInterface, FeedFormatAwareInterface
+   {
+      private FeedFormat $format;
+
+      public function setFormat(FeedFormat $format): void
+      {
+         $this->format = $format;
+      }
+
+      public function getDescription(): string
+      {
+         if ($this->format === FeedFormat::ATOM) {
+            return 'Here comes the Atom feed for your website.';
+         }
+
+         return 'Here comes the RSS feed for your website.';
+      }
+
+      // ... the other methods from the introduction example are untouched
+   }
+
+.. _developer-RequestAwareInterface:
+
+RequestAwareInterface
+---------------------
+
+The :any:`Brotkrueml\\FeedGenerator\\Feed\\RequestAwareInterface` injects the
+PSR-7 request object via a :php:`setRequest()` method, which must be
+implemented by yourself.
+
+This way you have access to request attributes, such as normalised parameters,
+the site or the language information:
+
+.. code-block:: php
+   :caption: EXT:your_extension/Classes/Feed/YourFeed.php
 
    // use Brotkrueml\FeedGenerator\Feed\RequestAwareInterface;
    // use Psr\Http\Message\ServerRequestInterface;
 
-   // ... the attributes like above
+   #[Feed('/your-feed.atom', FeedFormat::ATOM)]
    final class YourFeed implements FeedInterface, RequestAwareInterface
    {
-      private const PATH_LOGO = 'EXT:your_extension/Resources/Public/Images/logo.png';
-
       private ServerRequestInterface $request;
 
       public function setRequest(ServerRequestInterface $request): void
@@ -157,42 +219,171 @@ easily be achieved by implementing the
          $this->request = $request;
       }
 
-      public function getLogo(): string
-      {
-         return $this->request->getAttribute('normalizedParams')->getRequestHost()
-            . PathUtility::getAbsoluteWebPath(GeneralUtility::getFileAbsFileName(self::PATH_LOGO));
-      }
-
       public function getLink(): string
       {
          return $this->request->getAttribute('normalizedParams')->getSiteUrl();
       }
 
-      private function buildLink(int $uid): string
+      public function getItems(): array
       {
          $router = $this->request->getAttribute('site')->getRouter();
 
-         return (string)$router->generateUri($uid);
+         return [
+            new Item(
+               title: 'Another awesome article',
+               lastModified: '2022-06-07T18:22:00+02:00',
+               link: (string)$router->generateUri(43),
+            ),
+            new Item(
+               title: 'Some awesome article',
+               lastModified: '2022-02-20T20:06:00+01:00',
+               link: (string)$router->generateUri(42),
+            ),
+         ];
       }
 
-      // ... the other methods from above are untouched
+      // ... the other methods from the introduction example are untouched
    }
 
-Now the method :php:`setRequest()` has to be implemented, which provides you
-with the request. Now it is easy to provide a logo from an extension, to
-dynamically set the website links and the item's links.
+.. _developer-StyleSheetAwareInterface:
 
-When you now call one of the paths defined in the attributes you will see the
-feed in the according format.
+StyleSheetAwareInterface
+------------------------
 
-.. important::
-   Not all properties are used in every format. For example, the content of an
-   item is only available in an Atom feed and not in an RSS feed.
+The :any:`Brotkrueml\\FeedGenerator\\Feed\\StyleSheetAwareInterface` requires
+the implementation of a :php:`getStyleSheet()` method that returns the path to
+an XSL stylesheet. In this way, the appearance of an Atom or RSS feed can be
+customised in a browser.
 
-.. tip::
-   Have a look into the :ref:`api` chapter to see the different interfaces
-   and classes.
+.. code-block:: php
+   :caption: EXT:your_extension/Classes/Feed/YourFeed.php
 
+   // use Brotkrueml\FeedGenerator\Feed\StyleSheetAwareInterface;
+
+   #[Feed('/your-feed.atom', FeedFormat::ATOM)]
+   final class YourFeed implements FeedInterface, StyleSheetAwareInterface
+   {
+      public function getStyleSheet(): string
+      {
+         return 'EXT:your_extension/Resources/Public/StyleSheets/Atom.xsl';
+      }
+
+      // ... the other methods from the introduction example are untouched
+   }
+
+An XSL stylesheet is only useful for XML feeds (Atom and RSS). When providing a
+stylesheet for a JSON feed, it is ignored.
+
+
+This extension comes with two XSL stylesheets, one for an Atom feed and one for
+an RSS feed, which can be used directly or copied and adapted to your needs:
+
+*  Atom: :file:`Resources/Public/StyleSheets/Atom.xsl`
+*  RSS: :file:`Resources/Public/StyleSheets/Rss.xsl`
+
+
+.. _developer-multiple-feeds:
+
+Multiple feeds
+==============
+
+It is possible to define several feed formats for a class. In this case, it may
+be useful to implement the :ref:`FeedFormatAwareInterface
+<developer-FeedFormatAwareInterface>`.
+
+.. code-block:: php
+   :caption: EXT:your_extension/Classes/Feed/YourFeed.php
+
+   #[Feed('/your-feed.atom', FeedFormat::ATOM)]
+   #[Feed('/your-feed.json', FeedFormat::JSON)]
+   #[Feed('/your-feed.rss', FeedFormat::RSS)]
+   final class YourFeed implements FeedInterface
+   {
+      // ...
+   }
+
+But it is also possible to add different paths with the same format:
+
+.. code-block:: php
+   :caption: EXT:your_extension/Classes/Feed/YourFeed.php
+
+   #[Feed('/en/your-feed.atom', FeedFormat::ATOM)]
+   #[Feed('/de/dein-feed.atom', FeedFormat::ATOM)]
+   #[Feed('/nl/je-feed.atom', FeedFormat::ATOM)]
+   final class YourFeed implements FeedInterface
+   {
+      // ...
+   }
+
+If the paths of a feed match the entry point configured in the site
+configuration, the PSR-7 request object attribute `site` is populated with the
+corresponding information (such as base path and language).
+
+
+Multiple sites
+==============
+
+For a multi-site installation, it may be necessary to restrict a feed to one or
+more sites. Simply add the site identifier(s) as a third argument to the
+:php:`Feed` class attribute:
+
+.. code-block:: php
+   :caption: EXT:your_extension/Classes/Feed/YourFeed.php
+
+   #[Feed('/your-feed.atom', FeedFormat::ATOM, ['website', 'blog'])]
+   final class YourFeed implements FeedInterface
+   {
+      // ...
+   }
+
+
+Translations
+============
+
+When configuring a :ref:`feed for different languages <developer-multiple-feeds>`,
+it may be convenient to use translations from :file:`locallang.xlf` files. One
+possible implementation could be:
+
+.. code-block:: php
+   :caption: EXT:your_extension/Classes/Feed/YourFeed.php
+
+   // use TYPO3\CMS\Extbase\Utility\LocalizationUtility
+
+   #[Feed('/en/your-feed.atom', FeedFormat::ATOM)]
+   #[Feed('/de/dein-feed.atom', FeedFormat::ATOM)]
+   #[Feed('/nl/je-feed.atom', FeedFormat::ATOM)]
+   final class YourFeed implements FeedInterface, RequestAwareInterface
+   {
+      public function getDescription(): string
+      {
+         // feed.description is defined in your extensions' locallang.xlf
+         return $this->translate('feed.description');
+      }
+
+      public function getTitle(): string
+      {
+         // feed.title is defined in your extensions' locallang.xlf
+         return $this->translate('feed.title');
+      }
+
+      private function translate(string $key): string
+      {
+         return LocalizationUtility::translate(
+            $key,
+            'your_extension',
+            languageKey: $this->request->getAttribute('language')->getTypo3Language()
+         );
+      }
+
+      // ... the other methods from the introduction example are untouched
+   }
+
+.. note::
+   To get the correct language, the configured feed path must be in the defined
+   entry point of the language in the site configuration.
+
+
+.. _configurations-module:
 
 List of configured feeds
 ========================
@@ -201,8 +392,8 @@ An overview of the configured feeds can be found in the
 :guilabel:`System > Configuration` module.
 
 .. note::
-   The :guilabel:`System > Configuration` module is available when the lowlevel
-   system extension is installed.
+   The :guilabel:`System > Configuration` module is available when the
+   :doc:`lowlevel system extension <ext_lowlevel:Index>` is installed.
 
 To open the Configuration module, navigate to the
 :guilabel:`System > Configuration` module. In the upper menu bar, select
@@ -215,4 +406,4 @@ To open the Configuration module, navigate to the
 
 The feeds are grouped by the name of the class that implements a feed.
 
-You can quickly look up the feeds using the search box.
+You can quickly look up a feed using the search box.
