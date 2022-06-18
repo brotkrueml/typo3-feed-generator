@@ -17,7 +17,7 @@ provided programmatically according to the model.
 
 A PSR-15 middleware is used to determine the URL for a feed. The feed URL,
 the format and the optional site(s) are configured in the implementation class
-which provides the data via attributes. Have a look into the ref:`developer`
+which provides the data via attributes. Have a look into the :ref:`developer`
 chapter for examples how this is done.
 
 For assembling the feeds the library `alexdebril/feed-io`_ does the hard work.
