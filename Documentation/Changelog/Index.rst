@@ -16,6 +16,7 @@ Added
 
 
 * Overview of feeds in Configurations module
+* Last-Modified header in middleware
 
 Changed
 ^^^^^^^

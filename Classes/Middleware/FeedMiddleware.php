@@ -60,6 +60,11 @@ final class FeedMiddleware implements MiddlewareInterface
         $hasStyleSheet = $feed instanceof StyleSheetAwareInterface && ($feed->getStyleSheet() !== '');
         $response = $this->responseFactory->createResponse()
             ->withHeader('Content-Type', $configuration->format->contentType($hasStyleSheet) . '; charset=utf-8');
+
+        if ($feed->getLastModified() instanceof \DateTimeInterface) {
+            $response = $response->withHeader('Last-Modified', $feed->getLastModified()->format(\DateTimeInterface::RFC7231));
+        }
+
         $response->getBody()->write($result);
 
         return $response;
