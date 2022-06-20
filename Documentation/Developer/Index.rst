@@ -276,12 +276,16 @@ customised in a browser.
 An XSL stylesheet is only useful for XML feeds (Atom and RSS). When providing a
 stylesheet for a JSON feed, it is ignored.
 
-
 This extension comes with two XSL stylesheets, one for an Atom feed and one for
 an RSS feed, which can be used directly or copied and adapted to your needs:
 
 *  Atom: :file:`Resources/Public/StyleSheets/Atom.xsl`
 *  RSS: :file:`Resources/Public/StyleSheets/Rss.xsl`
+
+.. note::
+   When adding an XSL stylesheet to an Atom or RSS feed, the content type of the
+   HTTP response is changed to `application/xml`. This way Chrome and some other
+   browsers apply the stylesheet correctly.
 
 
 .. _developer-multiple-feeds:
