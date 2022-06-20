@@ -27,7 +27,7 @@ Feed Generator
 
 ----
 
-Generator for ATOM, JSON and RSS feeds in TYPO3
+Generator for Atom, JSON and RSS feeds in TYPO3
 
 ----
 
