@@ -61,6 +61,8 @@ Let's start with an example to warm up.
          return 'https://example.com/fileadmin/your-logo.png';
       }
 
+      // If the method returns an implementation of the DateTimeInterface it is
+      // also used for the Last-Modified header in the HTTP response.
       public function getLastModified(): ?\DateTimeInterface
       {
          return new \DateTimeImmutable();
