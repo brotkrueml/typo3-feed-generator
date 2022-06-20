@@ -21,12 +21,24 @@ final class FeedConfiguration
 {
     /**
      * @param string[] $siteIdentifiers
+     * @param int<0, max>|null $cacheInSeconds
+     * @noRector ChangeAndIfToEarlyReturnRector
      */
     public function __construct(
         public readonly FeedInterface $instance,
         public readonly string $path,
         public readonly FeedFormat $format,
         public readonly array $siteIdentifiers,
+        public readonly ?int $cacheInSeconds,
     ) {
+        if (\is_int($this->cacheInSeconds) && ($this->cacheInSeconds < 0)) { // @phpstan-ignore-line
+            throw new \DomainException(
+                \sprintf(
+                    'The configured cache seconds (%d) is a negative int',
+                    $this->cacheInSeconds
+                ),
+                1655707760
+            );
+        }
     }
 }

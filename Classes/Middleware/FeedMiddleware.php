@@ -65,6 +65,15 @@ final class FeedMiddleware implements MiddlewareInterface
             $response = $response->withHeader('Last-Modified', $feed->getLastModified()->format(\DateTimeInterface::RFC7231));
         }
 
+        if ($configuration->cacheInSeconds !== null) {
+            $response = $response
+                ->withHeader('Cache-Control', 'max-age=' . $configuration->cacheInSeconds)
+                ->withHeader(
+                    'Expires',
+                    (new \DateTimeImmutable($configuration->cacheInSeconds . ' seconds'))->format(\DateTimeInterface::RFC7231)
+                );
+        }
+
         $response->getBody()->write($result);
 
         return $response;

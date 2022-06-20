@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Configuration;
 
+use Brotkrueml\FeedGenerator\Attributes\Cache;
 use Brotkrueml\FeedGenerator\Attributes\Feed;
 use Brotkrueml\FeedGenerator\Feed\FeedInterface;
 
@@ -44,12 +45,15 @@ final class FeedRegistry implements FeedRegistryInterface
                 1647595664
             );
 
+            $cacheAttributes = (new \ReflectionClass($configuredFeed))->getAttributes(Cache::class);
+
             foreach ($feedAttributes as $attribute) {
                 $configurations[] = new FeedConfiguration(
                     $configuredFeed,
                     $attribute->path,
                     $attribute->format,
                     $attribute->siteIdentifiers,
+                    $cacheAttributes !== [] ? $cacheAttributes[0]->newInstance()->seconds : null,
                 );
             }
         }

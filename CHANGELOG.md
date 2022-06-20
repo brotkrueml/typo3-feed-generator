@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Overview of feeds in Configurations module
 - Last-Modified header in middleware
+- Cache attribute for Feed class to control cache HTTP headers
 
 ### Changed
 - Position of middleware in frontend stack

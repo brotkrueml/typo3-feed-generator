@@ -65,7 +65,7 @@ final class FeedProviderTest extends TestCase
 
         yield 'One configuration in one class and one format available' => [
             'configurations' => [
-                new FeedConfiguration(new SomeFeed(), '/some/path.atom', FeedFormat::ATOM, []),
+                new FeedConfiguration(new SomeFeed(), '/some/path.atom', FeedFormat::ATOM, [], null),
             ],
             'expected' => [
                 SomeFeed::class => [
@@ -77,7 +77,7 @@ final class FeedProviderTest extends TestCase
 
         yield 'One configuration in one class and one format with one site available' => [
             'configurations' => [
-                new FeedConfiguration(new SomeFeed(), '/some/path.atom', FeedFormat::ATOM, ['some_site']),
+                new FeedConfiguration(new SomeFeed(), '/some/path.atom', FeedFormat::ATOM, ['some_site'], null),
             ],
             'expected' => [
                 SomeFeed::class => [
@@ -90,7 +90,7 @@ final class FeedProviderTest extends TestCase
 
         yield 'One configuration in one class and one format with two sites available' => [
             'configurations' => [
-                new FeedConfiguration(new SomeFeed(), '/some/path.atom', FeedFormat::ATOM, ['some_site', 'another_site']),
+                new FeedConfiguration(new SomeFeed(), '/some/path.atom', FeedFormat::ATOM, ['some_site', 'another_site'], null),
             ],
             'expected' => [
                 SomeFeed::class => [
@@ -103,9 +103,9 @@ final class FeedProviderTest extends TestCase
 
         yield 'Three configurations in one class available' => [
             'configurations' => [
-                new FeedConfiguration(new SomeFeed(), '/some/path.atom', FeedFormat::ATOM, []),
-                new FeedConfiguration(new SomeFeed(), '/some/path.json', FeedFormat::JSON, []),
-                new FeedConfiguration(new SomeFeed(), '/some/path.rss', FeedFormat::RSS, []),
+                new FeedConfiguration(new SomeFeed(), '/some/path.atom', FeedFormat::ATOM, [], null),
+                new FeedConfiguration(new SomeFeed(), '/some/path.json', FeedFormat::JSON, [], null),
+                new FeedConfiguration(new SomeFeed(), '/some/path.rss', FeedFormat::RSS, [], null),
             ],
             'expected' => [
                 SomeFeed::class => [
@@ -127,10 +127,10 @@ final class FeedProviderTest extends TestCase
 
         yield 'Four configurations in two classes available' => [
             'configurations' => [
-                new FeedConfiguration(new SomeFeed(), '/some/path.atom', FeedFormat::ATOM, []),
-                new FeedConfiguration(new SomeFeed(), '/some/path.json', FeedFormat::JSON, []),
-                new FeedConfiguration(new SomeFeed(), '/some/path.rss', FeedFormat::RSS, []),
-                new FeedConfiguration(new AnotherFeed(), '/another/feed', FeedFormat::JSON, ['another_site']),
+                new FeedConfiguration(new SomeFeed(), '/some/path.atom', FeedFormat::ATOM, [], null),
+                new FeedConfiguration(new SomeFeed(), '/some/path.json', FeedFormat::JSON, [], null),
+                new FeedConfiguration(new SomeFeed(), '/some/path.rss', FeedFormat::RSS, [], null),
+                new FeedConfiguration(new AnotherFeed(), '/another/feed', FeedFormat::JSON, ['another_site'], null),
             ],
             'expected' => [
                 SomeFeed::class => [

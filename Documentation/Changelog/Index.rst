@@ -17,6 +17,7 @@ Added
 
 * Overview of feeds in Configurations module
 * Last-Modified header in middleware
+* Cache attribute for Feed class to control cache HTTP headers
 
 Changed
 ^^^^^^^
