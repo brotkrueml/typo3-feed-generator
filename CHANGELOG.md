@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2022-06-20
+
 ### Added
 - Overview of feeds in Configurations module
 - Last-Modified header in middleware
@@ -27,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 First preview release
 
-[Unreleased]: https://github.com/brotkrueml/typo3-feed-generator/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/brotkrueml/typo3-feed-generator/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/brotkrueml/typo3-feed-generator/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/brotkrueml/typo3-feed-generator/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/brotkrueml/typo3-feed-generator/releases/tag/v0.1.0
