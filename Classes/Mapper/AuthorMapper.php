@@ -12,18 +12,29 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Mapper;
 
 use Brotkrueml\FeedGenerator\Feed\AuthorInterface;
-use FeedIo\Feed\Item\Author;
 
 /**
  * @internal
  */
 final class AuthorMapper
 {
-    public function map(AuthorInterface $author): \FeedIo\Feed\Item\AuthorInterface
+    /**
+     * @return array{name: non-empty-string, email?: string, uri?: string}
+     */
+    public function map(AuthorInterface $author): array
     {
-        return (new Author())
-            ->setName($author->getName())
-            ->setUri($author->getUri())
-            ->setEmail($author->getEmail());
+        // @phpstan-ignore-next-line Array with keys is not allowed. Use value object to pass data instead
+        $authorArray = [
+            'name' => $author->getName(),
+        ];
+
+        if ($author->getEmail() !== '') {
+            $authorArray['email'] = $author->getEmail();
+        }
+        if ($author->getUri() !== '') {
+            $authorArray['uri'] = $author->getUri();
+        }
+
+        return $authorArray;
     }
 }

@@ -14,7 +14,6 @@ Enums
    feed formats:
 
    - ATOM
-   - JSON
    - RSS
 
    .. note::

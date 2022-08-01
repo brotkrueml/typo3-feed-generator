@@ -11,7 +11,7 @@ Introduction
 What does it do?
 ================
 
-The extension provides classes to generate Atom, JSON or RSS feeds in an
+The extension provides classes to generate Atom anda RSS feeds in an
 easy way. The target group are developers as the contents of the feeds must be
 provided programmatically according to the model.
 
@@ -20,7 +20,7 @@ implementation class. The feed URL, the format and the optional site(s) are
 configured in the implementation class which provides the data via attributes.
 Have a look into the :ref:`developer` chapter for examples how this is done.
 
-For assembling the feeds the library `alexdebril/feed-io`_ does the hard work.
+For assembling the feeds the library `laminas/laminas-feed`_ does the hard work.
 
 .. _release-management:
 
@@ -40,5 +40,5 @@ The changes between the different versions can be found in the
 :ref:`changelog <changelog>`.
 
 
-.. _alexdebril/feed-io: https://alexdebril.github.io/feed-io/
+.. _laminas/laminas-feed: https://github.com/laminas/laminas-feed
 .. _semantic versioning: https://semver.org/

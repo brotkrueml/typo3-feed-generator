@@ -11,6 +11,20 @@ and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0
 `Unreleased <https://github.com/brotkrueml/typo3-feed-generator/compare/v0.3.0...HEAD>`_
 --------------------------------------------------------------------------------------------
 
+Changed
+^^^^^^^
+
+
+* debril/feed-io removed in favour of laminas/laminas-feed
+
+Removed
+^^^^^^^
+
+
+* XSL stylesheets
+* JSON feeds
+* Medias in items
+
 `0.3.0 <https://github.com/brotkrueml/typo3-feed-generator/compare/v0.2.0...v0.3.0>`_ - 2022-06-20
 ------------------------------------------------------------------------------------------------------
 

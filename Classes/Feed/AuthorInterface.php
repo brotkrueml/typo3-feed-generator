@@ -14,17 +14,18 @@ namespace Brotkrueml\FeedGenerator\Feed;
 interface AuthorInterface
 {
     /**
-     * Get the name
+     * Get the name.
+     * @return non-empty-string
      */
     public function getName(): string;
 
     /**
-     * Get the URI. Used in Atom and JSON formats only
-     */
-    public function getUri(): string;
-
-    /**
-     * Get the email address. Used in Atom format only
+     * Get the email address.
      */
     public function getEmail(): string;
+
+    /**
+     * Get the URI. Used in Atom only.
+     */
+    public function getUri(): string;
 }

@@ -36,11 +36,17 @@ Let's start with an example to warm up.
    use Brotkrueml\FeedGenerator\Feed\Author;
    use Brotkrueml\FeedGenerator\Feed\FeedFormat;
    use Brotkrueml\FeedGenerator\Feed\FeedInterface;
+   use Brotkrueml\FeedGenerator\Feed\ImageInterface
    use Brotkrueml\FeedGenerator\Feed\Item;
 
    #[Feed('/your-feed.atom', FeedFormat::ATOM)]
    final class YourFeed implements FeedInterface
    {
+      public function getId(): string
+      {
+         return '';
+      }
+
       public function getTitle(): string
       {
          return 'Your website title';
@@ -51,52 +57,60 @@ Let's start with an example to warm up.
          return 'Here comes the Atom feed for your website.';
       }
 
-      public function getLanguage(): string
-      {
-         return 'en';
-      }
-
-      public function getLogo(): string
-      {
-         return 'https://example.com/fileadmin/your-logo.png';
-      }
-
-      // If the method returns an implementation of the DateTimeInterface it is
-      // also used for the Last-Modified header in the HTTP response.
-      public function getLastModified(): ?\DateTimeInterface
-      {
-         return new \DateTimeImmutable();
-      }
-
-      public function getPublicId(): string
-      {
-         return '';
-      }
-
       public function getLink(): string
       {
          return 'https://example.com/';
       }
 
+      public function getAuthors(): array
+      {
+         return [new Author('Your Company')];
+      }
+
+      public function getDateCreated(): ?\DateTimeInterface
+      {
+         return null;
+      }
+
+      // If the method returns an implementation of the DateTimeInterface it is
+      // also used for the "Last-Modified" header in the HTTP response.
+      public function getDateModified(): ?\DateTimeInterface
+      {
+         return new \DateTimeImmutable();
+      }
+
+      public function getLastBuildDate(): ?\DateTimeInterface
+      {
+         return null;
+      }
+
+      public function getLanguage(): string
+      {
+         return 'en';
+      }
+
+      public function getCopyright(): string
+      {
+         return '';
+      }
+
+      public function getImage(): ?ImageInterface;
+      {
+         return new Image('https://example.com/fileadmin/your-logo.png');
+      }
+
       public function getItems(): array
       {
          return [
-            new Item(
-               title: 'Another awesome article',
-               lastModified: '2022-06-07T18:22:00+02:00',
-               link: 'https://example.com/another-awesome-article',
-            ),
-            new Item(
-               title: 'Some awesome article',
-               lastModified: '2022-02-20T20:06:00+01:00',
-               link: 'https://example.com/some-awesome-article',
-            ),
+            (new Item())
+               ->setTitle('Another awesome article')
+               ->setDateModified(new \DateTimeImmutable('2022-06-07T18:22:00+02:00'))
+               ->setLink('https://example.com/another-awesome-article'),
+            (new Item())
+               ->setTitle('Some awesome article'),
+               ->setDateModified(new \DateTimeImmutable('2022-02-20T20:06:00+01:00')),
+               ->setLink('https://example.com/some-awesome-article'),
          ];
-      }
-
-      public function getAuthor(): ?AuthorInterface
-      {
-         return new Author('Your Company');
       }
    }
 
@@ -133,8 +147,8 @@ The :php:`getItems()` method returns an array of
    the class attributes the DI cache has to be flushed.
 
 .. note::
-   Not all properties are used in every format. For example, the content of an
-   item is only available in an Atom feed and not in an RSS feed.
+   Not all properties are used in every format. For example, the language of the
+   feed is only available in an RSS feed and not in an Atom feed.
 
 A list of all configured feeds is available in the :ref:`Configurations
 <configurations-module>` module.
@@ -143,7 +157,7 @@ A list of all configured feeds is available in the :ref:`Configurations
 Interfaces
 ==========
 
-Four interfaces are available and of interest:
+Three interfaces are available and of interest:
 
 .. _developer-FeedInterface:
 
@@ -247,47 +261,6 @@ the site or the language information:
       // ... the other methods from the introduction example are untouched
    }
 
-.. _developer-StyleSheetAwareInterface:
-
-StyleSheetAwareInterface
-------------------------
-
-The :any:`Brotkrueml\\FeedGenerator\\Feed\\StyleSheetAwareInterface` requires
-the implementation of a :php:`getStyleSheet()` method that returns the path to
-an XSL stylesheet. In this way, the appearance of an Atom or RSS feed can be
-customised in a browser.
-
-.. code-block:: php
-   :caption: EXT:your_extension/Classes/Feed/YourFeed.php
-
-   // use Brotkrueml\FeedGenerator\Feed\StyleSheetAwareInterface;
-
-   #[Feed('/your-feed.atom', FeedFormat::ATOM)]
-   final class YourFeed implements FeedInterface, StyleSheetAwareInterface
-   {
-      public function getStyleSheet(): string
-      {
-         return 'EXT:your_extension/Resources/Public/StyleSheets/Atom.xsl';
-      }
-
-      // ... the other methods from the introduction example are untouched
-   }
-
-An XSL stylesheet is only useful for XML feeds (Atom and RSS). When providing a
-stylesheet for a JSON feed, it is ignored.
-
-This extension comes with two XSL stylesheets, one for an Atom feed and one for
-an RSS feed, which can be used directly or copied and adapted to your needs:
-
-*  Atom: :file:`Resources/Public/StyleSheets/Atom.xsl`
-*  RSS: :file:`Resources/Public/StyleSheets/Rss.xsl`
-
-.. note::
-   When adding an XSL stylesheet to an Atom or RSS feed, the content type of the
-   HTTP response is changed to `application/xml`. This way Chrome and some other
-   browsers apply the stylesheet correctly.
-
-
 .. _developer-multiple-feeds:
 
 Multiple feeds
@@ -301,7 +274,6 @@ be useful to implement the :ref:`FeedFormatAwareInterface
    :caption: EXT:your_extension/Classes/Feed/YourFeed.php
 
    #[Feed('/your-feed.atom', FeedFormat::ATOM)]
-   #[Feed('/your-feed.json', FeedFormat::JSON)]
    #[Feed('/your-feed.rss', FeedFormat::RSS)]
    final class YourFeed implements FeedInterface
    {
@@ -407,17 +379,10 @@ the content type:
 
    # Apache module "mod_expires" has to be active
 
-   # For Atom feeds (without XSL stylesheet)
+   # For Atom feeds
    ExpiresByType application/atom+xml "access plus 1 hour"
-   # For JSON feeds
-   ExpiresByType application/feed+json "access plus 1 hour"
-   # For RSS feeds (without XSL stylesheet)
+   # For RSS feeds
    ExpiresByType application/rss+xml "access plus 1 hour"
-
-   # For Atom and RSS feeds (with XSL stylesheet)
-   # Attention: This is a general content type and can also affect resources
-   # other than feeds!
-   ExpiresByType application/xml "access plus 1 hour"
 
 
 Translations

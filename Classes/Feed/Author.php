@@ -16,10 +16,13 @@ namespace Brotkrueml\FeedGenerator\Feed;
  */
 final class Author implements AuthorInterface
 {
+    /**
+     * @param non-empty-string $name
+     */
     public function __construct(
         private readonly string $name,
-        private readonly string $uri = '',
         private readonly string $email = '',
+        private readonly string $uri = '',
     ) {
     }
 
@@ -28,13 +31,13 @@ final class Author implements AuthorInterface
         return $this->name;
     }
 
-    public function getUri(): string
-    {
-        return $this->uri;
-    }
-
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    public function getUri(): string
+    {
+        return $this->uri;
     }
 }

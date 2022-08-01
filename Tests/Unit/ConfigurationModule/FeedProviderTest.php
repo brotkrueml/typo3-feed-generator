@@ -16,7 +16,7 @@ use Brotkrueml\FeedGenerator\Configuration\FeedRegistryInterface;
 use Brotkrueml\FeedGenerator\ConfigurationModule\FeedProvider;
 use Brotkrueml\FeedGenerator\Feed\FeedFormat;
 use Brotkrueml\FeedGenerator\Feed\FeedInterface;
-use Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration\AnotherFeed;
+use Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration\EmptyFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration\SomeFeed;
 use PHPUnit\Framework\TestCase;
 
@@ -104,7 +104,6 @@ final class FeedProviderTest extends TestCase
         yield 'Three configurations in one class available' => [
             'configurations' => [
                 new FeedConfiguration(new SomeFeed(), '/some/path.atom', FeedFormat::ATOM, [], null),
-                new FeedConfiguration(new SomeFeed(), '/some/path.json', FeedFormat::JSON, [], null),
                 new FeedConfiguration(new SomeFeed(), '/some/path.rss', FeedFormat::RSS, [], null),
             ],
             'expected' => [
@@ -112,10 +111,6 @@ final class FeedProviderTest extends TestCase
                     [
                         'Path' => '/some/path.atom',
                         'Format' => 'atom',
-                    ],
-                    [
-                        'Path' => '/some/path.json',
-                        'Format' => 'json',
                     ],
                     [
                         'Path' => '/some/path.rss',
@@ -128,9 +123,8 @@ final class FeedProviderTest extends TestCase
         yield 'Four configurations in two classes available' => [
             'configurations' => [
                 new FeedConfiguration(new SomeFeed(), '/some/path.atom', FeedFormat::ATOM, [], null),
-                new FeedConfiguration(new SomeFeed(), '/some/path.json', FeedFormat::JSON, [], null),
                 new FeedConfiguration(new SomeFeed(), '/some/path.rss', FeedFormat::RSS, [], null),
-                new FeedConfiguration(new AnotherFeed(), '/another/feed', FeedFormat::JSON, ['another_site'], null),
+                new FeedConfiguration(new EmptyFeed(), '/empty/feed', FeedFormat::RSS, ['another_site'], null),
             ],
             'expected' => [
                 SomeFeed::class => [
@@ -139,18 +133,14 @@ final class FeedProviderTest extends TestCase
                         'Format' => 'atom',
                     ],
                     [
-                        'Path' => '/some/path.json',
-                        'Format' => 'json',
-                    ],
-                    [
                         'Path' => '/some/path.rss',
                         'Format' => 'rss',
                     ],
                 ],
-                AnotherFeed::class => [
+                EmptyFeed::class => [
                     'Site identifier' => 'another_site',
-                    'Path' => '/another/feed',
-                    'Format' => 'json',
+                    'Path' => '/empty/feed',
+                    'Format' => 'rss',
                 ],
             ],
         ];

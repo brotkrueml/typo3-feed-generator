@@ -15,13 +15,13 @@ use Brotkrueml\FeedGenerator\Configuration\FeedConfiguration;
 use Brotkrueml\FeedGenerator\Configuration\FeedRegistryInterface;
 use Brotkrueml\FeedGenerator\Feed\FeedFormatAwareInterface;
 use Brotkrueml\FeedGenerator\Feed\RequestAwareInterface;
-use Brotkrueml\FeedGenerator\Feed\StyleSheetAwareInterface;
 use Brotkrueml\FeedGenerator\Formatter\FeedFormatter;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
 /**
@@ -55,14 +55,20 @@ final class FeedMiddleware implements MiddlewareInterface
         if ($feed instanceof FeedFormatAwareInterface) {
             $feed->setFormat($configuration->format);
         }
-        $result = $this->feedFormatter->format($feed, $configuration->format);
 
-        $hasStyleSheet = $feed instanceof StyleSheetAwareInterface && ($feed->getStyleSheet() !== '');
+        /** @var NormalizedParams $normalizedParams */
+        $normalizedParams = $request->getAttribute('normalizedParams');
+        $result = $this->feedFormatter->format(
+            $normalizedParams->getRequestHost() . $configuration->path,
+            $feed,
+            $configuration->format
+        );
+
         $response = $this->responseFactory->createResponse()
-            ->withHeader('Content-Type', $configuration->format->contentType($hasStyleSheet) . '; charset=utf-8');
+            ->withHeader('Content-Type', $configuration->format->contentType() . '; charset=utf-8');
 
-        if ($feed->getLastModified() instanceof \DateTimeInterface) {
-            $response = $response->withHeader('Last-Modified', $feed->getLastModified()->format(\DateTimeInterface::RFC7231));
+        if ($feed->getDateModified() instanceof \DateTimeInterface) {
+            $response = $response->withHeader('Last-Modified', $feed->getDateModified()->format(\DateTimeInterface::RFC7231));
         }
 
         if ($configuration->cacheInSeconds !== null) {

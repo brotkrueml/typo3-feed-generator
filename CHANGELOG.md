@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- debril/feed-io removed in favour of laminas/laminas-feed
+
+### Removed
+- XSL stylesheets
+- JSON feeds
+- Medias in items
+
 ## [0.3.0] - 2022-06-20
 
 ### Added

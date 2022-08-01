@@ -13,7 +13,6 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\Feed;
 
 use Brotkrueml\FeedGenerator\Feed\Author;
 use Brotkrueml\FeedGenerator\Feed\Item;
-use Brotkrueml\FeedGenerator\Feed\Media;
 use PHPUnit\Framework\TestCase;
 
 final class ItemTest extends TestCase
@@ -25,14 +24,26 @@ final class ItemTest extends TestCase
     {
         $subject = new Item();
 
+        self::assertSame('', $subject->getId());
         self::assertSame('', $subject->getTitle());
-        self::assertSame('', $subject->getPublicId());
-        self::assertNull($subject->getLastModified());
-        self::assertSame('', $subject->getLink());
-        self::assertSame('', $subject->getSummary());
+        self::assertSame('', $subject->getDescription());
         self::assertSame('', $subject->getContent());
-        self::assertNull($subject->getAuthor());
-        self::assertSame([], $subject->getMedias());
+        self::assertSame('', $subject->getLink());
+        self::assertSame([], $subject->getAuthors());
+        self::assertNull($subject->getDateCreated());
+        self::assertNull($subject->getDateModified());
+        self::assertSame('', $subject->getCopyright());
+    }
+
+    /**
+     * @test
+     */
+    public function getIdReturnsPublicIdCorrectly(): void
+    {
+        $subject = (new Item())
+            ->setId('some id');
+
+        self::assertSame('some id', $subject->getId());
     }
 
     /**
@@ -40,7 +51,8 @@ final class ItemTest extends TestCase
      */
     public function getTitleReturnsTitleCorrectly(): void
     {
-        $subject = new Item(title: 'some title');
+        $subject = (new Item())
+            ->setTitle('some title');
 
         self::assertSame('some title', $subject->getTitle());
     }
@@ -48,43 +60,12 @@ final class ItemTest extends TestCase
     /**
      * @test
      */
-    public function getPublicIdReturnsPublicIdCorrectly(): void
+    public function getDescriptionReturnsDescriptionCorrectly(): void
     {
-        $subject = new Item(publicId: 'some public id');
+        $subject = (new Item())
+            ->setDescription('some description');
 
-        self::assertSame('some public id', $subject->getPublicId());
-    }
-
-    /**
-     * @test
-     */
-    public function getLastModifiedReturnsLastModifiedCorrectly(): void
-    {
-        $lastModified = new \DateTimeImmutable();
-
-        $subject = new Item(lastModified: $lastModified);
-
-        self::assertSame($lastModified, $subject->getLastModified());
-    }
-
-    /**
-     * @test
-     */
-    public function getLinkReturnsLinkCorrectly(): void
-    {
-        $subject = new Item(link: 'some link');
-
-        self::assertSame('some link', $subject->getLink());
-    }
-
-    /**
-     * @test
-     */
-    public function getSummaryReturnsSummaryCorrectly(): void
-    {
-        $subject = new Item(summary: 'some summary');
-
-        self::assertSame('some summary', $subject->getSummary());
+        self::assertSame('some description', $subject->getDescription());
     }
 
     /**
@@ -92,7 +73,8 @@ final class ItemTest extends TestCase
      */
     public function getContentReturnsContentCorrectly(): void
     {
-        $subject = new Item(content: 'some content');
+        $subject = (new Item())
+            ->setContent('some content');
 
         self::assertSame('some content', $subject->getContent());
     }
@@ -100,39 +82,64 @@ final class ItemTest extends TestCase
     /**
      * @test
      */
-    public function getAuthorReturnsAuthorCorrectly(): void
+    public function getLinkReturnsLinkCorrectly(): void
     {
-        $author = new Author('Some Author');
+        $subject = (new Item())
+            ->setLink('some link');
 
-        $subject = new Item(author: $author);
-
-        self::assertSame($author, $subject->getAuthor());
+        self::assertSame('some link', $subject->getLink());
     }
 
     /**
      * @test
      */
-    public function getMediasReturnsMediasAsArrayCorrectly(): void
+    public function getAuthorsReturnsOneAuthorCorrectly(): void
     {
-        $media1 = new Media('some type', 'some url');
-        $media2 = new Media('another type', 'another url');
+        $author = new Author('Some author');
 
-        $subject = new Item(medias: [$media1, $media2]);
+        $subject = (new Item())
+            ->setAuthors($author);
 
-        self::assertSame([$media1, $media2], $subject->getMedias());
+        self::assertSame([$author], $subject->getAuthors());
     }
 
     /**
      * @test
      */
-    public function getMediasReturnMediasAsArrayIteratorCorrectly(): void
+    public function getAuthorsReturnsTwoAuthorsCorrectly(): void
     {
-        $media1 = new Media('some type', 'some url');
-        $media2 = new Media('another type', 'another url');
-        $iterator = new \ArrayIterator([$media1, $media2]);
+        $author1 = new Author('Some author');
+        $author2 = new Author('Another author');
 
-        $subject = new Item(medias: $iterator);
+        $subject = (new Item())
+            ->setAuthors($author1, $author2);
 
-        self::assertSame($iterator, $subject->getMedias());
+        self::assertSame([$author1, $author2], $subject->getAuthors());
+    }
+
+    /**
+     * @test
+     */
+    public function getDateCreatedReturnsDateCreatedCorrectly(): void
+    {
+        $dateCreated = new \DateTimeImmutable();
+
+        $subject = (new Item())
+            ->setDateCreated($dateCreated);
+
+        self::assertSame($dateCreated, $subject->getDateCreated());
+    }
+
+    /**
+     * @test
+     */
+    public function getDateModifiedReturnsDateModifiedCorrectly(): void
+    {
+        $dateModified = new \DateTimeImmutable();
+
+        $subject = (new Item())
+            ->setDateModified($dateModified);
+
+        self::assertSame($dateModified, $subject->getDateModified());
     }
 }

@@ -6,6 +6,9 @@
 Classes
 =======
 
+.. note::
+   This overview is currently outdated.
+
 .. php:namespace:: Brotkrueml\FeedGenerator\Feed
 
 .. php:class:: Author
@@ -26,15 +29,15 @@ Classes
       :returntype: string
       :returns: The name of the author.
 
-   .. php:method:: getUri()
-
-      :returntype: string
-      :returns: The URI of the author.
-
    .. php:method:: getEmail()
 
       :returntype: string
       :returns: The email address of the author.
+
+   .. php:method:: getUri()
+
+      :returntype: string
+      :returns: The URI of the author.
 
 
 .. php:class:: Item

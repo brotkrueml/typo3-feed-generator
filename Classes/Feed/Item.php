@@ -16,19 +16,29 @@ namespace Brotkrueml\FeedGenerator\Feed;
  */
 final class Item implements ItemInterface
 {
+    private string $id = '';
+    private string $title = '';
+    private string $description = '';
+    private string $content = '';
+    private string $link = '';
     /**
-     * @param iterable<MediaInterface> $medias
+     * @var AuthorInterface[]
      */
-    public function __construct(
-        private readonly string $title = '',
-        private readonly string $publicId = '',
-        private readonly ?\DateTimeInterface $lastModified = null,
-        private readonly string $link = '',
-        private readonly string $summary = '',
-        private readonly string $content = '',
-        private readonly ?AuthorInterface $author = null,
-        private readonly iterable $medias = [],
-    ) {
+    private array $authors = [];
+    private ?\DateTimeInterface $dateCreated = null;
+    private ?\DateTimeInterface $dateModified = null;
+    private string $copyright = '';
+
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function setId(string $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getTitle(): string
@@ -36,24 +46,23 @@ final class Item implements ItemInterface
         return $this->title;
     }
 
-    public function getPublicId(): string
+    public function setTitle(string $title): self
     {
-        return $this->publicId;
+        $this->title = $title;
+
+        return $this;
     }
 
-    public function getLastModified(): ?\DateTimeInterface
+    public function getDescription(): string
     {
-        return $this->lastModified;
+        return $this->description;
     }
 
-    public function getLink(): string
+    public function setDescription(string $description): self
     {
-        return $this->link;
-    }
+        $this->description = $description;
 
-    public function getSummary(): string
-    {
-        return $this->summary;
+        return $this;
     }
 
     public function getContent(): string
@@ -61,16 +70,73 @@ final class Item implements ItemInterface
         return $this->content;
     }
 
-    public function getAuthor(): ?AuthorInterface
+    public function setContent(string $content): self
     {
-        return $this->author;
+        $this->content = $content;
+
+        return $this;
+    }
+
+    public function getLink(): string
+    {
+        return $this->link;
+    }
+
+    public function setLink(string $link): self
+    {
+        $this->link = $link;
+
+        return $this;
     }
 
     /**
-     * @return iterable<MediaInterface>
+     * @return AuthorInterface[]
      */
-    public function getMedias(): iterable
+    public function getAuthors(): array
     {
-        return $this->medias;
+        return $this->authors;
+    }
+
+    public function setAuthors(AuthorInterface ...$authors): self
+    {
+        $this->authors = $authors;
+
+        return $this;
+    }
+
+    public function getDateCreated(): ?\DateTimeInterface
+    {
+        return $this->dateCreated;
+    }
+
+    public function setDateCreated(?\DateTimeInterface $dateCreated): self
+    {
+        $this->dateCreated = $dateCreated;
+
+        return $this;
+    }
+
+    public function getDateModified(): ?\DateTimeInterface
+    {
+        return $this->dateModified;
+    }
+
+    public function setDateModified(?\DateTimeInterface $dateModified): self
+    {
+        $this->dateModified = $dateModified;
+
+        return $this;
+    }
+
+    public function getCopyright(): string
+    {
+        return $this->copyright;
+    }
+
+    public function setCopyright(string $copyright): self
+    {
+        $this->copyright = $copyright;
+
+        return $this;
     }
 }

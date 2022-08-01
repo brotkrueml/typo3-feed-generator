@@ -27,7 +27,7 @@ final class AuthorMapperTest extends TestCase
     /**
      * @test
      */
-    public function mapReturnsFeedIoAuthorCorrectly(): void
+    public function mapReturnsLaminasAuthorWithAllPropertiesGivenCorrectly(): void
     {
         $author = new class() implements AuthorInterface {
             public function getName(): string
@@ -48,8 +48,41 @@ final class AuthorMapperTest extends TestCase
 
         $actual = $this->subject->map($author);
 
-        self::assertSame('some name', $actual->getName());
-        self::assertSame('some uri', $actual->getUri());
-        self::assertSame('some email', $actual->getEmail());
+        self::assertCount(3, $actual);
+        self::assertArrayHasKey('name', $actual);
+        self::assertSame('some name', $actual['name']);
+        self::assertArrayHasKey('email', $actual);
+        self::assertSame('some email', $actual['email']);
+        self::assertArrayHasKey('uri', $actual);
+        self::assertSame('some uri', $actual['uri']);
+    }
+
+    /**
+     * @test
+     */
+    public function mapReturnsLaminasAuthorWithOnlyRequiredPropertiesGivenCorrectly(): void
+    {
+        $author = new class() implements AuthorInterface {
+            public function getName(): string
+            {
+                return 'some name';
+            }
+
+            public function getUri(): string
+            {
+                return '';
+            }
+
+            public function getEmail(): string
+            {
+                return '';
+            }
+        };
+
+        $actual = $this->subject->map($author);
+
+        self::assertCount(1, $actual);
+        self::assertArrayHasKey('name', $actual);
+        self::assertSame('some name', $actual['name']);
     }
 }

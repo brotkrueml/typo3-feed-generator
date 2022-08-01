@@ -11,34 +11,31 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration;
 
-use Brotkrueml\FeedGenerator\Feed\Author;
 use Brotkrueml\FeedGenerator\Feed\AuthorInterface;
 use Brotkrueml\FeedGenerator\Feed\FeedInterface;
-use Brotkrueml\FeedGenerator\Feed\Image;
 use Brotkrueml\FeedGenerator\Feed\ImageInterface;
-use Brotkrueml\FeedGenerator\Feed\Item;
 use Brotkrueml\FeedGenerator\Feed\ItemInterface;
 
-final class SomeFeed implements FeedInterface
+final class EmptyFeed implements FeedInterface
 {
     public function getId(): string
     {
-        return 'some id';
+        return '';
     }
 
     public function getTitle(): string
     {
-        return 'some title';
+        return '';
     }
 
     public function getDescription(): string
     {
-        return 'some description';
+        return '';
     }
 
     public function getLink(): string
     {
-        return 'some link';
+        return '';
     }
 
     /**
@@ -46,40 +43,37 @@ final class SomeFeed implements FeedInterface
      */
     public function getAuthors(): array
     {
-        return [
-            new Author('some author'),
-            new Author('another author'),
-        ];
+        return [];
     }
 
     public function getDateCreated(): ?\DateTimeInterface
     {
-        return new \DateTimeImmutable('01.08.2022 11:11:11');
+        return null;
     }
 
     public function getDateModified(): ?\DateTimeInterface
     {
-        return new \DateTimeImmutable('01.08.2022 12:12:12');
+        return null;
     }
 
     public function getLastBuildDate(): ?\DateTimeInterface
     {
-        return new \DateTimeImmutable('01.08.2022 13:13:13');
+        return null;
     }
 
     public function getLanguage(): string
     {
-        return 'some language';
+        return '';
     }
 
     public function getCopyright(): string
     {
-        return 'some copyright';
+        return '';
     }
 
     public function getImage(): ?ImageInterface
     {
-        return new Image('some uri');
+        return null;
     }
 
     /**
@@ -87,9 +81,6 @@ final class SomeFeed implements FeedInterface
      */
     public function getItems(): array
     {
-        return [
-            (new Item())->setTitle('some title'),
-            (new Item())->setTitle('another title'),
-        ];
+        return [];
     }
 }

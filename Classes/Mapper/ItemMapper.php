@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Mapper;
 
-use Brotkrueml\FeedGenerator\Feed\AuthorInterface;
 use Brotkrueml\FeedGenerator\Feed\ItemInterface;
-use FeedIo\Feed\Item as FeedIoItem;
+use Laminas\Feed\Writer\Entry as LaminasEntry;
+use Laminas\Feed\Writer\Feed as LaminasFeed;
 
 /**
  * @internal
@@ -22,33 +22,41 @@ class ItemMapper
 {
     public function __construct(
         private readonly AuthorMapper $authorMapper,
-        private readonly MediaMapper $mediaMapper,
     ) {
     }
 
-    public function map(ItemInterface $item): FeedIoItem
+    public function map(ItemInterface $item, LaminasFeed $laminasFeed): LaminasEntry
     {
-        $lastModified = $item->getLastModified();
-        $lastModified = $lastModified instanceof \DateTimeImmutable
-            ? \DateTime::createFromImmutable($lastModified)
-            : $lastModified;
-
-        $feedIoItem = new FeedIoItem();
-        $feedIoItem->setTitle($item->getTitle());
-        $feedIoItem->setPublicId($item->getPublicId());
-        $feedIoItem->setLastModified($lastModified);
-        $feedIoItem->setLink($item->getLink());
-        $feedIoItem->setSummary($item->getSummary());
-        $feedIoItem->setContent($item->getContent());
-
-        if ($item->getAuthor() instanceof AuthorInterface) {
-            $feedIoItem->setAuthor($this->authorMapper->map($item->getAuthor()));
+        $laminasEntry = $laminasFeed->createEntry();
+        if ($item->getId() !== '') {
+            $laminasEntry->setId($item->getId());
+        }
+        if ($item->getTitle() !== '') {
+            $laminasEntry->setTitle($item->getTitle());
+        }
+        if ($item->getDescription() !== '') {
+            $laminasEntry->setDescription($item->getDescription());
+        }
+        if ($item->getContent() !== '') {
+            $laminasEntry->setContent($item->getContent());
+        }
+        if ($item->getLink() !== '') {
+            $laminasEntry->setLink($item->getLink());
+        }
+        if ($item->getDateCreated() instanceof \DateTimeInterface) {
+            $laminasEntry->setDateCreated($item->getDateCreated());
+        }
+        if ($item->getDateModified() instanceof \DateTimeInterface) {
+            $laminasEntry->setDateModified($item->getDateModified());
+        }
+        if ($item->getCopyright() !== '') {
+            $laminasEntry->setCopyright($item->getCopyright());
         }
 
-        foreach ($item->getMedias() as $media) {
-            $feedIoItem->addMedia($this->mediaMapper->map($media));
+        foreach ($item->getAuthors() as $author) {
+            $laminasEntry->addAuthor($this->authorMapper->map($author));
         }
 
-        return $feedIoItem;
+        return $laminasEntry;
     }
 }

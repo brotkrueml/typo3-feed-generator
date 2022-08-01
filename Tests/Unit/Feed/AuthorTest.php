@@ -31,20 +31,20 @@ final class AuthorTest extends TestCase
     /**
      * @test
      */
-    public function getUriReturnsUriCorrectly(): void
+    public function getEmailReturnsEmailCorrectly(): void
     {
-        $subject = new Author('Some Name', 'some uri');
+        $subject = new Author('Some Name', 'some email');
 
-        self::assertSame('some uri', $subject->getUri());
+        self::assertSame('some email', $subject->getEmail());
     }
 
     /**
      * @test
      */
-    public function getEmailReturnsEmailCorrectly(): void
+    public function getUriReturnsUriCorrectly(): void
     {
-        $subject = new Author('Some Name', email: 'some email');
+        $subject = new Author('Some Name', uri: 'some uri');
 
-        self::assertSame('some email', $subject->getEmail());
+        self::assertSame('some uri', $subject->getUri());
     }
 }

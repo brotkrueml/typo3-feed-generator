@@ -14,29 +14,21 @@ namespace Brotkrueml\FeedGenerator\Formatter;
 use Brotkrueml\FeedGenerator\Feed\FeedFormat;
 use Brotkrueml\FeedGenerator\Feed\FeedInterface;
 use Brotkrueml\FeedGenerator\Mapper\FeedMapper;
-use FeedIo\Adapter\NullClient;
-use FeedIo\FeedIo;
-use Psr\Log\LoggerInterface;
 
 /**
  * @internal
  */
 final class FeedFormatter
 {
-    private readonly FeedIo $feedIo;
-
     public function __construct(
         private readonly FeedMapper $feedMapper,
-        LoggerInterface $logger,
     ) {
-        $this->feedIo = new FeedIo(new NullClient(), $logger);
     }
 
-    public function format(FeedInterface $feed, FeedFormat $format): string
+    public function format(string $feedLink, FeedInterface $feed, FeedFormat $format): string
     {
-        return $this->feedIo->format(
-            $this->feedMapper->map($feed),
-            $format->format()
-        );
+        $laminasFeed = $this->feedMapper->map($feedLink, $feed, $format);
+
+        return $laminasFeed->export($format->format());
     }
 }

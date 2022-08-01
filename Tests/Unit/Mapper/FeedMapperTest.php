@@ -11,14 +11,16 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Mapper;
 
-use Brotkrueml\FeedGenerator\Feed\Author;
-use Brotkrueml\FeedGenerator\Feed\AuthorInterface;
-use Brotkrueml\FeedGenerator\Feed\FeedInterface;
-use Brotkrueml\FeedGenerator\Feed\Item;
+use Brotkrueml\FeedGenerator\Feed\FeedFormat;
 use Brotkrueml\FeedGenerator\Feed\ItemInterface;
 use Brotkrueml\FeedGenerator\Mapper\AuthorMapper;
 use Brotkrueml\FeedGenerator\Mapper\FeedMapper;
+use Brotkrueml\FeedGenerator\Mapper\ImageMapper;
 use Brotkrueml\FeedGenerator\Mapper\ItemMapper;
+use Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration\EmptyFeed;
+use Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration\SomeFeed;
+use Laminas\Feed\Writer\Entry as LaminasEntry;
+use Laminas\Feed\Writer\Feed as LaminasFeed;
 use PHPUnit\Framework\TestCase;
 
 final class FeedMapperTest extends TestCase
@@ -28,169 +30,89 @@ final class FeedMapperTest extends TestCase
     protected function setUp(): void
     {
         $itemMapper = new class() extends ItemMapper {
+            /**
+             * @noinspection PhpMissingParentConstructorInspection
+             */
             public function __construct()
             {
             }
 
-            public function map(ItemInterface $item): \FeedIo\Feed\Item
+            public function map(ItemInterface $item, LaminasFeed $laminasFeed): LaminasEntry
             {
-                $feedIoItem = new \FeedIo\Feed\Item();
-                $feedIoItem->setTitle($item->getTitle());
+                $laminasEntry = $laminasFeed->createEntry();
+                $laminasEntry->setTitle($item->getTitle());
 
-                return $feedIoItem;
+                return $laminasEntry;
             }
         };
 
-        $this->subject = new FeedMapper(new AuthorMapper(), $itemMapper);
+        $this->subject = new FeedMapper(new AuthorMapper(), new ImageMapper(), $itemMapper);
     }
 
     /**
      * @test
      */
-    public function mapReturnsFeedIoItemCorrectlyWhenOnlyStringArgumentsAreGiven(): void
+    public function mapReturnsLaminasEntryCorrectlyWhenAllArgumentsAreGiven(): void
     {
-        $actual = $this->subject->map($this->buildFeed());
+        $actual = $this->subject->map(
+            'https://example.org/some-feed-link',
+            new SomeFeed(),
+            FeedFormat::ATOM,
+        );
 
-        self::assertSame('some description', $actual->getDescription());
-        self::assertSame('some language', $actual->getLanguage());
-        self::assertSame('some logo', $actual->getLogo());
-        self::assertCount(0, $actual);
-        self::assertNull($actual->getLastModified());
+        self::assertSame('some id', $actual->getId());
         self::assertSame('some title', $actual->getTitle());
-        self::assertSame('some public id', $actual->getPublicId());
         self::assertSame('some link', $actual->getLink());
-        self::assertNull($actual->getAuthor());
-    }
-
-    /**
-     * @test
-     */
-    public function mapReturnsFeedIoItemCorrectlyWhenOneItemIsGiven(): void
-    {
-        $feed = $this->buildFeed(items: [new Item(title: 'some title')]);
-
-        $actual = $this->subject->map($feed);
-
-        self::assertCount(1, $actual);
-        self::assertSame('some title', $actual->current()->getTitle());
-    }
-
-    /**
-     * @test
-     */
-    public function mapReturnsFeedIoItemCorrectlyWhenTwoItemsAreGiven(): void
-    {
-        $feed = $this->buildFeed(items: [
-            new Item(title: 'some title 1'),
-            new Item(title: 'some title 2'),
-        ]);
-
-        $actual = $this->subject->map($feed);
-
+        self::assertSame([
+            'atom' => 'https://example.org/some-feed-link',
+        ], $actual->getFeedLinks());
+        self::assertSame('some description', $actual->getDescription());
+        self::assertSame('01.08.2022 11:11:11', $actual->getDateCreated()->format('d.m.Y H:i:s'));
+        self::assertSame('01.08.2022 12:12:12', $actual->getDateModified()->format('d.m.Y H:i:s'));
+        self::assertSame('01.08.2022 13:13:13', $actual->getLastBuildDate()->format('d.m.Y H:i:s'));
+        self::assertSame('some language', $actual->getLanguage());
+        self::assertSame('some copyright', $actual->getCopyright());
+        self::assertSame([
+            'uri' => 'some uri',
+        ], $actual->getImage());
+        self::assertSame(
+            [
+                [
+                    'name' => 'some author',
+                ],
+                [
+                    'name' => 'another author',
+                ],
+            ],
+            $actual->getAuthors()
+        );
         self::assertCount(2, $actual);
-        self::assertSame('some title 1', $actual->current()->getTitle());
-        $actual->next();
-        self::assertSame('some title 2', $actual->current()->getTitle());
     }
 
     /**
      * @test
      */
-    public function mapReturnsFeedIoItemCorrectlyWhenLastModifiedIsAsDateTimeGiven(): void
+    public function mapReturnsLaminasEntryCorrectlyWhenNoArgumentsAreGiven(): void
     {
-        $date = '2022-04-02 21:11:11';
-        $feed = $this->buildFeed(lastModified: new \DateTime($date));
+        $actual = $this->subject->map(
+            'https://example.org/empty-feed-link',
+            new EmptyFeed(),
+            FeedFormat::ATOM,
+        );
 
-        $actual = $this->subject->map($feed);
-
-        self::assertSame($date, $actual->getLastModified()->format('Y-m-d H:i:s'));
-    }
-
-    /**
-     * @test
-     */
-    public function mapReturnsFeedIoItemCorrectlyWhenLastModifiedIsAsDateTimeImmutableGiven(): void
-    {
-        $date = '2022-04-02 21:11:11';
-        $feed = $this->buildFeed(lastModified: new \DateTimeImmutable($date));
-
-        $actual = $this->subject->map($feed);
-
-        self::assertSame($date, $actual->getLastModified()->format('Y-m-d H:i:s'));
-    }
-
-    /**
-     * @test
-     */
-    public function mapReturnsFeedIoItemCorrectlyWhenAuthorIsGiven(): void
-    {
-        $feed = $this->buildFeed(author: new Author('some author'));
-
-        $actual = $this->subject->map($feed);
-
-        self::assertSame('some author', $actual->getAuthor()->getName());
-    }
-
-    private function buildFeed(
-        array $items = [],
-        ?\DateTimeInterface $lastModified = null,
-        ?AuthorInterface $author = null,
-    ): FeedInterface {
-        return new class($items, $lastModified, $author) implements FeedInterface {
-            public function __construct(
-                private readonly array $items,
-                private readonly ?\DateTimeInterface $lastModified,
-                private readonly ?AuthorInterface $author,
-            ) {
-            }
-
-            public function getDescription(): string
-            {
-                return 'some description';
-            }
-
-            public function getLanguage(): string
-            {
-                return 'some language';
-            }
-
-            public function getLogo(): string
-            {
-                return 'some logo';
-            }
-
-            /**
-             * @return ItemInterface[]
-             */
-            public function getItems(): array
-            {
-                return $this->items;
-            }
-
-            public function getLastModified(): ?\DateTimeInterface
-            {
-                return $this->lastModified;
-            }
-
-            public function getTitle(): string
-            {
-                return 'some title';
-            }
-
-            public function getPublicId(): string
-            {
-                return 'some public id';
-            }
-
-            public function getLink(): string
-            {
-                return 'some link';
-            }
-
-            public function getAuthor(): ?AuthorInterface
-            {
-                return $this->author;
-            }
-        };
+        self::assertNull($actual->getId());
+        self::assertNull($actual->getTitle());
+        self::assertNull($actual->getLink());
+        self::assertSame([
+            'atom' => 'https://example.org/empty-feed-link',
+        ], $actual->getFeedLinks());
+        self::assertNull($actual->getDescription());
+        self::assertInstanceOf(\DateTimeInterface::class, $actual->getDateCreated());
+        self::assertInstanceOf(\DateTimeInterface::class, $actual->getDateModified());
+        self::assertInstanceOf(\DateTimeInterface::class, $actual->getLastBuildDate());
+        self::assertNull($actual->getLanguage());
+        self::assertNull($actual->getCopyright());
+        self::assertNull($actual->getImage());
+        self::assertCount(0, $actual);
     }
 }

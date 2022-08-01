@@ -11,13 +11,10 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Mapper;
 
-use Brotkrueml\FeedGenerator\Feed\AuthorInterface;
+use Brotkrueml\FeedGenerator\Feed\FeedFormat;
 use Brotkrueml\FeedGenerator\Feed\FeedInterface;
-use Brotkrueml\FeedGenerator\Feed\StyleSheetAwareInterface;
-use FeedIo\Feed as FeedIoFeed;
-use FeedIo\Feed\StyleSheet;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\PathUtility;
+use Brotkrueml\FeedGenerator\Feed\ImageInterface;
+use Laminas\Feed\Writer\Feed as LaminasFeed;
 
 /**
  * @internal
@@ -26,56 +23,48 @@ final class FeedMapper
 {
     public function __construct(
         private readonly AuthorMapper $authorMapper,
+        private readonly ImageMapper $imageMapper,
         private readonly ItemMapper $itemMapper,
     ) {
     }
 
-    public function map(FeedInterface $feed): FeedIoFeed
+    public function map(string $feedLink, FeedInterface $feed, FeedFormat $format): LaminasFeed
     {
-        $lastModified = $feed->getLastModified();
-        $lastModified = $lastModified instanceof \DateTimeImmutable
-            ? \DateTime::createFromImmutable($lastModified)
-            : $lastModified;
+        $laminasFeed = new LaminasFeed();
+        $laminasFeed->setFeedLink($feedLink, $format->format());
+        $laminasFeed->setDateCreated($feed->getDateCreated());
+        $laminasFeed->setDateModified($feed->getDateModified());
+        $laminasFeed->setLastBuildDate($feed->getLastBuildDate());
 
-        $feedIo = new FeedIoFeed();
-        $feedIo->setTitle($feed->getTitle());
-        $feedIo->setDescription($feed->getDescription());
-        $feedIo->setPublicId($feed->getPublicId());
-        $feedIo->setLastModified($lastModified);
-        $feedIo->setLink($feed->getLink());
-        $feedIo->setLanguage($feed->getLanguage());
-        $feedIo->setLogo($feed->getLogo());
-
-        if ($feed->getAuthor() instanceof AuthorInterface) {
-            $feedIo->setAuthor($this->authorMapper->map($feed->getAuthor()));
+        if ($feed->getId() !== '') {
+            $laminasFeed->setId($feed->getId());
         }
-
-        if ($feed instanceof StyleSheetAwareInterface) {
-            $styleSheet = $feed->getStyleSheet();
-            if ($styleSheet !== '') {
-                $feedIo->setStyleSheet(new StyleSheet($this->resolveExtensionPath($styleSheet)));
-            }
+        if ($feed->getTitle() !== '') {
+            $laminasFeed->setTitle($feed->getTitle());
+        }
+        if ($feed->getLink() !== '') {
+            $laminasFeed->setLink($feed->getLink());
+        }
+        if ($feed->getDescription() !== '') {
+            $laminasFeed->setDescription($feed->getDescription());
+        }
+        if ($feed->getLanguage() !== '') {
+            $laminasFeed->setLanguage($feed->getLanguage());
+        }
+        if ($feed->getCopyright() !== '') {
+            $laminasFeed->setCopyright($feed->getCopyright());
+        }
+        if ($feed->getImage() instanceof ImageInterface) {
+            $laminasFeed->setImage($this->imageMapper->map($feed->getImage()));
+        }
+        foreach ($feed->getAuthors() as $author) {
+            $laminasFeed->addAuthor($this->authorMapper->map($author));
         }
 
         foreach ($feed->getItems() as $item) {
-            $feedIo->add($this->itemMapper->map($item));
+            $laminasFeed->addEntry($this->itemMapper->map($item, $laminasFeed));
         }
 
-        return $feedIo;
-    }
-
-    private function resolveExtensionPath(string $path): string
-    {
-        if (! \str_starts_with($path, 'EXT:')) {
-            throw new \InvalidArgumentException(
-                \sprintf(
-                    'The style sheet must be an extension path starting with "EXT:", "%s" given',
-                    $path
-                ),
-                1647367323
-            );
-        }
-
-        return PathUtility::getAbsoluteWebPath(GeneralUtility::getFileAbsFileName($path));
+        return $laminasFeed;
     }
 }
