@@ -11,6 +11,12 @@ and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0
 `Unreleased <https://github.com/brotkrueml/typo3-feed-generator/compare/v0.3.0...HEAD>`_
 --------------------------------------------------------------------------------------------
 
+Added
+^^^^^
+
+
+* Categories can be added to a feed
+
 Changed
 ^^^^^^^
 
@@ -23,7 +29,7 @@ Removed
 
 * XSL stylesheets
 * JSON feeds
-* Medias in items
+* Media in items
 
 `0.3.0 <https://github.com/brotkrueml/typo3-feed-generator/compare/v0.2.0...v0.3.0>`_ - 2022-06-20
 ------------------------------------------------------------------------------------------------------

@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Mapper;
 
 use Brotkrueml\FeedGenerator\Entity\Generator;
+use Brotkrueml\FeedGenerator\Feed\CategoryAwareInterface;
 use Brotkrueml\FeedGenerator\Feed\FeedFormat;
 use Brotkrueml\FeedGenerator\Feed\FeedInterface;
 use Brotkrueml\FeedGenerator\Feed\ImageInterface;
@@ -24,6 +25,7 @@ final class FeedMapper
 {
     public function __construct(
         private readonly AuthorMapper $authorMapper,
+        private readonly CategoryMapper $categoryMapper,
         private readonly ImageMapper $imageMapper,
         private readonly ItemMapper $itemMapper,
         private readonly Generator $generator,
@@ -66,6 +68,12 @@ final class FeedMapper
 
         foreach ($feed->getItems() as $item) {
             $laminasFeed->addEntry($this->itemMapper->map($item, $laminasFeed));
+        }
+
+        if ($feed instanceof CategoryAwareInterface) {
+            foreach ($feed->getCategories() as $category) {
+                $laminasFeed->addCategory($this->categoryMapper->map($category));
+            }
         }
 
         return $laminasFeed;

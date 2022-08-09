@@ -15,9 +15,11 @@ use Brotkrueml\FeedGenerator\Entity\Generator;
 use Brotkrueml\FeedGenerator\Feed\FeedFormat;
 use Brotkrueml\FeedGenerator\Feed\ItemInterface;
 use Brotkrueml\FeedGenerator\Mapper\AuthorMapper;
+use Brotkrueml\FeedGenerator\Mapper\CategoryMapper;
 use Brotkrueml\FeedGenerator\Mapper\FeedMapper;
 use Brotkrueml\FeedGenerator\Mapper\ImageMapper;
 use Brotkrueml\FeedGenerator\Mapper\ItemMapper;
+use Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration\CategoryFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration\EmptyFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration\SomeFeed;
 use Laminas\Feed\Writer\Entry as LaminasEntry;
@@ -59,7 +61,13 @@ final class FeedMapperTest extends TestCase
             }
         };
 
-        $this->subject = new FeedMapper(new AuthorMapper(), new ImageMapper(), $itemMapper, $generator);
+        $this->subject = new FeedMapper(
+            new AuthorMapper(),
+            new CategoryMapper(),
+            new ImageMapper(),
+            $itemMapper,
+            $generator
+        );
     }
 
     /**
@@ -132,5 +140,25 @@ final class FeedMapperTest extends TestCase
         self::assertNull($actual->getCopyright());
         self::assertNull($actual->getImage());
         self::assertCount(0, $actual);
+    }
+
+    /**
+     * @test
+     */
+    public function mapReturnsLaminasEntryCorrectlyWhenCategoryAwareInterfaceIsImplemented(): void
+    {
+        $actual = $this->subject->map(
+            'https://example.org/some-feed-link',
+            new CategoryFeed(),
+            FeedFormat::ATOM,
+        );
+
+        self::assertCount(2, $actual->getCategories());
+        self::assertSame([
+            'term' => 'some-term',
+        ], $actual->getCategories()[0]);
+        self::assertSame([
+            'term' => 'another-term',
+        ], $actual->getCategories()[1]);
     }
 }

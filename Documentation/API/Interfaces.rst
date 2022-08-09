@@ -8,6 +8,7 @@ Interfaces
 
 .. note::
    This overview is currently outdated.
+   TODO: CategoryAwareInterface
 
 .. php:namespace:: Brotkrueml\FeedGenerator\Feed
 

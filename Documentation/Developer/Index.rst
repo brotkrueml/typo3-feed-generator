@@ -157,7 +157,7 @@ A list of all configured feeds is available in the :ref:`Configurations
 Interfaces
 ==========
 
-Three interfaces are available and of interest:
+Four interfaces are available and of interest:
 
 .. _developer-FeedInterface:
 
@@ -206,6 +206,16 @@ values according to the format.
 
       // ... the other methods from the introduction example are untouched
    }
+
+.. _developer-CategoryAwareInterface:
+
+CategoryAwareInterface
+---------------------
+
+The :any:`Brotkrueml\\FeedGenerator\\Feed\\CategoryAwareInterface` can be added
+when one or more categories should be applied to a feed.
+
+TODO: Add example
 
 .. _developer-RequestAwareInterface:
 
