@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Mapper;
 
+use Brotkrueml\FeedGenerator\Entity\Generator;
 use Brotkrueml\FeedGenerator\Feed\FeedFormat;
 use Brotkrueml\FeedGenerator\Feed\FeedInterface;
 use Brotkrueml\FeedGenerator\Feed\ImageInterface;
@@ -25,6 +26,7 @@ final class FeedMapper
         private readonly AuthorMapper $authorMapper,
         private readonly ImageMapper $imageMapper,
         private readonly ItemMapper $itemMapper,
+        private readonly Generator $generator,
     ) {
     }
 
@@ -35,6 +37,7 @@ final class FeedMapper
         $laminasFeed->setDateCreated($feed->getDateCreated());
         $laminasFeed->setDateModified($feed->getDateModified());
         $laminasFeed->setLastBuildDate($feed->getLastBuildDate());
+        $laminasFeed->setGenerator($this->generator->getName(), uri: $this->generator->getUri());
 
         if ($feed->getId() !== '') {
             $laminasFeed->setId($feed->getId());

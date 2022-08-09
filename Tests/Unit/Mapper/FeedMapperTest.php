@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Mapper;
 
+use Brotkrueml\FeedGenerator\Entity\Generator;
 use Brotkrueml\FeedGenerator\Feed\FeedFormat;
 use Brotkrueml\FeedGenerator\Feed\ItemInterface;
 use Brotkrueml\FeedGenerator\Mapper\AuthorMapper;
@@ -46,7 +47,19 @@ final class FeedMapperTest extends TestCase
             }
         };
 
-        $this->subject = new FeedMapper(new AuthorMapper(), new ImageMapper(), $itemMapper);
+        $generator = new class() extends Generator {
+            public function getName(): string
+            {
+                return 'Some Generator Name';
+            }
+
+            public function getUri(): string
+            {
+                return 'https://example.net/';
+            }
+        };
+
+        $this->subject = new FeedMapper(new AuthorMapper(), new ImageMapper(), $itemMapper, $generator);
     }
 
     /**
@@ -87,6 +100,11 @@ final class FeedMapperTest extends TestCase
             $actual->getAuthors()
         );
         self::assertCount(2, $actual);
+
+        self::assertArrayHasKey('name', $actual->getGenerator());
+        self::assertSame('Some Generator Name', $actual->getGenerator()['name']);
+        self::assertArrayHasKey('uri', $actual->getGenerator());
+        self::assertSame('https://example.net/', $actual->getGenerator()['uri']);
     }
 
     /**
