@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Mapper;
 
-use Brotkrueml\FeedGenerator\Feed\CategoryInterface;
+use Brotkrueml\FeedGenerator\Entity\CategoryInterface;
 
 /**
  * @internal

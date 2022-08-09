@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Feed;
 
+use Brotkrueml\FeedGenerator\Entity\CategoryInterface;
+
 interface CategoryAwareInterface
 {
     /**

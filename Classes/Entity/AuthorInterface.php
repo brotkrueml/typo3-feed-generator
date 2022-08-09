@@ -9,7 +9,7 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\FeedGenerator\Feed;
+namespace Brotkrueml\FeedGenerator\Entity;
 
 interface AuthorInterface
 {

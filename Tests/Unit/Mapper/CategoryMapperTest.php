@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Mapper;
 
-use Brotkrueml\FeedGenerator\Feed\CategoryInterface;
+use Brotkrueml\FeedGenerator\Entity\CategoryInterface;
 use Brotkrueml\FeedGenerator\Mapper\CategoryMapper;
 use PHPUnit\Framework\TestCase;
 

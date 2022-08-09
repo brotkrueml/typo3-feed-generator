@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Mapper;
 
-use Brotkrueml\FeedGenerator\Feed\ImageInterface;
+use Brotkrueml\FeedGenerator\Entity\ImageInterface;
 
 /**
  * @internal

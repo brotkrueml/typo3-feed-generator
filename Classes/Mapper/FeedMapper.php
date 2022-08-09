@@ -12,10 +12,10 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Mapper;
 
 use Brotkrueml\FeedGenerator\Entity\Generator;
+use Brotkrueml\FeedGenerator\Entity\ImageInterface;
 use Brotkrueml\FeedGenerator\Feed\CategoryAwareInterface;
 use Brotkrueml\FeedGenerator\Feed\FeedFormat;
 use Brotkrueml\FeedGenerator\Feed\FeedInterface;
-use Brotkrueml\FeedGenerator\Feed\ImageInterface;
 use Laminas\Feed\Writer\Feed as LaminasFeed;
 
 /**

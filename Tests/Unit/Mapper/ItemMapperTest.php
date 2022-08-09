@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Mapper;
 
-use Brotkrueml\FeedGenerator\Feed\Author;
+use Brotkrueml\FeedGenerator\Entity\Author;
 use Brotkrueml\FeedGenerator\Feed\Item;
 use Brotkrueml\FeedGenerator\Mapper\AuthorMapper;
 use Brotkrueml\FeedGenerator\Mapper\ItemMapper;

@@ -9,9 +9,9 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\FeedGenerator\Tests\Unit\Feed;
+namespace Brotkrueml\FeedGenerator\Tests\Unit\Entity;
 
-use Brotkrueml\FeedGenerator\Feed\Category;
+use Brotkrueml\FeedGenerator\Entity\Category;
 use PHPUnit\Framework\TestCase;
 
 final class CategoryTest extends TestCase

@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration;
 
-use Brotkrueml\FeedGenerator\Feed\AuthorInterface;
+use Brotkrueml\FeedGenerator\Entity\AuthorInterface;
+use Brotkrueml\FeedGenerator\Entity\ImageInterface;
 use Brotkrueml\FeedGenerator\Feed\FeedInterface;
-use Brotkrueml\FeedGenerator\Feed\ImageInterface;
 use Brotkrueml\FeedGenerator\Feed\ItemInterface;
 
 final class EmptyFeed implements FeedInterface

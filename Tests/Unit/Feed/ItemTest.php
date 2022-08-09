@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Feed;
 
-use Brotkrueml\FeedGenerator\Feed\Author;
+use Brotkrueml\FeedGenerator\Entity\Author;
 use Brotkrueml\FeedGenerator\Feed\Item;
 use PHPUnit\Framework\TestCase;
 
