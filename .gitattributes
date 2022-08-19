@@ -1,6 +1,7 @@
+codesnippets.php
 /.* export-ignore
-/Tests/ export-ignore
 /ecs.php export-ignore
+/Tests/ export-ignore
 /Makefile export-ignore
 /phpstan.neon export-ignore
 /rector.php export-ignore

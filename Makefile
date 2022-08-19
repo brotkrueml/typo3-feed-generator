@@ -25,6 +25,10 @@ rector: vendor
 rector-dry: vendor
 	.Build/bin/rector --dry-run
 
+.PHONE: snippets
+snippets: vendor
+	.Build/bin/generate-codesnippets Documentation/CodeSnippets
+
 .PHONY: tests
 tests: vendor
 	.Build/bin/phpunit -c Tests/phpunit.xml.dist

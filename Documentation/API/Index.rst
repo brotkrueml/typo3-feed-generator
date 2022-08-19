@@ -15,12 +15,6 @@ This extension provides some implementations of interfaces as value objects.
 However, you can also create your own implementations as long as they implement
 the appropriate interfaces.
 
-.. toctree::
-
-   Interfaces
-   Classes
-   Enums
-
 .. uml::
 
    enum FeedFormat {
@@ -59,6 +53,16 @@ the appropriate interfaces.
    YourFeed "1" *-- "0 .. 1" Image : contains
    YourFeed "1" *-- "0 .. n" Item : contains
    YourFeed .. FeedFormat : used in attributes
+
+
+Overview
+========
+
+.. toctree::
+
+   Enums/Index
+   Classes/Index
+   Interfaces/Index
 
 
 .. _laminas/laminas-feed: https://github.com/laminas/laminas-feed

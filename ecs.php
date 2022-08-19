@@ -17,6 +17,7 @@ HEADER;
     $config->paths([
         __DIR__ . '/Classes',
         __DIR__ . '/Configuration',
+        __DIR__ . '/Documentation/CodeSnippets',
         __DIR__ . '/Tests',
     ]);
     $config->ruleWithConfiguration(\PhpCsFixer\Fixer\Comment\HeaderCommentFixer::class, [
