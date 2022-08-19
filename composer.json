@@ -39,6 +39,12 @@
 	"suggest": {
 		"typo3/cms-lowlevel": "Display available feeds in Configurations module"
 	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/brotkrueml/t3docs-codesnippets-standalone"
+		}
+	],
 	"autoload": {
 		"psr-4": {
 			"Brotkrueml\\FeedGenerator\\": "Classes"
@@ -49,12 +55,6 @@
 			"Brotkrueml\\FeedGenerator\\Tests\\": "Tests"
 		}
 	},
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/brotkrueml/t3docs-codesnippets-standalone"
-		}
-	],
 	"config": {
 		"allow-plugins": {
 			"ergebnis/composer-normalize": true,
