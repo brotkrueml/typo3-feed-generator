@@ -9,9 +9,14 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\FeedGenerator\Feed;
+namespace Brotkrueml\FeedGenerator\Contract;
 
-interface FeedFormatAwareInterface
+use Psr\Http\Message\ServerRequestInterface;
+
+/**
+ * @api
+ */
+interface RequestAwareInterface
 {
-    public function setFormat(FeedFormat $format): void;
+    public function setRequest(ServerRequestInterface $request): void;
 }

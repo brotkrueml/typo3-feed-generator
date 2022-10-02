@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Configuration;
 
 use Brotkrueml\FeedGenerator\Configuration\FeedConfiguration;
-use Brotkrueml\FeedGenerator\Feed\FeedFormat;
+use Brotkrueml\FeedGenerator\Format\FeedFormat;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration\SomeFeed;
 use PHPUnit\Framework\TestCase;
 

@@ -22,6 +22,7 @@ Changed
 
 
 * debril/feed-io removed in favour of laminas/laminas-feed and jdecool/jsonfeed
+* Namespace of multiple classes has changed
 
 Removed
 ^^^^^^^

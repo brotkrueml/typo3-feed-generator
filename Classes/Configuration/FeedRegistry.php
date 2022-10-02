@@ -13,7 +13,7 @@ namespace Brotkrueml\FeedGenerator\Configuration;
 
 use Brotkrueml\FeedGenerator\Attributes\Cache;
 use Brotkrueml\FeedGenerator\Attributes\Feed;
-use Brotkrueml\FeedGenerator\Feed\FeedInterface;
+use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 
 /**
  * @internal

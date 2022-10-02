@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Mapper\LaminasFeed;
 
-use Brotkrueml\FeedGenerator\Entity\CategoryInterface;
+use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
 use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\CategoryMapper;
 use PHPUnit\Framework\TestCase;
 

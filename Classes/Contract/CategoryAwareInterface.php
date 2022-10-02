@@ -9,14 +9,12 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\FeedGenerator\Feed;
+namespace Brotkrueml\FeedGenerator\Contract;
 
-use Psr\Http\Message\ServerRequestInterface;
-
-/**
- * @api
- */
-interface RequestAwareInterface
+interface CategoryAwareInterface
 {
-    public function setRequest(ServerRequestInterface $request): void;
+    /**
+     * @return CategoryInterface[]
+     */
+    public function getCategories(): array;
 }

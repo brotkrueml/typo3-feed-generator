@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Mapper\JsonFeed;
 
-use Brotkrueml\FeedGenerator\Entity\AuthorInterface;
+use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
 use JDecool\JsonFeed\Author as JsonFeedAuthor;
 
 /**

@@ -33,11 +33,11 @@ Let's start with an example to warm up.
    namespace YourVender\YourExtension\Feed;
 
    use Brotkrueml\FeedGenerator\Attributes\Feed;
-   use Brotkrueml\FeedGenerator\Feed\Author;
-   use Brotkrueml\FeedGenerator\Feed\FeedFormat;
-   use Brotkrueml\FeedGenerator\Feed\FeedInterface;
-   use Brotkrueml\FeedGenerator\Feed\ImageInterface
-   use Brotkrueml\FeedGenerator\Feed\Item;
+   use Brotkrueml\FeedGenerator\Contract\FeedInterface;
+   use Brotkrueml\FeedGenerator\Contract\ImageInterface
+   use Brotkrueml\FeedGenerator\Entity\Author;
+   use Brotkrueml\FeedGenerator\Entity\Item;
+   use Brotkrueml\FeedGenerator\Format\FeedFormat;
 
    #[Feed('/your-feed.atom', FeedFormat::ATOM)]
    final class YourFeed implements FeedInterface
@@ -115,10 +115,10 @@ Let's start with an example to warm up.
    }
 
 First, a class which provides the data for one or more feeds must implement
-the :any:`Brotkrueml\\FeedGenerator\\Feed\\FeedInterface` interface. This marks
-the class as a feed data provider and requires some methods to be implemented.
-Of course, you can use dependency injection to inject service classes, for
-example, a repository that provides the needed items.
+the :any:`Brotkrueml\\FeedGenerator\\Contract\\FeedInterface` interface. This
+marks the class as a feed data provider and requires some methods to be
+implemented. Of course, you can use dependency injection to inject service
+classes, for example, a repository that provides the needed items.
 
 To define under which URL a feed is available and which format should be used
 you have to provide at least one :php:`Brotkrueml\FeedGenerator\Attributes\Feed`
@@ -127,7 +127,7 @@ class attribute. As format a name of the
 according format.
 
 The :php:`getItems()` method returns an array of
-:any:`Brotkrueml\\FeedGenerator\\Feed\\Item` value objects.
+:any:`Brotkrueml\\FeedGenerator\\Entity\\Item` entities.
 
 .. note::
    Based on the :php:`FeedInterface` the feed is automatically registered if
@@ -164,7 +164,7 @@ Four interfaces are available and of interest:
 FeedInterface
 -------------
 
-The :any:`Brotkrueml\\FeedGenerator\\Feed\\FeedInterface` marks the feed –
+The :any:`Brotkrueml\\FeedGenerator\\Contract\\FeedInterface` marks the feed –
 well – as a feed and requires the implementation of some methods like in the
 :ref:`example <developer-example>` above.
 
@@ -173,7 +173,7 @@ well – as a feed and requires the implementation of some methods like in the
 FeedFormatAwareInterface
 ------------------------
 
-When implementing the :any:`Brotkrueml\\FeedGenerator\\Feed\\FeedFormatAwareInterface`,
+When implementing the :any:`Brotkrueml\\FeedGenerator\\Contract\\FeedFormatAwareInterface`,
 you can access the feed format of the current request. This is helpful if you
 define a feed implementation with different formats and want to adjust some
 values according to the format.
@@ -181,8 +181,8 @@ values according to the format.
 .. code-block:: php
    :caption: EXT:your_extension/Classes/Feed/YourFeed.php
 
-   // use Brotkrueml\FeedGenerator\Feed\FeedFormat
-   // use Brotkrueml\FeedGenerator\Feed\FeedFormatAwareInterface
+   // use Brotkrueml\FeedGenerator\Contract\FeedFormatAwareInterface
+   // use Brotkrueml\FeedGenerator\Format\FeedFormat
 
    #[Feed('/your-feed.atom', FeedFormat::ATOM)]
    #[Feed('/your-feed.json', FeedFormat::JSON)]
@@ -213,7 +213,7 @@ values according to the format.
 CategoryAwareInterface
 ---------------------
 
-The :any:`Brotkrueml\\FeedGenerator\\Feed\\CategoryAwareInterface` can be added
+The :any:`Brotkrueml\\FeedGenerator\\Contract\\CategoryAwareInterface` can be added
 when one or more categories should be applied to a feed.
 
 TODO: Add example
@@ -223,7 +223,7 @@ TODO: Add example
 RequestAwareInterface
 ---------------------
 
-The :any:`Brotkrueml\\FeedGenerator\\Feed\\RequestAwareInterface` injects the
+The :any:`Brotkrueml\\FeedGenerator\\Contract\\RequestAwareInterface` injects the
 PSR-7 request object via a :php:`setRequest()` method, which must be
 implemented by yourself.
 
@@ -233,7 +233,7 @@ the site or the language information:
 .. code-block:: php
    :caption: EXT:your_extension/Classes/Feed/YourFeed.php
 
-   // use Brotkrueml\FeedGenerator\Feed\RequestAwareInterface;
+   // use Brotkrueml\FeedGenerator\Contract\RequestAwareInterface;
    // use Psr\Http\Message\ServerRequestInterface;
 
    #[Feed('/your-feed.atom', FeedFormat::ATOM)]
@@ -393,6 +393,8 @@ the content type:
 
    # For Atom feeds
    ExpiresByType application/atom+xml "access plus 1 hour"
+   # For JSON feeds
+   ExpiresByType application/feed+json "access plus 1 hour"
    # For RSS feeds
    ExpiresByType application/rss+xml "access plus 1 hour"
 

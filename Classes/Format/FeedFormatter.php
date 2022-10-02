@@ -9,10 +9,9 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\FeedGenerator\Formatter;
+namespace Brotkrueml\FeedGenerator\Format;
 
-use Brotkrueml\FeedGenerator\Feed\FeedFormat;
-use Brotkrueml\FeedGenerator\Feed\FeedInterface;
+use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Mapper\JsonFeed\FeedMapper as JsonFeedMapper;
 use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\FeedMapper as LaminasFeedMapper;
 use JDecool\JsonFeed\Writer\RendererFactory;

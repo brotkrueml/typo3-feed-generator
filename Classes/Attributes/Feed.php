@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Attributes;
 
 use Attribute;
-use Brotkrueml\FeedGenerator\Feed\FeedFormat;
+use Brotkrueml\FeedGenerator\Format\FeedFormat;
 
 #[Attribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
 final class Feed

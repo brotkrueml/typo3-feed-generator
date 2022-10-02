@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Entity;
 
+use Brotkrueml\FeedGenerator\Contract\ImageInterface;
+
 /**
  * @api
  */

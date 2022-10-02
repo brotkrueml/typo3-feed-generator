@@ -9,14 +9,11 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\FeedGenerator\Feed;
+namespace Brotkrueml\FeedGenerator\Contract;
 
-use Brotkrueml\FeedGenerator\Entity\CategoryInterface;
+use Brotkrueml\FeedGenerator\Format\FeedFormat;
 
-interface CategoryAwareInterface
+interface FeedFormatAwareInterface
 {
-    /**
-     * @return CategoryInterface[]
-     */
-    public function getCategories(): array;
+    public function setFormat(FeedFormat $format): void;
 }

@@ -13,9 +13,9 @@ namespace Brotkrueml\FeedGenerator\Middleware;
 
 use Brotkrueml\FeedGenerator\Configuration\FeedConfiguration;
 use Brotkrueml\FeedGenerator\Configuration\FeedRegistryInterface;
-use Brotkrueml\FeedGenerator\Feed\FeedFormatAwareInterface;
-use Brotkrueml\FeedGenerator\Feed\RequestAwareInterface;
-use Brotkrueml\FeedGenerator\Formatter\FeedFormatter;
+use Brotkrueml\FeedGenerator\Contract\FeedFormatAwareInterface;
+use Brotkrueml\FeedGenerator\Contract\RequestAwareInterface;
+use Brotkrueml\FeedGenerator\Format\FeedFormatter;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

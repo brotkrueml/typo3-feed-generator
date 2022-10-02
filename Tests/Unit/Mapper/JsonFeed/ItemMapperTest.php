@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Mapper\JsonFeed;
 
 use Brotkrueml\FeedGenerator\Entity\Author;
-use Brotkrueml\FeedGenerator\Feed\Item;
+use Brotkrueml\FeedGenerator\Entity\Item;
 use Brotkrueml\FeedGenerator\Mapper\JsonFeed\AuthorMapper;
 use Brotkrueml\FeedGenerator\Mapper\JsonFeed\ItemMapper;
 use PHPUnit\Framework\TestCase;

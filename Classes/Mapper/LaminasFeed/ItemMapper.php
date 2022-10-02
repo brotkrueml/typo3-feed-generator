@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Mapper\LaminasFeed;
 
-use Brotkrueml\FeedGenerator\Feed\ItemInterface;
+use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Laminas\Feed\Writer\Entry as LaminasEntry;
 use Laminas\Feed\Writer\Feed as LaminasFeed;
 

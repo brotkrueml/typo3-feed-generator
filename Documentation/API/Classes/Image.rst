@@ -9,11 +9,6 @@ Brotkrueml\\FeedGenerator\\Entity\\Image
 .. php:class:: Image
 
    
-   .. php:method:: __construct(int<0, 144>, int<0, 400>)
-   
-      :param int<0, 144>: $width
-      :param int<0, 400>: $height
-      
    .. php:method:: getUri()
    
       :returntype: string

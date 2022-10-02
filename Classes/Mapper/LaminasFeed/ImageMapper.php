@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Mapper\LaminasFeed;
 
-use Brotkrueml\FeedGenerator\Entity\ImageInterface;
+use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 
 /**
  * @internal

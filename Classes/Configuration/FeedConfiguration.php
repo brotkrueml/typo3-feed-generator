@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Configuration;
 
-use Brotkrueml\FeedGenerator\Feed\FeedFormat;
-use Brotkrueml\FeedGenerator\Feed\FeedInterface;
+use Brotkrueml\FeedGenerator\Contract\FeedInterface;
+use Brotkrueml\FeedGenerator\Format\FeedFormat;
 
 /**
  * @internal

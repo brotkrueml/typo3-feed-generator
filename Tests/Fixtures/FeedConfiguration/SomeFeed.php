@@ -11,13 +11,13 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration;
 
+use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
+use Brotkrueml\FeedGenerator\Contract\FeedInterface;
+use Brotkrueml\FeedGenerator\Contract\ImageInterface;
+use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Brotkrueml\FeedGenerator\Entity\Author;
-use Brotkrueml\FeedGenerator\Entity\AuthorInterface;
 use Brotkrueml\FeedGenerator\Entity\Image;
-use Brotkrueml\FeedGenerator\Entity\ImageInterface;
-use Brotkrueml\FeedGenerator\Feed\FeedInterface;
-use Brotkrueml\FeedGenerator\Feed\Item;
-use Brotkrueml\FeedGenerator\Feed\ItemInterface;
+use Brotkrueml\FeedGenerator\Entity\Item;
 
 final class SomeFeed implements FeedInterface
 {

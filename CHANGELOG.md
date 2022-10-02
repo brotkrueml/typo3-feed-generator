@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - debril/feed-io removed in favour of laminas/laminas-feed and jdecool/jsonfeed
+- Namespace of multiple classes has changed
 
 ### Removed
 - XSL stylesheets

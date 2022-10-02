@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator;
 
-use Brotkrueml\FeedGenerator\Feed\FeedInterface;
+use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 

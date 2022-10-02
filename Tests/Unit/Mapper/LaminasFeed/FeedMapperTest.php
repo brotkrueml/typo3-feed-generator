@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Mapper\LaminasFeed;
 
+use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Brotkrueml\FeedGenerator\Entity\Generator;
-use Brotkrueml\FeedGenerator\Feed\FeedFormat;
-use Brotkrueml\FeedGenerator\Feed\ItemInterface;
+use Brotkrueml\FeedGenerator\Format\FeedFormat;
 use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\AuthorMapper;
 use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\CategoryMapper;
 use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\FeedMapper;
