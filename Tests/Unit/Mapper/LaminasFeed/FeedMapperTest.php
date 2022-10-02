@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Mapper\LaminasFeed;
 
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
-use Brotkrueml\FeedGenerator\Entity\Generator;
 use Brotkrueml\FeedGenerator\Format\FeedFormat;
 use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\AuthorMapper;
 use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\CategoryMapper;
@@ -52,24 +51,11 @@ final class FeedMapperTest extends TestCase
             }
         };
 
-        $generator = new class() extends Generator {
-            public function getName(): string
-            {
-                return 'Some Generator Name';
-            }
-
-            public function getUri(): string
-            {
-                return 'https://example.net/';
-            }
-        };
-
         $this->subject = new FeedMapper(
             new AuthorMapper(),
             new CategoryMapper(),
             new ImageMapper(),
-            $itemMapper,
-            $generator
+            $itemMapper
         );
     }
 
@@ -113,9 +99,9 @@ final class FeedMapperTest extends TestCase
         self::assertCount(2, $actual);
 
         self::assertArrayHasKey('name', $actual->getGenerator());
-        self::assertSame('Some Generator Name', $actual->getGenerator()['name']);
+        self::assertSame('TYPO3 Feed Generator', $actual->getGenerator()['name']);
         self::assertArrayHasKey('uri', $actual->getGenerator());
-        self::assertSame('https://example.net/', $actual->getGenerator()['uri']);
+        self::assertSame('https://github.com/brotkrueml/typo3-feed-generator', $actual->getGenerator()['uri']);
     }
 
     /**

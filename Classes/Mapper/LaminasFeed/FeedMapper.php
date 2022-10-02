@@ -14,7 +14,6 @@ namespace Brotkrueml\FeedGenerator\Mapper\LaminasFeed;
 use Brotkrueml\FeedGenerator\Contract\CategoryAwareInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
-use Brotkrueml\FeedGenerator\Entity\Generator;
 use Brotkrueml\FeedGenerator\Format\FeedFormat;
 use Laminas\Feed\Writer\Feed as LaminasFeed;
 
@@ -23,12 +22,14 @@ use Laminas\Feed\Writer\Feed as LaminasFeed;
  */
 final class FeedMapper
 {
+    private const GENERATOR_NAME = 'TYPO3 Feed Generator';
+    private const GENERATOR_URI = 'https://github.com/brotkrueml/typo3-feed-generator';
+
     public function __construct(
         private readonly AuthorMapper $authorMapper,
         private readonly CategoryMapper $categoryMapper,
         private readonly ImageMapper $imageMapper,
         private readonly ItemMapper $itemMapper,
-        private readonly Generator $generator,
     ) {
     }
 
@@ -39,7 +40,7 @@ final class FeedMapper
         $laminasFeed->setDateCreated($feed->getDateCreated());
         $laminasFeed->setDateModified($feed->getDateModified());
         $laminasFeed->setLastBuildDate($feed->getLastBuildDate());
-        $laminasFeed->setGenerator($this->generator->getName(), uri: $this->generator->getUri());
+        $laminasFeed->setGenerator(self::GENERATOR_NAME, uri: self::GENERATOR_URI);
 
         if ($feed->getId() !== '') {
             $laminasFeed->setId($feed->getId());
