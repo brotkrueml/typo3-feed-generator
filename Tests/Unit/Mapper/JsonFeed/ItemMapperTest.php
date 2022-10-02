@@ -115,7 +115,7 @@ final class ItemMapperTest extends TestCase
         $dateCreated = new \DateTime();
 
         $item = new Item();
-        $item->setDateCreated($dateCreated);
+        $item->setDatePublished($dateCreated);
 
         $actual = $this->subject->map($item);
 
@@ -130,7 +130,7 @@ final class ItemMapperTest extends TestCase
         $dateCreated = new \DateTimeImmutable();
 
         $item = new Item();
-        $item->setDateCreated($dateCreated);
+        $item->setDatePublished($dateCreated);
 
         $actual = $this->subject->map($item);
 

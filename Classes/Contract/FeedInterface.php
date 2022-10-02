@@ -44,9 +44,9 @@ interface FeedInterface
     public function getAuthors(): array;
 
     /**
-     * Get the date on which this feed was created. Used in RSS only.
+     * Get the date on which this feed was published. Used in RSS only.
      */
-    public function getDateCreated(): ?\DateTimeInterface;
+    public function getDatePublished(): ?\DateTimeInterface;
 
     /**
      * Get the date on which this feed was last modified. Used in Atom only.

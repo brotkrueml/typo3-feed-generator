@@ -52,7 +52,7 @@ final class SomeFeed implements FeedInterface
         ];
     }
 
-    public function getDateCreated(): ?\DateTimeInterface
+    public function getDatePublished(): ?\DateTimeInterface
     {
         return new \DateTimeImmutable('01.08.2022 11:11:11');
     }

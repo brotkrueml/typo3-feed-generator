@@ -46,7 +46,7 @@ final class EmptyFeed implements FeedInterface
         return [];
     }
 
-    public function getDateCreated(): ?\DateTimeInterface
+    public function getDatePublished(): ?\DateTimeInterface
     {
         return null;
     }

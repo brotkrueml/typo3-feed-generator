@@ -43,8 +43,8 @@ class ItemMapper
         if ($item->getLink() !== '') {
             $laminasEntry->setLink($item->getLink());
         }
-        if ($item->getDateCreated() instanceof \DateTimeInterface) {
-            $laminasEntry->setDateCreated($item->getDateCreated());
+        if ($item->getDatePublished() instanceof \DateTimeInterface) {
+            $laminasEntry->setDateCreated($item->getDatePublished());
         }
         if ($item->getDateModified() instanceof \DateTimeInterface) {
             $laminasEntry->setDateModified($item->getDateModified());

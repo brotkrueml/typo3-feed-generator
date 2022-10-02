@@ -67,7 +67,7 @@ Let's start with an example to warm up.
          return [new Author('Your Company')];
       }
 
-      public function getDateCreated(): ?\DateTimeInterface
+      public function getDatePublished(): ?\DateTimeInterface
       {
          return null;
       }
@@ -568,7 +568,7 @@ Overview of used properties by feed type
       - —
       - :xml:`<copyright>`
 
-   *  - :php:`getDateCreated()`
+   *  - :php:`getDatePublished()`
       - —
       - —
       - :xml:`<pubDate>`
@@ -684,7 +684,7 @@ Overview of used properties by feed type
       - `content_html`
       - :xml:`<content:encoded>`
 
-   *  - :php:`getDateCreated()`
+   *  - :php:`getDatePublished()`
       - :xml:`<published>`
       - `date_published`
       - :xml:`<pubDate>`

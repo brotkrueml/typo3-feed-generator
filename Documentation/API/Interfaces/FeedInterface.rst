@@ -41,9 +41,9 @@ Brotkrueml\\FeedGenerator\\Contract\\FeedInterface
       
       :returntype: array
       
-   .. php:method:: getDateCreated()
+   .. php:method:: getDatePublished()
    
-      Get the date on which this feed was created. Used in RSS only.
+      Get the date on which this feed was published. Used in RSS only.
       
       :returntype: DateTimeInterface
       

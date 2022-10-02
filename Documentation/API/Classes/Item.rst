@@ -62,13 +62,13 @@ Brotkrueml\\FeedGenerator\\Entity\\Item
    
       :returntype: self
       
-   .. php:method:: getDateCreated()
+   .. php:method:: getDatePublished()
    
       :returntype: DateTimeInterface
       
-   .. php:method:: setDateCreated(DateTimeInterface dateCreated)
+   .. php:method:: setDatePublished(DateTimeInterface datePublished)
    
-      :param DateTimeInterface $dateCreated: the dateCreated
+      :param DateTimeInterface $datePublished: the datePublished
       :returntype: self
       
    .. php:method:: getDateModified()

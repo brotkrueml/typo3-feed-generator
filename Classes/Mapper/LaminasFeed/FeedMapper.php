@@ -37,7 +37,7 @@ final class FeedMapper
     {
         $laminasFeed = new LaminasFeed();
         $laminasFeed->setFeedLink($feedLink, $format->format());
-        $laminasFeed->setDateCreated($feed->getDateCreated());
+        $laminasFeed->setDateCreated($feed->getDatePublished());
         $laminasFeed->setDateModified($feed->getDateModified());
         $laminasFeed->setLastBuildDate($feed->getLastBuildDate());
         $laminasFeed->setGenerator(self::GENERATOR_NAME, uri: self::GENERATOR_URI);

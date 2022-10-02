@@ -40,8 +40,8 @@ final class ItemMapper
         if ($item->getDescription() !== '') {
             $jsonFeedItem->setSummary($item->getDescription());
         }
-        if ($item->getDateCreated() instanceof \DateTimeInterface) {
-            $jsonFeedItem->setDatePublished(\DateTime::createFromInterface($item->getDateCreated()));
+        if ($item->getDatePublished() instanceof \DateTimeInterface) {
+            $jsonFeedItem->setDatePublished(\DateTime::createFromInterface($item->getDatePublished()));
         }
         if ($item->getDateModified() instanceof \DateTimeInterface) {
             $jsonFeedItem->setDateModified(\DateTime::createFromInterface($item->getDateModified()));

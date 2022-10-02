@@ -45,7 +45,7 @@ final class ItemMapperTest extends TestCase
             ->setContent('some content')
             ->setLink('some link')
             ->setAuthors(new Author('some author'))
-            ->setDateCreated($dateCreated)
+            ->setDatePublished($dateCreated)
             ->setDateModified($dateModified);
 
         $actual = $this->subject->map($item, new LaminasFeed());

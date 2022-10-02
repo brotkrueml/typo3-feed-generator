@@ -30,7 +30,7 @@ final class ItemTest extends TestCase
         self::assertSame('', $subject->getContent());
         self::assertSame('', $subject->getLink());
         self::assertSame([], $subject->getAuthors());
-        self::assertNull($subject->getDateCreated());
+        self::assertNull($subject->getDatePublished());
         self::assertNull($subject->getDateModified());
     }
 
@@ -119,14 +119,14 @@ final class ItemTest extends TestCase
     /**
      * @test
      */
-    public function getDateCreatedReturnsDateCreatedCorrectly(): void
+    public function getDatePublishedReturnsDatePublishedCorrectly(): void
     {
-        $dateCreated = new \DateTimeImmutable();
+        $datePublished = new \DateTimeImmutable();
 
         $subject = (new Item())
-            ->setDateCreated($dateCreated);
+            ->setDatePublished($datePublished);
 
-        self::assertSame($dateCreated, $subject->getDateCreated());
+        self::assertSame($datePublished, $subject->getDatePublished());
     }
 
     /**

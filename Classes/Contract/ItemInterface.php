@@ -50,10 +50,10 @@ interface ItemInterface
     public function getAuthors(): array;
 
     /**
-     * Get the date on which this item was created. If null, the date used will be the current date and
+     * Get the date on which this item was published. If null, the date used will be the current date and
      * time.
      */
-    public function getDateCreated(): ?\DateTimeInterface;
+    public function getDatePublished(): ?\DateTimeInterface;
 
     /**
      * Get the date on which this item was last modified. If null, the date used will be the current date and time.

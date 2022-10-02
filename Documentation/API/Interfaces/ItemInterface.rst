@@ -46,9 +46,9 @@ Brotkrueml\\FeedGenerator\\Contract\\ItemInterface
       
       :returntype: array
       
-   .. php:method:: getDateCreated()
+   .. php:method:: getDatePublished()
    
-      Get the date on which this item was created. If null, the date used will be the current date and
+      Get the date on which this item was published. If null, the date used will be the current date and
       time.
       
       :returntype: DateTimeInterface

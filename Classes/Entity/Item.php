@@ -28,7 +28,7 @@ final class Item implements ItemInterface
      * @var AuthorInterface[]
      */
     private array $authors = [];
-    private ?\DateTimeInterface $dateCreated = null;
+    private ?\DateTimeInterface $datePublished = null;
     private ?\DateTimeInterface $dateModified = null;
 
     public function getId(): string
@@ -106,14 +106,14 @@ final class Item implements ItemInterface
         return $this;
     }
 
-    public function getDateCreated(): ?\DateTimeInterface
+    public function getDatePublished(): ?\DateTimeInterface
     {
-        return $this->dateCreated;
+        return $this->datePublished;
     }
 
-    public function setDateCreated(?\DateTimeInterface $dateCreated): self
+    public function setDatePublished(?\DateTimeInterface $datePublished): self
     {
-        $this->dateCreated = $dateCreated;
+        $this->datePublished = $datePublished;
 
         return $this;
     }
