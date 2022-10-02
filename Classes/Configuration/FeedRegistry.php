@@ -33,7 +33,7 @@ final class FeedRegistry implements FeedRegistryInterface
         $configurations = [];
         foreach ($configuredFeeds as $configuredFeed) {
             $feedAttributes = \array_map(
-                static fn (\ReflectionAttribute $attrib) => $attrib->newInstance(),
+                static fn (\ReflectionAttribute $attrib): Feed => $attrib->newInstance(),
                 (new \ReflectionClass($configuredFeed))->getAttributes(Feed::class)
             ) ?: throw new \DomainException(
                 \sprintf(
