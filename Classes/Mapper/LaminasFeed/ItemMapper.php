@@ -49,9 +49,6 @@ class ItemMapper
         if ($item->getDateModified() instanceof \DateTimeInterface) {
             $laminasEntry->setDateModified($item->getDateModified());
         }
-        if ($item->getCopyright() !== '') {
-            $laminasEntry->setCopyright($item->getCopyright());
-        }
 
         foreach ($item->getAuthors() as $author) {
             $laminasEntry->addAuthor($this->authorMapper->map($author));

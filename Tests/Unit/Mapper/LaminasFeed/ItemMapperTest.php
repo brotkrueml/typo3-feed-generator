@@ -46,8 +46,7 @@ final class ItemMapperTest extends TestCase
             ->setLink('some link')
             ->setAuthors(new Author('some author'))
             ->setDateCreated($dateCreated)
-            ->setDateModified($dateModified)
-            ->setCopyright('some copyright');
+            ->setDateModified($dateModified);
 
         $actual = $this->subject->map($item, new LaminasFeed());
 
@@ -61,7 +60,6 @@ final class ItemMapperTest extends TestCase
         ]], $actual->getAuthors());
         self::assertSame($dateCreated, $actual->getDateCreated());
         self::assertSame($dateModified, $actual->getDateModified());
-        self::assertSame('some copyright', $actual->getCopyright());
     }
 
     /**
@@ -79,7 +77,6 @@ final class ItemMapperTest extends TestCase
         self::assertNull($actual->getAuthors());
         self::assertNull($actual->getDateCreated());
         self::assertNull($actual->getDateModified());
-        self::assertNull($actual->getCopyright());
     }
 
     /**

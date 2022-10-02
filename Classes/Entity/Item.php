@@ -30,7 +30,6 @@ final class Item implements ItemInterface
     private array $authors = [];
     private ?\DateTimeInterface $dateCreated = null;
     private ?\DateTimeInterface $dateModified = null;
-    private string $copyright = '';
 
     public function getId(): string
     {
@@ -127,18 +126,6 @@ final class Item implements ItemInterface
     public function setDateModified(?\DateTimeInterface $dateModified): self
     {
         $this->dateModified = $dateModified;
-
-        return $this;
-    }
-
-    public function getCopyright(): string
-    {
-        return $this->copyright;
-    }
-
-    public function setCopyright(string $copyright): self
-    {
-        $this->copyright = $copyright;
 
         return $this;
     }

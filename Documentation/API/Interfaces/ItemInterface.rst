@@ -60,10 +60,4 @@ Brotkrueml\\FeedGenerator\\Contract\\ItemInterface
       Used in Atom and JSON.
       
       :returntype: DateTimeInterface
-      
-   .. php:method:: getCopyright()
-   
-      Get a copyright notice associated with the item.
-      
-      :returntype: string
 

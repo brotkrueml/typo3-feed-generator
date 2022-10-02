@@ -60,9 +60,4 @@ interface ItemInterface
      * Used in Atom and JSON.
      */
     public function getDateModified(): ?\DateTimeInterface;
-
-    /**
-     * Get a copyright notice associated with the item.
-     */
-    public function getCopyright(): string;
 }

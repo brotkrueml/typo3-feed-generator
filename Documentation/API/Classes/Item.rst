@@ -79,13 +79,4 @@ Brotkrueml\\FeedGenerator\\Entity\\Item
    
       :param DateTimeInterface $dateModified: the dateModified
       :returntype: self
-      
-   .. php:method:: getCopyright()
-   
-      :returntype: string
-      
-   .. php:method:: setCopyright(string copyright)
-   
-      :param string $copyright: the copyright
-      :returntype: self
 

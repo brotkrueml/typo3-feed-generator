@@ -32,7 +32,6 @@ final class ItemTest extends TestCase
         self::assertSame([], $subject->getAuthors());
         self::assertNull($subject->getDateCreated());
         self::assertNull($subject->getDateModified());
-        self::assertSame('', $subject->getCopyright());
     }
 
     /**
