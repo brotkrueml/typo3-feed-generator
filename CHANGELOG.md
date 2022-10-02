@@ -10,11 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Categories can be added to a feed
 
 ### Changed
-- debril/feed-io removed in favour of laminas/laminas-feed
+- debril/feed-io removed in favour of laminas/laminas-feed and jdecool/jsonfeed
 
 ### Removed
 - XSL stylesheets
-- JSON feeds
 - Media in items
 
 ## [0.3.0] - 2022-06-20

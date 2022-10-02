@@ -9,7 +9,7 @@ API
 This chapter provides information about all necessary interfaces, classes and
 enumerations. For up-to-date information, please read the source code. The
 interfaces and classes primarily serve as a façade for the
-`laminas/laminas-feed`_ library being used.
+`laminas/laminas-feed`_ and `jdecool/jsonfeed`_ libraries being used.
 
 This extension provides some implementations of interfaces as value objects.
 However, you can also create your own implementations as long as they implement
@@ -65,4 +65,5 @@ Overview
    Interfaces/Index
 
 
+.. _jdecool/jsonfeed: https://github.com/jdecool/jsonfeed
 .. _laminas/laminas-feed: https://github.com/laminas/laminas-feed

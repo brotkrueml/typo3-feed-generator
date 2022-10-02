@@ -185,6 +185,7 @@ values according to the format.
    // use Brotkrueml\FeedGenerator\Feed\FeedFormatAwareInterface
 
    #[Feed('/your-feed.atom', FeedFormat::ATOM)]
+   #[Feed('/your-feed.json', FeedFormat::JSON)]
    #[Feed('/your-feed.rss', FeedFormat::RSS)]
    final class YourFeed implements FeedInterface, FeedFormatAwareInterface
    {
@@ -197,11 +198,11 @@ values according to the format.
 
       public function getDescription(): string
       {
-         if ($this->format === FeedFormat::ATOM) {
-            return 'Here comes the Atom feed for your website.';
-         }
-
-         return 'Here comes the RSS feed for your website.';
+          return match ($this->format) {
+              FeedFormat::ATOM => 'Here comes the Atom feed for your website.',
+              FeedFormat::JSON => 'Here comes the JSON feed for your website.',
+              FeedFormat::RSS => 'Here comes the RSS feed for your website.'
+          };
       }
 
       // ... the other methods from the introduction example are untouched
@@ -284,6 +285,7 @@ be useful to implement the :ref:`FeedFormatAwareInterface
    :caption: EXT:your_extension/Classes/Feed/YourFeed.php
 
    #[Feed('/your-feed.atom', FeedFormat::ATOM)]
+   #[Feed('/your-feed.json', FeedFormat::JSON)]
    #[Feed('/your-feed.rss', FeedFormat::RSS)]
    final class YourFeed implements FeedInterface
    {

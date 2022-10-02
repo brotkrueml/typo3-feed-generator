@@ -17,6 +17,7 @@ namespace Brotkrueml\FeedGenerator\Feed;
 enum FeedFormat
 {
     case ATOM;
+    case JSON;
     case RSS;
     /**
      * @internal
@@ -25,6 +26,7 @@ enum FeedFormat
     {
         return match ($this) {
             FeedFormat::ATOM => 'atom',
+            FeedFormat::JSON => 'json',
             FeedFormat::RSS => 'rss',
         };
     }
@@ -36,6 +38,7 @@ enum FeedFormat
     {
         return match ($this) {
             FeedFormat::ATOM => 'application/atom+xml',
+            FeedFormat::JSON => 'application/feed+json',
             FeedFormat::RSS => 'application/rss+xml',
         };
     }

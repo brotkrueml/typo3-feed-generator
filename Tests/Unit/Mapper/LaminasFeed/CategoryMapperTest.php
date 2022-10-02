@@ -9,12 +9,15 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\FeedGenerator\Tests\Unit\Mapper;
+namespace Brotkrueml\FeedGenerator\Tests\Unit\Mapper\LaminasFeed;
 
 use Brotkrueml\FeedGenerator\Entity\CategoryInterface;
-use Brotkrueml\FeedGenerator\Mapper\CategoryMapper;
+use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\CategoryMapper;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \Brotkrueml\FeedGenerator\Mapper\LaminasFeed\CategoryMapper
+ */
 final class CategoryMapperTest extends TestCase
 {
     private CategoryMapper $subject;

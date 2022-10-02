@@ -9,7 +9,7 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\FeedGenerator\Mapper;
+namespace Brotkrueml\FeedGenerator\Mapper\LaminasFeed;
 
 use Brotkrueml\FeedGenerator\Feed\ItemInterface;
 use Laminas\Feed\Writer\Entry as LaminasEntry;

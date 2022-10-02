@@ -9,12 +9,15 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\FeedGenerator\Tests\Unit\Mapper;
+namespace Brotkrueml\FeedGenerator\Tests\Unit\Mapper\LaminasFeed;
 
 use Brotkrueml\FeedGenerator\Entity\AuthorInterface;
-use Brotkrueml\FeedGenerator\Mapper\AuthorMapper;
+use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\AuthorMapper;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \Brotkrueml\FeedGenerator\Mapper\LaminasFeed\AuthorMapper
+ */
 final class AuthorMapperTest extends TestCase
 {
     private AuthorMapper $subject;

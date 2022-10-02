@@ -9,16 +9,16 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\FeedGenerator\Tests\Unit\Mapper;
+namespace Brotkrueml\FeedGenerator\Tests\Unit\Mapper\LaminasFeed;
 
 use Brotkrueml\FeedGenerator\Entity\Generator;
 use Brotkrueml\FeedGenerator\Feed\FeedFormat;
 use Brotkrueml\FeedGenerator\Feed\ItemInterface;
-use Brotkrueml\FeedGenerator\Mapper\AuthorMapper;
-use Brotkrueml\FeedGenerator\Mapper\CategoryMapper;
-use Brotkrueml\FeedGenerator\Mapper\FeedMapper;
-use Brotkrueml\FeedGenerator\Mapper\ImageMapper;
-use Brotkrueml\FeedGenerator\Mapper\ItemMapper;
+use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\AuthorMapper;
+use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\CategoryMapper;
+use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\FeedMapper;
+use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\ImageMapper;
+use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\ItemMapper;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration\CategoryFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration\EmptyFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration\SomeFeed;
@@ -26,6 +26,9 @@ use Laminas\Feed\Writer\Entry as LaminasEntry;
 use Laminas\Feed\Writer\Feed as LaminasFeed;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \Brotkrueml\FeedGenerator\Mapper\LaminasFeed\FeedMapper
+ */
 final class FeedMapperTest extends TestCase
 {
     private FeedMapper $subject;

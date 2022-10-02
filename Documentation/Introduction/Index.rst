@@ -11,7 +11,7 @@ Introduction
 What does it do?
 ================
 
-The extension provides classes to generate Atom anda RSS feeds in an
+The extension provides classes to generate Atom, JSON and RSS feeds in an
 easy way. The target group are developers as the contents of the feeds must be
 provided programmatically according to the model.
 

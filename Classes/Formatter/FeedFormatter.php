@@ -13,7 +13,9 @@ namespace Brotkrueml\FeedGenerator\Formatter;
 
 use Brotkrueml\FeedGenerator\Feed\FeedFormat;
 use Brotkrueml\FeedGenerator\Feed\FeedInterface;
-use Brotkrueml\FeedGenerator\Mapper\FeedMapper;
+use Brotkrueml\FeedGenerator\Mapper\JsonFeed\FeedMapper as JsonFeedMapper;
+use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\FeedMapper as LaminasFeedMapper;
+use JDecool\JsonFeed\Writer\RendererFactory;
 
 /**
  * @internal
@@ -21,14 +23,21 @@ use Brotkrueml\FeedGenerator\Mapper\FeedMapper;
 final class FeedFormatter
 {
     public function __construct(
-        private readonly FeedMapper $feedMapper,
+        private readonly JsonFeedMapper $jsonFeedMapper,
+        private readonly LaminasFeedMapper $laminasFeedMapper,
     ) {
     }
 
     public function format(string $feedLink, FeedInterface $feed, FeedFormat $format): string
     {
-        $laminasFeed = $this->feedMapper->map($feedLink, $feed, $format);
+        if ($format === FeedFormat::JSON) {
+            return (new RendererFactory())
+                ->createRenderer()
+                ->render($this->jsonFeedMapper->map($feedLink, $feed));
+        }
 
-        return $laminasFeed->export($format->format());
+        return $this->laminasFeedMapper
+            ->map($feedLink, $feed, $format)
+            ->export($format->format());
     }
 }
