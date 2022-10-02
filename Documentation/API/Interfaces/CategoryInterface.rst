@@ -8,6 +8,8 @@ Brotkrueml\\FeedGenerator\\Contract\\CategoryInterface
 
 .. php:interface:: CategoryInterface
 
+   Interface for a category. Used in Atom and RSS feeds.
+
    .. php:method:: getTerm()
    
       Get the term. The term identifies the category.

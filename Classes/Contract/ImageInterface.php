@@ -11,10 +11,13 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Contract;
 
+/**
+ * Interface for an image. Used in Atom and RSS.
+ */
 interface ImageInterface
 {
     /**
-     * Get the URI of the image. Required for Atom and RSS.
+     * Get the URI of the image. Required.
      * @return non-empty-string
      */
     public function getUri(): string;

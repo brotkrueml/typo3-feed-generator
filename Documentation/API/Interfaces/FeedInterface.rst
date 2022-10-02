@@ -8,11 +8,11 @@ Brotkrueml\\FeedGenerator\\Contract\\FeedInterface
 
 .. php:interface:: FeedInterface
 
+   Interface for a feed.
+
    .. php:method:: getId()
    
-      Get a unique identifier associated with this feed. For Atom 1.0 this is an atom:id element,
-      whereas for RSS 2.0 it is added as a guid element. These are optional so long as a link is added; i.e. if no
-      identifier is provided, the link is used.
+      Get a unique identifier associated with this feed. Used in Atom only.
       
       :returntype: string
       
@@ -37,50 +37,49 @@ Brotkrueml\\FeedGenerator\\Contract\\FeedInterface
       
    .. php:method:: getAuthors()
    
-      Get the data for authors.
+      Get the data for authors. In JSON feed only one author is possible.
       
       :returntype: array
       
    .. php:method:: getDateCreated()
    
-      Get the date on which this feed was created. Generally only applicable to Atom, where it represents the date the
-      resource described by an Atom 1.0 document was created.
+      Get the date on which this feed was created. Used in RSS only.
       
       :returntype: DateTimeInterface
       
    .. php:method:: getDateModified()
    
-      Get the date on which this feed was last modified.
+      Get the date on which this feed was last modified. Used in Atom only.
       
       :returntype: DateTimeInterface
       
    .. php:method:: getLastBuildDate()
    
-      Get the date on which this feed was last build. This will only be rendered for RSS 2.0 feeds.
+      Get the date on which this feed was last build. Used in RSS only.
       
       :returntype: DateTimeInterface
       
    .. php:method:: getLanguage()
    
-      Get the language of the feed.
+      Get the language of the feed. Used in Atom and RSS.
       
       :returntype: string
       
    .. php:method:: getCopyright()
    
-      Get a copyright notice associated with the feed.
+      Get a copyright notice associated with the feed. Used in Atom and RSS.
       
       :returntype: string
       
    .. php:method:: getImage()
    
-      Get an image.
+      Get an image. Used in Atom and RSS.
       
       :returntype: Brotkrueml\\FeedGenerator\\Contract\\ImageInterface
       
    .. php:method:: getItems()
    
-      Get the items of the feed
+      Get the items of the feed.
       
       :returntype: array
 

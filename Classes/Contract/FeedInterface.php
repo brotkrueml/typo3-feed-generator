@@ -12,14 +12,12 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Contract;
 
 /**
- * @api
+ * Interface for a feed.
  */
 interface FeedInterface
 {
     /**
-     * Get a unique identifier associated with this feed. For Atom 1.0 this is an atom:id element,
-     * whereas for RSS 2.0 it is added as a guid element. These are optional so long as a link is added; i.e. if no
-     * identifier is provided, the link is used.
+     * Get a unique identifier associated with this feed. Used in Atom only.
      */
     public function getId(): string;
 
@@ -40,44 +38,43 @@ interface FeedInterface
     public function getLink(): string;
 
     /**
-     * Get the data for authors.
+     * Get the data for authors. In JSON feed only one author is possible.
      * @return AuthorInterface[]
      */
     public function getAuthors(): array;
 
     /**
-     * Get the date on which this feed was created. Generally only applicable to Atom, where it represents the date the
-     * resource described by an Atom 1.0 document was created.
+     * Get the date on which this feed was created. Used in RSS only.
      */
     public function getDateCreated(): ?\DateTimeInterface;
 
     /**
-     * Get the date on which this feed was last modified.
+     * Get the date on which this feed was last modified. Used in Atom only.
      */
     public function getDateModified(): ?\DateTimeInterface;
 
     /**
-     * Get the date on which this feed was last build. This will only be rendered for RSS 2.0 feeds.
+     * Get the date on which this feed was last build. Used in RSS only.
      */
     public function getLastBuildDate(): ?\DateTimeInterface;
 
     /**
-     * Get the language of the feed.
+     * Get the language of the feed. Used in Atom and RSS.
      */
     public function getLanguage(): string;
 
     /**
-     * Get a copyright notice associated with the feed.
+     * Get a copyright notice associated with the feed. Used in Atom and RSS.
      */
     public function getCopyright(): string;
 
     /**
-     * Get an image.
+     * Get an image. Used in Atom and RSS.
      */
     public function getImage(): ?ImageInterface;
 
     /**
-     * Get the items of the feed
+     * Get the items of the feed.
      *
      * @return ItemInterface[]
      */

@@ -17,53 +17,52 @@ namespace Brotkrueml\FeedGenerator\Contract;
 interface ItemInterface
 {
     /**
-     * Get a unique identifier associated with this entry. For Atom 1.0 this is an atom:id element,
-     * whereas for RSS 2.0 it is added as a guid element. These are optional so long as a link is added; i.e. if no
+     * Get a unique identifier associated with this item. These are optional so long as a link is added; i.e. if no
      * identifier is provided, the link is used.
      */
     public function getId(): string;
 
     /**
-     * Get the title of the entry.
+     * Get the title of the item.
      */
     public function getTitle(): string;
 
     /**
-     * Get the text description of the entry.
+     * Get the text description of the item.
      */
     public function getDescription(): string;
 
     /**
-     * Get the content of the entry.
+     * Get the content of the item. In JSON this is the HTML content.
      */
     public function getContent(): string;
 
     /**
-     * Get a URI to the HTML website containing the same or similar information as this entry (i.e. if the feed is from
+     * Get a URI to the HTML website containing the same or similar information as this item (i.e. if the feed is from
      * a blog, it should provide the blog article's URI where the HTML version of the entry can be read).
      */
     public function getLink(): string;
 
     /**
-     * Get the data for authors.
+     * Get the data for authors. In JSON only one author is possible.
      * @return AuthorInterface[]
      */
     public function getAuthors(): array;
 
     /**
-     * Get the date on which this entry was created. Generally only applicable to Atom where it represents the date the
-     * resource described by an Atom 1.0 document was created. If null, the date used will be the current date and
+     * Get the date on which this item was created. If null, the date used will be the current date and
      * time.
      */
     public function getDateCreated(): ?\DateTimeInterface;
 
     /**
-     * Get the date on which this entry was last modified. If null, the date used will be the current date and time.
+     * Get the date on which this item was last modified. If null, the date used will be the current date and time.
+     * Used in Atom and JSON.
      */
     public function getDateModified(): ?\DateTimeInterface;
 
     /**
-     * Get a copyright notice associated with the entry.
+     * Get a copyright notice associated with the item.
      */
     public function getCopyright(): string;
 }

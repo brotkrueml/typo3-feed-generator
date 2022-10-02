@@ -8,6 +8,8 @@ Brotkrueml\\FeedGenerator\\Contract\\AuthorInterface
 
 .. php:interface:: AuthorInterface
 
+   Interface for an author.
+
    .. php:method:: getName()
    
       Get the name.

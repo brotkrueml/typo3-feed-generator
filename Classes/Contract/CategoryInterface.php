@@ -11,6 +11,9 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Contract;
 
+/**
+ * Interface for a category. Used in Atom and RSS feeds.
+ */
 interface CategoryInterface
 {
     /**

@@ -11,6 +11,9 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Contract;
 
+/**
+ * Interface for an author.
+ */
 interface AuthorInterface
 {
     /**
