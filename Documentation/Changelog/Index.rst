@@ -28,7 +28,6 @@ Removed
 ^^^^^^^
 
 
-* XSL stylesheets
 * Media in items
 
 `0.3.0 <https://github.com/brotkrueml/typo3-feed-generator/compare/v0.2.0...v0.3.0>`_ - 2022-06-20

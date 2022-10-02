@@ -19,15 +19,18 @@ the appropriate interfaces.
 
    enum FeedFormat {
       ATOM
+      JSON
       RSS
    }
 
    interface AuthorInterface
+   interface CategoryInterface
    interface FeedInterface
    interface FeedFormatAwareInterface
    interface ImageInterface
    interface ItemInterface
    interface RequestAwareInterface
+   interface StyleSheetAwareInterface
 
    class Author
    class Image
@@ -40,16 +43,19 @@ the appropriate interfaces.
 
 
    Author <|.. AuthorInterface
+   Category <|.. CategoryInterface
    Image <|.. ImageInterface
    Item <|.. ItemInterface
 
    FeedInterface ..|> YourFeed : required
    FeedFormatAwareInterface ..|> YourFeed : optional
    RequestAwareInterface ..|> YourFeed : optional
+   StyleSheetAwareInterface ..|> YourFeed : optional
 
    Item "1" *-- "0 .. n" Author : contains
 
    YourFeed "1" *-- "0 .. n" Author : contains
+   YourFeed "1" *-- "0 .. n" Category : contains
    YourFeed "1" *-- "0 .. 1" Image : contains
    YourFeed "1" *-- "0 .. n" Item : contains
    YourFeed .. FeedFormat : used in attributes

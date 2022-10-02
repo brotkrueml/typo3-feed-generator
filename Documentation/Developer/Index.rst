@@ -272,6 +272,46 @@ the site or the language information:
       // ... the other methods from the introduction example are untouched
    }
 
+
+.. _developer-StyleSheetAwareInterface:
+
+StyleSheetAwareInterface
+------------------------
+
+The :any:`Brotkrueml\\FeedGenerator\\Contract\\StyleSheetAwareInterface`
+requires the implementation of a :php:`getStyleSheet()` method that returns the
+path to an XSL stylesheet. In this way, the appearance of an Atom or RSS feed
+can be customised in a browser.
+
+.. code-block:: php
+   :caption: EXT:your_extension/Classes/Feed/YourFeed.php
+   // use Brotkrueml\FeedGenerator\Contract\StyleSheetAwareInterface;
+   #[Feed('/your-feed.atom', FeedFormat::ATOM)]
+   final class YourFeed implements FeedInterface, StyleSheetAwareInterface
+   {
+      public function getStyleSheet(): string
+      {
+         return 'EXT:your_extension/Resources/Public/Xsl/Atom.xsl';
+      }
+
+      // ... the other methods from the introduction example are untouched
+   }
+
+An XSL stylesheet is only useful for XML feeds (Atom and RSS). When providing a
+stylesheet for a JSON feed, it is ignored.
+
+This extension comes with two XSL stylesheets, one for an Atom feed and one for
+an RSS feed, which can be used directly or copied and adapted to your needs:
+
+*  Atom: :file:`EXT:feed_generator/Resources/Public/Xsl/Atom.xsl`
+*  RSS: :file:`EXT:feed_generator/Resources/Public/Xsl/Rss.xsl`
+
+.. note::
+   When adding an XSL stylesheet to an Atom or RSS feed, the content type of the
+   HTTP response is changed to `application/xml`. This way Chrome and some other
+   browsers apply the stylesheet correctly.
+
+
 .. _developer-multiple-feeds:
 
 Multiple feeds

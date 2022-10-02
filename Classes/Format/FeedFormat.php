@@ -34,8 +34,12 @@ enum FeedFormat
     /**
      * @internal
      */
-    public function contentType(): string
+    public function contentType(bool $isStyleSheetAttached): string
     {
+        if ($isStyleSheetAttached) {
+            return 'application/xml';
+        }
+
         return match ($this) {
             FeedFormat::ATOM => 'application/atom+xml',
             FeedFormat::JSON => 'application/feed+json',
