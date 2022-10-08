@@ -57,6 +57,7 @@ final class FeedProvider implements ProviderInterface
             return ['No feeds found'];
         }
 
+        /** @var array<class-string, list<array{'Site identifier'?: string, 'Site identifiers'?: string, Path: string, Format: string}>> $feeds */
         $feeds = [];
         foreach ($configurations as $configuration) {
             $feed = [];
@@ -73,7 +74,8 @@ final class FeedProvider implements ProviderInterface
         }
 
         foreach ($feeds as $class => $feedsPerClass) {
-            if ((\is_countable($feedsPerClass) ? \count($feedsPerClass) : 0) === 1) {
+            /** @noRector CountOnNullRector */
+            if (\count($feedsPerClass) === 1) {
                 $feeds[$class] = $feedsPerClass[0];
             }
         }
