@@ -23,7 +23,6 @@ final class CategoryMapper
      */
     public function map(CategoryInterface $category): array
     {
-        // @phpstan-ignore-next-line Array with keys is not allowed. Use value object to pass data instead
         $categoryArray = [
             'term' => $category->getTerm(),
         ];

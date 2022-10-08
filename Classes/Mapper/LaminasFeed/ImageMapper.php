@@ -23,7 +23,6 @@ final class ImageMapper
      */
     public function map(ImageInterface $image): array
     {
-        // @phpstan-ignore-next-line Array with keys is not allowed. Use value object to pass data instead
         $imageArray = [
             'uri' => $image->getUri(),
         ];

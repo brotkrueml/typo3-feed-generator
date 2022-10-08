@@ -23,7 +23,6 @@ final class AuthorMapper
      */
     public function map(AuthorInterface $author): array
     {
-        // @phpstan-ignore-next-line Array with keys is not allowed. Use value object to pass data instead
         $authorArray = [
             'name' => $author->getName(),
         ];
