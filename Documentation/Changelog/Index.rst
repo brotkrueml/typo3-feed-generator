@@ -15,6 +15,7 @@ Added
 ^^^^^
 
 
+* Compatibility with TYPO3 v12
 * Categories can be added to a feed
 
 Changed

@@ -21,9 +21,9 @@
 	},
 	"require": {
 		"php": ">=8.1",
-		"jdecool/jsonfeed": "^0.5",
+		"jdecool/jsonfeed": "dev-symfony-6",
 		"laminas/laminas-feed": "^2.18",
-		"typo3/cms-core": "^11.5"
+		"typo3/cms-core": "^11.5 || ^12.0"
 	},
 	"require-dev": {
 		"brotkrueml/coding-standards": "~2.0.2",
@@ -33,9 +33,9 @@
 		"phpstan/phpstan": "1.8.6",
 		"phpunit/phpunit": "^9.5",
 		"rector/rector": "0.14.5",
-		"symfony/yaml": "^5.4 || ^6.0",
+		"symfony/yaml": "^5.4 || ^6.1",
 		"symplify/phpstan-rules": "^10.1",
-		"typo3/cms-lowlevel": "^11.5"
+		"typo3/cms-lowlevel": "^11.5 || ^12.0"
 	},
 	"suggest": {
 		"typo3/cms-lowlevel": "Display available feeds in Configurations module"
@@ -44,6 +44,10 @@
 		{
 			"type": "vcs",
 			"url": "https://github.com/brotkrueml/t3docs-codesnippets-standalone"
+		},
+		{
+			"type": "vcs",
+			"url": "https://github.com/brotkrueml/jsonfeed"
 		}
 	],
 	"autoload": {
