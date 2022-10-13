@@ -8,10 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Compatibility with TYPO3 v12
+- Status report for dependencies
 - Categories can be added to a feed
 
 ### Changed
 - debril/feed-io removed in favour of laminas/laminas-feed and jdecool/jsonfeed
+- Needed dependencies must be installed manually (laminas/laminas-feed, jdecool/jsonfeed)
 - Namespace of multiple classes has changed
 
 ### Removed

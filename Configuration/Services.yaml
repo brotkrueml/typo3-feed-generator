@@ -12,6 +12,10 @@ services:
     arguments:
       - !tagged_iterator tx_feed_generator.feed
 
+  Brotkrueml\FeedGenerator\Report\FeedGeneratorStatus:
+    # Only needed for TYPO3 v11
+    public: true
+
   feed_generator.configuration.module.feed_configuration:
     class: Brotkrueml\FeedGenerator\ConfigurationModule\FeedProvider
     tags:

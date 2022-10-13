@@ -14,7 +14,7 @@ namespace Brotkrueml\FeedGenerator\Format;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Mapper\JsonFeed\FeedMapper as JsonFeedMapper;
 use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\FeedMapper as LaminasFeedMapper;
-use Brotkrueml\FeedGenerator\Package\PackageChecker;
+use Brotkrueml\FeedGenerator\Package\PackageCheckerInterface;
 use Brotkrueml\FeedGenerator\Package\PackageNotInstalledException;
 use JDecool\JsonFeed\Writer\RendererFactory;
 
@@ -24,7 +24,7 @@ use JDecool\JsonFeed\Writer\RendererFactory;
 final class FeedFormatter
 {
     public function __construct(
-        private readonly PackageChecker $packageChecker,
+        private readonly PackageCheckerInterface $packageChecker,
         private readonly JsonFeedMapper $jsonFeedMapper,
         private readonly LaminasFeedMapper $laminasFeedMapper,
     ) {

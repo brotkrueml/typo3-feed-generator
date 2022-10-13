@@ -78,6 +78,30 @@ Generator for Atom, JSON and RSS feeds in TYPO3
 
          .. rst-class:: card-header h3
 
+            .. rubric:: :ref:`Configuration <configuration>`
+
+         .. container:: card-body
+
+            An overview of all configured feeds.
+
+   .. container:: col-md-6 pl-0 pr-3 py-3 m-0
+
+      .. container:: card px-0 h-100
+
+         .. rst-class:: card-header h3
+
+            .. rubric:: :ref:`Report <report>`
+
+         .. container:: card-body
+
+            A report about the status of the dependencies.
+
+   .. container:: col-md-6 pl-0 pr-3 py-3 m-0
+
+      .. container:: card px-0 h-100
+
+         .. rst-class:: card-header h3
+
             .. rubric:: :ref:`API <api>`
 
          .. container:: card-body
@@ -93,6 +117,8 @@ Generator for Atom, JSON and RSS feeds in TYPO3
    Introduction/Index
    Installation/Index
    Developer/Index
+   Configuration/Index
+   Report/Index
    API/Index
 
 .. Meta Menu

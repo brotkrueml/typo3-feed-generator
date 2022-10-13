@@ -18,7 +18,7 @@ use Composer\Semver\VersionParser;
 /**
  * @internal
  */
-final class PackageChecker
+final class PackageChecker implements PackageCheckerInterface
 {
     public function isPackageInstalledForFormat(FeedFormat $format): bool
     {
