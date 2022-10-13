@@ -55,7 +55,7 @@ enum FeedFormat
     public function package(): Package
     {
         return match ($this) {
-            FeedFormat::JSON => new Package('jdecool/jsonfeed', 'dev-symfony-6'),
+            FeedFormat::JSON => new Package('jdecool/jsonfeed', 'dev-master'),
             default => new Package('laminas/laminas-feed', '^2.18'),
         };
     }

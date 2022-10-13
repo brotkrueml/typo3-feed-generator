@@ -36,7 +36,7 @@ Use `jdecool/jsonfeed` for JSON feeds:
 
 .. code-block:: bash
 
-   composer req jdecool/jsonfeed:^0.5
+   composer req jdecool/jsonfeed:dev-master
 
 This way only necessary packages are installed on your TYPO3 installation. If
 the package for a feed format is missing an exception is thrown.
