@@ -31,7 +31,7 @@
 		"jdecool/jsonfeed": "dev-symfony-6",
 		"laminas/laminas-feed": "^2.18",
 		"phpstan/extension-installer": "^1.1",
-		"phpstan/phpstan": "1.8.8",
+		"phpstan/phpstan": "1.8.9",
 		"phpunit/phpunit": "^9.5",
 		"rector/rector": "0.14.5",
 		"symfony/yaml": "^5.4 || ^6.1",
