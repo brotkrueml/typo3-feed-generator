@@ -28,7 +28,7 @@ final class FeedGeneratorStatus implements StatusProviderInterface
     /**
      * @var FeedConfiguration[]
      */
-    private array $configurations;
+    private readonly array $configurations;
 
     public function __construct(
         private readonly PackageCheckerInterface $packageChecker,
@@ -67,7 +67,7 @@ final class FeedGeneratorStatus implements StatusProviderInterface
             static fn (FeedConfiguration $configuration): bool => $configuration->format === $format
         );
 
-        return \count($result) > 0;
+        return $result !== [];
     }
 
     private function buildStatus(FeedFormat $format, bool $packageInstalled, bool $feedsConfigured): Status
