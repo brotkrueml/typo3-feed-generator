@@ -148,6 +148,10 @@
                 </a>
             </h2>
             <dl>
+                <dt>Published</dt>
+                <dd>
+                    <xsl:value-of select="atom:published"/>
+                </dd>
                 <dt>Updated</dt>
                 <dd>
                     <xsl:value-of select="atom:updated"/>
