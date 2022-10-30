@@ -256,15 +256,14 @@ the site or the language information:
          $router = $this->request->getAttribute('site')->getRouter();
 
          return [
-            new Item(
-               title: 'Another awesome article',
-               lastModified: '2022-06-07T18:22:00+02:00',
-               link: (string)$router->generateUri(43),
-            ),
-            new Item(
-               title: 'Some awesome article',
-               lastModified: '2022-02-20T20:06:00+01:00',
-               link: (string)$router->generateUri(42),
+            (new Item())
+               ->setTitle('Another awesome article')
+               ->setDateModified(new \DateTimeImmutable('2022-06-07T18:22:00+02:00'))
+               ->setLink((string)$router->generateUri(43)),
+            (new Item())
+               ->setTitle('Some awesome article')
+               ->setDateModified(new \DateTimeImmutable('2022-02-20T20:06:00+01:00'))
+               ->setLink((string)$router->generateUri(42)),
             ),
          ];
       }
