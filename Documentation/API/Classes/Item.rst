@@ -79,4 +79,13 @@ Brotkrueml\\FeedGenerator\\Entity\\Item
    
       :param DateTimeInterface $dateModified: the dateModified
       :returntype: self
+      
+   .. php:method:: getEnclosure()
+   
+      :returntype: Brotkrueml\\FeedGenerator\\Contract\\EnclosureInterface
+      
+   .. php:method:: setEnclosure(Brotkrueml\\FeedGenerator\\Contract\\EnclosureInterface enclosure)
+   
+      :param Brotkrueml\\FeedGenerator\\Contract\\EnclosureInterface $enclosure: the enclosure
+      :returntype: self
 

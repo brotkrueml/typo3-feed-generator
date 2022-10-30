@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Entity;
 
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
+use Brotkrueml\FeedGenerator\Contract\EnclosureInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 
 /**
@@ -30,6 +31,7 @@ final class Item implements ItemInterface
     private array $authors = [];
     private ?\DateTimeInterface $datePublished = null;
     private ?\DateTimeInterface $dateModified = null;
+    private ?EnclosureInterface $enclosure = null;
 
     public function getId(): string
     {
@@ -126,6 +128,18 @@ final class Item implements ItemInterface
     public function setDateModified(?\DateTimeInterface $dateModified): self
     {
         $this->dateModified = $dateModified;
+
+        return $this;
+    }
+
+    public function getEnclosure(): ?EnclosureInterface
+    {
+        return $this->enclosure;
+    }
+
+    public function setEnclosure(?EnclosureInterface $enclosure): self
+    {
+        $this->enclosure = $enclosure;
 
         return $this;
     }

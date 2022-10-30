@@ -12,9 +12,13 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Entity;
 
 use Brotkrueml\FeedGenerator\Entity\Author;
+use Brotkrueml\FeedGenerator\Entity\Enclosure;
 use Brotkrueml\FeedGenerator\Entity\Item;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \Brotkrueml\FeedGenerator\Entity\Item
+ */
 final class ItemTest extends TestCase
 {
     /**
@@ -32,6 +36,7 @@ final class ItemTest extends TestCase
         self::assertSame([], $subject->getAuthors());
         self::assertNull($subject->getDatePublished());
         self::assertNull($subject->getDateModified());
+        self::assertNull($subject->getEnclosure());
     }
 
     /**
@@ -140,5 +145,18 @@ final class ItemTest extends TestCase
             ->setDateModified($dateModified);
 
         self::assertSame($dateModified, $subject->getDateModified());
+    }
+
+    /**
+     * @test
+     */
+    public function getEnclosureReturnsEnclosureCorrectly(): void
+    {
+        $enclosure = new Enclosure('https://example.org/video.mp4');
+
+        $subject = (new Item())
+            ->setEnclosure($enclosure);
+
+        self::assertSame($enclosure, $subject->getEnclosure());
     }
 }

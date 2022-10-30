@@ -60,4 +60,12 @@ Brotkrueml\\FeedGenerator\\Contract\\ItemInterface
       Used in Atom and JSON.
       
       :returntype: DateTimeInterface
+      
+   .. php:method:: getEnclosure()
+   
+      Get the enclosure. In accordance with the RSS Best Practices Profile of the RSS Advisory Board,
+      no support is offered for multiple enclosures since such support forms no part of the
+      RSS specification.
+      
+      :returntype: Brotkrueml\\FeedGenerator\\Contract\\EnclosureInterface
 

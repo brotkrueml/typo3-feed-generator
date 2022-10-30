@@ -12,8 +12,10 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Mapper\LaminasFeed;
 
 use Brotkrueml\FeedGenerator\Entity\Author;
+use Brotkrueml\FeedGenerator\Entity\Enclosure;
 use Brotkrueml\FeedGenerator\Entity\Item;
 use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\AuthorMapper;
+use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\EnclosureMapper;
 use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\ItemMapper;
 use Laminas\Feed\Writer\Feed as LaminasFeed;
 use PHPUnit\Framework\TestCase;
@@ -27,7 +29,7 @@ final class ItemMapperTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->subject = new ItemMapper(new AuthorMapper());
+        $this->subject = new ItemMapper(new AuthorMapper(), new EnclosureMapper());
     }
 
     /**
@@ -37,6 +39,7 @@ final class ItemMapperTest extends TestCase
     {
         $dateCreated = new \DateTimeImmutable('2022-08-01 11:11:11');
         $dateModified = new \DateTimeImmutable('2022-08-01 12:12:12');
+        $enclosure = new Enclosure('https://example.org/video.ogg');
 
         $item = (new Item())
             ->setId('some id')
@@ -46,7 +49,8 @@ final class ItemMapperTest extends TestCase
             ->setLink('some link')
             ->setAuthors(new Author('some author'))
             ->setDatePublished($dateCreated)
-            ->setDateModified($dateModified);
+            ->setDateModified($dateModified)
+            ->setEnclosure($enclosure);
 
         $actual = $this->subject->map($item, new LaminasFeed());
 
@@ -60,6 +64,9 @@ final class ItemMapperTest extends TestCase
         ]], $actual->getAuthors());
         self::assertSame($dateCreated, $actual->getDateCreated());
         self::assertSame($dateModified, $actual->getDateModified());
+        self::assertSame([
+            'uri' => 'https://example.org/video.ogg',
+        ], $actual->getEnclosure());
     }
 
     /**
@@ -77,6 +84,7 @@ final class ItemMapperTest extends TestCase
         self::assertNull($actual->getAuthors());
         self::assertNull($actual->getDateCreated());
         self::assertNull($actual->getDateModified());
+        self::assertNull($actual->getEnclosure());
     }
 
     /**

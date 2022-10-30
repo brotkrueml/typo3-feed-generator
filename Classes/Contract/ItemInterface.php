@@ -60,4 +60,11 @@ interface ItemInterface
      * Used in Atom and JSON.
      */
     public function getDateModified(): ?\DateTimeInterface;
+
+    /**
+     * Get the enclosure. In accordance with the RSS Best Practices Profile of the RSS Advisory Board,
+     * no support is offered for multiple enclosures since such support forms no part of the
+     * RSS specification.
+     */
+    public function getEnclosure(): ?EnclosureInterface;
 }

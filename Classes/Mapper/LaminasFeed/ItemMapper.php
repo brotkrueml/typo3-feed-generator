@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Mapper\LaminasFeed;
 
+use Brotkrueml\FeedGenerator\Contract\EnclosureInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Laminas\Feed\Writer\Entry as LaminasEntry;
 use Laminas\Feed\Writer\Feed as LaminasFeed;
@@ -22,6 +23,7 @@ class ItemMapper
 {
     public function __construct(
         private readonly AuthorMapper $authorMapper,
+        private readonly EnclosureMapper $enclosureMapper,
     ) {
     }
 
@@ -48,6 +50,9 @@ class ItemMapper
         }
         if ($item->getDateModified() instanceof \DateTimeInterface) {
             $laminasEntry->setDateModified($item->getDateModified());
+        }
+        if ($item->getEnclosure() instanceof EnclosureInterface) {
+            $laminasEntry->setEnclosure($this->enclosureMapper->map($item->getEnclosure()));
         }
 
         foreach ($item->getAuthors() as $author) {
