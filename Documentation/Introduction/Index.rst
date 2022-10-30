@@ -20,7 +20,21 @@ implementation class. The feed URL, the format and the optional site(s) are
 configured in the implementation class which provides the data via attributes.
 Have a look into the :ref:`developer` chapter for examples how this is done.
 
-For assembling the feeds the library `laminas/laminas-feed`_ does the hard work.
+For assembling the feeds the libraries `laminas/laminas-feed`_ and
+`jdecool/jsonfeed`_ do the hard work.
+
+This way, this extension supports
+
+-  `Atom 1.0`_ (RFC 4287)
+-  `JSON Feed 1`_
+-  `RSS 2.0`_ as specified by the RSS Advisory Board (RSS 2.0.11)
+
+.. _jdecool/jsonfeed: https://github.com/jdecool/jsonfeed
+.. _laminas/laminas-feed: https://github.com/laminas/laminas-feed
+.. _Atom 1.0: https://validator.w3.org/feed/docs/atom.html
+.. _JSON Feed 1: https://www.jsonfeed.org/version/1/
+.. _RSS 2.0: https://www.rssboard.org/rss-specification
+
 
 .. _release-management:
 
@@ -39,6 +53,4 @@ This extension uses `semantic versioning`_ which basically means for you, that
 The changes between the different versions can be found in the
 :ref:`changelog <changelog>`.
 
-
-.. _laminas/laminas-feed: https://github.com/laminas/laminas-feed
 .. _semantic versioning: https://semver.org/
