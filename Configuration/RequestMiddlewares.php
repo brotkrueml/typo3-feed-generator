@@ -16,7 +16,7 @@ return [
         'brotkrueml/feed-generator/feed' => [
             'target' => FeedMiddleware::class,
             'before' => [
-                'typo3/cms-frontend/page-resolver',
+                'typo3/cms-frontend/backend-user-authentication',
             ],
         ],
     ],
