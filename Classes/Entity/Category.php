@@ -13,6 +13,9 @@ namespace Brotkrueml\FeedGenerator\Entity;
 
 use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
 
+/**
+ * @api
+ */
 final class Category implements CategoryInterface
 {
     /**

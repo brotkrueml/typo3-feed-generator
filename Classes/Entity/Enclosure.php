@@ -13,6 +13,9 @@ namespace Brotkrueml\FeedGenerator\Entity;
 
 use Brotkrueml\FeedGenerator\Contract\EnclosureInterface;
 
+/**
+ * @api
+ */
 final class Enclosure implements EnclosureInterface
 {
     /**
