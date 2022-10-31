@@ -213,10 +213,29 @@ values according to the format.
 CategoryAwareInterface
 ---------------------
 
-The :any:`Brotkrueml\\FeedGenerator\\Contract\\CategoryAwareInterface` can be added
-when one or more categories should be applied to a feed.
+The :any:`Brotkrueml\\FeedGenerator\\Contract\\CategoryAwareInterface` can be
+added when one or more categories should be applied to a feed.
 
-TODO: Add example
+.. code-block:: php
+   :caption: EXT:your_extension/Classes/Feed/YourFeed.php
+
+   // use Brotkrueml\FeedGenerator\Contract\CategoryAwareInterface;
+   // use Brotkrueml\FeedGenerator\Entity\Category;
+
+   #[Feed('/your-feed.atom', FeedFormat::ATOM)]
+   final class YourFeed implements FeedInterface, CategoryAwareInterface
+   {
+      public function getCategories(): array
+      {
+         return [
+            new Category('some-term', 'https://example.org/some-term'),
+            new Category('another-term', 'https://example.org/another-term', 'Another term'),
+         ];
+      }
+
+      // ... the other methods from the introduction example are untouched
+   }
+
 
 .. _developer-RequestAwareInterface:
 
