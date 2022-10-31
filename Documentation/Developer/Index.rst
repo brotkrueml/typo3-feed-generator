@@ -214,17 +214,23 @@ FeedCategoryInterface
 ---------------------
 
 The :any:`Brotkrueml\\FeedGenerator\\Contract\\FeedCategoryInterface` can be
-added when one or more categories should be applied to a feed.
+added when one or more categories should be applied to a feed. It requires the
+implementation of a :php:`getCategories()` method that returns an array of
+categories.
 
 .. code-block:: php
    :caption: EXT:your_extension/Classes/Feed/YourFeed.php
 
+   // use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
    // use Brotkrueml\FeedGenerator\Contract\FeedCategoryInterface;
    // use Brotkrueml\FeedGenerator\Entity\Category;
 
    #[Feed('/your-feed.atom', FeedFormat::ATOM)]
    final class YourFeed implements FeedInterface, FeedCategoryInterface
    {
+      /**
+       * @return CategoryInterface[]
+       */
       public function getCategories(): array
       {
          return [
