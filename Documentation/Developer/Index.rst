@@ -475,31 +475,44 @@ possible implementation could be:
 .. code-block:: php
    :caption: EXT:your_extension/Classes/Feed/YourFeed.php
 
-   // use TYPO3\CMS\Extbase\Utility\LocalizationUtility
+   // use TYPO3\CMS\Core\Localization\LanguageService;
+   // use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 
    #[Feed('/en/your-feed.atom', FeedFormat::ATOM)]
    #[Feed('/de/dein-feed.atom', FeedFormat::ATOM)]
    #[Feed('/nl/je-feed.atom', FeedFormat::ATOM)]
    final class YourFeed implements FeedInterface, RequestAwareInterface
    {
+      private ?LanguageService $languageService = null;
+
+      public function __construct(
+         private readonly LanguageServiceFactory $languageServiceFactory,
+      ) {
+      }
+
       public function getDescription(): string
       {
-         // feed.description is defined in your extensions' locallang.xlf
+         // feed.description is defined in your extension's locallang.xlf
          return $this->translate('feed.description');
       }
 
       public function getTitle(): string
       {
-         // feed.title is defined in your extensions' locallang.xlf
+         // feed.title is defined in your extension's locallang.xlf
          return $this->translate('feed.title');
       }
 
       private function translate(string $key): string
       {
-         return LocalizationUtility::translate(
-            $key,
-            'your_extension',
-            languageKey: $this->request->getAttribute('language')->getTypo3Language()
+         if ($this->languageService === null) {
+            $this->languageService = $this->languageServiceFactory->createFromSiteLanguage(
+               $this->request->getAttribute('language')
+                  ?? $this->request->getAttribute('site')->getDefaultLanguage();
+            );
+         }
+
+         return $this->languageService->sL(
+            'LLL:EXT:your_extension/Resources/Private/Language/locallang.xlf:' . $key
          );
       }
 
