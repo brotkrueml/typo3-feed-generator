@@ -208,22 +208,22 @@ values according to the format.
       // ... the other methods from the introduction example are untouched
    }
 
-.. _developer-CategoryAwareInterface:
+.. _developer-FeedCategoryInterface:
 
-CategoryAwareInterface
+FeedCategoryInterface
 ---------------------
 
-The :any:`Brotkrueml\\FeedGenerator\\Contract\\CategoryAwareInterface` can be
+The :any:`Brotkrueml\\FeedGenerator\\Contract\\FeedCategoryInterface` can be
 added when one or more categories should be applied to a feed.
 
 .. code-block:: php
    :caption: EXT:your_extension/Classes/Feed/YourFeed.php
 
-   // use Brotkrueml\FeedGenerator\Contract\CategoryAwareInterface;
+   // use Brotkrueml\FeedGenerator\Contract\FeedCategoryInterface;
    // use Brotkrueml\FeedGenerator\Entity\Category;
 
    #[Feed('/your-feed.atom', FeedFormat::ATOM)]
-   final class YourFeed implements FeedInterface, CategoryAwareInterface
+   final class YourFeed implements FeedInterface, FeedCategoryInterface
    {
       public function getCategories(): array
       {
@@ -291,12 +291,12 @@ the site or the language information:
    }
 
 
-.. _developer-StyleSheetAwareInterface:
+.. _developer-StyleSheetInterface:
 
-StyleSheetAwareInterface
-------------------------
+StyleSheetInterface
+-------------------
 
-The :any:`Brotkrueml\\FeedGenerator\\Contract\\StyleSheetAwareInterface`
+The :any:`Brotkrueml\\FeedGenerator\\Contract\\StyleSheetInterface`
 requires the implementation of a :php:`getStyleSheet()` method that returns the
 path to an XSL stylesheet. In this way, the appearance of an Atom or RSS feed
 can be customised in a browser.
@@ -304,10 +304,10 @@ can be customised in a browser.
 .. code-block:: php
    :caption: EXT:your_extension/Classes/Feed/YourFeed.php
 
-   // use Brotkrueml\FeedGenerator\Contract\StyleSheetAwareInterface;
+   // use Brotkrueml\FeedGenerator\Contract\StyleSheetInterface;
 
    #[Feed('/your-feed.atom', FeedFormat::ATOM)]
-   final class YourFeed implements FeedInterface, StyleSheetAwareInterface
+   final class YourFeed implements FeedInterface, StyleSheetInterface
    {
       public function getStyleSheet(): string
       {

@@ -30,7 +30,7 @@ the appropriate interfaces.
    interface ImageInterface
    interface ItemInterface
    interface RequestAwareInterface
-   interface StyleSheetAwareInterface
+   interface StyleSheetInterface
 
    class Author
    class Image
@@ -50,7 +50,7 @@ the appropriate interfaces.
    FeedInterface ..|> YourFeed : required
    FeedFormatAwareInterface ..|> YourFeed : optional
    RequestAwareInterface ..|> YourFeed : optional
-   StyleSheetAwareInterface ..|> YourFeed : optional
+   StyleSheetInterface ..|> YourFeed : optional
 
    Item "1" *-- "0 .. n" Author : contains
 

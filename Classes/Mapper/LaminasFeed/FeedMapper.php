@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Mapper\LaminasFeed;
 
-use Brotkrueml\FeedGenerator\Contract\CategoryAwareInterface;
+use Brotkrueml\FeedGenerator\Contract\FeedCategoryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Format\FeedFormat;
@@ -71,7 +71,7 @@ final class FeedMapper
             $laminasFeed->addEntry($this->itemMapper->map($item, $laminasFeed));
         }
 
-        if ($feed instanceof CategoryAwareInterface) {
+        if ($feed instanceof FeedCategoryInterface) {
             foreach ($feed->getCategories() as $category) {
                 $laminasFeed->addCategory($this->categoryMapper->map($category));
             }

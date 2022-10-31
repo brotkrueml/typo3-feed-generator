@@ -11,7 +11,10 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Contract;
 
-interface StyleSheetAwareInterface
+interface FeedCategoryInterface
 {
-    public function getStyleSheet(): string;
+    /**
+     * @return CategoryInterface[]
+     */
+    public function getCategories(): array;
 }

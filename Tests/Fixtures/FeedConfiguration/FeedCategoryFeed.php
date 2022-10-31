@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration;
 
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
-use Brotkrueml\FeedGenerator\Contract\CategoryAwareInterface;
 use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
+use Brotkrueml\FeedGenerator\Contract\FeedCategoryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
@@ -21,7 +21,7 @@ use Brotkrueml\FeedGenerator\Entity\Author;
 use Brotkrueml\FeedGenerator\Entity\Image;
 use Brotkrueml\FeedGenerator\Entity\Item;
 
-final class CategoryFeed implements FeedInterface, CategoryAwareInterface
+final class FeedCategoryFeed implements FeedInterface, FeedCategoryInterface
 {
     public function getId(): string
     {

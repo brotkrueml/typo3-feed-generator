@@ -15,7 +15,7 @@ use Brotkrueml\FeedGenerator\Configuration\FeedConfiguration;
 use Brotkrueml\FeedGenerator\Configuration\FeedRegistryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedFormatAwareInterface;
 use Brotkrueml\FeedGenerator\Contract\RequestAwareInterface;
-use Brotkrueml\FeedGenerator\Contract\StyleSheetAwareInterface;
+use Brotkrueml\FeedGenerator\Contract\StyleSheetInterface;
 use Brotkrueml\FeedGenerator\Format\FeedFormat;
 use Brotkrueml\FeedGenerator\Format\FeedFormatter;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -67,7 +67,7 @@ final class FeedMiddleware implements MiddlewareInterface
             $feed,
             $configuration->format
         );
-        $hasStyleSheet = ($configuration->format !== FeedFormat::JSON) && ($feed instanceof StyleSheetAwareInterface && ($feed->getStyleSheet() !== ''));
+        $hasStyleSheet = ($configuration->format !== FeedFormat::JSON) && ($feed instanceof StyleSheetInterface && ($feed->getStyleSheet() !== ''));
         if ($hasStyleSheet) {
             $result = $this->addStyleSheetToXml($result, $feed->getStyleSheet());
         }

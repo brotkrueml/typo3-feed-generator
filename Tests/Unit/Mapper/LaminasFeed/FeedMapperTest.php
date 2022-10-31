@@ -18,7 +18,7 @@ use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\CategoryMapper;
 use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\FeedMapper;
 use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\ImageMapper;
 use Brotkrueml\FeedGenerator\Mapper\LaminasFeed\ItemMapper;
-use Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration\CategoryFeed;
+use Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration\FeedCategoryFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration\EmptyFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration\SomeFeed;
 use Laminas\Feed\Writer\Entry as LaminasEntry;
@@ -138,7 +138,7 @@ final class FeedMapperTest extends TestCase
     {
         $actual = $this->subject->map(
             'https://example.org/some-feed-link',
-            new CategoryFeed(),
+            new FeedCategoryFeed(),
             FeedFormat::ATOM,
         );
 
