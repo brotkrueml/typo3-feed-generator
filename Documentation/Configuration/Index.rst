@@ -18,9 +18,8 @@ An overview of the configured feeds can be found in the
    The :guilabel:`System > Configuration` module is available when the
    :doc:`lowlevel system extension <ext_lowlevel:Index>` is installed.
 
-To open the Configuration module, navigate to the
-:guilabel:`System > Configuration` module. In the upper menu bar, select
-:guilabel:`Feed Generator: Feeds`.
+To open the module, navigate to the :guilabel:`System > Configuration` module.
+In the upper menu bar, select :guilabel:`Feed Generator: Feeds`.
 
 .. figure:: /Images/ConfigurationModule.png
    :alt: Configured feeds in the Configuration module
