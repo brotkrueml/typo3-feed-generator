@@ -10,8 +10,8 @@ Installation
    The extension in version |release| supports TYPO3 v11 LTS and TYPO3 v12, and
    needs at least PHP 8.1.
 
-.. caution::
-   The extension is under development and considered experimental!
+.. attention::
+   The extension is under development and in alpha state.
 
 The recommended way to install this extension is by using Composer. In your
 Composer-based TYPO3 project root, just type:
