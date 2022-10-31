@@ -284,7 +284,9 @@ can be customised in a browser.
 
 .. code-block:: php
    :caption: EXT:your_extension/Classes/Feed/YourFeed.php
+
    // use Brotkrueml\FeedGenerator\Contract\StyleSheetAwareInterface;
+
    #[Feed('/your-feed.atom', FeedFormat::ATOM)]
    final class YourFeed implements FeedInterface, StyleSheetAwareInterface
    {
