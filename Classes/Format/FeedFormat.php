@@ -56,7 +56,7 @@ enum FeedFormat
     {
         return match ($this) {
             FeedFormat::JSON => new Package('jdecool/jsonfeed', 'dev-master'),
-            default => new Package('laminas/laminas-feed', '^2.18'),
+            default => new Package('laminas/laminas-feed', '^2.19'),
         };
     }
 }
