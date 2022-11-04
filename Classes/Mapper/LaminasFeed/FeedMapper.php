@@ -23,7 +23,7 @@ use Laminas\Feed\Writer\Feed as LaminasFeed;
 final class FeedMapper
 {
     private const GENERATOR_NAME = 'TYPO3 Feed Generator';
-    private const GENERATOR_URI = 'https://github.com/brotkrueml/typo3-feed-generator';
+    private const GENERATOR_URI = 'https://extensions.typo3.org/extension/feed_generator';
 
     public function __construct(
         private readonly AuthorMapper $authorMapper,

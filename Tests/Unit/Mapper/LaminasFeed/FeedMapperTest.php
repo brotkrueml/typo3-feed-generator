@@ -101,7 +101,7 @@ final class FeedMapperTest extends TestCase
         self::assertArrayHasKey('name', $actual->getGenerator());
         self::assertSame('TYPO3 Feed Generator', $actual->getGenerator()['name']);
         self::assertArrayHasKey('uri', $actual->getGenerator());
-        self::assertSame('https://github.com/brotkrueml/typo3-feed-generator', $actual->getGenerator()['uri']);
+        self::assertSame('https://extensions.typo3.org/extension/feed_generator', $actual->getGenerator()['uri']);
     }
 
     /**
