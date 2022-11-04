@@ -36,7 +36,9 @@ final class FeedMapper
     public function map(string $feedLink, FeedInterface $feed, FeedFormat $format): LaminasFeed
     {
         $laminasFeed = new LaminasFeed();
-        $laminasFeed->setFeedLink($feedLink, $format->format());
+        if ($format === FeedFormat::ATOM) {
+            $laminasFeed->setFeedLink($feedLink, $format->format());
+        }
         $laminasFeed->setDateCreated($feed->getDatePublished());
         $laminasFeed->setDateModified($feed->getDateModified());
         $laminasFeed->setLastBuildDate($feed->getLastBuildDate());

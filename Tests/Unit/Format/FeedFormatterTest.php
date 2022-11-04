@@ -200,7 +200,7 @@ ATOM;
     {
         $expected = <<< RSS
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" version="2.0">
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" version="2.0">
   <channel>
     <language>some language</language>
     <title>some title</title>
@@ -222,7 +222,6 @@ ATOM;
     <copyright>some copyright</copyright>
     <dc:creator>some author</dc:creator>
     <dc:creator>another author</dc:creator>
-    <atom:link href="https://example.org/some/feed.rss" rel="self" type="application/rss+xml"/>
     <item>
       <title>some title</title>
       <description>some description</description>
