@@ -26,7 +26,6 @@ the appropriate interfaces.
    interface AuthorInterface
    interface CategoryInterface
    interface FeedInterface
-   interface FeedCategoryInterface
    interface FeedFormatAwareInterface
    interface ImageInterface
    interface ItemInterface
@@ -49,7 +48,6 @@ the appropriate interfaces.
    Item <|.. ItemInterface
 
    FeedInterface ..|> YourFeed : required
-   FeedCategoryInterface ..|> YourFeed : optional
    FeedFormatAwareInterface ..|> YourFeed : optional
    RequestAwareInterface ..|> YourFeed : optional
    StyleSheetInterface ..|> YourFeed : optional

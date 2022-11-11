@@ -18,6 +18,7 @@ Changed
 * Substitute laminas/laminas-feed and jdecool/jsonfeed with custom implementation
 * Rename Enclosure class to Attachment
 * Allow multiple attachments for JSON feeds
+* Integrate FeedCategoryInterface into FeedInterface
 
 `0.4.0 <https://github.com/brotkrueml/typo3-feed-generator/compare/v0.3.0...v0.4.0>`_ - 2022-10-31
 ------------------------------------------------------------------------------------------------------

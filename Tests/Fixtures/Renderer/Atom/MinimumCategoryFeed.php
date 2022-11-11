@@ -12,13 +12,12 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom;
 
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
-use Brotkrueml\FeedGenerator\Contract\FeedCategoryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Brotkrueml\FeedGenerator\Entity\Category;
 
-final class MinimumCategoryFeed implements FeedInterface, FeedCategoryInterface
+final class MinimumCategoryFeed implements FeedInterface
 {
     /**
      * @return Category[]

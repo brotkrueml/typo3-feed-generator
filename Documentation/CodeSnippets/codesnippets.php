@@ -13,7 +13,6 @@ $classes = [
     \Brotkrueml\FeedGenerator\Contract\AuthorInterface::class => 'Interfaces/AuthorInterface.rst',
     \Brotkrueml\FeedGenerator\Contract\CategoryInterface::class => 'Interfaces/CategoryInterface.rst',
     \Brotkrueml\FeedGenerator\Contract\ImageInterface::class => 'Interfaces/ImageInterface.rst',
-    \Brotkrueml\FeedGenerator\Contract\FeedCategoryInterface::class => 'Interfaces/FeedCategoryInterface.rst',
     \Brotkrueml\FeedGenerator\Contract\AttachmentInterface::class => 'Interfaces/EnclosureInterface.rst',
     \Brotkrueml\FeedGenerator\Contract\FeedFormatAwareInterface::class => 'Interfaces/FeedFormatAwareInterface.rst',
     \Brotkrueml\FeedGenerator\Contract\FeedInterface::class => 'Interfaces/FeedInterface.rst',

@@ -19,4 +19,6 @@
         <email>another-author@example.org</email>
         <uri>https://example.org/another-author</uri>
     </author>
+    <category label="some label" scheme="https://example.org/some-term" term="some term"/>
+    <category label="another label" scheme="https://example.org/another-term" term="another term"/>
 </feed>

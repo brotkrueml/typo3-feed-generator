@@ -13,7 +13,6 @@ namespace Brotkrueml\FeedGenerator\Renderer;
 
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
 use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
-use Brotkrueml\FeedGenerator\Contract\FeedCategoryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
@@ -78,10 +77,8 @@ final class AtomRenderer implements RendererInterface
         foreach ($feed->getAuthors() as $author) {
             $this->addAuthorNode($author, $root);
         }
-        if ($feed instanceof FeedCategoryInterface) {
-            foreach ($feed->getCategories() as $category) {
-                $this->addCategoryNode($category, $root);
-            }
+        foreach ($feed->getCategories() as $category) {
+            $this->addCategoryNode($category, $root);
         }
         foreach ($feed->getItems() as $item) {
             $this->addItemNode($item, $root);

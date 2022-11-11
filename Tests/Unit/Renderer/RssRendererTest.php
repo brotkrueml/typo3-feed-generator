@@ -16,7 +16,6 @@ use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredRssFeedProperties;
 use Brotkrueml\FeedGenerator\Renderer\RssRenderer;
 use Brotkrueml\FeedGenerator\Renderer\WrongImageDimensionException;
-use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\CategoryFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FeedImageWithEmptyLink;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FeedImageWithEmptyTitle;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FeedImageWithEmptyUri;
@@ -177,11 +176,6 @@ final class RssRendererTest extends TestCase
         yield 'Minimum feed' => [
             'feed' => new MinimumFeed(),
             'expectedFile' => __DIR__ . '/../../Fixtures/Renderer/Rss/MinimumFeed.xml',
-        ];
-
-        yield 'Feed with category' => [
-            'feed' => new CategoryFeed(),
-            'expectedFile' => __DIR__ . '/../../Fixtures/Renderer/Rss/CategoryFeed.xml',
         ];
 
         yield 'Feed with mimimum image properties' => [

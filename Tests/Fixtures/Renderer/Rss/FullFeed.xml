@@ -8,6 +8,8 @@
         <copyright>some copyright</copyright>
         <pubDate>Fri, 11 Nov 2022 11:11:11 +0000</pubDate>
         <lastBuildDate>Sat, 12 Nov 2022 12:12:12 +0000</lastBuildDate>
+        <category>some-category</category>
+        <category>another-category</category>
         <generator>TYPO3 Feed Generator (https://extensions.typo3.org/extension/feed_generator)</generator>
         <image>
             <uri>https://example.org/some-image</uri>

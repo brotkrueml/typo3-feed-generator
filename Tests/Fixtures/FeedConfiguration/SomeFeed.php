@@ -12,10 +12,12 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration;
 
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
+use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Brotkrueml\FeedGenerator\Entity\Author;
+use Brotkrueml\FeedGenerator\Entity\Category;
 use Brotkrueml\FeedGenerator\Entity\Image;
 use Brotkrueml\FeedGenerator\Entity\Item;
 
@@ -80,6 +82,16 @@ final class SomeFeed implements FeedInterface
     public function getImage(): ?ImageInterface
     {
         return new Image('some uri');
+    }
+
+    /**
+     * @return CategoryInterface[]
+     */
+    public function getCategories(): array
+    {
+        return [
+            new Category('some category'),
+        ];
     }
 
     /**

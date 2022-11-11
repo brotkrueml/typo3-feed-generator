@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss;
 
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
+use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
@@ -79,6 +80,14 @@ final class FeedWithMinimumImageProperties implements FeedInterface
             'some image title',
             'https://example.org/some-link'
         );
+    }
+
+    /**
+     * @return CategoryInterface[]
+     */
+    public function getCategories(): array
+    {
+        return [];
     }
 
     /**

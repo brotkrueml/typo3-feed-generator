@@ -12,9 +12,11 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss;
 
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
+use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
+use Brotkrueml\FeedGenerator\Entity\Category;
 use Brotkrueml\FeedGenerator\Entity\Image;
 
 final class FullFeed implements FeedInterface
@@ -82,6 +84,17 @@ final class FullFeed implements FeedInterface
             100,
             'some image description',
         );
+    }
+
+    /**
+     * @return CategoryInterface[]
+     */
+    public function getCategories(): array
+    {
+        return [
+            new Category('some-category', 'https://example.org/some-category', 'some label'),
+            new Category('another-category'),
+        ];
     }
 
     /**

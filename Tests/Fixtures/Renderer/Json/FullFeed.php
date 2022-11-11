@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Json;
 
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
+use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
@@ -80,6 +81,14 @@ final class FullFeed implements FeedInterface
     public function getImage(): ?ImageInterface
     {
         return new Image('https://example.org/some-image');
+    }
+
+    /**
+     * @return CategoryInterface[]
+     */
+    public function getCategories(): array
+    {
+        return [];
     }
 
     /**

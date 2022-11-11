@@ -74,6 +74,11 @@ interface FeedInterface
     public function getImage(): ?ImageInterface;
 
     /**
+     * @return CategoryInterface[]
+     */
+    public function getCategories(): array;
+
+    /**
      * Get the items of the feed.
      *
      * @return ItemInterface[]

@@ -13,7 +13,6 @@ namespace Brotkrueml\FeedGenerator\Renderer;
 
 use Brotkrueml\FeedGenerator\Contract\AttachmentInterface;
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
-use Brotkrueml\FeedGenerator\Contract\FeedCategoryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
@@ -78,10 +77,8 @@ final class RssRenderer implements RendererInterface
         if ($feed->getLastBuildDate() instanceof \DateTimeInterface) {
             $this->addTextNode('lastBuildDate', $feed->getLastBuildDate()->format('r'), $channel);
         }
-        if ($feed instanceof FeedCategoryInterface) {
-            foreach ($feed->getCategories() as $category) {
-                $this->addTextNode('category', $category->getTerm(), $channel);
-            }
+        foreach ($feed->getCategories() as $category) {
+            $this->addTextNode('category', $category->getTerm(), $channel);
         }
         $this->addTextNode('generator', \sprintf('%s (%s)', Generator::NAME, Generator::URI), $channel);
         if ($feed->getImage() instanceof ImageInterface) {

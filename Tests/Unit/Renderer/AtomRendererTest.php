@@ -17,7 +17,6 @@ use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FeedWithEmptyDateModified;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FeedWithEmptyId;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FeedWithEmptyTitle;
-use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FullCategoryFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FullFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FullItems;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\ItemWithEmptyDateModified;
@@ -130,11 +129,6 @@ final class AtomRendererTest extends TestCase
         yield 'Minimum category feed' => [
             'feed' => new MinimumCategoryFeed(),
             'expectedFile' => __DIR__ . '/../../Fixtures/Renderer/Atom/MinimumCategoryFeed.xml',
-        ];
-
-        yield 'Full category feed' => [
-            'feed' => new FullCategoryFeed(),
-            'expectedFile' => __DIR__ . '/../../Fixtures/Renderer/Atom/FullCategoryFeed.xml',
         ];
 
         yield 'Full feed' => [
