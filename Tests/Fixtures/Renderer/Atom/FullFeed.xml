@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="some language">
+    <id>some id</id>
+    <title>some title</title>
+    <subtitle>some description</subtitle>
+    <logo>https://example.org/some-image</logo>
+    <updated>2022-11-11T11:11:11+00:00</updated>
+    <link rel="alternate" href="https://example.org/home" type="text/html"/>
+    <link rel="self" href="https://example.org/feed.atom" type="application/atom+xml"/>
+    <generator uri="https://extensions.typo3.org/extension/feed_generator">TYPO3 Feed Generator</generator>
+    <rights>some copyright</rights>
+    <author>
+        <name>some author</name>
+        <email>some-author@example.org</email>
+        <uri>https://example.org/some-author</uri>
+    </author>
+    <author>
+        <name>another author</name>
+        <email>another-author@example.org</email>
+        <uri>https://example.org/another-author</uri>
+    </author>
+</feed>

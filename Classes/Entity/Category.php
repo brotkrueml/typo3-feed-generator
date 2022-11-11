@@ -18,9 +18,6 @@ use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
  */
 final class Category implements CategoryInterface
 {
-    /**
-     * @param non-empty-string $term
-     */
     public function __construct(
         private readonly string $term,
         private readonly string $scheme = '',

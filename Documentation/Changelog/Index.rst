@@ -11,11 +11,13 @@ and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0
 `Unreleased <https://github.com/brotkrueml/typo3-feed-generator/compare/v0.4.0...HEAD>`_
 --------------------------------------------------------------------------------------------
 
-Fixed
-^^^^^
+Changed
+^^^^^^^
 
 
-* Avoid atom:link tag in RSS feed
+* Substitute laminas/laminas-feed and jdecool/jsonfeed with custom implementation
+* Rename Enclosure class to Attachment
+* Allow multiple attachments for JSON feeds
 
 `0.4.0 <https://github.com/brotkrueml/typo3-feed-generator/compare/v0.3.0...v0.4.0>`_ - 2022-10-31
 ------------------------------------------------------------------------------------------------------

@@ -18,7 +18,6 @@ interface ImageInterface
 {
     /**
      * Get the URI of the image. Required.
-     * @return non-empty-string
      */
     public function getUri(): string;
 

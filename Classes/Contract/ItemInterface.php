@@ -62,9 +62,10 @@ interface ItemInterface
     public function getDateModified(): ?\DateTimeInterface;
 
     /**
-     * Get the enclosure. In accordance with the RSS Best Practices Profile of the RSS Advisory Board,
-     * no support is offered for multiple enclosures since such support forms no part of the
-     * RSS specification.
+     * Get the attachments (enclosure). In accordance with the RSS Best Practices Profile of the RSS Advisory Board,
+     * no support is offered for multiple enclosures since such support forms no part of the RSS specification.
+     * JSON feeds support multiple attachments
+     * @return AttachmentInterface[]
      */
-    public function getEnclosure(): ?EnclosureInterface;
+    public function getAttachments(): array;
 }

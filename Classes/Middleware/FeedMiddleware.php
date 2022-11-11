@@ -17,7 +17,9 @@ use Brotkrueml\FeedGenerator\Contract\FeedFormatAwareInterface;
 use Brotkrueml\FeedGenerator\Contract\RequestAwareInterface;
 use Brotkrueml\FeedGenerator\Contract\StyleSheetInterface;
 use Brotkrueml\FeedGenerator\Format\FeedFormat;
-use Brotkrueml\FeedGenerator\Format\FeedFormatter;
+use Brotkrueml\FeedGenerator\Renderer\AtomRenderer;
+use Brotkrueml\FeedGenerator\Renderer\JsonRenderer;
+use Brotkrueml\FeedGenerator\Renderer\RssRenderer;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -25,8 +27,6 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Site\Entity\Site;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\PathUtility;
 
 /**
  * @internal
@@ -34,7 +34,6 @@ use TYPO3\CMS\Core\Utility\PathUtility;
 final class FeedMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly FeedFormatter $feedFormatter,
         private readonly FeedRegistryInterface $feedRegistry,
         private readonly ResponseFactoryInterface $responseFactory,
     ) {
@@ -62,15 +61,14 @@ final class FeedMiddleware implements MiddlewareInterface
 
         /** @var NormalizedParams $normalizedParams */
         $normalizedParams = $request->getAttribute('normalizedParams');
-        $result = $this->feedFormatter->format(
-            $normalizedParams->getRequestHost() . $configuration->path,
-            $feed,
-            $configuration->format
-        );
+        $feedLink = $normalizedParams->getRequestHost() . $configuration->path;
+        $result = match ($configuration->format) {
+            FeedFormat::ATOM => (new AtomRenderer())->render($feed, $feedLink),
+            FeedFormat::JSON => (new JsonRenderer())->render($feed, $feedLink),
+            FeedFormat::RSS => (new RssRenderer())->render($feed, $feedLink),
+        };
+
         $hasStyleSheet = ($configuration->format !== FeedFormat::JSON) && ($feed instanceof StyleSheetInterface && ($feed->getStyleSheet() !== ''));
-        if ($hasStyleSheet) {
-            $result = $this->addStyleSheetToXml($result, $feed->getStyleSheet());
-        }
         $response = $this->responseFactory->createResponse()
             ->withHeader('Content-Type', $configuration->format->contentType($hasStyleSheet) . '; charset=utf-8');
 
@@ -90,16 +88,5 @@ final class FeedMiddleware implements MiddlewareInterface
         $response->getBody()->write($result);
 
         return $response;
-    }
-
-    private function addStyleSheetToXml(string $xml, string $styleSheet): string
-    {
-        $href = PathUtility::getAbsoluteWebPath(GeneralUtility::getFileAbsFileName($styleSheet));
-
-        return str_replace(
-            '<?xml version="1.0" encoding="UTF-8"?>',
-            '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . '<?xml-stylesheet type="text/xsl" href="' . $href . '"?>',
-            $xml
-        );
     }
 }

@@ -738,9 +738,9 @@ Overview of used properties by feed type
       - `summary`
       - :xml:`<description>`
 
-   *  - :php:`getEnclosure()`
-      - :xml:`<link rel="enclosure" type="..." length="..." href="..."/>`
+   *  - :php:`getAttachment()`
       - —
+      - `attachments`
       - :xml:`<enclosure type="..." length="..." url="..."/>`
 
    *  - :php:`getId()`

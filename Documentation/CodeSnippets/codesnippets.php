@@ -14,7 +14,7 @@ $classes = [
     \Brotkrueml\FeedGenerator\Contract\CategoryInterface::class => 'Interfaces/CategoryInterface.rst',
     \Brotkrueml\FeedGenerator\Contract\ImageInterface::class => 'Interfaces/ImageInterface.rst',
     \Brotkrueml\FeedGenerator\Contract\FeedCategoryInterface::class => 'Interfaces/FeedCategoryInterface.rst',
-    \Brotkrueml\FeedGenerator\Contract\EnclosureInterface::class => 'Interfaces/EnclosureInterface.rst',
+    \Brotkrueml\FeedGenerator\Contract\AttachmentInterface::class => 'Interfaces/EnclosureInterface.rst',
     \Brotkrueml\FeedGenerator\Contract\FeedFormatAwareInterface::class => 'Interfaces/FeedFormatAwareInterface.rst',
     \Brotkrueml\FeedGenerator\Contract\FeedInterface::class => 'Interfaces/FeedInterface.rst',
     \Brotkrueml\FeedGenerator\Contract\ItemInterface::class => 'Interfaces/ItemInterface.rst',
@@ -23,7 +23,7 @@ $classes = [
 
     \Brotkrueml\FeedGenerator\Entity\Author::class => 'Classes/Author.rst',
     \Brotkrueml\FeedGenerator\Entity\Category::class => 'Classes/Category.rst',
-    \Brotkrueml\FeedGenerator\Entity\Enclosure::class => 'Classes/Enclosure.rst',
+    \Brotkrueml\FeedGenerator\Entity\Attachment::class => 'Classes/Enclosure.rst',
     \Brotkrueml\FeedGenerator\Entity\Image::class => 'Classes/Image.rst',
     \Brotkrueml\FeedGenerator\Entity\Item::class => 'Classes/Item.rst',
 

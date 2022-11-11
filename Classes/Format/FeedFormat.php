@@ -11,8 +11,6 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Format;
 
-use Brotkrueml\FeedGenerator\Package\Package;
-
 /**
  * @api
  */
@@ -46,17 +44,6 @@ enum FeedFormat
             FeedFormat::ATOM => 'application/atom+xml',
             FeedFormat::JSON => 'application/feed+json',
             FeedFormat::RSS => 'application/rss+xml',
-        };
-    }
-
-    /**
-     * @internal
-     */
-    public function package(): Package
-    {
-        return match ($this) {
-            FeedFormat::JSON => new Package('jdecool/jsonfeed', 'dev-master'),
-            default => new Package('laminas/laminas-feed', '^2.19'),
         };
     }
 }

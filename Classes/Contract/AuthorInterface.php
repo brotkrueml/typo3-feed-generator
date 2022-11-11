@@ -18,7 +18,6 @@ interface AuthorInterface
 {
     /**
      * Get the name.
-     * @return non-empty-string
      */
     public function getName(): string;
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <channel>en-GB</channel>
+        <title>some title</title>
+        <link>https://example.org/home</link>
+        <description>some description</description>
+        <copyright>some copyright</copyright>
+        <pubDate>Fri, 11 Nov 2022 11:11:11 +0000</pubDate>
+        <lastBuildDate>Sat, 12 Nov 2022 12:12:12 +0000</lastBuildDate>
+        <generator>TYPO3 Feed Generator (https://extensions.typo3.org/extension/feed_generator)</generator>
+        <image>
+            <uri>https://example.org/some-image</uri>
+            <title>some image title</title>
+            <link>https://example.org/some-link</link>
+            <width>100</width>
+            <height>100</height>
+            <description>some image description</description>
+        </image>
+    </channel>
+</rss>

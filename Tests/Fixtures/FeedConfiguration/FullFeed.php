@@ -15,8 +15,8 @@ use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
+use Brotkrueml\FeedGenerator\Entity\Attachment;
 use Brotkrueml\FeedGenerator\Entity\Author;
-use Brotkrueml\FeedGenerator\Entity\Enclosure;
 use Brotkrueml\FeedGenerator\Entity\Image;
 use Brotkrueml\FeedGenerator\Entity\Item;
 
@@ -104,7 +104,7 @@ final class FullFeed implements FeedInterface
                 ->setContent('some content')
                 ->setDatePublished(new \DateTimeImmutable('2022-11-01 12:34:56'))
                 ->setDateModified(new \DateTimeImmutable('2022-11-02 01:02:03'))
-                ->setEnclosure(new Enclosure('https://example.org/some-enclosure', 'some/enclosure', 123456))
+                ->setAttachment(new Attachment('https://example.org/some-attachment', 'some/enclosure', 123456))
                 ->setAuthors(
                     new Author('some author 1', 'some-author-1@example.org', 'https://example.org/some-author-1'),
                     new Author('some author 2', 'some-author-2@example.org', 'https://example.org/some-author-2'),
@@ -117,7 +117,7 @@ final class FullFeed implements FeedInterface
                 ->setContent('another content')
                 ->setDatePublished(new \DateTimeImmutable('2022-11-03 12:00:00'))
                 ->setDateModified(new \DateTimeImmutable('2022-11-04 09:08:07'))
-                ->setEnclosure(new Enclosure('https://example.org/another-enclosure', 'another/enclosure', 987654))
+                ->setAttachment(new Attachment('https://example.org/another-attachment', 'another/enclosure', 987654))
                 ->setAuthors(
                     new Author('another author', 'another-author@example.org', 'https://example.org/another-author'),
                 ),

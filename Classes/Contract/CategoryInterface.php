@@ -18,7 +18,6 @@ interface CategoryInterface
 {
     /**
      * Get the term. The term identifies the category.
-     * @return non-empty-string
      */
     public function getTerm(): string;
 

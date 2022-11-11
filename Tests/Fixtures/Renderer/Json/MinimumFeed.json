@@ -1,0 +1,10 @@
+{
+	"version": "https://jsonfeed.org/version/1.1",
+	"title": "some title",
+	"feed_url": "https://example.org/feed.json",
+	"items": [
+		{
+			"id": "some id"
+		}
+	]
+}

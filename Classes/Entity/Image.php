@@ -19,7 +19,6 @@ use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 final class Image implements ImageInterface
 {
     /**
-     * @param non-empty-string $uri
      * @param int<0, 144> $width
      * @param int<0, 400> $height
      */

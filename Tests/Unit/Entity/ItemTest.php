@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Entity;
 
+use Brotkrueml\FeedGenerator\Entity\Attachment;
 use Brotkrueml\FeedGenerator\Entity\Author;
-use Brotkrueml\FeedGenerator\Entity\Enclosure;
 use Brotkrueml\FeedGenerator\Entity\Item;
 use PHPUnit\Framework\TestCase;
 
@@ -36,7 +36,7 @@ final class ItemTest extends TestCase
         self::assertSame([], $subject->getAuthors());
         self::assertNull($subject->getDatePublished());
         self::assertNull($subject->getDateModified());
-        self::assertNull($subject->getEnclosure());
+        self::assertSame([], $subject->getAttachments());
     }
 
     /**
@@ -150,13 +150,15 @@ final class ItemTest extends TestCase
     /**
      * @test
      */
-    public function getEnclosureReturnsEnclosureCorrectly(): void
+    public function getAttachmentsReturnsAttachmentsCorrectly(): void
     {
-        $enclosure = new Enclosure('https://example.org/video.mp4');
+        $attachment1 = new Attachment('https://example.org/video.mp4');
+        $attachment2 = new Attachment('https://example.org/audio.mp3');
 
         $subject = (new Item())
-            ->setEnclosure($enclosure);
+            ->setAttachments($attachment1, $attachment2);
 
-        self::assertSame($enclosure, $subject->getEnclosure());
+        self::assertContains($attachment1, $subject->getAttachments());
+        self::assertContains($attachment2, $subject->getAttachments());
     }
 }

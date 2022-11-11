@@ -18,9 +18,6 @@ use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
  */
 final class Author implements AuthorInterface
 {
-    /**
-     * @param non-empty-string $name
-     */
     public function __construct(
         private readonly string $name,
         private readonly string $email = '',

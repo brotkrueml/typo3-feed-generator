@@ -1,0 +1,46 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:append\\(\\)\\.$#"
+			count: 6
+			path: Classes/Renderer/AtomRenderer.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:setAttribute\\(\\)\\.$#"
+			count: 1
+			path: Classes/Renderer/AtomRenderer.php
+
+		-
+			message: "#^Class cognitive complexity is 30, keep it under 13$#"
+			count: 1
+			path: Classes/Renderer/AtomRenderer.php
+
+		-
+			message: "#^Class cognitive complexity is 27, keep it under 13$#"
+			count: 1
+			path: Classes/Renderer/JsonRenderer.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:append\\(\\)\\.$#"
+			count: 3
+			path: Classes/Renderer/RssRenderer.php
+
+		-
+			message: "#^Class cognitive complexity is 43, keep it under 13$#"
+			count: 1
+			path: Classes/Renderer/RssRenderer.php
+
+		-
+			message: "#^Comparison operation \"\\>\" between int\\<0, 144\\> and 144 is always false\\.$#"
+			count: 1
+			path: Classes/Renderer/RssRenderer.php
+
+		-
+			message: "#^Comparison operation \"\\>\" between int\\<0, 400\\> and 400 is always false\\.$#"
+			count: 1
+			path: Classes/Renderer/RssRenderer.php
+
+		-
+			message: "#^Strict comparison using \\=\\=\\= between numeric\\-string\\|non\\-empty\\-string and '' will always evaluate to false\\.$#"
+			count: 1
+			path: Classes/Renderer/RssRenderer.php
