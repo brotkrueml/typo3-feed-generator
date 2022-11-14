@@ -33,10 +33,10 @@ final class ItemTest extends TestCase
         self::assertSame('', $subject->getDescription());
         self::assertSame('', $subject->getContent());
         self::assertSame('', $subject->getLink());
-        self::assertSame([], $subject->getAuthors());
+        self::assertTrue($subject->getAuthors()->isEmpty());
         self::assertNull($subject->getDatePublished());
         self::assertNull($subject->getDateModified());
-        self::assertSame([], $subject->getAttachments());
+        self::assertTrue($subject->getAttachments()->isEmpty());
     }
 
     /**
@@ -102,9 +102,9 @@ final class ItemTest extends TestCase
         $author = new Author('Some author');
 
         $subject = (new Item())
-            ->setAuthors($author);
+            ->addAuthors($author);
 
-        self::assertSame([$author], $subject->getAuthors());
+        self::assertSame($author, $subject->getAuthors()->get(0));
     }
 
     /**
@@ -116,9 +116,10 @@ final class ItemTest extends TestCase
         $author2 = new Author('Another author');
 
         $subject = (new Item())
-            ->setAuthors($author1, $author2);
+            ->addAuthors($author1, $author2);
 
-        self::assertSame([$author1, $author2], $subject->getAuthors());
+        self::assertSame($author1, $subject->getAuthors()->get(0));
+        self::assertSame($author2, $subject->getAuthors()->get(1));
     }
 
     /**
@@ -156,7 +157,7 @@ final class ItemTest extends TestCase
         $attachment2 = new Attachment('https://example.org/audio.mp3');
 
         $subject = (new Item())
-            ->setAttachments($attachment1, $attachment2);
+            ->addAttachments($attachment1, $attachment2);
 
         self::assertContains($attachment1, $subject->getAttachments());
         self::assertContains($attachment2, $subject->getAttachments());

@@ -37,9 +37,9 @@ Brotkrueml\\FeedGenerator\\Contract\\FeedInterface
       
    .. php:method:: getAuthors()
    
-      Get the data for authors. In JSON feed only one author is possible.
+      Get the data for authors.
       
-      :returntype: array
+      :returntype: Brotkrueml\\FeedGenerator\\Collection\\Collection
       
    .. php:method:: getDatePublished()
    
@@ -79,11 +79,11 @@ Brotkrueml\\FeedGenerator\\Contract\\FeedInterface
       
    .. php:method:: getCategories()
    
-      :returntype: array
+      :returntype: Brotkrueml\\FeedGenerator\\Collection\\Collection
       
    .. php:method:: getItems()
    
       Get the items of the feed.
       
-      :returntype: array
+      :returntype: Brotkrueml\\FeedGenerator\\Collection\\Collection
 

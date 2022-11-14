@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration;
 
+use Brotkrueml\FeedGenerator\Collection\Collection;
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
 use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
@@ -44,14 +45,14 @@ final class SomeFeed implements FeedInterface
     }
 
     /**
-     * @return AuthorInterface[]
+     * @return Collection<AuthorInterface>
      */
-    public function getAuthors(): array
+    public function getAuthors(): Collection
     {
-        return [
+        return (new Collection())->add(
             new Author('some author'),
             new Author('another author'),
-        ];
+        );
     }
 
     public function getDatePublished(): ?\DateTimeInterface
@@ -85,23 +86,23 @@ final class SomeFeed implements FeedInterface
     }
 
     /**
-     * @return CategoryInterface[]
+     * @return Collection<CategoryInterface>
      */
-    public function getCategories(): array
+    public function getCategories(): Collection
     {
-        return [
+        return (new Collection())->add(
             new Category('some category'),
-        ];
+        );
     }
 
     /**
-     * @return ItemInterface[]
+     * @return Collection<ItemInterface>
      */
-    public function getItems(): array
+    public function getItems(): Collection
     {
-        return [
+        return (new Collection())->add(
             (new Item())->setTitle('some title'),
             (new Item())->setTitle('another title'),
-        ];
+        );
     }
 }

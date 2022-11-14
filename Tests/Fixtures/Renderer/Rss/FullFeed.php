@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss;
 
+use Brotkrueml\FeedGenerator\Collection\Collection;
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
 use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
@@ -42,11 +43,11 @@ final class FullFeed implements FeedInterface
     }
 
     /**
-     * @return AuthorInterface[]
+     * @return Collection<AuthorInterface>
      */
-    public function getAuthors(): array
+    public function getAuthors(): Collection
     {
-        return [];
+        return new Collection();
     }
 
     public function getDatePublished(): ?\DateTimeInterface
@@ -87,21 +88,21 @@ final class FullFeed implements FeedInterface
     }
 
     /**
-     * @return CategoryInterface[]
+     * @return Collection<CategoryInterface>
      */
-    public function getCategories(): array
+    public function getCategories(): Collection
     {
-        return [
+        return (new Collection())->add(
             new Category('some-category', 'https://example.org/some-category', 'some label'),
             new Category('another-category'),
-        ];
+        );
     }
 
     /**
-     * @return ItemInterface[]
+     * @return Collection<ItemInterface>
      */
-    public function getItems(): array
+    public function getItems(): Collection
     {
-        return [];
+        return new Collection();
     }
 }

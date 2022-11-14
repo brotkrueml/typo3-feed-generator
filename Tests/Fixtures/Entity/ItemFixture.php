@@ -9,15 +9,18 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss;
+namespace Brotkrueml\FeedGenerator\Tests\Fixtures\Entity;
 
 use Brotkrueml\FeedGenerator\Collection\Collection;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
-use Brotkrueml\FeedGenerator\Entity\AbstractFeed;
-use Brotkrueml\FeedGenerator\Entity\Item;
 
-final class ItemWithUndefinedIdButLink extends AbstractFeed
+final class ItemFixture implements ItemInterface
 {
+    public function getId(): string
+    {
+        return 'some-id';
+    }
+
     public function getTitle(): string
     {
         return 'some title';
@@ -28,20 +31,33 @@ final class ItemWithUndefinedIdButLink extends AbstractFeed
         return 'some description';
     }
 
+    public function getContent(): string
+    {
+        return 'some content';
+    }
+
     public function getLink(): string
     {
         return 'https://example.org/';
     }
 
-    /**
-     * @return Collection<ItemInterface>
-     */
-    public function getItems(): Collection
+    public function getAuthors(): Collection
     {
-        return (new Collection())->add(
-            (new Item())
-                ->setTitle('some item title')
-                ->setLink('https://example.org/some-item-link'),
-        );
+        return new Collection();
+    }
+
+    public function getDatePublished(): ?\DateTimeInterface
+    {
+        return null;
+    }
+
+    public function getDateModified(): ?\DateTimeInterface
+    {
+        return null;
+    }
+
+    public function getAttachments(): Collection
+    {
+        return new Collection();
     }
 }

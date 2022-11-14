@@ -31,14 +31,14 @@ final class AbstractFeedTest extends TestCase
         self::assertSame('', $subject->getTitle());
         self::assertSame('', $subject->getDescription());
         self::assertSame('', $subject->getLink());
-        self::assertSame([], $subject->getAuthors());
+        self::assertTrue($subject->getAuthors()->isEmpty());
         self::assertNull($subject->getDatePublished());
         self::assertNull($subject->getDateModified());
         self::assertNull($subject->getLastBuildDate());
         self::assertSame('', $subject->getLanguage());
         self::assertSame('', $subject->getCopyright());
         self::assertNull($subject->getImage());
-        self::assertSame([], $subject->getCategories());
-        self::assertSame([], $subject->getItems());
+        self::assertTrue($subject->getCategories()->isEmpty());
+        self::assertTrue($subject->getItems()->isEmpty());
     }
 }

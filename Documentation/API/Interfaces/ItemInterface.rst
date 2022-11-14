@@ -42,9 +42,9 @@ Brotkrueml\\FeedGenerator\\Contract\\ItemInterface
       
    .. php:method:: getAuthors()
    
-      Get the data for authors. In JSON only one author is possible.
+      Get the data for authors.
       
-      :returntype: array
+      :returntype: Brotkrueml\\FeedGenerator\\Collection\\Collection
       
    .. php:method:: getDatePublished()
    
@@ -68,5 +68,5 @@ Brotkrueml\\FeedGenerator\\Contract\\ItemInterface
       
       JSON feeds support multiple attachments
       
-      :returntype: array
+      :returntype: Brotkrueml\\FeedGenerator\\Collection\\Collection
 

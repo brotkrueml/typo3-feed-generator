@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss;
 
+use Brotkrueml\FeedGenerator\Collection\Collection;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Brotkrueml\FeedGenerator\Entity\AbstractFeed;
 use Brotkrueml\FeedGenerator\Entity\Item;
@@ -35,25 +36,25 @@ final class FullItems extends AbstractFeed
     }
 
     /**
-     * @return ItemInterface[]
+     * @return Collection<ItemInterface>
      */
-    public function getItems(): array
+    public function getItems(): Collection
     {
-        return [
+        return (new Collection())->add(
             (new Item())
                 ->setId('some id')
                 ->setTitle('some item title')
                 ->setLink('https://example.org/some-item')
                 ->setDescription('some description title')
-                ->setAuthors(
+                ->addAuthors(
                     new Author('John Doe', 'john-doe@example.org'),
                     new Author('Jane Doe', 'jane-doe@example.org'),
                 )
-                ->setAttachments(
+                ->addAttachments(
                     new Attachment('https://example.org/some-attachment', 'some/type', 123456),
                     new Attachment('https://example.org/not-rendered-attachment'),
                 )
                 ->setDatePublished(new \DateTimeImmutable('2022-11-11 11:11:11')),
-        ];
+        );
     }
 }

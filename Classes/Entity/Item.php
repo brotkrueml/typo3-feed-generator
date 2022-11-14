@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Entity;
 
+use Brotkrueml\FeedGenerator\Collection\Collection;
 use Brotkrueml\FeedGenerator\Contract\AttachmentInterface;
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
@@ -26,15 +27,21 @@ final class Item implements ItemInterface
     private string $content = '';
     private string $link = '';
     /**
-     * @var AuthorInterface[]
+     * @var Collection<AuthorInterface>
      */
-    private array $authors = [];
+    private readonly Collection $authors;
     private ?\DateTimeInterface $datePublished = null;
     private ?\DateTimeInterface $dateModified = null;
     /**
-     * @var AttachmentInterface[]
+     * @var Collection<AttachmentInterface>
      */
-    private array $attachments = [];
+    private readonly Collection $attachments;
+
+    public function __construct()
+    {
+        $this->authors = new Collection();
+        $this->attachments = new Collection();
+    }
 
     public function getId(): string
     {
@@ -97,16 +104,16 @@ final class Item implements ItemInterface
     }
 
     /**
-     * @return AuthorInterface[]
+     * @return Collection<AuthorInterface>
      */
-    public function getAuthors(): array
+    public function getAuthors(): Collection
     {
         return $this->authors;
     }
 
-    public function setAuthors(AuthorInterface ...$authors): self
+    public function addAuthors(AuthorInterface ...$authors): self
     {
-        $this->authors = $authors;
+        $this->authors->add(...$authors);
 
         return $this;
     }
@@ -136,16 +143,16 @@ final class Item implements ItemInterface
     }
 
     /**
-     * @return AttachmentInterface[]
+     * @return Collection<AttachmentInterface>
      */
-    public function getAttachments(): array
+    public function getAttachments(): Collection
     {
         return $this->attachments;
     }
 
-    public function setAttachments(AttachmentInterface ...$attachments): self
+    public function addAttachments(AttachmentInterface ...$attachments): self
     {
-        $this->attachments = $attachments;
+        $this->attachments->add(...$attachments);
 
         return $this;
     }

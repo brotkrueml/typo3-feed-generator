@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss;
 
+use Brotkrueml\FeedGenerator\Collection\Collection;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Brotkrueml\FeedGenerator\Entity\AbstractFeed;
 use Brotkrueml\FeedGenerator\Entity\Item;
@@ -33,15 +34,15 @@ final class MinimumItems extends AbstractFeed
     }
 
     /**
-     * @return ItemInterface[]
+     * @return Collection<ItemInterface>
      */
-    public function getItems(): array
+    public function getItems(): Collection
     {
-        return [
+        return (new Collection())->add(
             (new Item())
                 ->setTitle('some item title'),
             (new Item())
                 ->setDescription('another item description'),
-        ];
+        );
     }
 }

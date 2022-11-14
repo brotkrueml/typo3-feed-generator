@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom;
 
+use Brotkrueml\FeedGenerator\Collection\Collection;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Brotkrueml\FeedGenerator\Entity\AbstractFeed;
 use Brotkrueml\FeedGenerator\Entity\Item;
@@ -34,18 +35,18 @@ final class FullItems extends AbstractFeed
     }
 
     /**
-     * @return ItemInterface[]
+     * @return Collection<ItemInterface>
      */
-    public function getItems(): array
+    public function getItems(): Collection
     {
-        return [
+        return (new Collection())->add(
             (new Item())
                 ->setId('some item id')
                 ->setTitle('some item title')
                 ->setDescription('some item description')
                 ->setContent('some item content')
                 ->setLink('https://example.org/some-item')
-                ->setAuthors(new Author('John Doe'))
+                ->addAuthors(new Author('John Doe'))
                 ->setDatePublished(new \DateTimeImmutable('2022-11-12 12:12:12'))
                 ->setDateModified(new \DateTimeImmutable('2022-11-13 13:13:13')),
             (new Item())
@@ -54,9 +55,9 @@ final class FullItems extends AbstractFeed
                 ->setDescription('another item description')
                 ->setContent('another item content')
                 ->setLink('https://example.org/another-item')
-                ->setAuthors(new Author('Jane Doe', 'jane-doe@example.org', 'https://example.org/jane-doe'))
+                ->addAuthors(new Author('Jane Doe', 'jane-doe@example.org', 'https://example.org/jane-doe'))
                 ->setDatePublished(new \DateTimeImmutable('2022-11-14 14:14:14'))
                 ->setDateModified(new \DateTimeImmutable('2022-11-15 15:15:15')),
-        ];
+        );
     }
 }

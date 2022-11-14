@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Contract;
 
+use Brotkrueml\FeedGenerator\Collection\Collection;
+
 /**
  * @api
  */
@@ -44,10 +46,10 @@ interface ItemInterface
     public function getLink(): string;
 
     /**
-     * Get the data for authors. In JSON only one author is possible.
-     * @return AuthorInterface[]
+     * Get the data for authors.
+     * @return Collection<AuthorInterface>
      */
-    public function getAuthors(): array;
+    public function getAuthors(): Collection;
 
     /**
      * Get the date on which this item was published. If null, the date used will be the current date and
@@ -65,7 +67,7 @@ interface ItemInterface
      * Get the attachments (enclosure). In accordance with the RSS Best Practices Profile of the RSS Advisory Board,
      * no support is offered for multiple enclosures since such support forms no part of the RSS specification.
      * JSON feeds support multiple attachments
-     * @return AttachmentInterface[]
+     * @return Collection<AttachmentInterface>
      */
-    public function getAttachments(): array;
+    public function getAttachments(): Collection;
 }

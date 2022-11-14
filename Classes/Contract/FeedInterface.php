@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Contract;
 
+use Brotkrueml\FeedGenerator\Collection\Collection;
+
 /**
  * Interface for a feed.
  */
@@ -38,10 +40,10 @@ interface FeedInterface
     public function getLink(): string;
 
     /**
-     * Get the data for authors. In JSON feed only one author is possible.
-     * @return AuthorInterface[]
+     * Get the data for authors.
+     * @return Collection<AuthorInterface>
      */
-    public function getAuthors(): array;
+    public function getAuthors(): Collection;
 
     /**
      * Get the date on which this feed was published. Used in RSS only.
@@ -74,14 +76,14 @@ interface FeedInterface
     public function getImage(): ?ImageInterface;
 
     /**
-     * @return CategoryInterface[]
+     * @return Collection<CategoryInterface>
      */
-    public function getCategories(): array;
+    public function getCategories(): Collection;
 
     /**
      * Get the items of the feed.
      *
-     * @return ItemInterface[]
+     * @return Collection<ItemInterface>
      */
-    public function getItems(): array;
+    public function getItems(): Collection;
 }

@@ -41,6 +41,7 @@ Let's start with an example to warm up.
    namespace YourVender\YourExtension\Feed;
 
    use Brotkrueml\FeedGenerator\Attributes\Feed;
+   use Brotkrueml\FeedGenerator\Collection\Collection;
    use Brotkrueml\FeedGenerator\Contract\FeedInterface;
    use Brotkrueml\FeedGenerator\Contract\ImageInterface
    use Brotkrueml\FeedGenerator\Entity\Author;
@@ -70,9 +71,10 @@ Let's start with an example to warm up.
          return 'https://example.com/';
       }
 
-      public function getAuthors(): array
+      public function getAuthors(): Collection
       {
-         return [new Author('Your Company')];
+         return (new Collection())
+            ->add(new Author('Your Company'));
       }
 
       public function getDatePublished(): ?\DateTimeInterface
@@ -107,9 +109,9 @@ Let's start with an example to warm up.
          return new Image('https://example.com/fileadmin/your-logo.png');
       }
 
-      public function getItems(): array
+      public function getItems(): Collection
       {
-         return [
+         return (new Collection())->add(
             (new Item())
                ->setTitle('Another awesome article')
                ->setDateModified(new \DateTimeImmutable('2022-06-07T18:22:00+02:00'))
@@ -118,7 +120,7 @@ Let's start with an example to warm up.
                ->setTitle('Some awesome article'),
                ->setDateModified(new \DateTimeImmutable('2022-02-20T20:06:00+01:00')),
                ->setLink('https://example.com/some-awesome-article'),
-         ];
+         );
       }
    }
 
@@ -134,8 +136,11 @@ class attribute. As format a name of the
 :php:`Brotkrueml\FeedGenerator\Attributes\Feed` enum is used which defines the
 according format.
 
-The :php:`getItems()` method returns an array of
-:any:`Brotkrueml\\FeedGenerator\\Entity\\Item` entities.
+The :php:`getItems()` method returns a
+:php:`Brotkrueml\FeedGenerator\Collection\Collection`object of
+:any:`Brotkrueml\\FeedGenerator\\Entity\\Item` entities (or to be precise of
+objects implementing the
+:any:`Brotkrueml\\FeedGenerator\\Entity\\ItemInterface`).
 
 .. note::
    Based on the :php:`FeedInterface` the feed is automatically registered if
@@ -151,12 +156,12 @@ The :php:`getItems()` method returns an array of
                - name: tx_feed_generator.feed
 
 .. important::
-   After adding a class which implements :php:`FeedInterface` or adjusting
+   After adding a class which implements the :php:`FeedInterface` or adjusting
    the class attributes the DI cache has to be flushed.
 
 .. note::
-   Not all properties are used in every format. For example, the language of the
-   feed is only available in an RSS feed and not in an Atom feed.
+   Not all properties are used in every format. For example, the last build date
+   of the feed is only available in an RSS feed and not in an Atom feed.
 
 A list of all configured feeds is available in the :ref:`Configurations
 <configurations-module>` module.
@@ -165,7 +170,7 @@ A list of all configured feeds is available in the :ref:`Configurations
 Interfaces
 ==========
 
-Four interfaces are available and of interest:
+Three interfaces for a feed implementation are available and of interest:
 
 .. _developer-FeedInterface:
 
@@ -211,40 +216,6 @@ values according to the format.
               FeedFormat::JSON => 'Here comes the JSON feed for your website.',
               FeedFormat::RSS => 'Here comes the RSS feed for your website.'
           };
-      }
-
-      // ... the other methods from the introduction example are untouched
-   }
-
-.. _developer-FeedCategoryInterface:
-
-FeedCategoryInterface
----------------------
-
-The :any:`Brotkrueml\\FeedGenerator\\Contract\\FeedCategoryInterface` can be
-added when one or more categories should be applied to a feed. It requires the
-implementation of a :php:`getCategories()` method that returns an array of
-categories.
-
-.. code-block:: php
-   :caption: EXT:your_extension/Classes/Feed/YourFeed.php
-
-   // use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
-   // use Brotkrueml\FeedGenerator\Contract\FeedCategoryInterface;
-   // use Brotkrueml\FeedGenerator\Entity\Category;
-
-   #[Feed('/your-feed.atom', FeedFormat::ATOM)]
-   final class YourFeed implements FeedInterface, FeedCategoryInterface
-   {
-      /**
-       * @return CategoryInterface[]
-       */
-      public function getCategories(): array
-      {
-         return [
-            new Category('some-term', 'https://example.org/some-term'),
-            new Category('another-term', 'https://example.org/another-term', 'Another term'),
-         ];
       }
 
       // ... the other methods from the introduction example are untouched
@@ -344,6 +315,36 @@ an RSS feed, which can be used directly or copied and adapted to your needs:
    When adding an XSL stylesheet to an Atom or RSS feed, the content type of the
    HTTP response is changed to `application/xml`. This way Chrome and some other
    browsers apply the stylesheet correctly.
+
+
+Collection
+==========
+
+Where a list of "items" have to be returned a
+:any:`Brotkrueml\\FeedGenerator\\Collection\\Collection` object comes into the
+game:
+
+-  List of authors of a feed or an item (:php:`Collection<AuthorInterface>`)
+-  List of attachments of an item (:php:`Collection<AttachmentInterface>`)
+-  List of categories of a feed (:php:`Collection<CategoryInterface>`)
+-  List of items of a feed (:php:`Collection<ItemInterface>`)
+
+A collection can be used like this:
+
+.. code-block:: php
+
+   // use Brotkrueml\\FeedGenerator\\Collection\\Collection
+   // use Brotkrueml\\FeedGenerator\\Contract\\AuthorInterface
+
+   /**
+    * @var Collection<AuthorInterface> $authorCollection
+    */
+   $authorCollection = new Collection();
+   $authorCollection->add($author1);
+   // Also multiple authors can be added at once
+   $authorCollection->add($author2, $author3);
+
+   // ... same for the other items ...
 
 
 .. _developer-multiple-feeds:

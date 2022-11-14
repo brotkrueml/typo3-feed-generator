@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Json;
 
+use Brotkrueml\FeedGenerator\Collection\Collection;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Brotkrueml\FeedGenerator\Entity\AbstractFeed;
 use Brotkrueml\FeedGenerator\Entity\Item;
@@ -25,11 +26,11 @@ final class FullItems extends AbstractFeed
     }
 
     /**
-     * @return ItemInterface[]
+     * @return Collection<ItemInterface>
      */
-    public function getItems(): array
+    public function getItems(): Collection
     {
-        return [
+        return (new Collection())->add(
             (new Item())
                 ->setId('some item id')
                 ->setLink('https://example.org/some-item-link')
@@ -37,16 +38,16 @@ final class FullItems extends AbstractFeed
                 ->setDescription('some item description')
                 ->setDatePublished(new \DateTimeImmutable('2022-11-11 11:11:11'))
                 ->setDateModified(new \DateTimeImmutable('2022-11-12 12:12:12'))
-                ->setAuthors(
+                ->addAuthors(
                     new Author('John Doe', uri: 'https://example.org/john-doe'),
                     new Author('Jane Doe'),
                 )
-                ->setAttachments(
+                ->addAttachments(
                     new Attachment('https://example.org/some-attachment.mp4', 'video/mp4', 123456789),
                     new Attachment('https://example.org/another-attachment.mp3', 'audio/mp3'),
                 ),
             (new Item())
                 ->setId('another item id'),
-        ];
+        );
     }
 }

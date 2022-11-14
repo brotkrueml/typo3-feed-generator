@@ -56,9 +56,9 @@ Brotkrueml\\FeedGenerator\\Entity\\Item
 
    .. php:method:: getAuthors()
 
-      :returntype: array
+      :returntype: Brotkrueml\\FeedGenerator\\Collection\\Collection
 
-   .. php:method:: setAuthors(Brotkrueml\\FeedGenerator\\Contract\\AuthorInterface ...authors)
+   .. php:method:: addAuthors(Brotkrueml\\FeedGenerator\\Contract\\AuthorInterface authors)
 
       :returntype: self
 
@@ -82,9 +82,9 @@ Brotkrueml\\FeedGenerator\\Entity\\Item
 
    .. php:method:: getAttachments()
 
-      :returntype: array
+      :returntype: Brotkrueml\\FeedGenerator\\Collection\\Collection
 
-   .. php:method:: setAttachments(Brotkrueml\\FeedGenerator\\Contract\\AttachmentInterface ...attachments)
+   .. php:method:: addAttachments(Brotkrueml\\FeedGenerator\\Contract\\AttachmentInterface attachments)
 
       :returntype: self
 

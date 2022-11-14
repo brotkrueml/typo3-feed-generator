@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Entity;
 
+use Brotkrueml\FeedGenerator\Collection\Collection;
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
 use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
@@ -45,11 +46,11 @@ abstract class AbstractFeed implements FeedInterface
     }
 
     /**
-     * @return AuthorInterface[]
+     * @return Collection<AuthorInterface>
      */
-    public function getAuthors(): array
+    public function getAuthors(): Collection
     {
-        return [];
+        return new Collection();
     }
 
     public function getDatePublished(): ?\DateTimeInterface
@@ -83,18 +84,18 @@ abstract class AbstractFeed implements FeedInterface
     }
 
     /**
-     * @return CategoryInterface[]
+     * @return Collection<CategoryInterface>
      */
-    public function getCategories(): array
+    public function getCategories(): Collection
     {
-        return [];
+        return new Collection();
     }
 
     /**
-     * @return ItemInterface[]
+     * @return Collection<ItemInterface>
      */
-    public function getItems(): array
+    public function getItems(): Collection
     {
-        return [];
+        return new Collection();
     }
 }

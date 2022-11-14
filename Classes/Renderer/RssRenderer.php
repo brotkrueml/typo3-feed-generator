@@ -85,7 +85,7 @@ final class RssRenderer implements RendererInterface
             $this->addImageNode($feed->getImage(), $channel);
         }
 
-        foreach ($feed->getItems() as $item) {
+        foreach ($feed->getItems()->getIterator() as $item) {
             $this->addItemNode($item, $root);
         }
 
@@ -190,8 +190,8 @@ final class RssRenderer implements RendererInterface
         foreach ($item->getAuthors() as $author) {
             $this->addAuthorNode($author, $itemNode);
         }
-        if ($item->getAttachments() !== []) {
-            $this->addEnclosureNode(\array_values($item->getAttachments())[0], $itemNode);
+        if (! $item->getAttachments()->isEmpty()) {
+            $this->addEnclosureNode($item->getAttachments()->get(0), $itemNode);
         }
         $this->addGuidNode($item->getId(), $item->getLink(), $itemNode);
         if ($item->getDatePublished() instanceof \DateTimeInterface) {

@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom;
 
+use Brotkrueml\FeedGenerator\Collection\Collection;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Brotkrueml\FeedGenerator\Entity\AbstractFeed;
 use Brotkrueml\FeedGenerator\Entity\Item;
@@ -33,11 +34,11 @@ final class MinimumItems extends AbstractFeed
     }
 
     /**
-     * @return ItemInterface[]
+     * @return Collection<ItemInterface>
      */
-    public function getItems(): array
+    public function getItems(): Collection
     {
-        return [
+        return (new Collection())->add(
             (new Item())
                 ->setId('some item id')
                 ->setTitle('some item title')
@@ -46,6 +47,6 @@ final class MinimumItems extends AbstractFeed
                 ->setId('another item id')
                 ->setTitle('another item title')
                 ->setDateModified(new \DateTimeImmutable('2022-11-13 13:13:13')),
-        ];
+        );
     }
 }

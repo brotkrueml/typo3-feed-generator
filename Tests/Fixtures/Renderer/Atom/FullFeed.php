@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom;
 
+use Brotkrueml\FeedGenerator\Collection\Collection;
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
 use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
@@ -43,14 +44,14 @@ final class FullFeed implements FeedInterface
     }
 
     /**
-     * @return AuthorInterface[]
+     * @return Collection<AuthorInterface>
      */
-    public function getAuthors(): array
+    public function getAuthors(): Collection
     {
-        return [
+        return (new Collection())->add(
             new Author('some author', 'some-author@example.org', 'https://example.org/some-author'),
             new Author('another author', 'another-author@example.org', 'https://example.org/another-author'),
-        ];
+        );
     }
 
     public function getDatePublished(): ?\DateTimeInterface
@@ -84,11 +85,11 @@ final class FullFeed implements FeedInterface
     }
 
     /**
-     * @return CategoryInterface[]
+     * @return Collection<CategoryInterface>
      */
-    public function getCategories(): array
+    public function getCategories(): Collection
     {
-        return [
+        return (new Collection())->add(
             new Category(
                 'some term',
                 'https://example.org/some-term',
@@ -99,14 +100,14 @@ final class FullFeed implements FeedInterface
                 'https://example.org/another-term',
                 'another label',
             ),
-        ];
+        );
     }
 
     /**
-     * @return ItemInterface[]
+     * @return Collection<ItemInterface>
      */
-    public function getItems(): array
+    public function getItems(): Collection
     {
-        return [];
+        return new Collection();
     }
 }

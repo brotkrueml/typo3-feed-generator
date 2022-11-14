@@ -20,6 +20,7 @@ $classes = [
     \Brotkrueml\FeedGenerator\Contract\RequestAwareInterface::class => 'Interfaces/RequestAwareInterface.rst',
     \Brotkrueml\FeedGenerator\Contract\StyleSheetInterface::class => 'Interfaces/StyleSheetInterface.rst',
 
+    \Brotkrueml\FeedGenerator\Collection\Collection::class => 'Classes/Collection.rst',
     \Brotkrueml\FeedGenerator\Entity\AbstractFeed::class => 'Classes/AbstractFeed.rst',
     \Brotkrueml\FeedGenerator\Entity\Item::class => 'Classes/Item.rst',
     \Brotkrueml\FeedGenerator\ValueObject\Author::class => 'Classes/Author.rst',

@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Json;
 
+use Brotkrueml\FeedGenerator\Collection\Collection;
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
@@ -42,14 +43,14 @@ final class FullFeed extends AbstractFeed
     }
 
     /**
-     * @return AuthorInterface[]
+     * @return Collection<AuthorInterface>
      */
-    public function getAuthors(): array
+    public function getAuthors(): Collection
     {
-        return [
+        return (new Collection())->add(
             new Author('John Doe', uri: 'https://example.org/john-doe'),
             new Author('Jane Doe'),
-        ];
+        );
     }
 
     public function getLanguage(): string
@@ -63,12 +64,12 @@ final class FullFeed extends AbstractFeed
     }
 
     /**
-     * @return ItemInterface[]
+     * @return Collection<ItemInterface>
      */
-    public function getItems(): array
+    public function getItems(): Collection
     {
-        return [
+        return (new Collection())->add(
             (new Item())->setId('some id'),
-        ];
+        );
     }
 }

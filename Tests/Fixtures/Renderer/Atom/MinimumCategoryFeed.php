@@ -11,20 +11,22 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom;
 
+use Brotkrueml\FeedGenerator\Collection\Collection;
+use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
 use Brotkrueml\FeedGenerator\Entity\AbstractFeed;
 use Brotkrueml\FeedGenerator\ValueObject\Category;
 
 final class MinimumCategoryFeed extends AbstractFeed
 {
     /**
-     * @return Category[]
+     * @return Collection<CategoryInterface>
      */
-    public function getCategories(): array
+    public function getCategories(): Collection
     {
-        return [
+        return (new Collection())->add(
             new Category('some term'),
             new Category('another term'),
-        ];
+        );
     }
 
     public function getId(): string

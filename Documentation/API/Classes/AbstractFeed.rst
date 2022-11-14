@@ -10,8 +10,7 @@ Brotkrueml\\FeedGenerator\\Entity\\AbstractFeed
 
    This class is an implementation of the FeedInterface and returns for every getter
    an empty result. It is meant to be extended by custom implementations which then
-   only have to override the methods that should return something meaningful. This
-   eases the implementation of custom feeds.
+   only have to override the methods that should return something meaningful.
 
    .. php:method:: getId()
    
@@ -31,7 +30,7 @@ Brotkrueml\\FeedGenerator\\Entity\\AbstractFeed
       
    .. php:method:: getAuthors()
    
-      :returntype: array
+      :returntype: Brotkrueml\\FeedGenerator\\Collection\\Collection
       
    .. php:method:: getDatePublished()
    
@@ -59,9 +58,9 @@ Brotkrueml\\FeedGenerator\\Entity\\AbstractFeed
       
    .. php:method:: getCategories()
    
-      :returntype: array
+      :returntype: Brotkrueml\\FeedGenerator\\Collection\\Collection
       
    .. php:method:: getItems()
    
-      :returntype: array
+      :returntype: Brotkrueml\\FeedGenerator\\Collection\\Collection
 

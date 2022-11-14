@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom;
 
+use Brotkrueml\FeedGenerator\Collection\Collection;
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
 use Brotkrueml\FeedGenerator\Entity\AbstractFeed;
 use Brotkrueml\FeedGenerator\ValueObject\Author;
@@ -28,13 +29,13 @@ final class MinimumFeedAuthor extends AbstractFeed
     }
 
     /**
-     * @return AuthorInterface[]
+     * @return Collection<AuthorInterface>
      */
-    public function getAuthors(): array
+    public function getAuthors(): Collection
     {
-        return [
+        return (new Collection())->add(
             new Author('John Doe'),
-        ];
+        );
     }
 
     public function getDateModified(): ?\DateTimeInterface

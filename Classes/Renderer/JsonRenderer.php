@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Renderer;
 
+use Brotkrueml\FeedGenerator\Collection\Collection;
 use Brotkrueml\FeedGenerator\Contract\AttachmentInterface;
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
@@ -26,7 +27,7 @@ final class JsonRenderer implements RendererInterface
         if ($feed->getTitle() === '') {
             throw MissingRequiredPropertyException::forProperty('title');
         }
-        if ($feed->getItems() === []) {
+        if ($feed->getItems()->isEmpty()) {
             throw MissingRequiredPropertyException::forProperty('items');
         }
 
@@ -44,7 +45,7 @@ final class JsonRenderer implements RendererInterface
         if ($feed->getImage() instanceof ImageInterface) {
             $resultArray['icon'] = $feed->getImage()->getUri();
         }
-        $authorsArray = $this->buildAuthorsArray(...$feed->getAuthors());
+        $authorsArray = $this->buildAuthorsArray($feed->getAuthors());
         if ($authorsArray !== []) {
             $resultArray['authors'] = $authorsArray;
         }
@@ -77,11 +78,11 @@ final class JsonRenderer implements RendererInterface
             if ($item->getDateModified() instanceof \DateTimeInterface) {
                 $itemArray['date_modified'] = $item->getDateModified()->format('c');
             }
-            $authorsArray = $this->buildAuthorsArray(...$item->getAuthors());
+            $authorsArray = $this->buildAuthorsArray($item->getAuthors());
             if ($authorsArray !== []) {
                 $itemArray['authors'] = $authorsArray;
             }
-            if ($item->getAttachments() !== []) {
+            if (! $item->getAttachments()->isEmpty()) {
                 $itemArray['attachments'] = $this->buildAttachmentsArray($item->getAttachments());
             }
             $resultArray['items'][] = $itemArray;
@@ -91,12 +92,13 @@ final class JsonRenderer implements RendererInterface
     }
 
     /**
+     * @param Collection<AuthorInterface> $authors
      * @return list<array{name?: string, url?: string}>
      */
-    private function buildAuthorsArray(AuthorInterface ...$authors): array
+    private function buildAuthorsArray(Collection $authors): array
     {
         $authorsArray = [];
-        foreach ($authors as $author) {
+        foreach ($authors->getIterator() as $author) {
             $authorArray = [];
             if ($author->getName() !== '') {
                 $authorArray['name'] = $author->getName();
@@ -111,13 +113,13 @@ final class JsonRenderer implements RendererInterface
     }
 
     /**
-     * @param AttachmentInterface[] $attachments
+     * @param Collection<AttachmentInterface> $attachments
      * @return list<array{url: string, mime_type?: string, size_in_bytes?: int}>
      */
-    private function buildAttachmentsArray(array $attachments): array
+    private function buildAttachmentsArray(Collection $attachments): array
     {
         $attachmentsArray = [];
-        foreach ($attachments as $attachment) {
+        foreach ($attachments->getIterator() as $attachment) {
             if ($attachment->getUri() === '') {
                 throw MissingRequiredPropertyException::forProperty('item/attachment/url');
             }
