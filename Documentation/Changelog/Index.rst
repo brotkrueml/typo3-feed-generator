@@ -11,6 +11,12 @@ and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0
 `Unreleased <https://github.com/brotkrueml/typo3-feed-generator/compare/v0.4.0...HEAD>`_
 --------------------------------------------------------------------------------------------
 
+Added
+^^^^^
+
+
+* ``AbstractFeed`` class which can be extended in custom feed implementations
+
 Changed
 ^^^^^^^
 

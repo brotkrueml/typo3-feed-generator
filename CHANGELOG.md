@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `AbstractFeed` class which can be extended in custom feed implementations
+
 ### Changed
 - Substitute laminas/laminas-feed and jdecool/jsonfeed with custom implementation
 - Rename `Enclosure` class to `Attachment`

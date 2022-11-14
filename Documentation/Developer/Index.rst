@@ -22,6 +22,14 @@ build, you only have to provide the data from your concrete model.
 Example
 -------
 
+.. versionadded:: 0.5.0
+   Instead of implementing the :php:`FeedInterface` like described below one can
+   also extend from the :php:`\Brotkrueml\FeedGenerator\Entity\AbstractFeed`
+   abstract class which returns empty values for each getter method. One can
+   override the necessary methods. This way, only the methods required for a
+   specific feed format must be overridden which results in smaller feed
+   implementation classes.
+
 Let's start with an example to warm up.
 
 .. code-block:: php
