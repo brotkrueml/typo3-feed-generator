@@ -19,6 +19,7 @@ enum FeedFormat
     case ATOM;
     case JSON;
     case RSS;
+
     /**
      * @internal
      */
