@@ -173,7 +173,7 @@ final class RssRenderer implements RendererInterface
     private function addItemNode(ItemInterface $item, \DOMNode $parent): void
     {
         if ($item->getTitle() === '' && $item->getDescription() === '') {
-            throw MissingRequiredRssFeedProperties::forItem();
+            throw MissingRequiredPropertyException::forProperties('item/title', 'item/description');
         }
 
         $itemNode = $this->xml->createElement('item');

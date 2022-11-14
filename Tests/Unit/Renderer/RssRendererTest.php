@@ -13,7 +13,6 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer;
 
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
-use Brotkrueml\FeedGenerator\Renderer\MissingRequiredRssFeedProperties;
 use Brotkrueml\FeedGenerator\Renderer\RssRenderer;
 use Brotkrueml\FeedGenerator\Renderer\WrongImageDimensionException;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FeedImageWithEmptyLink;
@@ -82,8 +81,8 @@ final class RssRendererTest extends TestCase
      */
     public function emptyTitleAndDescriptionInItemThrowsException(): void
     {
-        $this->expectException(MissingRequiredRssFeedProperties::class);
-        $this->expectExceptionMessage('At least one of title or description must be present in an item element.');
+        $this->expectException(MissingRequiredPropertyException::class);
+        $this->expectExceptionMessage('At least one of "item/title" or "item/description" must be present.');
 
         $this->subject->render(new ItemWithEmptyTitleAndDescription(), 'https://example.org/feed.rss');
     }
