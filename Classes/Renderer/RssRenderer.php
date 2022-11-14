@@ -100,8 +100,8 @@ final class RssRenderer implements RendererInterface
     private function addTextNode(string $name, string $value, \DOMNode $parent): void
     {
         $node = $this->xml->createElement($name);
-        $node->append($this->xml->createTextNode($value));
-        $parent->append($node);
+        $node->appendChild($this->xml->createTextNode($value));
+        $parent->appendChild($node);
     }
 
     private function addImageNode(ImageInterface $image, \DOMNode $parent): void
@@ -146,11 +146,11 @@ final class RssRenderer implements RendererInterface
             }
 
             $subNode = $this->xml->createElement($property);
-            $subNode->append($this->xml->createTextNode($value));
-            $imageNode->append($subNode);
+            $subNode->appendChild($this->xml->createTextNode($value));
+            $imageNode->appendChild($subNode);
         }
 
-        $parent->append($imageNode);
+        $parent->appendChild($imageNode);
     }
 
     private function addAuthorNode(AuthorInterface $author, \DOMNode $parent): void
@@ -198,7 +198,7 @@ final class RssRenderer implements RendererInterface
             $this->addTextNode('pubDate', $item->getDatePublished()->format('r'), $itemNode);
         }
 
-        $parent->append($itemNode);
+        $parent->appendChild($itemNode);
     }
 
     private function addEnclosureNode(AttachmentInterface $attachment, \DOMNode $parent): void
@@ -230,7 +230,7 @@ final class RssRenderer implements RendererInterface
         if ($link !== '') {
             $node = $this->xml->createElement('guid');
             $node->setAttribute('isPermaLink', 'true');
-            $node->append($this->xml->createTextNode($link));
+            $node->appendChild($this->xml->createTextNode($link));
             $parent->appendChild($node);
         }
     }

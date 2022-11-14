@@ -95,8 +95,8 @@ final class AtomRenderer implements RendererInterface
     private function addTextNode(string $name, string $value, \DOMNode $parent): void
     {
         $node = $this->xml->createElement($name);
-        $node->append($this->xml->createTextNode($value));
-        $parent->append($node);
+        $node->appendChild($this->xml->createTextNode($value));
+        $parent->appendChild($node);
     }
 
     private function addLinkNode(string $rel, string $href, string $type, \DOMNode $parent): void
@@ -105,15 +105,15 @@ final class AtomRenderer implements RendererInterface
         $node->setAttribute('rel', $rel);
         $node->setAttribute('href', $href);
         $node->setAttribute('type', $type);
-        $parent->append($node);
+        $parent->appendChild($node);
     }
 
     private function addGeneratorNode(\DOMNode $parent): void
     {
         $node = $this->xml->createElement('generator');
         $node->setAttribute('uri', Generator::URI);
-        $node->append($this->xml->createTextNode(Generator::NAME));
-        $parent->append($node);
+        $node->appendChild($this->xml->createTextNode(Generator::NAME));
+        $parent->appendChild($node);
     }
 
     private function addAuthorNode(AuthorInterface $author, \DOMNode $parent): void
@@ -132,11 +132,11 @@ final class AtomRenderer implements RendererInterface
             }
 
             $subNode = $this->xml->createElement($property);
-            $subNode->append($this->xml->createTextNode($value));
-            $authorNode->append($subNode);
+            $subNode->appendChild($this->xml->createTextNode($value));
+            $authorNode->appendChild($subNode);
         }
 
-        $parent->append($authorNode);
+        $parent->appendChild($authorNode);
     }
 
     private function addCategoryNode(CategoryInterface $category, \DOMNode $parent): void
@@ -157,7 +157,7 @@ final class AtomRenderer implements RendererInterface
             $categoryNode->setAttribute($attribute, $value);
         }
 
-        $parent->append($categoryNode);
+        $parent->appendChild($categoryNode);
     }
 
     private function addItemNode(ItemInterface $item, \DOMNode $parent): void
@@ -196,6 +196,6 @@ final class AtomRenderer implements RendererInterface
             $this->addTextNode('published', $item->getDatePublished()->format('c'), $itemNode);
         }
 
-        $parent->append($itemNode);
+        $parent->appendChild($itemNode);
     }
 }

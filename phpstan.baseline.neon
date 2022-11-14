@@ -16,11 +16,6 @@ parameters:
 			path: Classes/Entity/AbstractFeed.php
 
 		-
-			message: "#^Call to an undefined method DOMNode\\:\\:append\\(\\)\\.$#"
-			count: 6
-			path: Classes/Renderer/AtomRenderer.php
-
-		-
 			message: "#^Call to an undefined method DOMNode\\:\\:setAttribute\\(\\)\\.$#"
 			count: 1
 			path: Classes/Renderer/AtomRenderer.php
@@ -34,11 +29,6 @@ parameters:
 			message: "#^Class cognitive complexity is 27, keep it under 13$#"
 			count: 1
 			path: Classes/Renderer/JsonRenderer.php
-
-		-
-			message: "#^Call to an undefined method DOMNode\\:\\:append\\(\\)\\.$#"
-			count: 3
-			path: Classes/Renderer/RssRenderer.php
 
 		-
 			message: "#^Class cognitive complexity is 41, keep it under 13$#"
