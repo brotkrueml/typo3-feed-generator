@@ -16,7 +16,7 @@ use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Brotkrueml\FeedGenerator\Entity\AbstractFeed;
 use Brotkrueml\FeedGenerator\Entity\Item;
 
-final class MinimumItems extends AbstractFeed
+final class ItemWithEmptyLinkAndContent extends AbstractFeed
 {
     public function getId(): string
     {
@@ -30,7 +30,7 @@ final class MinimumItems extends AbstractFeed
 
     public function getDateModified(): ?\DateTimeInterface
     {
-        return new \DateTimeImmutable('2022-11-11 11:11:11');
+        return new \DateTimeImmutable('2011-11-11 11:11:11');
     }
 
     /**
@@ -42,13 +42,7 @@ final class MinimumItems extends AbstractFeed
             (new Item())
                 ->setId('some item id')
                 ->setTitle('some item title')
-                ->setLink('https://example.org/some-item')
                 ->setDateModified(new \DateTimeImmutable('2022-11-12 12:12:12')),
-            (new Item())
-                ->setId('another item id')
-                ->setTitle('another item title')
-                ->setContent('another item content')
-                ->setDateModified(new \DateTimeImmutable('2022-11-13 13:13:13')),
         );
     }
 }

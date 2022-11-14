@@ -21,6 +21,7 @@ use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FullFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FullItems;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\ItemWithEmptyDateModified;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\ItemWithEmptyId;
+use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\ItemWithEmptyLinkAndContent;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\ItemWithEmptyTitle;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\MinimumCategoryFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\MinimumFeed;
@@ -101,6 +102,17 @@ final class AtomRendererTest extends TestCase
         $this->expectExceptionMessage('Required property "entry/updated" is missing.');
 
         $this->subject->render(new ItemWithEmptyDateModified(), 'https://example.org/feed.atom');
+    }
+
+    /**
+     * @test
+     */
+    public function emptyItemLinkAndContentThrowsException(): void
+    {
+        $this->expectException(MissingRequiredPropertyException::class);
+        $this->expectExceptionMessage('At least one of "entry/link" or "entry/content" must be present.');
+
+        $this->subject->render(new ItemWithEmptyLinkAndContent(), 'https://example.org/feed.atom');
     }
 
     /**

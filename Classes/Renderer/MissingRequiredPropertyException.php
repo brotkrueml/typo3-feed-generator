@@ -23,4 +23,16 @@ final class MissingRequiredPropertyException extends \RuntimeException
             1668153106
         );
     }
+
+    public static function forProperties(string $property1, string $property2): self
+    {
+        return new self(
+            \sprintf(
+                'At least one of "%s" or "%s" must be present.',
+                $property1,
+                $property2
+            ),
+            1668434363
+        );
+    }
 }

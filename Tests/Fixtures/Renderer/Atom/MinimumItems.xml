@@ -9,10 +9,12 @@
         <id>some item id</id>
         <title>some item title</title>
         <updated>2022-11-12T12:12:12+00:00</updated>
+        <link href="https://example.org/some-item" rel="alternate" type="text/html"/>
     </entry>
     <entry>
         <id>another item id</id>
         <title>another item title</title>
         <updated>2022-11-13T13:13:13+00:00</updated>
+        <content>another item content</content>
     </entry>
 </feed>

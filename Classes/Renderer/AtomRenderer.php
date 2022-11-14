@@ -173,6 +173,9 @@ final class AtomRenderer implements RendererInterface
         if ($item->getDateModified() === null) {
             throw MissingRequiredPropertyException::forProperty('entry/updated');
         }
+        if ($item->getLink() === '' && $item->getContent() === '') {
+            throw MissingRequiredPropertyException::forProperties('entry/link', 'entry/content');
+        }
 
         $this->addTextNode('id', $item->getId(), $itemNode);
         $this->addTextNode('title', $item->getTitle(), $itemNode);
