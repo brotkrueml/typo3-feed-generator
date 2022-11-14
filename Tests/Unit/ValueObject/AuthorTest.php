@@ -9,9 +9,9 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\FeedGenerator\Tests\Unit\Entity;
+namespace Brotkrueml\FeedGenerator\Tests\Unit\ValueObject;
 
-use Brotkrueml\FeedGenerator\Entity\Author;
+use Brotkrueml\FeedGenerator\ValueObject\Author;
 use PHPUnit\Framework\TestCase;
 
 final class AuthorTest extends TestCase

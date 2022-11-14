@@ -77,6 +77,10 @@ Brotkrueml\\FeedGenerator\\Contract\\FeedInterface
       
       :returntype: Brotkrueml\\FeedGenerator\\Contract\\ImageInterface
       
+   .. php:method:: getCategories()
+   
+      :returntype: array
+      
    .. php:method:: getItems()
    
       Get the items of the feed.

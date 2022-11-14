@@ -61,11 +61,12 @@ Brotkrueml\\FeedGenerator\\Contract\\ItemInterface
       
       :returntype: DateTimeInterface
       
-   .. php:method:: getEnclosure()
+   .. php:method:: getAttachments()
    
-      Get the enclosure. In accordance with the RSS Best Practices Profile of the RSS Advisory Board,
-      no support is offered for multiple enclosures since such support forms no part of the
-      RSS specification.
+      Get the attachments (enclosure). In accordance with the RSS Best Practices Profile of the RSS Advisory Board,
+      no support is offered for multiple enclosures since such support forms no part of the RSS specification.
       
-      :returntype: Brotkrueml\\FeedGenerator\\Contract\\EnclosureInterface
+      JSON feeds support multiple attachments
+      
+      :returntype: array
 

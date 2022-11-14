@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Entity;
 
-use Brotkrueml\FeedGenerator\Entity\Attachment;
-use Brotkrueml\FeedGenerator\Entity\Author;
 use Brotkrueml\FeedGenerator\Entity\Item;
+use Brotkrueml\FeedGenerator\ValueObject\Attachment;
+use Brotkrueml\FeedGenerator\ValueObject\Author;
 use PHPUnit\Framework\TestCase;
 
 /**

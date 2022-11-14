@@ -15,7 +15,7 @@ use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
-use Brotkrueml\FeedGenerator\Entity\Category;
+use Brotkrueml\FeedGenerator\ValueObject\Category;
 
 final class MinimumCategoryFeed implements FeedInterface
 {

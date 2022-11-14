@@ -16,9 +16,9 @@ use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
-use Brotkrueml\FeedGenerator\Entity\Author;
-use Brotkrueml\FeedGenerator\Entity\Category;
-use Brotkrueml\FeedGenerator\Entity\Image;
+use Brotkrueml\FeedGenerator\ValueObject\Author;
+use Brotkrueml\FeedGenerator\ValueObject\Category;
+use Brotkrueml\FeedGenerator\ValueObject\Image;
 
 final class FullFeed implements FeedInterface
 {

@@ -9,9 +9,9 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\FeedGenerator\Tests\Unit\Entity;
+namespace Brotkrueml\FeedGenerator\Tests\Unit\ValueObject;
 
-use Brotkrueml\FeedGenerator\Entity\Attachment;
+use Brotkrueml\FeedGenerator\ValueObject\Attachment;
 use PHPUnit\Framework\TestCase;
 
 final class AttachmentTest extends TestCase

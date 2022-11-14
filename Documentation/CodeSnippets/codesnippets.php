@@ -20,11 +20,11 @@ $classes = [
     \Brotkrueml\FeedGenerator\Contract\RequestAwareInterface::class => 'Interfaces/RequestAwareInterface.rst',
     \Brotkrueml\FeedGenerator\Contract\StyleSheetInterface::class => 'Interfaces/StyleSheetInterface.rst',
 
-    \Brotkrueml\FeedGenerator\Entity\Author::class => 'Classes/Author.rst',
-    \Brotkrueml\FeedGenerator\Entity\Category::class => 'Classes/Category.rst',
-    \Brotkrueml\FeedGenerator\Entity\Attachment::class => 'Classes/Enclosure.rst',
-    \Brotkrueml\FeedGenerator\Entity\Image::class => 'Classes/Image.rst',
     \Brotkrueml\FeedGenerator\Entity\Item::class => 'Classes/Item.rst',
+    \Brotkrueml\FeedGenerator\ValueObject\Author::class => 'Classes/Author.rst',
+    \Brotkrueml\FeedGenerator\ValueObject\Category::class => 'Classes/Category.rst',
+    \Brotkrueml\FeedGenerator\ValueObject\Attachment::class => 'Classes/Attachment.rst',
+    \Brotkrueml\FeedGenerator\ValueObject\Image::class => 'Classes/Image.rst',
 
     \Brotkrueml\FeedGenerator\Format\FeedFormat::class => 'Enums/FeedFormat.rst',
 ];
