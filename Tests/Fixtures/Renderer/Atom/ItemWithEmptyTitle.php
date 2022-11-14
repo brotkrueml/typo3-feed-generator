@@ -11,14 +11,11 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom;
 
-use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
-use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
-use Brotkrueml\FeedGenerator\Contract\FeedInterface;
-use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
+use Brotkrueml\FeedGenerator\Entity\AbstractFeed;
 use Brotkrueml\FeedGenerator\Entity\Item;
 
-final class ItemWithEmptyTitle implements FeedInterface
+final class ItemWithEmptyTitle extends AbstractFeed
 {
     public function getId(): string
     {
@@ -30,60 +27,9 @@ final class ItemWithEmptyTitle implements FeedInterface
         return 'some title';
     }
 
-    public function getDescription(): string
-    {
-        return '';
-    }
-
-    public function getLink(): string
-    {
-        return '';
-    }
-
-    /**
-     * @return AuthorInterface[]
-     */
-    public function getAuthors(): array
-    {
-        return [];
-    }
-
-    public function getDatePublished(): ?\DateTimeInterface
-    {
-        return null;
-    }
-
     public function getDateModified(): ?\DateTimeInterface
     {
         return new \DateTimeImmutable('2011-11-11 11:11:11');
-    }
-
-    public function getLastBuildDate(): ?\DateTimeInterface
-    {
-        return null;
-    }
-
-    public function getLanguage(): string
-    {
-        return '';
-    }
-
-    public function getCopyright(): string
-    {
-        return '';
-    }
-
-    public function getImage(): ?ImageInterface
-    {
-        return null;
-    }
-
-    /**
-     * @return CategoryInterface[]
-     */
-    public function getCategories(): array
-    {
-        return [];
     }
 
     /**

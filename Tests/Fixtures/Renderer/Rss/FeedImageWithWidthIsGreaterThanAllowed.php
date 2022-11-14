@@ -11,20 +11,12 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss;
 
-use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
-use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
-use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
-use Brotkrueml\FeedGenerator\Contract\ItemInterface;
+use Brotkrueml\FeedGenerator\Entity\AbstractFeed;
 use Brotkrueml\FeedGenerator\ValueObject\Image;
 
-final class FeedImageWithWidthIsGreaterThanAllowed implements FeedInterface
+final class FeedImageWithWidthIsGreaterThanAllowed extends AbstractFeed
 {
-    public function getId(): string
-    {
-        return '';
-    }
-
     public function getTitle(): string
     {
         return 'some title';
@@ -40,39 +32,6 @@ final class FeedImageWithWidthIsGreaterThanAllowed implements FeedInterface
         return 'https://example.org/';
     }
 
-    /**
-     * @return AuthorInterface[]
-     */
-    public function getAuthors(): array
-    {
-        return [];
-    }
-
-    public function getDatePublished(): ?\DateTimeInterface
-    {
-        return null;
-    }
-
-    public function getDateModified(): ?\DateTimeInterface
-    {
-        return null;
-    }
-
-    public function getLastBuildDate(): ?\DateTimeInterface
-    {
-        return null;
-    }
-
-    public function getLanguage(): string
-    {
-        return '';
-    }
-
-    public function getCopyright(): string
-    {
-        return '';
-    }
-
     public function getImage(): ?ImageInterface
     {
         return new Image(
@@ -83,21 +42,5 @@ final class FeedImageWithWidthIsGreaterThanAllowed implements FeedInterface
             100,
             'some image description',
         );
-    }
-
-    /**
-     * @return CategoryInterface[]
-     */
-    public function getCategories(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return ItemInterface[]
-     */
-    public function getItems(): array
-    {
-        return [];
     }
 }

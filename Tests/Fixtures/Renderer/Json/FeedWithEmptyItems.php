@@ -13,17 +13,12 @@ namespace Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Json;
 
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
 use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
-use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
+use Brotkrueml\FeedGenerator\Entity\AbstractFeed;
 
-final class FeedWithEmptyItems implements FeedInterface
+final class FeedWithEmptyItems extends AbstractFeed
 {
-    public function getId(): string
-    {
-        return '';
-    }
-
     public function getTitle(): string
     {
         return 'some title';

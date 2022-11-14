@@ -12,15 +12,14 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Json;
 
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
-use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
-use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
+use Brotkrueml\FeedGenerator\Entity\AbstractFeed;
 use Brotkrueml\FeedGenerator\Entity\Item;
 use Brotkrueml\FeedGenerator\ValueObject\Author;
 use Brotkrueml\FeedGenerator\ValueObject\Image;
 
-final class FullFeed implements FeedInterface
+final class FullFeed extends AbstractFeed
 {
     public function getId(): string
     {
@@ -53,42 +52,14 @@ final class FullFeed implements FeedInterface
         ];
     }
 
-    public function getDatePublished(): ?\DateTimeInterface
-    {
-        return null;
-    }
-
-    public function getDateModified(): ?\DateTimeInterface
-    {
-        return null;
-    }
-
-    public function getLastBuildDate(): ?\DateTimeInterface
-    {
-        return null;
-    }
-
     public function getLanguage(): string
     {
         return 'en-GB';
     }
 
-    public function getCopyright(): string
-    {
-        return '';
-    }
-
     public function getImage(): ?ImageInterface
     {
         return new Image('https://example.org/some-image');
-    }
-
-    /**
-     * @return CategoryInterface[]
-     */
-    public function getCategories(): array
-    {
-        return [];
     }
 
     /**
