@@ -19,6 +19,7 @@ $classes = [
     \Brotkrueml\FeedGenerator\Contract\ItemInterface::class => 'Interfaces/ItemInterface.rst',
     \Brotkrueml\FeedGenerator\Contract\RequestAwareInterface::class => 'Interfaces/RequestAwareInterface.rst',
     \Brotkrueml\FeedGenerator\Contract\StyleSheetInterface::class => 'Interfaces/StyleSheetInterface.rst',
+    \Brotkrueml\FeedGenerator\Contract\TextInterface::class => 'Interfaces/TextInterface.rst',
 
     \Brotkrueml\FeedGenerator\Collection\Collection::class => 'Classes/Collection.rst',
     \Brotkrueml\FeedGenerator\Entity\AbstractFeed::class => 'Classes/AbstractFeed.rst',
@@ -27,8 +28,10 @@ $classes = [
     \Brotkrueml\FeedGenerator\ValueObject\Category::class => 'Classes/Category.rst',
     \Brotkrueml\FeedGenerator\ValueObject\Attachment::class => 'Classes/Attachment.rst',
     \Brotkrueml\FeedGenerator\ValueObject\Image::class => 'Classes/Image.rst',
+    \Brotkrueml\FeedGenerator\ValueObject\Text::class => 'Classes/Text.rst',
 
     \Brotkrueml\FeedGenerator\Format\FeedFormat::class => 'Enums/FeedFormat.rst',
+    \Brotkrueml\FeedGenerator\Format\TextFormat::class => 'Enums/TextFormat.rst',
 ];
 
 $template = <<<TEMPLATE

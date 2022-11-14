@@ -30,9 +30,9 @@ interface ItemInterface
     public function getTitle(): string;
 
     /**
-     * Get the text description of the item.
+     * Get the description of the item.
      */
-    public function getDescription(): string;
+    public function getDescription(): string|TextInterface;
 
     /**
      * Get the content of the item. In JSON this is the HTML content.

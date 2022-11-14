@@ -14,6 +14,7 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\Entity;
 use Brotkrueml\FeedGenerator\Entity\Item;
 use Brotkrueml\FeedGenerator\ValueObject\Attachment;
 use Brotkrueml\FeedGenerator\ValueObject\Author;
+use Brotkrueml\FeedGenerator\ValueObject\Text;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -64,12 +65,25 @@ final class ItemTest extends TestCase
     /**
      * @test
      */
-    public function getDescriptionReturnsDescriptionCorrectly(): void
+    public function getDescriptionReturnsDescriptionAsStringCorrectly(): void
     {
         $subject = (new Item())
             ->setDescription('some description');
 
         self::assertSame('some description', $subject->getDescription());
+    }
+
+    /**
+     * @test
+     */
+    public function getDescriptionReturnsDescriptionAsTextObjectCorrectly(): void
+    {
+        $description = new Text('some description');
+
+        $subject = (new Item())
+            ->setDescription($description);
+
+        self::assertSame($description, $subject->getDescription());
     }
 
     /**

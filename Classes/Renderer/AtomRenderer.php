@@ -17,6 +17,7 @@ use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Brotkrueml\FeedGenerator\Contract\StyleSheetInterface;
+use Brotkrueml\FeedGenerator\Contract\TextInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
 
@@ -59,9 +60,7 @@ final class AtomRenderer implements RendererInterface
 
         $this->addTextNode('id', $feed->getId(), $root);
         $this->addTextNode('title', $feed->getTitle(), $root);
-        if ($feed->getDescription() !== '') {
-            $this->addTextNode('subtitle', $feed->getDescription(), $root);
-        }
+        $this->addTextNode('subtitle', $feed->getDescription(), $root);
         if ($feed->getImage() instanceof ImageInterface) {
             $this->addTextNode('logo', $feed->getImage()->getUri(), $root);
         }
@@ -71,9 +70,7 @@ final class AtomRenderer implements RendererInterface
         }
         $this->addLinkNode('self', $feedLink, 'application/atom+xml', $root);
         $this->addGeneratorNode($root);
-        if ($feed->getCopyright() !== '') {
-            $this->addTextNode('rights', $feed->getCopyright(), $root);
-        }
+        $this->addTextNode('rights', $feed->getCopyright(), $root);
         foreach ($feed->getAuthors() as $author) {
             $this->addAuthorNode($author, $root);
         }
@@ -94,6 +91,10 @@ final class AtomRenderer implements RendererInterface
 
     private function addTextNode(string $name, string $value, \DOMNode $parent): void
     {
+        if ($value === '') {
+            return;
+        }
+
         $node = $this->xml->createElement($name);
         $node->appendChild($this->xml->createTextNode($value));
         $parent->appendChild($node);
@@ -186,16 +187,25 @@ final class AtomRenderer implements RendererInterface
         foreach ($item->getAuthors() as $author) {
             $this->addAuthorNode($author, $itemNode);
         }
-        if ($item->getDescription() !== '') {
-            $this->addTextNode('summary', $item->getDescription(), $itemNode);
-        }
-        if ($item->getContent() !== '') {
-            $this->addTextNode('content', $item->getContent(), $itemNode);
-        }
+        $this->addTextOrHtmlNode('summary', $item->getDescription(), $itemNode);
+        $this->addTextNode('content', $item->getContent(), $itemNode);
         if ($item->getDatePublished() instanceof \DateTimeInterface) {
             $this->addTextNode('published', $item->getDatePublished()->format('c'), $itemNode);
         }
 
         $parent->appendChild($itemNode);
+    }
+
+    private function addTextOrHtmlNode(string $name, string|TextInterface $value, \DOMNode $parent): void
+    {
+        if (\is_string($value)) {
+            $this->addTextNode($name, $value, $parent);
+            return;
+        }
+
+        $node = $this->xml->createElement($name);
+        $node->setAttribute('type', $value->getFormat()->getType());
+        $node->appendChild($this->xml->createTextNode($value->getText()));
+        $parent->appendChild($node);
     }
 }

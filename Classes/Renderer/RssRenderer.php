@@ -17,6 +17,7 @@ use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Brotkrueml\FeedGenerator\Contract\StyleSheetInterface;
+use Brotkrueml\FeedGenerator\Contract\TextInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
 
@@ -61,16 +62,11 @@ final class RssRenderer implements RendererInterface
             throw MissingRequiredPropertyException::forProperty('description');
         }
 
-        if ($feed->getLanguage() !== '') {
-            $this->addTextNode('channel', $feed->getLanguage(), $channel);
-        }
-
+        $this->addTextNode('channel', $feed->getLanguage(), $channel);
         $this->addTextNode('title', $feed->getTitle(), $channel);
         $this->addTextNode('link', $feed->getLink(), $channel);
         $this->addTextNode('description', $feed->getDescription(), $channel);
-        if ($feed->getCopyright() !== '') {
-            $this->addTextNode('copyright', $feed->getCopyright(), $channel);
-        }
+        $this->addTextNode('copyright', $feed->getCopyright(), $channel);
         if ($feed->getDatePublished() instanceof \DateTimeInterface) {
             $this->addTextNode('pubDate', $feed->getDatePublished()->format('r'), $channel);
         }
@@ -99,6 +95,10 @@ final class RssRenderer implements RendererInterface
 
     private function addTextNode(string $name, string $value, \DOMNode $parent): void
     {
+        if ($value === '') {
+            return;
+        }
+
         $node = $this->xml->createElement($name);
         $node->appendChild($this->xml->createTextNode($value));
         $parent->appendChild($node);
@@ -178,15 +178,9 @@ final class RssRenderer implements RendererInterface
 
         $itemNode = $this->xml->createElement('item');
 
-        if ($item->getTitle() !== '') {
-            $this->addTextNode('title', $item->getTitle(), $itemNode);
-        }
-        if ($item->getLink() !== '') {
-            $this->addTextNode('link', $item->getLink(), $itemNode);
-        }
-        if ($item->getDescription() !== '') {
-            $this->addTextNode('description', $item->getDescription(), $itemNode);
-        }
+        $this->addTextNode('title', $item->getTitle(), $itemNode);
+        $this->addTextNode('link', $item->getLink(), $itemNode);
+        $this->addDescriptionNode($item->getDescription(), $itemNode);
         foreach ($item->getAuthors() as $author) {
             $this->addAuthorNode($author, $itemNode);
         }
@@ -199,6 +193,16 @@ final class RssRenderer implements RendererInterface
         }
 
         $parent->appendChild($itemNode);
+    }
+
+    private function addDescriptionNode(string|TextInterface $value, \DOMNode $parent): void
+    {
+        $text = $value instanceof TextInterface ? $value->getText() : $value;
+        if ($text === '') {
+            return;
+        }
+
+        $this->addTextNode('description', $text, $parent);
     }
 
     private function addEnclosureNode(AttachmentInterface $attachment, \DOMNode $parent): void

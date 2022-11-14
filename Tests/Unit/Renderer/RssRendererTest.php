@@ -28,6 +28,10 @@ use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FullItems;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\ItemAttachmentWithEmptyLength;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\ItemAttachmentWithEmptyType;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\ItemAttachmentWithEmptyUri;
+use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\ItemWithDescriptionAsObjectWithEmptyText;
+use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\ItemWithDescriptionAsObjectWithFormatHtml;
+use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\ItemWithDescriptionAsObjectWithFormatText;
+use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\ItemWithDescriptionAsString;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\ItemWithEmptyTitleAndDescription;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\ItemWithUndefinedIdButLink;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\MinimumFeed;
@@ -200,6 +204,26 @@ final class RssRendererTest extends TestCase
         yield 'Full items' => [
             'feed' => new FullItems(),
             'expectedFile' => __DIR__ . '/../../Fixtures/Renderer/Rss/FullItems.xml',
+        ];
+
+        yield 'Item with description as string' => [
+            'feed' => new ItemWithDescriptionAsString(),
+            'expectedFile' => __DIR__ . '/../../Fixtures/Renderer/Rss/ItemWithDescriptionAsString.xml',
+        ];
+
+        yield 'Item with description as object with format text' => [
+            'feed' => new ItemWithDescriptionAsObjectWithFormatText(),
+            'expectedFile' => __DIR__ . '/../../Fixtures/Renderer/Rss/ItemWithDescriptionAsObjectWithFormatText.xml',
+        ];
+
+        yield 'Item with description as object with format HTML' => [
+            'feed' => new ItemWithDescriptionAsObjectWithFormatHtml(),
+            'expectedFile' => __DIR__ . '/../../Fixtures/Renderer/Rss/ItemWithDescriptionAsObjectWithFormatHtml.xml',
+        ];
+
+        yield 'Item with description as object with empty text' => [
+            'feed' => new ItemWithDescriptionAsObjectWithEmptyText(),
+            'expectedFile' => __DIR__ . '/../../Fixtures/Renderer/Rss/ItemWithDescriptionAsObjectWithEmptyText.xml',
         ];
     }
 }

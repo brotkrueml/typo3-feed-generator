@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>some title</title>
+        <link>https://example.org/</link>
+        <description>some description</description>
+        <generator>TYPO3 Feed Generator (https://extensions.typo3.org/extension/feed_generator)</generator>
+    </channel>
+    <item>
+        <description>&lt;p&gt;some item description as object with format text&lt;/p&gt;</description>
+    </item>
+</rss>

@@ -29,11 +29,11 @@ Brotkrueml\\FeedGenerator\\Entity\\Item
 
    .. php:method:: getDescription()
 
-      :returntype: string
+      :returntype: Brotkrueml\\FeedGenerator\\Contract\\TextInterface|string
 
-   .. php:method:: setDescription(string description)
+   .. php:method:: setDescription(Brotkrueml\\FeedGenerator\\Contract\\TextInterface|string description)
 
-      :param string $description: the description
+      :param Brotkrueml\\FeedGenerator\\Contract\\TextInterface|string $description: the description
       :returntype: self
 
    .. php:method:: getContent()

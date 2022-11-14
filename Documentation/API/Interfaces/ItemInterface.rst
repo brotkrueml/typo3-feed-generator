@@ -23,9 +23,9 @@ Brotkrueml\\FeedGenerator\\Contract\\ItemInterface
       
    .. php:method:: getDescription()
    
-      Get the text description of the item.
+      Get the description of the item.
       
-      :returntype: string
+      :returntype: Brotkrueml\\FeedGenerator\\Contract\\TextInterface|string
       
    .. php:method:: getContent()
    

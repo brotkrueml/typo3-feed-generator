@@ -19,6 +19,9 @@ use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FeedWithEmptyId;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FeedWithEmptyTitle;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FullFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FullItems;
+use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\ItemWithDescriptionAsString;
+use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\ItemWithDescriptionAsTextObjectWithFormatHtml;
+use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\ItemWithDescriptionAsTextObjectWithFormatText;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\ItemWithEmptyDateModified;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\ItemWithEmptyId;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\ItemWithEmptyLinkAndContent;
@@ -156,6 +159,21 @@ final class AtomRendererTest extends TestCase
         yield 'Full items' => [
             'feed' => new FullItems(),
             'expectedFile' => __DIR__ . '/../../Fixtures/Renderer/Atom/FullItems.xml',
+        ];
+
+        yield 'Item with description as string' => [
+            'feed' => new ItemWithDescriptionAsString(),
+            'expectedFile' => __DIR__ . '/../../Fixtures/Renderer/Atom/ItemWithDescriptionAsString.xml',
+        ];
+
+        yield 'Item with description as text object with format "TEXT"' => [
+            'feed' => new ItemWithDescriptionAsTextObjectWithFormatText(),
+            'expectedFile' => __DIR__ . '/../../Fixtures/Renderer/Atom/ItemWithDescriptionAsTextObjectWithFormatText.xml',
+        ];
+
+        yield 'Item with description as text object with format "HTML"' => [
+            'feed' => new ItemWithDescriptionAsTextObjectWithFormatHtml(),
+            'expectedFile' => __DIR__ . '/../../Fixtures/Renderer/Atom/ItemWithDescriptionAsTextObjectWithFormatHtml.xml',
         ];
     }
 }

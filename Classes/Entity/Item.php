@@ -15,6 +15,7 @@ use Brotkrueml\FeedGenerator\Collection\Collection;
 use Brotkrueml\FeedGenerator\Contract\AttachmentInterface;
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
+use Brotkrueml\FeedGenerator\Contract\TextInterface;
 
 /**
  * @api
@@ -23,7 +24,7 @@ final class Item implements ItemInterface
 {
     private string $id = '';
     private string $title = '';
-    private string $description = '';
+    private string|TextInterface $description = '';
     private string $content = '';
     private string $link = '';
     /**
@@ -67,12 +68,12 @@ final class Item implements ItemInterface
         return $this;
     }
 
-    public function getDescription(): string
+    public function getDescription(): string|TextInterface
     {
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(string|TextInterface $description): self
     {
         $this->description = $description;
 
