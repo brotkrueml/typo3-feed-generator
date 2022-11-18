@@ -97,7 +97,7 @@ final class RssRendererTest extends TestCase
     public function emptyAttachmentUriInItemThrowsException(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectExceptionMessage('Required property "item/enclosure/uri" is missing.');
+        $this->expectExceptionMessage('Required property "item/enclosure/url" is missing.');
 
         $this->subject->render(new ItemAttachmentWithEmptyUri(), 'https://example.org/feed.rss');
     }

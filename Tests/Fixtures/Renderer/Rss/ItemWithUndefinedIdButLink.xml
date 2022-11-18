@@ -5,10 +5,10 @@
         <link>https://example.org/</link>
         <description>some description</description>
         <generator>TYPO3 Feed Generator (https://extensions.typo3.org/extension/feed_generator)</generator>
+        <item>
+            <title>some item title</title>
+            <link>https://example.org/some-item-link</link>
+            <guid isPermaLink="true">https://example.org/some-item-link</guid>
+        </item>
     </channel>
-    <item>
-        <title>some item title</title>
-        <link>https://example.org/some-item-link</link>
-        <guid isPermaLink="true">https://example.org/some-item-link</guid>
-    </item>
 </rss>

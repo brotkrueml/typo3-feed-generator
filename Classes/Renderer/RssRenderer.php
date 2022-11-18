@@ -82,7 +82,7 @@ final class RssRenderer implements RendererInterface
         }
 
         foreach ($feed->getItems() as $item) {
-            $this->addItemNode($item, $root);
+            $this->addItemNode($item, $channel);
         }
 
         $result = $this->xml->saveXML();

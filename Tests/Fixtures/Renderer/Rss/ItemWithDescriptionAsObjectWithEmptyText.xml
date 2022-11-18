@@ -5,6 +5,6 @@
         <link>https://example.org/</link>
         <description>some description</description>
         <generator>TYPO3 Feed Generator (https://extensions.typo3.org/extension/feed_generator)</generator>
+        <item/>
     </channel>
-    <item/>
 </rss>

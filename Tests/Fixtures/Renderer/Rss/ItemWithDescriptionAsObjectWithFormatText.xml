@@ -5,8 +5,8 @@
         <link>https://example.org/</link>
         <description>some description</description>
         <generator>TYPO3 Feed Generator (https://extensions.typo3.org/extension/feed_generator)</generator>
+        <item>
+            <description>some item description as object with format text</description>
+        </item>
     </channel>
-    <item>
-        <description>some item description as object with format text</description>
-    </item>
 </rss>
