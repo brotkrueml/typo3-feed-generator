@@ -18,24 +18,40 @@ use Brotkrueml\FeedGenerator\Contract\RequestAwareInterface;
 use Brotkrueml\FeedGenerator\Format\FeedFormat;
 use Brotkrueml\FeedGenerator\Renderer\AtomRenderer;
 use Brotkrueml\FeedGenerator\Renderer\JsonRenderer;
+use Brotkrueml\FeedGenerator\Renderer\RendererInterface;
 use Brotkrueml\FeedGenerator\Renderer\RssRenderer;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Symfony\Contracts\Service\ServiceSubscriberInterface;
 use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
 /**
  * @internal
  */
-final class FeedMiddleware implements MiddlewareInterface
+final class FeedMiddleware implements MiddlewareInterface, ServiceSubscriberInterface
 {
     public function __construct(
+        private readonly ContainerInterface $locator,
         private readonly FeedRegistryInterface $feedRegistry,
         private readonly ResponseFactoryInterface $responseFactory,
     ) {
+    }
+
+    /**
+     * @return array<string, class-string<RendererInterface>>
+     */
+    public static function getSubscribedServices(): array
+    {
+        return [
+            FeedFormat::ATOM->format() => AtomRenderer::class,
+            FeedFormat::JSON->format() => JsonRenderer::class,
+            FeedFormat::RSS->format() => RssRenderer::class,
+        ];
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -61,11 +77,9 @@ final class FeedMiddleware implements MiddlewareInterface
         /** @var NormalizedParams $normalizedParams */
         $normalizedParams = $request->getAttribute('normalizedParams');
         $feedLink = $normalizedParams->getRequestHost() . $configuration->path;
-        $result = match ($configuration->format) {
-            FeedFormat::ATOM => (new AtomRenderer())->render($feed, $feedLink),
-            FeedFormat::JSON => (new JsonRenderer())->render($feed, $feedLink),
-            FeedFormat::RSS => (new RssRenderer())->render($feed, $feedLink),
-        };
+        /** @var RendererInterface $renderer */
+        $renderer = $this->locator->get($configuration->format->format());
+        $result = $renderer->render($feed, $feedLink);
 
         $hasStyleSheet = ($configuration->format !== FeedFormat::JSON) && ($feed->getStyleSheet() !== '');
         $response = $this->responseFactory->createResponse()

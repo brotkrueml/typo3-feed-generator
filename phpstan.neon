@@ -9,6 +9,9 @@ parameters:
     level: 9
     paths:
         - Classes
+    ignoreErrors:
+        -
+            message: "#^Class has a static method must so must contains \"Static\" in its name$#"
 
 services:
     -
