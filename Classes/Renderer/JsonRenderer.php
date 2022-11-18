@@ -98,7 +98,7 @@ final class JsonRenderer implements RendererInterface
     private function buildAuthorsArray(Collection $authors): array
     {
         $authorsArray = [];
-        foreach ($authors->getIterator() as $author) {
+        foreach ($authors as $author) {
             $authorArray = [];
             if ($author->getName() !== '') {
                 $authorArray['name'] = $author->getName();
@@ -119,7 +119,7 @@ final class JsonRenderer implements RendererInterface
     private function buildAttachmentsArray(Collection $attachments): array
     {
         $attachmentsArray = [];
-        foreach ($attachments->getIterator() as $attachment) {
+        foreach ($attachments as $attachment) {
             if ($attachment->getUri() === '') {
                 throw MissingRequiredPropertyException::forProperty('item/attachment/url');
             }

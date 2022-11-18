@@ -81,7 +81,7 @@ final class RssRenderer implements RendererInterface
             $this->addImageNode($feed->getImage(), $channel);
         }
 
-        foreach ($feed->getItems()->getIterator() as $item) {
+        foreach ($feed->getItems() as $item) {
             $this->addItemNode($item, $root);
         }
 
