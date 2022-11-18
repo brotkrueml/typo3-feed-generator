@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0">
     <channel>
-        <channel>en-GB</channel>
+        <language>en-GB</language>
         <title>some title</title>
         <link>https://example.org/home</link>
         <description>some description</description>

@@ -62,7 +62,7 @@ final class RssRenderer implements RendererInterface
             throw MissingRequiredPropertyException::forProperty('description');
         }
 
-        $this->addTextNode('channel', $feed->getLanguage(), $channel);
+        $this->addTextNode('language', $feed->getLanguage(), $channel);
         $this->addTextNode('title', $feed->getTitle(), $channel);
         $this->addTextNode('link', $feed->getLink(), $channel);
         $this->addTextNode('description', $feed->getDescription(), $channel);
