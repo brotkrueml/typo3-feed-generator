@@ -181,8 +181,8 @@ final class RssRenderer implements RendererInterface
         $this->addTextNode('title', $item->getTitle(), $itemNode);
         $this->addTextNode('link', $item->getLink(), $itemNode);
         $this->addDescriptionNode($item->getDescription(), $itemNode);
-        foreach ($item->getAuthors() as $author) {
-            $this->addAuthorNode($author, $itemNode);
+        if (! $item->getAuthors()->isEmpty()) {
+            $this->addAuthorNode($item->getAuthors()->get(0), $itemNode);
         }
         if (! $item->getAttachments()->isEmpty()) {
             $this->addEnclosureNode($item->getAttachments()->get(0), $itemNode);
