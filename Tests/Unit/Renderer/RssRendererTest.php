@@ -13,6 +13,7 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer;
 
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
+use Brotkrueml\FeedGenerator\Renderer\PathResolver;
 use Brotkrueml\FeedGenerator\Renderer\RssRenderer;
 use Brotkrueml\FeedGenerator\Renderer\WrongImageDimensionException;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FeedImageWithEmptyLink;
@@ -23,6 +24,7 @@ use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FeedWithEmptyDescriptio
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FeedWithEmptyLink;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FeedWithEmptyTitle;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FeedWithMinimumImageProperties;
+use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FeedWithStyleSheet;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FullFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FullItems;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\ItemAttachmentWithEmptyLength;
@@ -44,7 +46,12 @@ final class RssRendererTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->subject = new RssRenderer();
+        $pathResolverStub = $this->createStub(PathResolver::class);
+        $pathResolverStub
+            ->method('getWebPath')
+            ->willReturnCallback(static fn ($path) => $path);
+
+        $this->subject = new RssRenderer($pathResolverStub);
     }
 
     /**
@@ -189,6 +196,11 @@ final class RssRendererTest extends TestCase
         yield 'Full feed' => [
             'feed' => new FullFeed(),
             'expectedFile' => __DIR__ . '/../../Fixtures/Renderer/Rss/FullFeed.xml',
+        ];
+
+        yield 'Feed with stylesheet' => [
+            'feed' => new FeedWithStyleSheet(),
+            'expectedFile' => __DIR__ . '/../../Fixtures/Renderer/Rss/FeedWithStyleSheet.xml',
         ];
 
         yield 'Minimum items' => [

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/some/path/to/stylesheet/atom.xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>some id</id>
+    <title>some title</title>
+    <updated>2022-11-11T11:11:11+00:00</updated>
+    <link href="https://example.org/feed.atom" rel="self" type="application/atom+xml"/>
+    <generator uri="https://extensions.typo3.org/extension/feed_generator">TYPO3 Feed Generator</generator>
+</feed>

@@ -14,9 +14,11 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Renderer\AtomRenderer;
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
+use Brotkrueml\FeedGenerator\Renderer\PathResolver;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FeedWithEmptyDateModified;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FeedWithEmptyId;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FeedWithEmptyTitle;
+use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FeedWithStyleSheet;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FullFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FullItems;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\ItemWithDescriptionAsString;
@@ -38,7 +40,12 @@ final class AtomRendererTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->subject = new AtomRenderer();
+        $pathResolverStub = $this->createStub(PathResolver::class);
+        $pathResolverStub
+            ->method('getWebPath')
+            ->willReturnCallback(static fn ($path) => $path);
+
+        $this->subject = new AtomRenderer($pathResolverStub);
     }
 
     /**
@@ -149,6 +156,11 @@ final class AtomRendererTest extends TestCase
         yield 'Full feed' => [
             'feed' => new FullFeed(),
             'expectedFile' => __DIR__ . '/../../Fixtures/Renderer/Atom/FullFeed.xml',
+        ];
+
+        yield 'Feed with stylesheet' => [
+            'feed' => new FeedWithStyleSheet(),
+            'expectedFile' => __DIR__ . '/../../Fixtures/Renderer/Atom/FeedWithStyleSheet.xml',
         ];
 
         yield 'Minimum items' => [

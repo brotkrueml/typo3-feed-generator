@@ -17,8 +17,6 @@ use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Brotkrueml\FeedGenerator\Contract\TextInterface;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\PathUtility;
 
 /**
  * @internal
@@ -27,13 +25,18 @@ final class AtomRenderer implements RendererInterface
 {
     private \DOMDocument $xml;
 
+    public function __construct(
+        private readonly PathResolver $pathResolver,
+    ) {
+    }
+
     public function render(FeedInterface $feed, string $feedLink): string
     {
         $this->xml = new \DOMDocument('1.0', 'utf-8');
         $this->xml->formatOutput = true;
 
         if ($feed->getStyleSheet() !== '') {
-            $href = PathUtility::getAbsoluteWebPath(GeneralUtility::getFileAbsFileName($feed->getStyleSheet()));
+            $href = $this->pathResolver->getWebPath($feed->getStyleSheet());
             $xslt = $this->xml->createProcessingInstruction(
                 'xml-stylesheet',
                 'type="text/xsl" href="' . $href . '"'
