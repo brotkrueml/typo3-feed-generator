@@ -8,13 +8,13 @@ Brotkrueml\\FeedGenerator\\ValueObject\\Attachment
 
 .. php:class:: Attachment
 
-   .. php:method:: __construct(string uri, string type = '', int length = 0)
+   .. php:method:: __construct(string url, string type = '', int length = 0)
 
-      :param string $uri: The URI
+      :param string $url: The URL
       :param string $type: The type
       :param int $length: The length
 
-   .. php:method:: getUri()
+   .. php:method:: getUrl()
 
       :returntype: string
 

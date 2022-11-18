@@ -22,15 +22,15 @@ final class Attachment implements AttachmentInterface
      * @param int<0, max> $length
      */
     public function __construct(
-        private readonly string $uri,
+        private readonly string $url,
         private readonly string $type = '',
         private readonly int $length = 0,
     ) {
     }
 
-    public function getUri(): string
+    public function getUrl(): string
     {
-        return $this->uri;
+        return $this->url;
     }
 
     public function getType(): string

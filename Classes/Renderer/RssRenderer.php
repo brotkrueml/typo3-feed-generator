@@ -207,8 +207,8 @@ final class RssRenderer implements RendererInterface
 
     private function addEnclosureNode(AttachmentInterface $attachment, \DOMNode $parent): void
     {
-        if ($attachment->getUri() === '') {
-            throw MissingRequiredPropertyException::forProperty('item/enclosure/uri');
+        if ($attachment->getUrl() === '') {
+            throw MissingRequiredPropertyException::forProperty('item/enclosure/url');
         }
         if ($attachment->getLength() === 0) {
             throw MissingRequiredPropertyException::forProperty('item/enclosure/length');
@@ -218,7 +218,7 @@ final class RssRenderer implements RendererInterface
         }
 
         $node = $this->xml->createElement('enclosure');
-        $node->setAttribute('uri', $attachment->getUri());
+        $node->setAttribute('url', $attachment->getUrl());
         $node->setAttribute('length', (string)$attachment->getLength());
         $node->setAttribute('type', $attachment->getType());
         $parent->appendChild($node);

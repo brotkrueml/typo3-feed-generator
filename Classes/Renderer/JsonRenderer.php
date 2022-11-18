@@ -120,7 +120,7 @@ final class JsonRenderer implements RendererInterface
     {
         $attachmentsArray = [];
         foreach ($attachments as $attachment) {
-            if ($attachment->getUri() === '') {
+            if ($attachment->getUrl() === '') {
                 throw MissingRequiredPropertyException::forProperty('item/attachment/url');
             }
             if ($attachment->getType() === '') {
@@ -128,7 +128,7 @@ final class JsonRenderer implements RendererInterface
             }
 
             $attachmentArray = [
-                'url' => $attachment->getUri(),
+                'url' => $attachment->getUrl(),
             ];
             /** @noRector \Rector\DeadCode\Rector\If_\RemoveAlwaysTrueIfConditionRector */
             if ($attachment->getType() !== '') {

@@ -15,7 +15,7 @@ use Brotkrueml\FeedGenerator\Contract\AttachmentInterface;
 
 final class AttachmentFixture implements AttachmentInterface
 {
-    public function getUri(): string
+    public function getUrl(): string
     {
         return 'https://example.org/some-attachment';
     }

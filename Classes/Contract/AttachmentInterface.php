@@ -18,9 +18,9 @@ namespace Brotkrueml\FeedGenerator\Contract;
 interface AttachmentInterface
 {
     /**
-     * Get the URI.
+     * Get the URL.
      */
-    public function getUri(): string;
+    public function getUrl(): string;
 
     /**
      * Get the type, for example "video/mp4". Return empty string to omit in output.

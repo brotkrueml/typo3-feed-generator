@@ -23,7 +23,7 @@ final class AttachmentTest extends TestCase
     {
         $subject = new Attachment('https://example.org/video.mp4');
 
-        self::assertSame('https://example.org/video.mp4', $subject->getUri());
+        self::assertSame('https://example.org/video.mp4', $subject->getUrl());
         self::assertSame('', $subject->getType());
         self::assertSame(0, $subject->getLength());
     }

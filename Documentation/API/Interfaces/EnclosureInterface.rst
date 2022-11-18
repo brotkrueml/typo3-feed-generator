@@ -10,9 +10,9 @@ Brotkrueml\\FeedGenerator\\Contract\\AttachmentInterface
 
    Interface for an attachment (enclosure). Used in RSS and JSON feeds.
 
-   .. php:method:: getUri()
+   .. php:method:: getUrl()
    
-      Get the URI.
+      Get the URL.
       
       :returntype: string
       
