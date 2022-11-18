@@ -46,7 +46,7 @@ interface ItemInterface
     public function getLink(): string;
 
     /**
-     * Get the data for authors.
+     * Get the data for authors. For an RSS feed only one author can be assigned.
      * @return Collection<AuthorInterface>
      */
     public function getAuthors(): Collection;
