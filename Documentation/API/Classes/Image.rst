@@ -8,16 +8,16 @@ Brotkrueml\\FeedGenerator\\ValueObject\\Image
 
 .. php:class:: Image
 
-   .. php:method:: __construct(string uri, string title = '', string link = '', int width = 0, int height = 0, string description = '')
+   .. php:method:: __construct(string url, string title = '', string link = '', int width = 0, int height = 0, string description = '')
 
-      :param string $uri: The URI
+      :param string $url: The URL
       :param string $title: The title
       :param string $link: The link
       :param int $width: The width
       :param int $height: The height
       :param string $description: The description
 
-   .. php:method:: getUri()
+   .. php:method:: getUrl()
 
       :returntype: string
 

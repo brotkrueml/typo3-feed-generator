@@ -43,7 +43,7 @@ final class JsonRenderer implements RendererInterface
             $resultArray['description'] = $feed->getDescription();
         }
         if ($feed->getImage() instanceof ImageInterface) {
-            $resultArray['icon'] = $feed->getImage()->getUri();
+            $resultArray['icon'] = $feed->getImage()->getUrl();
         }
         $authorsArray = $this->buildAuthorsArray($feed->getAuthors());
         if ($authorsArray !== []) {

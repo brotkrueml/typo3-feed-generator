@@ -12,7 +12,7 @@
         <category>another-category</category>
         <generator>TYPO3 Feed Generator (https://extensions.typo3.org/extension/feed_generator)</generator>
         <image>
-            <uri>https://example.org/some-image</uri>
+            <url>https://example.org/some-image</url>
             <title>some image title</title>
             <link>https://example.org/some-link</link>
             <width>100</width>

@@ -10,7 +10,7 @@ Brotkrueml\\FeedGenerator\\Contract\\ImageInterface
 
    Interface for an image. Used in Atom and RSS.
 
-   .. php:method:: getUri()
+   .. php:method:: getUrl()
    
       Get the URI of the image. Required.
       

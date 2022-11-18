@@ -21,9 +21,9 @@ final class ImageTest extends TestCase
      */
     public function propertiesAreInitialisedCorrectlyWhenNotGiven(): void
     {
-        $subject = new Image('Some URI');
+        $subject = new Image('https://example.org/some-image.png');
 
-        self::assertSame('Some URI', $subject->getUri());
+        self::assertSame('https://example.org/some-image.png', $subject->getUrl());
         self::assertSame('', $subject->getTitle());
         self::assertSame('', $subject->getLink());
         self::assertSame(0, $subject->getWidth());

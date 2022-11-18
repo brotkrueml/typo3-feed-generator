@@ -15,7 +15,7 @@ use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Entity\AbstractFeed;
 use Brotkrueml\FeedGenerator\ValueObject\Image;
 
-final class FeedImageWithEmptyUri extends AbstractFeed
+final class FeedImageWithEmptyUrl extends AbstractFeed
 {
     public function getTitle(): string
     {

@@ -17,7 +17,7 @@ use Brotkrueml\FeedGenerator\Renderer\RssRenderer;
 use Brotkrueml\FeedGenerator\Renderer\WrongImageDimensionException;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FeedImageWithEmptyLink;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FeedImageWithEmptyTitle;
-use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FeedImageWithEmptyUri;
+use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FeedImageWithEmptyUrl;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FeedImageWithWidthIsGreaterThanAllowed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FeedWithEmptyDescription;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FeedWithEmptyLink;
@@ -138,10 +138,10 @@ final class RssRendererTest extends TestCase
 
     public function providerForIncorrectFeedImageProperties(): iterable
     {
-        yield 'Empty uri' => [
-            'feed' => new FeedImageWithEmptyUri(),
+        yield 'Empty URL' => [
+            'feed' => new FeedImageWithEmptyUrl(),
             'expectedException' => MissingRequiredPropertyException::class,
-            'expectedExceptionMessage' => 'Required property "channel/image/uri" is missing.',
+            'expectedExceptionMessage' => 'Required property "channel/image/url" is missing.',
         ];
 
         yield 'Empty title' => [

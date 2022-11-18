@@ -62,7 +62,7 @@ final class AtomRenderer implements RendererInterface
         $this->addTextNode('title', $feed->getTitle(), $root);
         $this->addTextNode('subtitle', $feed->getDescription(), $root);
         if ($feed->getImage() instanceof ImageInterface) {
-            $this->addTextNode('logo', $feed->getImage()->getUri(), $root);
+            $this->addTextNode('logo', $feed->getImage()->getUrl(), $root);
         }
         $this->addTextNode('updated', $feed->getDateModified()->format('c'), $root);
         if ($feed->getLink() !== '') {

@@ -17,9 +17,9 @@ namespace Brotkrueml\FeedGenerator\Contract;
 interface ImageInterface
 {
     /**
-     * Get the URI of the image. Required.
+     * Get the URL of the image. Required.
      */
-    public function getUri(): string;
+    public function getUrl(): string;
 
     /**
      * Get the title. Used and required for RSS.

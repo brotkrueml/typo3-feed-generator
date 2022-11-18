@@ -23,7 +23,7 @@ final class Image implements ImageInterface
      * @param int<0, 400> $height
      */
     public function __construct(
-        private readonly string $uri,
+        private readonly string $url,
         private readonly string $title = '',
         private readonly string $link = '',
         private readonly int $width = 0,
@@ -32,9 +32,9 @@ final class Image implements ImageInterface
     ) {
     }
 
-    public function getUri(): string
+    public function getUrl(): string
     {
-        return $this->uri;
+        return $this->url;
     }
 
     public function getTitle(): string

@@ -108,8 +108,8 @@ final class RssRenderer implements RendererInterface
     {
         $imageNode = $this->xml->createElement('image');
 
-        if ($image->getUri() === '') {
-            throw MissingRequiredPropertyException::forProperty('channel/image/uri');
+        if ($image->getUrl() === '') {
+            throw MissingRequiredPropertyException::forProperty('channel/image/url');
         }
         if ($image->getTitle() === '') {
             throw MissingRequiredPropertyException::forProperty('channel/image/title');
@@ -125,7 +125,7 @@ final class RssRenderer implements RendererInterface
         }
 
         $imageArray = [
-            'uri' => $image->getUri(),
+            'url' => $image->getUrl(),
             'title' => $image->getTitle(),
             'link' => $image->getLink(),
         ];
