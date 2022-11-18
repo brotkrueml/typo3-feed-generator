@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rename `Enclosure` class to `Attachment`
 - Allow multiple attachments for JSON feeds
 - Integrate `FeedCategoryInterface` into `FeedInterface`
+- Integrate `StyleSheetInterface` into `FeedInterface`
 - Adjust namespace for classes `Attachment`, `Author`, `Category`, `Image`
 
 ## [0.4.0] - 2022-10-31

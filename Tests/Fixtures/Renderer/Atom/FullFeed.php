@@ -110,4 +110,9 @@ final class FullFeed implements FeedInterface
     {
         return new Collection();
     }
+
+    public function getStyleSheet(): string
+    {
+        return '';
+    }
 }

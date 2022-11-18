@@ -16,7 +16,6 @@ use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
-use Brotkrueml\FeedGenerator\Contract\StyleSheetInterface;
 use Brotkrueml\FeedGenerator\Contract\TextInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
@@ -36,7 +35,7 @@ final class RssRenderer implements RendererInterface
         $this->xml = new \DOMDocument('1.0', 'utf-8');
         $this->xml->formatOutput = true;
 
-        if ($feed instanceof StyleSheetInterface && $feed->getStyleSheet() !== '') {
+        if ($feed->getStyleSheet() !== '') {
             $href = PathUtility::getAbsoluteWebPath(GeneralUtility::getFileAbsFileName($feed->getStyleSheet()));
             $xslt = $this->xml->createProcessingInstruction(
                 'xml-stylesheet',
@@ -67,7 +66,7 @@ final class RssRenderer implements RendererInterface
         $this->addTextNode('link', $feed->getLink(), $channel);
         $this->addTextNode('description', $feed->getDescription(), $channel);
         $this->addTextNode('copyright', $feed->getCopyright(), $channel);
-        if (!$feed->getAuthors()->isEmpty()) {
+        if (! $feed->getAuthors()->isEmpty()) {
             $this->addAuthorNode('managingEditor', $feed->getAuthors()->get(0), $channel);
         }
         if ($feed->getDatePublished() instanceof \DateTimeInterface) {

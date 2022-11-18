@@ -105,4 +105,9 @@ final class SomeFeed implements FeedInterface
             (new Item())->setTitle('another title'),
         );
     }
+
+    public function getStyleSheet(): string
+    {
+        return '';
+    }
 }

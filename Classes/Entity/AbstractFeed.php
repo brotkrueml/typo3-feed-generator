@@ -98,4 +98,9 @@ abstract class AbstractFeed implements FeedInterface
     {
         return new Collection();
     }
+
+    public function getStyleSheet(): string
+    {
+        return '';
+    }
 }

@@ -86,4 +86,10 @@ interface FeedInterface
      * @return Collection<ItemInterface>
      */
     public function getItems(): Collection;
+
+    /**
+     * Get the path for an XSL stylesheet. Used in Atom and RSS.
+     * The path should be prefixed with "EXT:".
+     */
+    public function getStyleSheet(): string;
 }

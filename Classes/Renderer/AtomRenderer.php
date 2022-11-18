@@ -16,7 +16,6 @@ use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
-use Brotkrueml\FeedGenerator\Contract\StyleSheetInterface;
 use Brotkrueml\FeedGenerator\Contract\TextInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
@@ -33,7 +32,7 @@ final class AtomRenderer implements RendererInterface
         $this->xml = new \DOMDocument('1.0', 'utf-8');
         $this->xml->formatOutput = true;
 
-        if ($feed instanceof StyleSheetInterface && $feed->getStyleSheet() !== '') {
+        if ($feed->getStyleSheet() !== '') {
             $href = PathUtility::getAbsoluteWebPath(GeneralUtility::getFileAbsFileName($feed->getStyleSheet()));
             $xslt = $this->xml->createProcessingInstruction(
                 'xml-stylesheet',

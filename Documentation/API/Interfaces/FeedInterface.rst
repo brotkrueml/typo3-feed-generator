@@ -86,4 +86,12 @@ Brotkrueml\\FeedGenerator\\Contract\\FeedInterface
       Get the items of the feed.
       
       :returntype: Brotkrueml\\FeedGenerator\\Collection\\Collection
+      
+   .. php:method:: getStyleSheet()
+   
+      Get the path for an XSL stylesheet. Used in Atom and RSS.
+      
+      The path should be prefixed with "EXT:".
+      
+      :returntype: string
 

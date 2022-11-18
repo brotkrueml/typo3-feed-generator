@@ -15,7 +15,6 @@ use Brotkrueml\FeedGenerator\Configuration\FeedConfiguration;
 use Brotkrueml\FeedGenerator\Configuration\FeedRegistryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedFormatAwareInterface;
 use Brotkrueml\FeedGenerator\Contract\RequestAwareInterface;
-use Brotkrueml\FeedGenerator\Contract\StyleSheetInterface;
 use Brotkrueml\FeedGenerator\Format\FeedFormat;
 use Brotkrueml\FeedGenerator\Renderer\AtomRenderer;
 use Brotkrueml\FeedGenerator\Renderer\JsonRenderer;
@@ -68,7 +67,7 @@ final class FeedMiddleware implements MiddlewareInterface
             FeedFormat::RSS => (new RssRenderer())->render($feed, $feedLink),
         };
 
-        $hasStyleSheet = ($configuration->format !== FeedFormat::JSON) && ($feed instanceof StyleSheetInterface && ($feed->getStyleSheet() !== ''));
+        $hasStyleSheet = ($configuration->format !== FeedFormat::JSON) && ($feed->getStyleSheet() !== '');
         $response = $this->responseFactory->createResponse()
             ->withHeader('Content-Type', $configuration->format->contentType($hasStyleSheet) . '; charset=utf-8');
 

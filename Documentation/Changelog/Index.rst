@@ -25,6 +25,7 @@ Changed
 * Rename ``Enclosure`` class to ``Attachment``
 * Allow multiple attachments for JSON feeds
 * Integrate ``FeedCategoryInterface`` into ``FeedInterface``
+* Integrate ``StyleSheetInterface`` into ``FeedInterface``
 * Adjust namespace for classes ``Attachment``\ , ``Author``\ , ``Category``\ , ``Image``
 
 `0.4.0 <https://github.com/brotkrueml/typo3-feed-generator/compare/v0.3.0...v0.4.0>`_ - 2022-10-31

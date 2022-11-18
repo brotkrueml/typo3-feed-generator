@@ -18,7 +18,6 @@ $classes = [
     \Brotkrueml\FeedGenerator\Contract\FeedInterface::class => 'Interfaces/FeedInterface.rst',
     \Brotkrueml\FeedGenerator\Contract\ItemInterface::class => 'Interfaces/ItemInterface.rst',
     \Brotkrueml\FeedGenerator\Contract\RequestAwareInterface::class => 'Interfaces/RequestAwareInterface.rst',
-    \Brotkrueml\FeedGenerator\Contract\StyleSheetInterface::class => 'Interfaces/StyleSheetInterface.rst',
     \Brotkrueml\FeedGenerator\Contract\TextInterface::class => 'Interfaces/TextInterface.rst',
 
     \Brotkrueml\FeedGenerator\Collection\Collection::class => 'Classes/Collection.rst',

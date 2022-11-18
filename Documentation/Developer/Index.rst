@@ -14,5 +14,6 @@ Developer corner
    MultipleFeeds
    MultipleSites
    CacheHeaders
+   XslStyleSheet
    Translations
    UsedProperties
