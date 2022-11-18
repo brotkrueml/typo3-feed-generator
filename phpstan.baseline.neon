@@ -31,7 +31,7 @@ parameters:
 			path: Classes/Renderer/JsonRenderer.php
 
 		-
-			message: "#^Class cognitive complexity is 39, keep it under 13$#"
+			message: "#^Class cognitive complexity is 42, keep it under 13$#"
 			count: 1
 			path: Classes/Renderer/RssRenderer.php
 

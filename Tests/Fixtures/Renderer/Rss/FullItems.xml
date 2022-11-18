@@ -13,7 +13,7 @@
         <author>john-doe@example.org (John Doe)</author>
         <author>jane-doe@example.org (Jane Doe)</author>
         <enclosure length="123456" type="some/type" uri="https://example.org/some-attachment"/>
-        <guid>some id</guid>
+        <guid isPermaLink="false">some id</guid>
         <pubDate>Fri, 11 Nov 2022 11:11:11 +0000</pubDate>
     </item>
 </rss>

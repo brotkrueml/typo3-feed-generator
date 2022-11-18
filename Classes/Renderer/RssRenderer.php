@@ -187,7 +187,7 @@ final class RssRenderer implements RendererInterface
         if (! $item->getAttachments()->isEmpty()) {
             $this->addEnclosureNode($item->getAttachments()->get(0), $itemNode);
         }
-        $this->addGuidNode($item->getId(), $item->getLink(), $itemNode);
+        $this->addGuidNode($item->getId() ?: $item->getLink(), $itemNode);
         if ($item->getDatePublished() instanceof \DateTimeInterface) {
             $this->addTextNode('pubDate', $item->getDatePublished()->format('r'), $itemNode);
         }
@@ -224,18 +224,20 @@ final class RssRenderer implements RendererInterface
         $parent->appendChild($node);
     }
 
-    private function addGuidNode(string $id, string $link, \DOMNode $parent): void
+    private function addGuidNode(string $guid, \DOMNode $parent): void
     {
-        if ($id !== '') {
-            $this->addTextNode('guid', $id, $parent);
+        if ($guid === '') {
             return;
         }
 
-        if ($link !== '') {
-            $node = $this->xml->createElement('guid');
-            $node->setAttribute('isPermaLink', 'true');
-            $node->appendChild($this->xml->createTextNode($link));
-            $parent->appendChild($node);
+        $isPermaLink = false;
+        if (\str_starts_with($guid, 'http') && \filter_var($guid, \FILTER_VALIDATE_URL)) {
+            $isPermaLink = true;
         }
+
+        $node = $this->xml->createElement('guid');
+        $node->setAttribute('isPermaLink', $isPermaLink ? 'true' : 'false');
+        $node->appendChild($this->xml->createTextNode($guid));
+        $parent->appendChild($node);
     }
 }
