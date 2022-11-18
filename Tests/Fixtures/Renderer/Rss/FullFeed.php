@@ -17,6 +17,7 @@ use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
+use Brotkrueml\FeedGenerator\ValueObject\Author;
 use Brotkrueml\FeedGenerator\ValueObject\Category;
 use Brotkrueml\FeedGenerator\ValueObject\Image;
 
@@ -47,7 +48,11 @@ final class FullFeed implements FeedInterface
      */
     public function getAuthors(): Collection
     {
-        return new Collection();
+        return (new Collection())
+            ->add(
+                new Author('John Doe', 'john-doe@example.org', 'https://example.org/john-doe'),
+                new Author('Jane Doe', 'jane-doe@example.org', 'https://example.org/jane-doe'),
+            );
     }
 
     public function getDatePublished(): ?\DateTimeInterface

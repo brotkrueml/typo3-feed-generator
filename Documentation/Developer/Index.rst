@@ -615,7 +615,7 @@ See: :any:`Brotkrueml\\FeedGenerator\\Contract\\FeedInterface`
    *  - :php:`getAuthors()`
       - :xml:`<author>`
       - `author` (only one)
-      - :xml:`<author>`
+      - :xml:`<managingEditor>` (only one)
 
    *  - :php:`getCopyright()`
       - :xml:`<rights>`
@@ -735,7 +735,7 @@ See: :any:`Brotkrueml\\FeedGenerator\\Contract\\ItemInterface`
    *  - :php:`getAuthors()`
       - :xml:`<author>`
       - `author` (only one)
-      - :xml:`<author>`
+      - :xml:`<author>` (only one)
 
    *  - :php:`getContent()`
       - :xml:`<content>`

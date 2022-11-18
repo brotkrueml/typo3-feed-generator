@@ -67,6 +67,9 @@ final class RssRenderer implements RendererInterface
         $this->addTextNode('link', $feed->getLink(), $channel);
         $this->addTextNode('description', $feed->getDescription(), $channel);
         $this->addTextNode('copyright', $feed->getCopyright(), $channel);
+        if (!$feed->getAuthors()->isEmpty()) {
+            $this->addAuthorNode('managingEditor', $feed->getAuthors()->get(0), $channel);
+        }
         if ($feed->getDatePublished() instanceof \DateTimeInterface) {
             $this->addTextNode('pubDate', $feed->getDatePublished()->format('r'), $channel);
         }
@@ -153,7 +156,7 @@ final class RssRenderer implements RendererInterface
         $parent->appendChild($imageNode);
     }
 
-    private function addAuthorNode(AuthorInterface $author, \DOMNode $parent): void
+    private function addAuthorNode(string $name, AuthorInterface $author, \DOMNode $parent): void
     {
         if ($author->getEmail() !== '') {
             $authorText = $author->getEmail();
@@ -161,12 +164,12 @@ final class RssRenderer implements RendererInterface
                 $authorText .= ' (' . $author->getName() . ')';
             }
 
-            $this->addTextNode('author', $authorText, $parent);
+            $this->addTextNode($name, $authorText, $parent);
             return;
         }
 
         if ($author->getName() !== '') {
-            $this->addTextNode('author', $author->getName(), $parent);
+            $this->addTextNode($name, $author->getName(), $parent);
         }
     }
 
@@ -182,7 +185,7 @@ final class RssRenderer implements RendererInterface
         $this->addTextNode('link', $item->getLink(), $itemNode);
         $this->addDescriptionNode($item->getDescription(), $itemNode);
         if (! $item->getAuthors()->isEmpty()) {
-            $this->addAuthorNode($item->getAuthors()->get(0), $itemNode);
+            $this->addAuthorNode('author', $item->getAuthors()->get(0), $itemNode);
         }
         if (! $item->getAttachments()->isEmpty()) {
             $this->addEnclosureNode($item->getAttachments()->get(0), $itemNode);

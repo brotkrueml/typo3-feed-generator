@@ -6,6 +6,7 @@
         <link>https://example.org/home</link>
         <description>some description</description>
         <copyright>some copyright</copyright>
+        <managingEditor>john-doe@example.org (John Doe)</managingEditor>
         <pubDate>Fri, 11 Nov 2022 11:11:11 +0000</pubDate>
         <lastBuildDate>Sat, 12 Nov 2022 12:12:12 +0000</lastBuildDate>
         <category>some-category</category>
