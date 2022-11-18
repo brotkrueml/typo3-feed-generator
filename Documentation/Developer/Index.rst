@@ -538,8 +538,10 @@ possible implementation could be:
 Overview of used properties by feed type
 ========================================
 
-:any:`Brotkrueml\\FeedGenerator\\Contract\\AuthorInterface`
------------------------------------------------------------
+:php:`Brotkrueml\FeedGenerator\Contract\AuthorInterface`
+--------------------------------------------------------
+
+See: :any:`Brotkrueml\\FeedGenerator\\Contract\\AuthorInterface`
 
 .. list-table::
    :widths: 25 25 25 25
@@ -566,8 +568,10 @@ Overview of used properties by feed type
       - :xml:`<author>`
 
 
-:any:`Brotkrueml\\FeedGenerator\\Contract\\CategoryInterface`
--------------------------------------------------------------
+:php:`Brotkrueml\FeedGenerator\Contract\CategoryInterface`
+----------------------------------------------------------
+
+See: :any:`Brotkrueml\\FeedGenerator\\Contract\\CategoryInterface`
 
 .. list-table::
    :widths: 25 25 25 25
@@ -594,8 +598,10 @@ Overview of used properties by feed type
       - :xml:`<category>`
 
 
-:any:`Brotkrueml\\FeedGenerator\\Contract\\FeedInterface`
----------------------------------------------------------
+:php:`Brotkrueml\FeedGenerator\Contract\FeedInterface`
+------------------------------------------------------
+
+See: :any:`Brotkrueml\\FeedGenerator\\Contract\\FeedInterface`
 
 .. list-table::
    :widths: 25 25 25 25
@@ -667,8 +673,10 @@ Overview of used properties by feed type
       - :xml:`<title>`
 
 
-:any:`Brotkrueml\\FeedGenerator\\Contract\\ImageInterface`
-----------------------------------------------------------
+:php:`Brotkrueml\FeedGenerator\Contract\ImageInterface`
+-------------------------------------------------------
+
+See: :any:`Brotkrueml\\FeedGenerator\\Contract\\ImageInterface`
 
 .. list-table::
    :widths: 25 25 25 25
@@ -710,8 +718,10 @@ Overview of used properties by feed type
       - :xml:`<feed><image><width>`
 
 
-:any:`Brotkrueml\\FeedGenerator\\Contract\\ItemInterface`
----------------------------------------------------------
+:php:`Brotkrueml\FeedGenerator\Contract\ItemInterface`
+------------------------------------------------------
+
+See: :any:`Brotkrueml\\FeedGenerator\\Contract\\ItemInterface`
 
 .. list-table::
    :widths: 25 25 25 25
