@@ -13,7 +13,9 @@ $EM_CONF[$_EXTKEY] = [
             'typo3' => '11.5.0-12.4.99',
         ],
         'conflicts' => [],
-        'suggests' => [],
+        'suggests' => [
+            'lowlevel' => '',
+        ],
     ],
     'autoload' => [
         'psr-4' => ['Brotkrueml\\FeedGenerator\\' => 'Classes']
