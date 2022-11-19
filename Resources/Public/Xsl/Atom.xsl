@@ -129,9 +129,7 @@
                             </p>
                         </xsl:if>
                     </section>
-                    <xsl:apply-templates select="atom:entry">
-                        <xsl:sort select="atom:updated" order="descending"/>
-                    </xsl:apply-templates>
+                    <xsl:apply-templates select="atom:entry"/>
                 </div>
             </body>
         </html>

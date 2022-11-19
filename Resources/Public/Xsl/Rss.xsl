@@ -124,9 +124,7 @@
                             </p>
                         </xsl:if>
                     </section>
-                    <xsl:apply-templates select="item">
-                        <xsl:sort select="pubDate" order="descending"/>
-                    </xsl:apply-templates>
+                    <xsl:apply-templates select="item"/>
                 </div>
             </body>
         </html>
