@@ -133,7 +133,7 @@ The :php:`getItems()` method returns a
 :php:`Brotkrueml\FeedGenerator\Collection\Collection`object of
 :any:`Brotkrueml\\FeedGenerator\\Entity\\Item` entities (or to be precise of
 objects implementing the
-:any:`Brotkrueml\\FeedGenerator\\Entity\\ItemInterface`).
+:any:`Brotkrueml\\FeedGenerator\\Contract\\ItemInterface`).
 
 .. note::
    Based on the :php:`FeedInterface` the feed is automatically registered if
