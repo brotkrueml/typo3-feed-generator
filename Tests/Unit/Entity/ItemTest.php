@@ -38,6 +38,7 @@ final class ItemTest extends TestCase
         self::assertNull($subject->getDatePublished());
         self::assertNull($subject->getDateModified());
         self::assertTrue($subject->getAttachments()->isEmpty());
+        self::assertTrue($subject->getExtensionElements()->isEmpty());
     }
 
     /**

@@ -70,4 +70,10 @@ interface ItemInterface
      * @return Collection<AttachmentInterface>
      */
     public function getAttachments(): Collection;
+
+    /**
+     * Get extension elements
+     * @return Collection<ExtensionElementInterface>
+     */
+    public function getExtensionElements(): Collection;
 }

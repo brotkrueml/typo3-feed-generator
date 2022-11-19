@@ -11,6 +11,9 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer;
 
+use Brotkrueml\FeedGenerator\Configuration\ExtensionRegistryInterface;
+use Brotkrueml\FeedGenerator\Contract\ExtensionElementInterface;
+use Brotkrueml\FeedGenerator\Contract\ExtensionInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
 use Brotkrueml\FeedGenerator\Renderer\PathResolver;
@@ -46,12 +49,27 @@ final class RssRendererTest extends TestCase
 
     protected function setUp(): void
     {
+        $extensionRegistryDummy = new class() implements ExtensionRegistryInterface {
+            public function getExtensionForElement(ExtensionElementInterface $element): ExtensionInterface
+            {
+                throw new \Exception('Should not happen here');
+            }
+
+            /**
+             * @return array{}
+             */
+            public function getAllExtensions(): iterable
+            {
+                return [];
+            }
+        };
+
         $pathResolverStub = $this->createStub(PathResolver::class);
         $pathResolverStub
             ->method('getWebPath')
             ->willReturnCallback(static fn ($path) => $path);
 
-        $this->subject = new RssRenderer($pathResolverStub);
+        $this->subject = new RssRenderer($extensionRegistryDummy, $pathResolverStub);
     }
 
     /**

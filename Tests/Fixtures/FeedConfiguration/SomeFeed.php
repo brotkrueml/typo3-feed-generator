@@ -110,4 +110,9 @@ final class SomeFeed implements FeedInterface
     {
         return '';
     }
+
+    public function getExtensionElements(): Collection
+    {
+        return new Collection();
+    }
 }

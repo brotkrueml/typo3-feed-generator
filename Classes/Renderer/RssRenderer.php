@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Renderer;
 
+use Brotkrueml\FeedGenerator\Configuration\ExtensionRegistryInterface;
 use Brotkrueml\FeedGenerator\Contract\AttachmentInterface;
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
@@ -27,8 +28,13 @@ final class RssRenderer implements RendererInterface
     private const IMAGE_MAX_WIDTH = 144;
 
     private \DOMDocument $xml;
+    /**
+     * @var array<string, string>
+     */
+    private array $usedExtensions = [];
 
     public function __construct(
+        private readonly ExtensionRegistryInterface $extensionRegistry,
         private readonly PathResolver $pathResolver,
     ) {
     }
@@ -86,8 +92,18 @@ final class RssRenderer implements RendererInterface
             $this->addImageNode($feed->getImage(), $channel);
         }
 
+        foreach ($feed->getExtensionElements() as $element) {
+            $extension = $this->extensionRegistry->getExtensionForElement($element);
+            $extension->getRenderer()->render($element, $channel, $this->xml);
+            $this->usedExtensions[$extension->getQualifiedName()] = $extension->getNamespace();
+        }
+
         foreach ($feed->getItems() as $item) {
             $this->addItemNode($item, $channel);
+        }
+
+        foreach ($this->usedExtensions as $qualifiedName => $namespace) {
+            $rss->setAttribute('xmlns:' . $qualifiedName, $namespace);
         }
 
         $result = $this->xml->saveXML();
@@ -195,6 +211,12 @@ final class RssRenderer implements RendererInterface
         $this->addGuidNode($item->getId() ?: $item->getLink(), $itemNode);
         if ($item->getDatePublished() instanceof \DateTimeInterface) {
             $this->addTextNode('pubDate', $item->getDatePublished()->format('r'), $itemNode);
+        }
+
+        foreach ($item->getExtensionElements() as $element) {
+            $extension = $this->extensionRegistry->getExtensionForElement($element);
+            $extension->getRenderer()->render($element, $itemNode, $this->xml);
+            $this->usedExtensions[$extension->getQualifiedName()] = $extension->getNamespace();
         }
 
         $parent->appendChild($itemNode);

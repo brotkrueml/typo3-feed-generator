@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Renderer;
 
+use Brotkrueml\FeedGenerator\Configuration\ExtensionRegistryInterface;
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
 use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
@@ -24,8 +25,13 @@ use Brotkrueml\FeedGenerator\Contract\TextInterface;
 final class AtomRenderer implements RendererInterface
 {
     private \DOMDocument $xml;
+    /**
+     * @var array<string, string>
+     */
+    private array $usedExtensions = [];
 
     public function __construct(
+        private readonly ExtensionRegistryInterface $extensionRegistry,
         private readonly PathResolver $pathResolver,
     ) {
     }
@@ -79,8 +85,19 @@ final class AtomRenderer implements RendererInterface
         foreach ($feed->getCategories() as $category) {
             $this->addCategoryNode($category, $root);
         }
+
+        foreach ($feed->getExtensionElements() as $element) {
+            $extension = $this->extensionRegistry->getExtensionForElement($element);
+            $extension->getRenderer()->render($element, $root, $this->xml);
+            $this->usedExtensions[$extension->getQualifiedName()] = $extension->getNamespace();
+        }
+
         foreach ($feed->getItems() as $item) {
             $this->addItemNode($item, $root);
+        }
+
+        foreach ($this->usedExtensions as $qualifiedName => $namespace) {
+            $atom->setAttribute('xmlns:' . $qualifiedName, $namespace);
         }
 
         $result = $this->xml->saveXML();
@@ -193,6 +210,12 @@ final class AtomRenderer implements RendererInterface
         $this->addTextNode('content', $item->getContent(), $itemNode);
         if ($item->getDatePublished() instanceof \DateTimeInterface) {
             $this->addTextNode('published', $item->getDatePublished()->format('c'), $itemNode);
+        }
+
+        foreach ($item->getExtensionElements() as $element) {
+            $extension = $this->extensionRegistry->getExtensionForElement($element);
+            $extension->getRenderer()->render($element, $itemNode, $this->xml);
+            $this->usedExtensions[$extension->getQualifiedName()] = $extension->getNamespace();
         }
 
         $parent->appendChild($itemNode);

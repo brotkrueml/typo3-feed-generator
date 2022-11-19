@@ -6,7 +6,11 @@ services:
 
   Brotkrueml\FeedGenerator\:
     resource: '../Classes/*'
-    exclude: '../Classes/{Attributes,Configuration/FeedConfiguration,Item}'
+    exclude: '../Classes/{Attributes,Configuration/FeedConfiguration,Entity,ValueObject}'
+
+  Brotkrueml\FeedGenerator\Configuration\ExtensionRegistry:
+    arguments:
+      - !tagged_iterator tx_feed_generator.extension
 
   Brotkrueml\FeedGenerator\Configuration\FeedRegistry:
     arguments:

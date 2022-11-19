@@ -11,10 +11,12 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator;
 
+use Brotkrueml\FeedGenerator\Contract\ExtensionInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-return static function (ContainerConfigurator $container, ContainerBuilder $containerBuilder) {
-    $containerBuilder->registerForAutoconfiguration(FeedInterface::class)->addTag('tx_feed_generator.feed');
+return static function (ContainerConfigurator $configurator, ContainerBuilder $builder) {
+    $builder->registerForAutoconfiguration(ExtensionInterface::class)->addTag('tx_feed_generator.extension');
+    $builder->registerForAutoconfiguration(FeedInterface::class)->addTag('tx_feed_generator.feed');
 };

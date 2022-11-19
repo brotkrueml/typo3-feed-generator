@@ -11,6 +11,9 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer;
 
+use Brotkrueml\FeedGenerator\Configuration\ExtensionRegistryInterface;
+use Brotkrueml\FeedGenerator\Contract\ExtensionElementInterface;
+use Brotkrueml\FeedGenerator\Contract\ExtensionInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Renderer\AtomRenderer;
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
@@ -40,12 +43,27 @@ final class AtomRendererTest extends TestCase
 
     protected function setUp(): void
     {
+        $extensionRegistryDummy = new class() implements ExtensionRegistryInterface {
+            public function getExtensionForElement(ExtensionElementInterface $element): ExtensionInterface
+            {
+                throw new \Exception('Should not happen here');
+            }
+
+            /**
+             * @return array{}
+             */
+            public function getAllExtensions(): iterable
+            {
+                return [];
+            }
+        };
+
         $pathResolverStub = $this->createStub(PathResolver::class);
         $pathResolverStub
             ->method('getWebPath')
             ->willReturnCallback(static fn ($path) => $path);
 
-        $this->subject = new AtomRenderer($pathResolverStub);
+        $this->subject = new AtomRenderer($extensionRegistryDummy, $pathResolverStub);
     }
 
     /**

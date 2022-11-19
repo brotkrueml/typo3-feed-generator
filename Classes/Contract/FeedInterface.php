@@ -92,4 +92,10 @@ interface FeedInterface
      * The path should be prefixed with "EXT:".
      */
     public function getStyleSheet(): string;
+
+    /**
+     * Get extension elements
+     * @return Collection<ExtensionElementInterface>
+     */
+    public function getExtensionElements(): Collection;
 }

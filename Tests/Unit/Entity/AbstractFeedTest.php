@@ -40,5 +40,6 @@ final class AbstractFeedTest extends TestCase
         self::assertNull($subject->getImage());
         self::assertTrue($subject->getCategories()->isEmpty());
         self::assertTrue($subject->getItems()->isEmpty());
+        self::assertTrue($subject->getExtensionElements()->isEmpty());
     }
 }
