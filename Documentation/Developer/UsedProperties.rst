@@ -85,7 +85,7 @@ See: :any:`Brotkrueml\\FeedGenerator\\Contract\\FeedInterface`
 
    *  - :php:`getAuthors()`
       - :xml:`<author>`
-      - `author` (only one)
+      - `author`
       - :xml:`<managingEditor>` (only one)
 
    *  - :php:`getCopyright()`
@@ -205,13 +205,13 @@ See: :any:`Brotkrueml\\FeedGenerator\\Contract\\ItemInterface`
 
    *  - :php:`getAuthors()`
       - :xml:`<author>`
-      - `author` (only one)
+      - `author`
       - :xml:`<author>` (only one)
 
    *  - :php:`getContent()`
       - :xml:`<content>`
       - `content_html`
-      - :xml:`<content:encoded>`
+      - :xml:`—`
 
    *  - :php:`getDatePublished()`
       - :xml:`<published>`
@@ -231,7 +231,7 @@ See: :any:`Brotkrueml\\FeedGenerator\\Contract\\ItemInterface`
    *  - :php:`getAttachment()`
       - —
       - `attachments`
-      - :xml:`<enclosure type="..." length="..." url="..."/>`
+      - :xml:`<enclosure type="..." length="..." url="..."/>` (only one)
 
    *  - :php:`getId()`
       - :xml:`<id>`
