@@ -14,7 +14,7 @@ namespace Brotkrueml\FeedGenerator\Contract;
 /**
  * Interface for a category. Used in Atom and RSS feeds.
  */
-interface CategoryInterface
+interface CategoryInterface extends CollectableInterface
 {
     /**
      * Get the term. The term identifies the category.

@@ -15,7 +15,7 @@ namespace Brotkrueml\FeedGenerator\Contract;
  * Interface for an attachment (enclosure). Used in RSS and JSON feeds.
  */
 
-interface AttachmentInterface
+interface AttachmentInterface extends CollectableInterface
 {
     /**
      * Get the URL.

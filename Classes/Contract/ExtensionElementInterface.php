@@ -15,6 +15,6 @@ namespace Brotkrueml\FeedGenerator\Contract;
  * A marker interface for extension elements
  * @api
  */
-interface ExtensionElementInterface
+interface ExtensionElementInterface extends CollectableInterface
 {
 }

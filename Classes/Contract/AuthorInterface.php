@@ -14,7 +14,7 @@ namespace Brotkrueml\FeedGenerator\Contract;
 /**
  * Interface for an author.
  */
-interface AuthorInterface
+interface AuthorInterface extends CollectableInterface
 {
     /**
      * Get the name.

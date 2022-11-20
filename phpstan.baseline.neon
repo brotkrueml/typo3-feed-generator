@@ -1,22 +1,22 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Method Brotkrueml\\\\FeedGenerator\\\\Entity\\\\AbstractFeed\\:\\:getAuthors\\(\\) should return Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\AuthorInterface\\> but returns Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\AttachmentInterface\\|Brotkrueml\\\\FeedGenerator\\\\Contract\\\\AuthorInterface\\|Brotkrueml\\\\FeedGenerator\\\\Contract\\\\CategoryInterface\\|Brotkrueml\\\\FeedGenerator\\\\Contract\\\\ExtensionElementInterface\\|Brotkrueml\\\\FeedGenerator\\\\Contract\\\\ItemInterface\\>\\.$#"
+			message: "#^Method Brotkrueml\\\\FeedGenerator\\\\Entity\\\\AbstractFeed\\:\\:getAuthors\\(\\) should return Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\AuthorInterface\\> but returns Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\CollectableInterface\\>\\.$#"
 			count: 1
 			path: Classes/Entity/AbstractFeed.php
 
 		-
-			message: "#^Method Brotkrueml\\\\FeedGenerator\\\\Entity\\\\AbstractFeed\\:\\:getCategories\\(\\) should return Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\CategoryInterface\\> but returns Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\AttachmentInterface\\|Brotkrueml\\\\FeedGenerator\\\\Contract\\\\AuthorInterface\\|Brotkrueml\\\\FeedGenerator\\\\Contract\\\\CategoryInterface\\|Brotkrueml\\\\FeedGenerator\\\\Contract\\\\ExtensionElementInterface\\|Brotkrueml\\\\FeedGenerator\\\\Contract\\\\ItemInterface\\>\\.$#"
+			message: "#^Method Brotkrueml\\\\FeedGenerator\\\\Entity\\\\AbstractFeed\\:\\:getCategories\\(\\) should return Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\CategoryInterface\\> but returns Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\CollectableInterface\\>\\.$#"
 			count: 1
 			path: Classes/Entity/AbstractFeed.php
 
 		-
-			message: "#^Method Brotkrueml\\\\FeedGenerator\\\\Entity\\\\AbstractFeed\\:\\:getExtensionElements\\(\\) should return Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\ExtensionElementInterface\\> but returns Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\AttachmentInterface\\|Brotkrueml\\\\FeedGenerator\\\\Contract\\\\AuthorInterface\\|Brotkrueml\\\\FeedGenerator\\\\Contract\\\\CategoryInterface\\|Brotkrueml\\\\FeedGenerator\\\\Contract\\\\ExtensionElementInterface\\|Brotkrueml\\\\FeedGenerator\\\\Contract\\\\ItemInterface\\>\\.$#"
+			message: "#^Method Brotkrueml\\\\FeedGenerator\\\\Entity\\\\AbstractFeed\\:\\:getExtensionElements\\(\\) should return Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\ExtensionElementInterface\\> but returns Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\CollectableInterface\\>\\.$#"
 			count: 1
 			path: Classes/Entity/AbstractFeed.php
 
 		-
-			message: "#^Method Brotkrueml\\\\FeedGenerator\\\\Entity\\\\AbstractFeed\\:\\:getItems\\(\\) should return Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\ItemInterface\\> but returns Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\AttachmentInterface\\|Brotkrueml\\\\FeedGenerator\\\\Contract\\\\AuthorInterface\\|Brotkrueml\\\\FeedGenerator\\\\Contract\\\\CategoryInterface\\|Brotkrueml\\\\FeedGenerator\\\\Contract\\\\ExtensionElementInterface\\|Brotkrueml\\\\FeedGenerator\\\\Contract\\\\ItemInterface\\>\\.$#"
+			message: "#^Method Brotkrueml\\\\FeedGenerator\\\\Entity\\\\AbstractFeed\\:\\:getItems\\(\\) should return Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\ItemInterface\\> but returns Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\CollectableInterface\\>\\.$#"
 			count: 1
 			path: Classes/Entity/AbstractFeed.php
 

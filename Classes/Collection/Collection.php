@@ -11,15 +11,11 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Collection;
 
-use Brotkrueml\FeedGenerator\Contract\AttachmentInterface;
-use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
-use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
-use Brotkrueml\FeedGenerator\Contract\ExtensionElementInterface;
-use Brotkrueml\FeedGenerator\Contract\ItemInterface;
+use Brotkrueml\FeedGenerator\Contract\CollectableInterface;
 use Traversable;
 
 /**
- * @template T of AttachmentInterface|AuthorInterface|CategoryInterface|ExtensionElementInterface|ItemInterface
+ * @template T of CollectableInterface
  * @implements \IteratorAggregate<T>
  */
 final class Collection implements \IteratorAggregate
@@ -33,7 +29,7 @@ final class Collection implements \IteratorAggregate
      * @param T $items
      * @return self<T>
      */
-    public function add(AttachmentInterface|AuthorInterface|CategoryInterface|ExtensionElementInterface|ItemInterface ...$items): self
+    public function add(CollectableInterface ...$items): self
     {
         if ($items === []) {
             return $this;
@@ -54,7 +50,7 @@ final class Collection implements \IteratorAggregate
     /**
      * @return T
      */
-    public function get(int $index): AttachmentInterface|AuthorInterface|CategoryInterface|ExtensionElementInterface|ItemInterface
+    public function get(int $index): CollectableInterface
     {
         return $this->items[$index] ?? throw IndexNotFoundException::forIndex($index);
     }

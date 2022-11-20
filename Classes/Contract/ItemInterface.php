@@ -16,7 +16,7 @@ use Brotkrueml\FeedGenerator\Collection\Collection;
 /**
  * @api
  */
-interface ItemInterface
+interface ItemInterface extends CollectableInterface
 {
     /**
      * Get a unique identifier associated with this item. These are optional so long as a link is added; i.e. if no
