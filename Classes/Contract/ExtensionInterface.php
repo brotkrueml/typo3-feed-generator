@@ -11,10 +11,17 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Contract;
 
+use JiriPudil\SealedClasses\Sealed;
+
 /**
- * Every extension must implement this interface to be recognised as extension
- * @api
+ * Marker interface for an extension class. Every extension must implement one of the
+ * two interfaces that extend this one to be recognised as extension.
+ * @internal
  */
+#[Sealed(permits: [
+    JsonExtensionInterface::class,
+    XmlExtensionInterface::class,
+])]
 interface ExtensionInterface
 {
     public function canHandle(ExtensionElementInterface $element): bool;
@@ -22,6 +29,4 @@ interface ExtensionInterface
     public function getNamespace(): string;
 
     public function getQualifiedName(): string;
-
-    public function getRenderer(): ExtensionRendererInterface;
 }

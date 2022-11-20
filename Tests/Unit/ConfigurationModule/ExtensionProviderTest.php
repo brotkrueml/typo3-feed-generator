@@ -14,8 +14,11 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\ConfigurationModule;
 use Brotkrueml\FeedGenerator\Configuration\ExtensionRegistryInterface;
 use Brotkrueml\FeedGenerator\ConfigurationModule\ExtensionProvider;
 use Brotkrueml\FeedGenerator\Contract\ExtensionElementInterface;
-use Brotkrueml\FeedGenerator\Contract\ExtensionInterface;
-use Brotkrueml\FeedGenerator\Contract\ExtensionRendererInterface;
+use Brotkrueml\FeedGenerator\Contract\JsonExtensionInterface;
+use Brotkrueml\FeedGenerator\Contract\JsonExtensionRendererInterface;
+use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
+use Brotkrueml\FeedGenerator\Contract\XmlExtensionRendererInterface;
+use Brotkrueml\FeedGenerator\Format\FeedFormat;
 use PHPUnit\Framework\TestCase;
 
 final class ExtensionProviderTest extends TestCase
@@ -63,58 +66,89 @@ final class ExtensionProviderTest extends TestCase
 
         yield 'One extension is available' => [
             'configurations' => [
-                $this->buildExtension('some', 'https://example.org/some'),
+                $this->buildExtensionForJson('some', 'https://example.org/some'),
             ],
             'expected' => [
                 [
                     'Qualified name' => 'some',
                     'Namespace' => 'https://example.org/some',
+                    'Feed format' => 'json',
                 ],
             ],
         ];
 
         yield 'Two extensions are available which are sorted by qualified name' => [
             'configurations' => [
-                $this->buildExtension('some', 'https://example.org/some'),
-                $this->buildExtension('another', 'https://example.org/another'),
+                $this->buildExtensionForJson('some', 'https://example.org/some'),
+                $this->buildExtensionForJson('another', 'https://example.org/another'),
             ],
             'expected' => [
                 [
                     'Qualified name' => 'another',
                     'Namespace' => 'https://example.org/another',
+                    'Feed format' => 'json',
                 ],
                 [
                     'Qualified name' => 'some',
                     'Namespace' => 'https://example.org/some',
+                    'Feed format' => 'json',
                 ],
             ],
         ];
 
         yield 'Two extensions with same qualified name and namespace' => [
             'configurations' => [
-                $this->buildExtension('another', 'https://example.org/another'),
-                $this->buildExtension('some', 'https://example.org/some'),
-                $this->buildExtension('some', 'https://example.org/some'),
+                $this->buildExtensionForJson('another', 'https://example.org/another'),
+                $this->buildExtensionForJson('some', 'https://example.org/some'),
+                $this->buildExtensionForJson('some', 'https://example.org/some'),
             ],
             'expected' => [
                 [
                     'Qualified name' => 'another',
                     'Namespace' => 'https://example.org/another',
+                    'Feed format' => 'json',
                 ],
                 [
                     'Qualified name' => 'some',
                     'Namespace' => 'https://example.org/some',
+                    'Feed format' => 'json',
                 ],
                 [
                     'Qualified name' => 'some',
                     'Namespace' => 'https://example.org/some',
+                    'Feed format' => 'json',
+                ],
+            ],
+        ];
+
+        yield 'Two extensions with different formats' => [
+            'configurations' => [
+                $this->buildExtensionForXmlAndJson('xml-and-json', 'https://example.org/xml-and-json'),
+                $this->buildExtensionForJson('json', 'https://example.org/json'),
+                $this->buildExtensionForXml('xml', 'https://example.org/xml'),
+            ],
+            'expected' => [
+                [
+                    'Qualified name' => 'json',
+                    'Namespace' => 'https://example.org/json',
+                    'Feed format' => 'json',
+                ],
+                [
+                    'Qualified name' => 'xml',
+                    'Namespace' => 'https://example.org/xml',
+                    'Feed formats' => 'atom, rss',
+                ],
+                [
+                    'Qualified name' => 'xml-and-json',
+                    'Namespace' => 'https://example.org/xml-and-json',
+                    'Feed formats' => 'atom, rss, json',
                 ],
             ],
         ];
     }
 
     /**
-     * @param ExtensionInterface[] $extensions
+     * @param list<JsonExtensionInterface|XmlExtensionInterface> $extensions
      */
     private function getInstanceOfSubjectUnderTest(array $extensions): ExtensionProvider
     {
@@ -124,13 +158,13 @@ final class ExtensionProviderTest extends TestCase
             ) {
             }
 
-            public function getExtensionForElement(ExtensionElementInterface $element): ExtensionInterface
+            public function getExtensionForElement(FeedFormat $format, ExtensionElementInterface $element): JsonExtensionInterface|XmlExtensionInterface
             {
                 throw new \Exception('unused');
             }
 
             /**
-             * @return iterable<ExtensionInterface>
+             * @return iterable<JsonExtensionInterface|XmlExtensionInterface>
              */
             public function getAllExtensions(): iterable
             {
@@ -146,9 +180,12 @@ final class ExtensionProviderTest extends TestCase
         return $subject;
     }
 
-    private function buildExtension(string $qualifiedName, string $namespace): ExtensionInterface
+    /**
+     * @noRector \Rector\TypeDeclaration\Rector\FunctionLike\ReturnTypeDeclarationRector
+     */
+    private function buildExtensionForXmlAndJson(string $qualifiedName, string $namespace): JsonExtensionInterface&XmlExtensionInterface
     {
-        return new class($qualifiedName, $namespace) implements ExtensionInterface {
+        return new class($qualifiedName, $namespace) implements JsonExtensionInterface, XmlExtensionInterface {
             public function __construct(
                 private readonly string $qualifiedName,
                 private readonly string $namespace,
@@ -170,7 +207,74 @@ final class ExtensionProviderTest extends TestCase
                 return $this->qualifiedName;
             }
 
-            public function getRenderer(): ExtensionRendererInterface
+            public function getJsonRenderer(): JsonExtensionRendererInterface
+            {
+                throw new \Exception('unused');
+            }
+
+            public function getXmlRenderer(): XmlExtensionRendererInterface
+            {
+                throw new \Exception('unused');
+            }
+        };
+    }
+
+    private function buildExtensionForJson(string $qualifiedName, string $namespace): JsonExtensionInterface
+    {
+        return new class($qualifiedName, $namespace) implements JsonExtensionInterface {
+            public function __construct(
+                private readonly string $qualifiedName,
+                private readonly string $namespace,
+            ) {
+            }
+
+            public function canHandle(ExtensionElementInterface $element): bool
+            {
+                throw new \Exception('unused');
+            }
+
+            public function getNamespace(): string
+            {
+                return $this->namespace;
+            }
+
+            public function getQualifiedName(): string
+            {
+                return $this->qualifiedName;
+            }
+
+            public function getJsonRenderer(): JsonExtensionRendererInterface
+            {
+                throw new \Exception('unused');
+            }
+        };
+    }
+
+    private function buildExtensionForXml(string $qualifiedName, string $namespace): XmlExtensionInterface
+    {
+        return new class($qualifiedName, $namespace) implements XmlExtensionInterface {
+            public function __construct(
+                private readonly string $qualifiedName,
+                private readonly string $namespace,
+            ) {
+            }
+
+            public function canHandle(ExtensionElementInterface $element): bool
+            {
+                throw new \Exception('unused');
+            }
+
+            public function getNamespace(): string
+            {
+                return $this->namespace;
+            }
+
+            public function getQualifiedName(): string
+            {
+                return $this->qualifiedName;
+            }
+
+            public function getXmlRenderer(): XmlExtensionRendererInterface
             {
                 throw new \Exception('unused');
             }

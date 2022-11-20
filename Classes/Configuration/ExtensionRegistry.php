@@ -12,7 +12,9 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Configuration;
 
 use Brotkrueml\FeedGenerator\Contract\ExtensionElementInterface;
-use Brotkrueml\FeedGenerator\Contract\ExtensionInterface;
+use Brotkrueml\FeedGenerator\Contract\JsonExtensionInterface;
+use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
+use Brotkrueml\FeedGenerator\Format\FeedFormat;
 
 /**
  * @internal
@@ -20,29 +22,63 @@ use Brotkrueml\FeedGenerator\Contract\ExtensionInterface;
 final class ExtensionRegistry implements ExtensionRegistryInterface
 {
     /**
-     * @param iterable<ExtensionInterface> $extensions
+     * @param iterable<JsonExtensionInterface|XmlExtensionInterface> $extensions
      */
     public function __construct(
         private readonly iterable $extensions
     ) {
     }
 
-    public function getExtensionForElement(ExtensionElementInterface $element): ExtensionInterface
+    /**
+     * @return ($format is FeedFormat::JSON ? JsonExtensionInterface : XmlExtensionInterface)
+     */
+    public function getExtensionForElement(FeedFormat $format, ExtensionElementInterface $element): JsonExtensionInterface|XmlExtensionInterface
     {
-        foreach ($this->extensions as $extension) {
+        $extensions = $format === FeedFormat::JSON ? $this->getExtensionsForJsonFormat() : $this->getExtensionsForXmlFormat();
+        foreach ($extensions as $extension) {
             if ($extension->canHandle($element)) {
                 return $extension;
             }
         }
 
-        throw ExtensionForElementNotFoundException::forElement($element);
+        throw ExtensionForElementNotFoundException::forFormatAndElement($format, $element);
     }
 
     /**
-     * @return iterable<ExtensionInterface>
+     * @return iterable<JsonExtensionInterface|XmlExtensionInterface>
      */
     public function getAllExtensions(): iterable
     {
         return $this->extensions;
+    }
+
+    /**
+     * @return XmlExtensionInterface[]
+     */
+    private function getExtensionsForXmlFormat(): array
+    {
+        $extensionsForXml = [];
+        foreach ($this->extensions as $extension) {
+            if ($extension instanceof XmlExtensionInterface) {
+                $extensionsForXml[] = $extension;
+            }
+        }
+
+        return $extensionsForXml;
+    }
+
+    /**
+     * @return JsonExtensionInterface[]
+     */
+    private function getExtensionsForJsonFormat(): array
+    {
+        $extensionsForJson = [];
+        foreach ($this->extensions as $extension) {
+            if ($extension instanceof JsonExtensionInterface) {
+                $extensionsForJson[] = $extension;
+            }
+        }
+
+        return $extensionsForJson;
     }
 }

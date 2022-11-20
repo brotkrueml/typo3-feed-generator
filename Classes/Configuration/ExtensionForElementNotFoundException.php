@@ -12,17 +12,19 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Configuration;
 
 use Brotkrueml\FeedGenerator\Contract\ExtensionElementInterface;
+use Brotkrueml\FeedGenerator\Format\FeedFormat;
 
 /**
  * @internal
  */
 final class ExtensionForElementNotFoundException extends \DomainException
 {
-    public static function forElement(ExtensionElementInterface $element): self
+    public static function forFormatAndElement(FeedFormat $format, ExtensionElementInterface $element): self
     {
         return new self(
             \sprintf(
-                'Extension for element "%s" not found.',
+                'Extension for format "%s" and element "%s" not found.',
+                $format->format(),
                 $element::class
             ),
             1668878017

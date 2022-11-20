@@ -12,6 +12,9 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\ConfigurationModule;
 
 use Brotkrueml\FeedGenerator\Configuration\ExtensionRegistryInterface;
+use Brotkrueml\FeedGenerator\Contract\JsonExtensionInterface;
+use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
+use Brotkrueml\FeedGenerator\Format\FeedFormat;
 use TYPO3\CMS\Lowlevel\ConfigurationModuleProvider\ProviderInterface;
 
 /**
@@ -58,9 +61,19 @@ final class ExtensionProvider implements ProviderInterface
 
         $result = [];
         foreach ($extensions as $extension) {
+            $formats = [];
+            if ($extension instanceof XmlExtensionInterface) {
+                $formats = [FeedFormat::ATOM, FeedFormat::RSS];
+            }
+            if ($extension instanceof JsonExtensionInterface) {
+                $formats[] = FeedFormat::JSON;
+            }
+            $formatKey = 'Feed format' . (count($formats) > 1 ? 's' : '');
+
             $result[] = [
                 'Qualified name' => $extension->getQualifiedName(),
                 'Namespace' => $extension->getNamespace(),
+                $formatKey => \implode(', ', \array_map(static fn (FeedFormat $format): string => $format->format(), $formats)),
             ];
         }
 

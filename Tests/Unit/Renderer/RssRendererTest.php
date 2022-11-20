@@ -13,8 +13,10 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer;
 
 use Brotkrueml\FeedGenerator\Configuration\ExtensionRegistryInterface;
 use Brotkrueml\FeedGenerator\Contract\ExtensionElementInterface;
-use Brotkrueml\FeedGenerator\Contract\ExtensionInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
+use Brotkrueml\FeedGenerator\Contract\JsonExtensionInterface;
+use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
+use Brotkrueml\FeedGenerator\Format\FeedFormat;
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
 use Brotkrueml\FeedGenerator\Renderer\PathResolver;
 use Brotkrueml\FeedGenerator\Renderer\RssRenderer;
@@ -50,9 +52,9 @@ final class RssRendererTest extends TestCase
     protected function setUp(): void
     {
         $extensionRegistryDummy = new class() implements ExtensionRegistryInterface {
-            public function getExtensionForElement(ExtensionElementInterface $element): ExtensionInterface
+            public function getExtensionForElement(FeedFormat $format, ExtensionElementInterface $element): JsonExtensionInterface|XmlExtensionInterface
             {
-                throw new \Exception('Should not happen here');
+                throw new \Exception('unused');
             }
 
             /**

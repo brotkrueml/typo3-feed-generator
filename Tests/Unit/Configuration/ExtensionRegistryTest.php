@@ -14,8 +14,11 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\Configuration;
 use Brotkrueml\FeedGenerator\Configuration\ExtensionForElementNotFoundException;
 use Brotkrueml\FeedGenerator\Configuration\ExtensionRegistry;
 use Brotkrueml\FeedGenerator\Contract\ExtensionElementInterface;
-use Brotkrueml\FeedGenerator\Contract\ExtensionInterface;
-use Brotkrueml\FeedGenerator\Contract\ExtensionRendererInterface;
+use Brotkrueml\FeedGenerator\Contract\JsonExtensionInterface;
+use Brotkrueml\FeedGenerator\Contract\JsonExtensionRendererInterface;
+use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
+use Brotkrueml\FeedGenerator\Contract\XmlExtensionRendererInterface;
+use Brotkrueml\FeedGenerator\Format\FeedFormat;
 use PHPUnit\Framework\TestCase;
 
 final class ExtensionRegistryTest extends TestCase
@@ -59,22 +62,22 @@ final class ExtensionRegistryTest extends TestCase
         $element = new class() implements ExtensionElementInterface {
         };
 
-        $subject->getExtensionForElement($element);
+        $subject->getExtensionForElement(FeedFormat::ATOM, $element);
     }
 
     /**
      * @test
      */
-    public function getExtensionForElementReturnsRendererCorrectly(): void
+    public function getExtensionForElementReturnsExtensionCorrectly(): void
     {
-        $extension1 = $this->buildExtensionClass();
-        $extension2 = $this->buildExtensionClass(true);
+        $extension1 = $this->buildExtensionClass(formats: [FeedFormat::ATOM]);
+        $extension2 = $this->buildExtensionClass(true, [FeedFormat::ATOM]);
         $subject = new ExtensionRegistry([$extension1, $extension2]);
 
         $element = new class() implements ExtensionElementInterface {
         };
 
-        $actual = $subject->getExtensionForElement($element);
+        $actual = $subject->getExtensionForElement(FeedFormat::ATOM, $element);
 
         self::assertSame($extension2, $actual);
     }
@@ -84,24 +87,37 @@ final class ExtensionRegistryTest extends TestCase
      */
     public function getExtensionForElementReturnsRendererTheFirstAvailableRenderer(): void
     {
-        $extension1 = $this->buildExtensionClass(true);
-        $extension2 = $this->buildExtensionClass(true);
+        $extension1 = $this->buildExtensionClass(true, [FeedFormat::ATOM]);
+        $extension2 = $this->buildExtensionClass(true, [FeedFormat::ATOM]);
         $subject = new ExtensionRegistry([$extension1, $extension2]);
 
         $element = new class() implements ExtensionElementInterface {
         };
 
-        $actual = $subject->getExtensionForElement($element);
+        $actual = $subject->getExtensionForElement(FeedFormat::ATOM, $element);
 
         self::assertSame($extension1, $actual);
     }
 
-    private function buildExtensionClass(bool $canHandle = false): ExtensionInterface
+    /**
+     * @noRector \Rector\TypeDeclaration\Rector\FunctionLike\ReturnTypeDeclarationRector
+     * @param FeedFormat[] $formats
+     */
+    private function buildExtensionClass(bool $canHandle = false, array $formats = []): JsonExtensionInterface&XmlExtensionInterface
     {
-        return new class($canHandle) implements ExtensionInterface {
+        return new class($canHandle, $formats) implements JsonExtensionInterface, XmlExtensionInterface {
             public function __construct(
                 private readonly bool $canHandle,
+                private readonly array $formats,
             ) {
+            }
+
+            /**
+             * @return FeedFormat[]
+             */
+            public function supportsFormat(): array
+            {
+                return $this->formats;
             }
 
             public function canHandle(ExtensionElementInterface $element): bool
@@ -119,9 +135,22 @@ final class ExtensionRegistryTest extends TestCase
                 return 'some-name';
             }
 
-            public function getRenderer(): ExtensionRendererInterface
+            public function getJsonRenderer(): JsonExtensionRendererInterface
             {
-                return new class() implements ExtensionRendererInterface {
+                return new class() implements JsonExtensionRendererInterface {
+                    /**
+                     * @return array<string, mixed>
+                     */
+                    public function render(ExtensionElementInterface $element): array
+                    {
+                        return [];
+                    }
+                };
+            }
+
+            public function getXmlRenderer(): XmlExtensionRendererInterface
+            {
+                return new class() implements XmlExtensionRendererInterface {
                     public function render(ExtensionElementInterface $element, \DOMNode $parent, \DOMDocument $document): void
                     {
                     }

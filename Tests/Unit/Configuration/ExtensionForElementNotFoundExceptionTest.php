@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Configuration;
 
 use Brotkrueml\FeedGenerator\Configuration\ExtensionForElementNotFoundException;
+use Brotkrueml\FeedGenerator\Format\FeedFormat;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\ValueObject\ExtensionElementFixture;
 use PHPUnit\Framework\TestCase;
 
@@ -22,10 +23,10 @@ final class ExtensionForElementNotFoundExceptionTest extends TestCase
      */
     public function forElement(): void
     {
-        $actual = ExtensionForElementNotFoundException::forElement(new ExtensionElementFixture());
+        $actual = ExtensionForElementNotFoundException::forFormatAndElement(FeedFormat::RSS, new ExtensionElementFixture());
 
         self::assertSame(
-            'Extension for element "Brotkrueml\FeedGenerator\Tests\Fixtures\ValueObject\ExtensionElementFixture" not found.',
+            'Extension for format "rss" and element "Brotkrueml\FeedGenerator\Tests\Fixtures\ValueObject\ExtensionElementFixture" not found.',
             $actual->getMessage()
         );
         self::assertSame(1668878017, $actual->getCode());
