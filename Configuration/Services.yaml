@@ -23,8 +23,14 @@ services:
           json: '@Brotkrueml\FeedGenerator\Renderer\JsonRenderer'
           rss: '@Brotkrueml\FeedGenerator\Renderer\RssRenderer'
 
-  feed_generator.configuration.module.feed_configuration:
+  feed_generator.configuration.module.feeds:
     class: Brotkrueml\FeedGenerator\ConfigurationModule\FeedProvider
     tags:
       - name: 'lowlevel.configuration.module.provider'
         identifier: 'feed-generator/feed-provider'
+
+  feed_generator.configuration.module.extensions:
+    class: Brotkrueml\FeedGenerator\ConfigurationModule\ExtensionProvider
+    tags:
+      - name: 'lowlevel.configuration.module.provider'
+        identifier: 'feed-generator/extension-provider'

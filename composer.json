@@ -39,7 +39,7 @@
 		"typo3/cms-lowlevel": "^11.5 || ^12.0"
 	},
 	"suggest": {
-		"typo3/cms-lowlevel": "Display available feeds in Configurations module"
+		"typo3/cms-lowlevel": "Display available feeds and extensions in Configuration module"
 	},
 	"repositories": [
 		{
