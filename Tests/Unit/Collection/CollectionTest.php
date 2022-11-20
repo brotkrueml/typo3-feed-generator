@@ -13,7 +13,6 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\Collection;
 
 use Brotkrueml\FeedGenerator\Collection\Collection;
 use Brotkrueml\FeedGenerator\Collection\IndexNotFoundException;
-use Brotkrueml\FeedGenerator\Collection\MixedItemsException;
 use Brotkrueml\FeedGenerator\Contract\ExtensionElementInterface;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Entity\ItemFixture;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\ValueObject\AttachmentFixture;
@@ -133,33 +132,6 @@ final class CollectionTest extends TestCase
 
         self::assertSame($author1, $this->subject->get(0));
         self::assertSame($author2, $this->subject->get(1));
-    }
-
-    /**
-     * @test
-     */
-    public function addWithDifferentValueObjectsThrowsException(): void
-    {
-        $this->expectException(MixedItemsException::class);
-
-        $author = new AuthorFixture();
-        $category = new CategoryFixture();
-
-        $this->subject->add($author, $category);
-    }
-
-    /**
-     * @test
-     */
-    public function consecutiveAddWithDifferentValueObjectsThrowsException(): void
-    {
-        $this->expectException(MixedItemsException::class);
-
-        $author = new AuthorFixture();
-        $category = new CategoryFixture();
-
-        $this->subject->add($author);
-        $this->subject->add($category);
     }
 
     /**

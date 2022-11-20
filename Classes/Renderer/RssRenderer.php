@@ -18,6 +18,7 @@ use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Brotkrueml\FeedGenerator\Contract\TextInterface;
+use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
 use Brotkrueml\FeedGenerator\Format\FeedFormat;
 
 /**
@@ -95,6 +96,9 @@ final class RssRenderer implements RendererInterface
 
         foreach ($feed->getExtensionElements() as $element) {
             $extension = $this->extensionRegistry->getExtensionForElement(FeedFormat::RSS, $element);
+            if (! $extension instanceof XmlExtensionInterface) {
+                continue;
+            }
             $extension->getXmlRenderer()->render($element, $channel, $this->xml);
             $this->usedExtensions[$extension->getQualifiedName()] = $extension->getNamespace();
         }
@@ -216,6 +220,9 @@ final class RssRenderer implements RendererInterface
 
         foreach ($item->getExtensionElements() as $element) {
             $extension = $this->extensionRegistry->getExtensionForElement(FeedFormat::RSS, $element);
+            if (! $extension instanceof XmlExtensionInterface) {
+                continue;
+            }
             $extension->getXmlRenderer()->render($element, $itemNode, $this->xml);
             $this->usedExtensions[$extension->getQualifiedName()] = $extension->getNamespace();
         }

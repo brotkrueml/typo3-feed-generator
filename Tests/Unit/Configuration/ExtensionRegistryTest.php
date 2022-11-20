@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Configuration;
 
-use Brotkrueml\FeedGenerator\Configuration\ExtensionForElementNotFoundException;
 use Brotkrueml\FeedGenerator\Configuration\ExtensionRegistry;
 use Brotkrueml\FeedGenerator\Contract\ExtensionElementInterface;
 use Brotkrueml\FeedGenerator\Contract\JsonExtensionInterface;
@@ -52,17 +51,17 @@ final class ExtensionRegistryTest extends TestCase
     /**
      * @test
      */
-    public function getExtensionForElementThrowsExceptionWhenNoRendererCanHandleAnElement(): void
+    public function getExtensionForElementReturnsNUllNoRendererCanHandleAnElement(): void
     {
-        $this->expectException(ExtensionForElementNotFoundException::class);
-
         $extension = $this->buildExtensionClass();
         $subject = new ExtensionRegistry([$extension]);
 
         $element = new class() implements ExtensionElementInterface {
         };
 
-        $subject->getExtensionForElement(FeedFormat::ATOM, $element);
+        $actual = $subject->getExtensionForElement(FeedFormat::ATOM, $element);
+
+        self::assertNull($actual);
     }
 
     /**
@@ -133,6 +132,11 @@ final class ExtensionRegistryTest extends TestCase
             public function getQualifiedName(): string
             {
                 return 'some-name';
+            }
+
+            public function getAbout(): string
+            {
+                return 'http://example.org/some-about-docs';
             }
 
             public function getJsonRenderer(): JsonExtensionRendererInterface

@@ -31,18 +31,7 @@ final class Collection implements \IteratorAggregate
      */
     public function add(CollectableInterface ...$items): self
     {
-        if ($items === []) {
-            return $this;
-        }
-
-        $type = $this->isEmpty() ? $items[0]::class : $this->get(0)::class;
-        foreach ($items as $item) {
-            if (! $item instanceof $type) {
-                throw MixedItemsException::forItemTypes($item::class, $type);
-            }
-
-            $this->items[] = $item;
-        }
+        $this->items = \array_merge($this->items, $items);
 
         return $this;
     }

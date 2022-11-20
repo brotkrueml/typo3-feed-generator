@@ -61,20 +61,27 @@ final class ExtensionProvider implements ProviderInterface
 
         $result = [];
         foreach ($extensions as $extension) {
+            $item = [
+                'Qualified name' => $extension->getQualifiedName(),
+            ];
+
             $formats = [];
             if ($extension instanceof XmlExtensionInterface) {
                 $formats = [FeedFormat::ATOM, FeedFormat::RSS];
+                $item['Namespace'] = $extension->getNamespace();
             }
             if ($extension instanceof JsonExtensionInterface) {
                 $formats[] = FeedFormat::JSON;
+                $item['About'] = $extension->getAbout();
             }
-            $formatKey = 'Feed format' . (count($formats) > 1 ? 's' : '');
 
-            $result[] = [
-                'Qualified name' => $extension->getQualifiedName(),
-                'Namespace' => $extension->getNamespace(),
-                $formatKey => \implode(', ', \array_map(static fn (FeedFormat $format): string => $format->format(), $formats)),
-            ];
+            $formatKey = 'Feed format' . (count($formats) > 1 ? 's' : '');
+            $item[$formatKey] = \implode(
+                ', ',
+                \array_map(static fn (FeedFormat $format): string => $format->format(), $formats)
+            );
+
+            $result[] = $item;
         }
 
         \usort(

@@ -12,10 +12,15 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Contract;
 
 /**
- * Every extension must implement this interface to be recognised as extension
+ * An extension for an Atom/RSS feed must implement this interface to be recognised as extension
  * @api
  */
 interface XmlExtensionInterface extends ExtensionInterface
 {
+    /**
+     * The XML namespace
+     */
+    public function getNamespace(): string;
+
     public function getXmlRenderer(): XmlExtensionRendererInterface;
 }

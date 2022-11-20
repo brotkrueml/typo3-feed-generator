@@ -22,9 +22,9 @@ use Brotkrueml\FeedGenerator\Format\FeedFormat;
 interface ExtensionRegistryInterface
 {
     /**
-     * @return ($format is FeedFormat::JSON ? JsonExtensionInterface : XmlExtensionInterface)
+     * @return ($format is FeedFormat::JSON ? JsonExtensionInterface : XmlExtensionInterface)|null
      */
-    public function getExtensionForElement(FeedFormat $format, ExtensionElementInterface $element): JsonExtensionInterface|XmlExtensionInterface;
+    public function getExtensionForElement(FeedFormat $format, ExtensionElementInterface $element): JsonExtensionInterface|XmlExtensionInterface|null;
 
     /**
      * @return iterable<JsonExtensionInterface|XmlExtensionInterface>

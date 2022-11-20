@@ -11,7 +11,12 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer;
 
+use Brotkrueml\FeedGenerator\Configuration\ExtensionRegistryInterface;
+use Brotkrueml\FeedGenerator\Contract\ExtensionElementInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
+use Brotkrueml\FeedGenerator\Contract\JsonExtensionInterface;
+use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
+use Brotkrueml\FeedGenerator\Format\FeedFormat;
 use Brotkrueml\FeedGenerator\Renderer\JsonRenderer;
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Json\FeedWithEmptyItems;
@@ -28,7 +33,22 @@ final class JsonRendererTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->subject = new JsonRenderer();
+        $extensionRegistryDummy = new class() implements ExtensionRegistryInterface {
+            public function getExtensionForElement(FeedFormat $format, ExtensionElementInterface $element): JsonExtensionInterface|XmlExtensionInterface
+            {
+                throw new \Exception('unused');
+            }
+
+            /**
+             * @return array{}
+             */
+            public function getAllExtensions(): iterable
+            {
+                return [];
+            }
+        };
+
+        $this->subject = new JsonRenderer($extensionRegistryDummy);
     }
 
     /**

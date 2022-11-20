@@ -12,16 +12,27 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Renderer;
 
 use Brotkrueml\FeedGenerator\Collection\Collection;
+use Brotkrueml\FeedGenerator\Configuration\ExtensionRegistryInterface;
 use Brotkrueml\FeedGenerator\Contract\AttachmentInterface;
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
+use Brotkrueml\FeedGenerator\Contract\ExtensionElementInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
+use Brotkrueml\FeedGenerator\Contract\JsonExtensionInterface;
+use Brotkrueml\FeedGenerator\Format\FeedFormat;
 
 /**
  * @internal
  */
 final class JsonRenderer implements RendererInterface
 {
+    private array $isAboutRendered = [];
+
+    public function __construct(
+        private readonly ExtensionRegistryInterface $extensionRegistry,
+    ) {
+    }
+
     public function render(FeedInterface $feed, string $feedLink): string
     {
         if ($feed->getTitle() === '') {
@@ -51,6 +62,9 @@ final class JsonRenderer implements RendererInterface
         }
         if ($feed->getLanguage() !== '') {
             $resultArray['language'] = $feed->getLanguage();
+        }
+        foreach ($feed->getExtensionElements() as $element) {
+            $resultArray = [...$resultArray, ...$this->renderExtensionContent($element)];
         }
 
         $resultArray['items'] = [];
@@ -84,6 +98,9 @@ final class JsonRenderer implements RendererInterface
             }
             if (! $item->getAttachments()->isEmpty()) {
                 $itemArray['attachments'] = $this->buildAttachmentsArray($item->getAttachments());
+            }
+            foreach ($item->getExtensionElements() as $element) {
+                $itemArray = [...$itemArray, ...$this->renderExtensionContent($element)];
             }
             $resultArray['items'][] = $itemArray;
         }
@@ -142,5 +159,28 @@ final class JsonRenderer implements RendererInterface
         }
 
         return $attachmentsArray;
+    }
+
+    /**
+     * @return array<string, array<string, mixed>>
+     */
+    private function renderExtensionContent(ExtensionElementInterface $element): array
+    {
+        $extension = $this->extensionRegistry->getExtensionForElement(FeedFormat::JSON, $element);
+        if (! $extension instanceof JsonExtensionInterface) {
+            return [];
+        }
+        $qualifiedName = (\str_starts_with($extension->getQualifiedName(), '_') ? '' : '_') . $extension->getQualifiedName();
+        $content = $extension->getJsonRenderer()->render($element);
+        if ($extension->getAbout() !== '' && ! ($this->isAboutRendered[$qualifiedName] ?? false)) {
+            $content = [...[
+                'about' => $extension->getAbout(),
+            ], ...$content];
+            $this->isAboutRendered[$qualifiedName] = true;
+        }
+
+        return [
+            $qualifiedName => $content,
+        ];
     }
 }

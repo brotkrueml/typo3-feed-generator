@@ -71,7 +71,7 @@ final class ExtensionProviderTest extends TestCase
             'expected' => [
                 [
                     'Qualified name' => 'some',
-                    'Namespace' => 'https://example.org/some',
+                    'About' => 'https://example.org/some',
                     'Feed format' => 'json',
                 ],
             ],
@@ -85,12 +85,12 @@ final class ExtensionProviderTest extends TestCase
             'expected' => [
                 [
                     'Qualified name' => 'another',
-                    'Namespace' => 'https://example.org/another',
+                    'About' => 'https://example.org/another',
                     'Feed format' => 'json',
                 ],
                 [
                     'Qualified name' => 'some',
-                    'Namespace' => 'https://example.org/some',
+                    'About' => 'https://example.org/some',
                     'Feed format' => 'json',
                 ],
             ],
@@ -105,17 +105,17 @@ final class ExtensionProviderTest extends TestCase
             'expected' => [
                 [
                     'Qualified name' => 'another',
-                    'Namespace' => 'https://example.org/another',
+                    'About' => 'https://example.org/another',
                     'Feed format' => 'json',
                 ],
                 [
                     'Qualified name' => 'some',
-                    'Namespace' => 'https://example.org/some',
+                    'About' => 'https://example.org/some',
                     'Feed format' => 'json',
                 ],
                 [
                     'Qualified name' => 'some',
-                    'Namespace' => 'https://example.org/some',
+                    'About' => 'https://example.org/some',
                     'Feed format' => 'json',
                 ],
             ],
@@ -123,14 +123,14 @@ final class ExtensionProviderTest extends TestCase
 
         yield 'Two extensions with different formats' => [
             'configurations' => [
-                $this->buildExtensionForXmlAndJson('xml-and-json', 'https://example.org/xml-and-json'),
+                $this->buildExtensionForXmlAndJson('xml-and-json', 'https://example.org/xml-and-json', 'https://example.org/about'),
                 $this->buildExtensionForJson('json', 'https://example.org/json'),
                 $this->buildExtensionForXml('xml', 'https://example.org/xml'),
             ],
             'expected' => [
                 [
                     'Qualified name' => 'json',
-                    'Namespace' => 'https://example.org/json',
+                    'About' => 'https://example.org/json',
                     'Feed format' => 'json',
                 ],
                 [
@@ -141,6 +141,7 @@ final class ExtensionProviderTest extends TestCase
                 [
                     'Qualified name' => 'xml-and-json',
                     'Namespace' => 'https://example.org/xml-and-json',
+                    'About' => 'https://example.org/about',
                     'Feed formats' => 'atom, rss, json',
                 ],
             ],
@@ -183,12 +184,13 @@ final class ExtensionProviderTest extends TestCase
     /**
      * @noRector \Rector\TypeDeclaration\Rector\FunctionLike\ReturnTypeDeclarationRector
      */
-    private function buildExtensionForXmlAndJson(string $qualifiedName, string $namespace): JsonExtensionInterface&XmlExtensionInterface
+    private function buildExtensionForXmlAndJson(string $qualifiedName, string $namespace, string $about): JsonExtensionInterface&XmlExtensionInterface
     {
-        return new class($qualifiedName, $namespace) implements JsonExtensionInterface, XmlExtensionInterface {
+        return new class($qualifiedName, $namespace, $about) implements JsonExtensionInterface, XmlExtensionInterface {
             public function __construct(
                 private readonly string $qualifiedName,
                 private readonly string $namespace,
+                private readonly string $about,
             ) {
             }
 
@@ -207,6 +209,11 @@ final class ExtensionProviderTest extends TestCase
                 return $this->qualifiedName;
             }
 
+            public function getAbout(): string
+            {
+                return $this->about;
+            }
+
             public function getJsonRenderer(): JsonExtensionRendererInterface
             {
                 throw new \Exception('unused');
@@ -219,12 +226,12 @@ final class ExtensionProviderTest extends TestCase
         };
     }
 
-    private function buildExtensionForJson(string $qualifiedName, string $namespace): JsonExtensionInterface
+    private function buildExtensionForJson(string $qualifiedName, string $about): JsonExtensionInterface
     {
-        return new class($qualifiedName, $namespace) implements JsonExtensionInterface {
+        return new class($qualifiedName, $about) implements JsonExtensionInterface {
             public function __construct(
                 private readonly string $qualifiedName,
-                private readonly string $namespace,
+                private readonly string $about,
             ) {
             }
 
@@ -233,9 +240,9 @@ final class ExtensionProviderTest extends TestCase
                 throw new \Exception('unused');
             }
 
-            public function getNamespace(): string
+            public function getAbout(): string
             {
-                return $this->namespace;
+                return $this->about;
             }
 
             public function getQualifiedName(): string

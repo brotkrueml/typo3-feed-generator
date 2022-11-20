@@ -30,9 +30,9 @@ final class ExtensionRegistry implements ExtensionRegistryInterface
     }
 
     /**
-     * @return ($format is FeedFormat::JSON ? JsonExtensionInterface : XmlExtensionInterface)
+     * @return ($format is FeedFormat::JSON ? JsonExtensionInterface : XmlExtensionInterface)|null
      */
-    public function getExtensionForElement(FeedFormat $format, ExtensionElementInterface $element): JsonExtensionInterface|XmlExtensionInterface
+    public function getExtensionForElement(FeedFormat $format, ExtensionElementInterface $element): JsonExtensionInterface|XmlExtensionInterface|null
     {
         $extensions = $format === FeedFormat::JSON ? $this->getExtensionsForJsonFormat() : $this->getExtensionsForXmlFormat();
         foreach ($extensions as $extension) {
@@ -41,7 +41,7 @@ final class ExtensionRegistry implements ExtensionRegistryInterface
             }
         }
 
-        throw ExtensionForElementNotFoundException::forFormatAndElement($format, $element);
+        return null;
     }
 
     /**

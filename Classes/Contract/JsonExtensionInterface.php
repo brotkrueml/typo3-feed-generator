@@ -12,10 +12,16 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Contract;
 
 /**
- * Every extension must implement this interface to be recognised as extension
+ * An extension for a JSON feed must implement this interface to be recognised as extension
  * @api
  */
 interface JsonExtensionInterface extends ExtensionInterface
 {
+    /**
+     * The "about" string is there for a human looking at the feed, so they can understand what goes
+     * in the custom extension.
+     */
+    public function getAbout(): string;
+
     public function getJsonRenderer(): JsonExtensionRendererInterface;
 }

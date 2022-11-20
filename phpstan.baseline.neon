@@ -26,17 +26,22 @@ parameters:
 			path: Classes/Renderer/AtomRenderer.php
 
 		-
-			message: "#^Class cognitive complexity is 30, keep it under 13$#"
+			message: "#^Class cognitive complexity is 34, keep it under 13$#"
 			count: 1
 			path: Classes/Renderer/AtomRenderer.php
 
 		-
-			message: "#^Class cognitive complexity is 27, keep it under 13$#"
+			message: "#^Class cognitive complexity is 33, keep it under 13$#"
 			count: 1
 			path: Classes/Renderer/JsonRenderer.php
 
 		-
-			message: "#^Class cognitive complexity is 45, keep it under 13$#"
+			message: "#^Property Brotkrueml\\\\FeedGenerator\\\\Renderer\\\\JsonRenderer\\:\\:\\$isAboutRendered type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Renderer/JsonRenderer.php
+
+		-
+			message: "#^Class cognitive complexity is 49, keep it under 13$#"
 			count: 1
 			path: Classes/Renderer/RssRenderer.php
 

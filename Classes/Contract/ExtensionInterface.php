@@ -26,7 +26,5 @@ interface ExtensionInterface
 {
     public function canHandle(ExtensionElementInterface $element): bool;
 
-    public function getNamespace(): string;
-
     public function getQualifiedName(): string;
 }
