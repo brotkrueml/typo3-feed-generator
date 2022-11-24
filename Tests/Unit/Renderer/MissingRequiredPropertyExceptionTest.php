@@ -33,10 +33,10 @@ final class MissingRequiredPropertyExceptionTest extends TestCase
      */
     public function forProperties(): void
     {
-        $actual = MissingRequiredPropertyException::forProperties('some_property', 'another_property');
+        $actual = MissingRequiredPropertyException::forProperties(['some_property', 'another_property']);
 
         self::assertInstanceOf(MissingRequiredPropertyException::class, $actual);
-        self::assertSame('At least one of "some_property" or "another_property" must be present.', $actual->getMessage());
+        self::assertSame('At least one of some_property or another_property must be present.', $actual->getMessage());
         self::assertSame(1668434363, $actual->getCode());
     }
 }

@@ -113,7 +113,7 @@ final class RssRendererTest extends TestCase
     public function emptyTitleAndDescriptionInItemThrowsException(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectExceptionMessage('At least one of "item/title" or "item/description" must be present.');
+        $this->expectExceptionMessage('At least one of item/title or item/description must be present.');
 
         $this->subject->render(new ItemWithEmptyTitleAndDescription(), 'https://example.org/feed.rss');
     }

@@ -29,10 +29,6 @@ use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FullItems;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\ItemWithDescriptionAsString;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\ItemWithDescriptionAsTextObjectWithFormatHtml;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\ItemWithDescriptionAsTextObjectWithFormatText;
-use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\ItemWithEmptyDateModified;
-use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\ItemWithEmptyId;
-use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\ItemWithEmptyLinkAndContent;
-use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\ItemWithEmptyTitle;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\MinimumCategoryFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\MinimumFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\MinimumFeedAuthor;
@@ -99,50 +95,6 @@ final class AtomRendererTest extends TestCase
         $this->expectExceptionMessage('Required property "updated" is missing.');
 
         $this->subject->render(new FeedWithEmptyDateModified(), 'https://example.org/feed.atom');
-    }
-
-    /**
-     * @test
-     */
-    public function emptyItemIdThrowsException(): void
-    {
-        $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectExceptionMessage('Required property "entry/id" is missing.');
-
-        $this->subject->render(new ItemWithEmptyId(), 'https://example.org/feed.atom');
-    }
-
-    /**
-     * @test
-     */
-    public function emptyItemTitleThrowsException(): void
-    {
-        $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectExceptionMessage('Required property "entry/title" is missing.');
-
-        $this->subject->render(new ItemWithEmptyTitle(), 'https://example.org/feed.atom');
-    }
-
-    /**
-     * @test
-     */
-    public function emptyItemDateModifiedThrowsException(): void
-    {
-        $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectExceptionMessage('Required property "entry/updated" is missing.');
-
-        $this->subject->render(new ItemWithEmptyDateModified(), 'https://example.org/feed.atom');
-    }
-
-    /**
-     * @test
-     */
-    public function emptyItemLinkAndContentThrowsException(): void
-    {
-        $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectExceptionMessage('At least one of "entry/link" or "entry/content" must be present.');
-
-        $this->subject->render(new ItemWithEmptyLinkAndContent(), 'https://example.org/feed.atom');
     }
 
     /**

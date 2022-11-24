@@ -8,6 +8,7 @@ use Rector\Php74\Rector\LNumber\AddLiteralSeparatorToNumberRector;
 use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
+use Rector\TypeDeclaration\Rector\ClassMethod\AddArrayParamDocTypeRector;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->phpVersion(PhpVersion::PHP_81);
@@ -27,7 +28,7 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->autoloadPaths([
         __DIR__ . '/.Build/vendor/autoload.php',
     ]);
-    $rectorConfig->disableImportShortClasses();
+    $rectorConfig->importShortClasses(false);
     $rectorConfig->importNames();
     $rectorConfig->paths([
         __DIR__ . '/Classes',
@@ -35,5 +36,8 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
     $rectorConfig->skip([
         AddLiteralSeparatorToNumberRector::class,
+        AddArrayParamDocTypeRector::class => [
+            __DIR__ . '/Tests',
+        ]
     ]);
 };

@@ -26,11 +26,6 @@ parameters:
 			path: Classes/Renderer/AtomRenderer.php
 
 		-
-			message: "#^Class cognitive complexity is 34, keep it under 13$#"
-			count: 1
-			path: Classes/Renderer/AtomRenderer.php
-
-		-
 			message: "#^Class cognitive complexity is 33, keep it under 13$#"
 			count: 1
 			path: Classes/Renderer/JsonRenderer.php
