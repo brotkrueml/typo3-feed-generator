@@ -11,20 +11,23 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer;
 
-use Brotkrueml\FeedGenerator\Renderer\WrongImageDimensionException;
+use Brotkrueml\FeedGenerator\Renderer\IntegerNotInRangeException;
 use PHPUnit\Framework\TestCase;
 
-final class WrongImageDimensionExceptionTest extends TestCase
+final class IntegerNotInRangeExceptionTest extends TestCase
 {
     /**
      * @test
      */
     public function forProperty(): void
     {
-        $actual = WrongImageDimensionException::forProperty('some_property', 42, 21);
+        $actual = IntegerNotInRangeException::forProperty('some_property', 42, 50, 100);
 
-        self::assertInstanceOf(WrongImageDimensionException::class, $actual);
-        self::assertSame('The some_property of an image is "42" which is higher than the maximum allowed (21).', $actual->getMessage());
+        self::assertInstanceOf(IntegerNotInRangeException::class, $actual);
+        self::assertSame(
+            'The value of "some_property" must be between 50 and 100, 42 given.',
+            $actual->getMessage()
+        );
         self::assertSame(1668153593, $actual->getCode());
     }
 }

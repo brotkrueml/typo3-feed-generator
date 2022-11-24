@@ -11,16 +11,17 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Renderer;
 
-final class WrongImageDimensionException extends \RuntimeException
+final class IntegerNotInRangeException extends \OutOfRangeException
 {
-    public static function forProperty(string $property, int $value, int $maximum): self
+    public static function forProperty(string $property, int $value, int $min, int $max): self
     {
         return new self(
             \sprintf(
-                'The %s of an image is "%d" which is higher than the maximum allowed (%d).',
+                'The value of "%s" must be between %d and %d, %d given.',
                 $property,
-                $value,
-                $maximum
+                $min,
+                $max,
+                $value
             ),
             1668153593
         );
