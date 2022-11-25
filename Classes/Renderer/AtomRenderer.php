@@ -91,12 +91,12 @@ final class AtomRenderer implements RendererInterface
             $categoryNode->add($category);
         }
 
-        foreach ($feed->getExtensionElements() as $element) {
-            $extension = $this->extensionRegistry->getExtensionForElement(FeedFormat::ATOM, $element);
+        foreach ($feed->getExtensionContents() as $content) {
+            $extension = $this->extensionRegistry->getExtensionForContent(FeedFormat::ATOM, $content);
             if (! $extension instanceof XmlExtensionInterface) {
                 continue;
             }
-            $extension->getXmlRenderer()->render($element, $rootElement, $this->document);
+            $extension->getXmlRenderer()->render($content, $rootElement, $this->document);
             $this->usedExtensions[$extension->getQualifiedName()] = $extension->getNamespace();
         }
 

@@ -21,5 +21,5 @@ interface JsonExtensionRendererInterface extends ExtensionRendererInterface
     /**
      * @return array<string, mixed>
      */
-    public function render(ExtensionElementInterface $element): array;
+    public function render(ExtensionContentInterface $content): array;
 }

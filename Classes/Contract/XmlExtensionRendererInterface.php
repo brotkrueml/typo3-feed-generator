@@ -18,5 +18,5 @@ namespace Brotkrueml\FeedGenerator\Contract;
  */
 interface XmlExtensionRendererInterface extends ExtensionRendererInterface
 {
-    public function render(ExtensionElementInterface $element, \DOMNode $parent, \DOMDocument $document): void;
+    public function render(ExtensionContentInterface $content, \DOMNode $parent, \DOMDocument $document): void;
 }

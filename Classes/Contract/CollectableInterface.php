@@ -20,7 +20,7 @@ use JiriPudil\SealedClasses\Sealed;
 #[Sealed(permits: [
     AttachmentInterface::class,
     AuthorInterface::class,
-    ExtensionElementInterface::class,
+    ExtensionContentInterface::class,
     CategoryInterface::class,
     ItemInterface::class,
 ])]

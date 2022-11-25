@@ -116,7 +116,7 @@ final class FullFeed implements FeedInterface
         return '';
     }
 
-    public function getExtensionElements(): Collection
+    public function getExtensionContents(): Collection
     {
         return new Collection();
     }

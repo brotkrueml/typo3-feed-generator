@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Configuration;
 
-use Brotkrueml\FeedGenerator\Contract\ExtensionElementInterface;
+use Brotkrueml\FeedGenerator\Contract\ExtensionContentInterface;
 use Brotkrueml\FeedGenerator\Contract\JsonExtensionInterface;
 use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
 use Brotkrueml\FeedGenerator\Format\FeedFormat;
@@ -32,11 +32,11 @@ final class ExtensionRegistry implements ExtensionRegistryInterface
     /**
      * @return ($format is FeedFormat::JSON ? JsonExtensionInterface : XmlExtensionInterface)|null
      */
-    public function getExtensionForElement(FeedFormat $format, ExtensionElementInterface $element): JsonExtensionInterface|XmlExtensionInterface|null
+    public function getExtensionForContent(FeedFormat $format, ExtensionContentInterface $content): JsonExtensionInterface|XmlExtensionInterface|null
     {
         $extensions = $format === FeedFormat::JSON ? $this->getExtensionsForJsonFormat() : $this->getExtensionsForXmlFormat();
         foreach ($extensions as $extension) {
-            if ($extension->canHandle($element)) {
+            if ($extension->canHandle($content)) {
                 return $extension;
             }
         }

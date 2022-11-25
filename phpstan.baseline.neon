@@ -11,7 +11,7 @@ parameters:
 			path: Classes/Entity/AbstractFeed.php
 
 		-
-			message: "#^Method Brotkrueml\\\\FeedGenerator\\\\Entity\\\\AbstractFeed\\:\\:getExtensionElements\\(\\) should return Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\ExtensionElementInterface\\> but returns Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\CollectableInterface\\>\\.$#"
+			message: "#^Method Brotkrueml\\\\FeedGenerator\\\\Entity\\\\AbstractFeed\\:\\:getExtensionContents\\(\\) should return Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\ExtensionContentInterface\\> but returns Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\CollectableInterface\\>\\.$#"
 			count: 1
 			path: Classes/Entity/AbstractFeed.php
 

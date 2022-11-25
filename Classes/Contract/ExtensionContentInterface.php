@@ -9,10 +9,12 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\FeedGenerator\Tests\Fixtures\ValueObject;
+namespace Brotkrueml\FeedGenerator\Contract;
 
-use Brotkrueml\FeedGenerator\Contract\ExtensionElementInterface;
-
-final class ExtensionElementFixture implements ExtensionElementInterface
+/**
+ * A marker interface for extension content
+ * @api
+ */
+interface ExtensionContentInterface extends CollectableInterface
 {
 }

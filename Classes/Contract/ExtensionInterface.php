@@ -24,7 +24,7 @@ use JiriPudil\SealedClasses\Sealed;
 ])]
 interface ExtensionInterface
 {
-    public function canHandle(ExtensionElementInterface $element): bool;
+    public function canHandle(ExtensionContentInterface $content): bool;
 
     public function getQualifiedName(): string;
 }

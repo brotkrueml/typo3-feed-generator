@@ -13,7 +13,7 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\ConfigurationModule;
 
 use Brotkrueml\FeedGenerator\Configuration\ExtensionRegistryInterface;
 use Brotkrueml\FeedGenerator\ConfigurationModule\ExtensionProvider;
-use Brotkrueml\FeedGenerator\Contract\ExtensionElementInterface;
+use Brotkrueml\FeedGenerator\Contract\ExtensionContentInterface;
 use Brotkrueml\FeedGenerator\Contract\JsonExtensionInterface;
 use Brotkrueml\FeedGenerator\Contract\JsonExtensionRendererInterface;
 use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
@@ -159,7 +159,7 @@ final class ExtensionProviderTest extends TestCase
             ) {
             }
 
-            public function getExtensionForElement(FeedFormat $format, ExtensionElementInterface $element): JsonExtensionInterface|XmlExtensionInterface
+            public function getExtensionForContent(FeedFormat $format, ExtensionContentInterface $content): JsonExtensionInterface|XmlExtensionInterface
             {
                 throw new \Exception('unused');
             }
@@ -194,7 +194,7 @@ final class ExtensionProviderTest extends TestCase
             ) {
             }
 
-            public function canHandle(ExtensionElementInterface $element): bool
+            public function canHandle(ExtensionContentInterface $content): bool
             {
                 throw new \Exception('unused');
             }
@@ -235,7 +235,7 @@ final class ExtensionProviderTest extends TestCase
             ) {
             }
 
-            public function canHandle(ExtensionElementInterface $element): bool
+            public function canHandle(ExtensionContentInterface $content): bool
             {
                 throw new \Exception('unused');
             }
@@ -266,7 +266,7 @@ final class ExtensionProviderTest extends TestCase
             ) {
             }
 
-            public function canHandle(ExtensionElementInterface $element): bool
+            public function canHandle(ExtensionContentInterface $content): bool
             {
                 throw new \Exception('unused');
             }

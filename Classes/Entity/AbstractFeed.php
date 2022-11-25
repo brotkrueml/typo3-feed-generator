@@ -14,7 +14,7 @@ namespace Brotkrueml\FeedGenerator\Entity;
 use Brotkrueml\FeedGenerator\Collection\Collection;
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
 use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
-use Brotkrueml\FeedGenerator\Contract\ExtensionElementInterface;
+use Brotkrueml\FeedGenerator\Contract\ExtensionContentInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
@@ -106,9 +106,9 @@ abstract class AbstractFeed implements FeedInterface
     }
 
     /**
-     * @return Collection<ExtensionElementInterface>
+     * @return Collection<ExtensionContentInterface>
      */
-    public function getExtensionElements(): Collection
+    public function getExtensionContents(): Collection
     {
         return new Collection();
     }

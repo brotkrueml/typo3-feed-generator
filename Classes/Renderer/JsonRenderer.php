@@ -15,7 +15,7 @@ use Brotkrueml\FeedGenerator\Collection\Collection;
 use Brotkrueml\FeedGenerator\Configuration\ExtensionRegistryInterface;
 use Brotkrueml\FeedGenerator\Contract\AttachmentInterface;
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
-use Brotkrueml\FeedGenerator\Contract\ExtensionElementInterface;
+use Brotkrueml\FeedGenerator\Contract\ExtensionContentInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Contract\JsonExtensionInterface;
@@ -63,8 +63,8 @@ final class JsonRenderer implements RendererInterface
         if ($feed->getLanguage() !== '') {
             $resultArray['language'] = $feed->getLanguage();
         }
-        foreach ($feed->getExtensionElements() as $element) {
-            $resultArray = [...$resultArray, ...$this->renderExtensionContent($element)];
+        foreach ($feed->getExtensionContents() as $content) {
+            $resultArray = [...$resultArray, ...$this->renderExtensionContent($content)];
         }
 
         $resultArray['items'] = [];
@@ -99,7 +99,7 @@ final class JsonRenderer implements RendererInterface
             if (! $item->getAttachments()->isEmpty()) {
                 $itemArray['attachments'] = $this->buildAttachmentsArray($item->getAttachments());
             }
-            foreach ($item->getExtensionElements() as $element) {
+            foreach ($item->getExtensionContents() as $element) {
                 $itemArray = [...$itemArray, ...$this->renderExtensionContent($element)];
             }
             $resultArray['items'][] = $itemArray;
@@ -164,9 +164,9 @@ final class JsonRenderer implements RendererInterface
     /**
      * @return array<string, array<string, mixed>>
      */
-    private function renderExtensionContent(ExtensionElementInterface $element): array
+    private function renderExtensionContent(ExtensionContentInterface $element): array
     {
-        $extension = $this->extensionRegistry->getExtensionForElement(FeedFormat::JSON, $element);
+        $extension = $this->extensionRegistry->getExtensionForContent(FeedFormat::JSON, $element);
         if (! $extension instanceof JsonExtensionInterface) {
             return [];
         }

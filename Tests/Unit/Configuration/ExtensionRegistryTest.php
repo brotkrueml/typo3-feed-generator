@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Configuration;
 
 use Brotkrueml\FeedGenerator\Configuration\ExtensionRegistry;
-use Brotkrueml\FeedGenerator\Contract\ExtensionElementInterface;
+use Brotkrueml\FeedGenerator\Contract\ExtensionContentInterface;
 use Brotkrueml\FeedGenerator\Contract\JsonExtensionInterface;
 use Brotkrueml\FeedGenerator\Contract\JsonExtensionRendererInterface;
 use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
@@ -56,10 +56,10 @@ final class ExtensionRegistryTest extends TestCase
         $extension = $this->buildExtensionClass();
         $subject = new ExtensionRegistry([$extension]);
 
-        $element = new class() implements ExtensionElementInterface {
+        $element = new class() implements ExtensionContentInterface {
         };
 
-        $actual = $subject->getExtensionForElement(FeedFormat::ATOM, $element);
+        $actual = $subject->getExtensionForContent(FeedFormat::ATOM, $element);
 
         self::assertNull($actual);
     }
@@ -73,10 +73,10 @@ final class ExtensionRegistryTest extends TestCase
         $extension2 = $this->buildExtensionClass(true, [FeedFormat::ATOM]);
         $subject = new ExtensionRegistry([$extension1, $extension2]);
 
-        $element = new class() implements ExtensionElementInterface {
+        $element = new class() implements ExtensionContentInterface {
         };
 
-        $actual = $subject->getExtensionForElement(FeedFormat::ATOM, $element);
+        $actual = $subject->getExtensionForContent(FeedFormat::ATOM, $element);
 
         self::assertSame($extension2, $actual);
     }
@@ -90,10 +90,10 @@ final class ExtensionRegistryTest extends TestCase
         $extension2 = $this->buildExtensionClass(true, [FeedFormat::ATOM]);
         $subject = new ExtensionRegistry([$extension1, $extension2]);
 
-        $element = new class() implements ExtensionElementInterface {
+        $element = new class() implements ExtensionContentInterface {
         };
 
-        $actual = $subject->getExtensionForElement(FeedFormat::ATOM, $element);
+        $actual = $subject->getExtensionForContent(FeedFormat::ATOM, $element);
 
         self::assertSame($extension1, $actual);
     }
@@ -119,7 +119,7 @@ final class ExtensionRegistryTest extends TestCase
                 return $this->formats;
             }
 
-            public function canHandle(ExtensionElementInterface $element): bool
+            public function canHandle(ExtensionContentInterface $content): bool
             {
                 return $this->canHandle;
             }
@@ -145,7 +145,7 @@ final class ExtensionRegistryTest extends TestCase
                     /**
                      * @return array<string, mixed>
                      */
-                    public function render(ExtensionElementInterface $element): array
+                    public function render(ExtensionContentInterface $content): array
                     {
                         return [];
                     }
@@ -155,7 +155,7 @@ final class ExtensionRegistryTest extends TestCase
             public function getXmlRenderer(): XmlExtensionRendererInterface
             {
                 return new class() implements XmlExtensionRendererInterface {
-                    public function render(ExtensionElementInterface $element, \DOMNode $parent, \DOMDocument $document): void
+                    public function render(ExtensionContentInterface $content, \DOMNode $parent, \DOMDocument $document): void
                     {
                     }
                 };

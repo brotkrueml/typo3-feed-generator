@@ -72,8 +72,8 @@ interface ItemInterface extends CollectableInterface
     public function getAttachments(): Collection;
 
     /**
-     * Get extension elements
-     * @return Collection<ExtensionElementInterface>
+     * Get extension contents for the item
+     * @return Collection<ExtensionContentInterface>
      */
-    public function getExtensionElements(): Collection;
+    public function getExtensionContents(): Collection;
 }

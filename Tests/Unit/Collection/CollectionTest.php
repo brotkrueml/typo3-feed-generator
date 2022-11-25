@@ -13,7 +13,7 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\Collection;
 
 use Brotkrueml\FeedGenerator\Collection\Collection;
 use Brotkrueml\FeedGenerator\Collection\IndexNotFoundException;
-use Brotkrueml\FeedGenerator\Contract\ExtensionElementInterface;
+use Brotkrueml\FeedGenerator\Contract\ExtensionContentInterface;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Entity\ItemFixture;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\ValueObject\AttachmentFixture;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\ValueObject\AuthorFixture;
@@ -70,14 +70,14 @@ final class CollectionTest extends TestCase
     /**
      * @test
      */
-    public function addAcceptsAnImplementationOfExtensionElementInterface(): void
+    public function addAcceptsAnImplementationOfExtensionContentInterface(): void
     {
         self::expectNotToPerformAssertions();
 
-        $extensionElement = new class() implements ExtensionElementInterface {
+        $extensionContent = new class() implements ExtensionContentInterface {
         };
 
-        $this->subject->add($extensionElement);
+        $this->subject->add($extensionContent);
     }
 
     /**

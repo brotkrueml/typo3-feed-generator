@@ -86,12 +86,12 @@ final class RssRenderer implements RendererInterface
         $textNode->add('generator', \sprintf('%s (%s)', Generator::NAME, Generator::URI));
         $imageNode->add($feed->getImage());
 
-        foreach ($feed->getExtensionElements() as $element) {
-            $extension = $this->extensionRegistry->getExtensionForElement(FeedFormat::RSS, $element);
+        foreach ($feed->getExtensionContents() as $content) {
+            $extension = $this->extensionRegistry->getExtensionForContent(FeedFormat::RSS, $content);
             if (! $extension instanceof XmlExtensionInterface) {
                 continue;
             }
-            $extension->getXmlRenderer()->render($element, $channelElement, $this->document);
+            $extension->getXmlRenderer()->render($content, $channelElement, $this->document);
             $this->usedExtensions[$extension->getQualifiedName()] = $extension->getNamespace();
         }
 
