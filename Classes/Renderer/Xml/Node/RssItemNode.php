@@ -14,6 +14,7 @@ namespace Brotkrueml\FeedGenerator\Renderer\Xml\Node;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Brotkrueml\FeedGenerator\Contract\TextInterface;
 use Brotkrueml\FeedGenerator\Renderer\Guard\AtLeastOneValueNotEmptyGuard;
+use Brotkrueml\FeedGenerator\Renderer\Xml\XmlExtensionProcessor;
 
 /**
  * Renders an Atom entry node like "<item>...</item>"
@@ -26,6 +27,7 @@ final class RssItemNode
     public function __construct(
         private readonly \DOMDocument $document,
         private readonly \DOMElement $parentElement,
+        private readonly XmlExtensionProcessor $extensionProcessor,
     ) {
         $this->atLeastOneValueNotEmptyGuard = new AtLeastOneValueNotEmptyGuard();
     }
@@ -58,6 +60,8 @@ final class RssItemNode
         }
         $guidNode->add($item->getId() ?: $item->getLink());
         $textNode->add('pubDate', $item->getDatePublished()?->format('r') ?? '');
+
+        $this->extensionProcessor->process($item->getExtensionContents(), $itemElement, $this->document);
 
         $this->parentElement->appendChild($itemElement);
     }

@@ -15,6 +15,7 @@ use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Brotkrueml\FeedGenerator\Contract\TextInterface;
 use Brotkrueml\FeedGenerator\Renderer\Guard\AtLeastOneValueNotEmptyGuard;
 use Brotkrueml\FeedGenerator\Renderer\Guard\ValueNotEmptyGuard;
+use Brotkrueml\FeedGenerator\Renderer\Xml\XmlExtensionProcessor;
 
 /**
  * Renders an Atom entry node like "<entry>...</entry>"
@@ -28,6 +29,7 @@ final class AtomItemNode
     public function __construct(
         private readonly \DOMDocument $document,
         private readonly \DOMElement $parentElement,
+        private readonly XmlExtensionProcessor $extensionProcessor,
     ) {
         $this->notEmptyGuard = new ValueNotEmptyGuard();
         $this->atLeastOneValueNotEmptyGuard = new AtLeastOneValueNotEmptyGuard();
@@ -66,6 +68,8 @@ final class AtomItemNode
         }
         $textNode->add('content', $item->getContent());
         $textNode->add('published', $item->getDatePublished()?->format('c') ?? '');
+
+        $this->extensionProcessor->process($item->getExtensionContents(), $itemElement, $this->document);
 
         $this->parentElement->appendChild($itemElement);
     }

@@ -11,12 +11,8 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer;
 
-use Brotkrueml\FeedGenerator\Configuration\ExtensionRegistryInterface;
-use Brotkrueml\FeedGenerator\Contract\ExtensionContentInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
-use Brotkrueml\FeedGenerator\Contract\JsonExtensionInterface;
-use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
-use Brotkrueml\FeedGenerator\Format\FeedFormat;
+use Brotkrueml\FeedGenerator\Renderer\Json\JsonExtensionProcessor;
 use Brotkrueml\FeedGenerator\Renderer\JsonRenderer;
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Json\FeedWithEmptyItems;
@@ -33,22 +29,9 @@ final class JsonRendererTest extends TestCase
 
     protected function setUp(): void
     {
-        $extensionRegistryDummy = new class() implements ExtensionRegistryInterface {
-            public function getExtensionForContent(FeedFormat $format, ExtensionContentInterface $content): JsonExtensionInterface|XmlExtensionInterface
-            {
-                throw new \Exception('unused');
-            }
+        $extensionProcessorDummy = $this->createStub(JsonExtensionProcessor::class);
 
-            /**
-             * @return array{}
-             */
-            public function getAllExtensions(): iterable
-            {
-                return [];
-            }
-        };
-
-        $this->subject = new JsonRenderer($extensionRegistryDummy);
+        $this->subject = new JsonRenderer($extensionProcessorDummy);
     }
 
     /**

@@ -14,17 +14,15 @@ namespace Brotkrueml\FeedGenerator\Configuration;
 use Brotkrueml\FeedGenerator\Contract\ExtensionContentInterface;
 use Brotkrueml\FeedGenerator\Contract\JsonExtensionInterface;
 use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
-use Brotkrueml\FeedGenerator\Format\FeedFormat;
 
 /**
  * @internal
  */
 interface ExtensionRegistryInterface
 {
-    /**
-     * @return ($format is FeedFormat::JSON ? JsonExtensionInterface : XmlExtensionInterface)|null
-     */
-    public function getExtensionForContent(FeedFormat $format, ExtensionContentInterface $content): JsonExtensionInterface|XmlExtensionInterface|null;
+    public function getExtensionForJsonContent(ExtensionContentInterface $content): ?JsonExtensionInterface;
+
+    public function getExtensionForXmlContent(ExtensionContentInterface $content): ?XmlExtensionInterface;
 
     /**
      * @return iterable<JsonExtensionInterface|XmlExtensionInterface>

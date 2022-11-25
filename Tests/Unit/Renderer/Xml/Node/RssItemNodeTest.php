@@ -16,6 +16,7 @@ use Brotkrueml\FeedGenerator\Entity\Item;
 use Brotkrueml\FeedGenerator\Format\TextFormat;
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\RssItemNode;
+use Brotkrueml\FeedGenerator\Renderer\Xml\XmlExtensionProcessor;
 use Brotkrueml\FeedGenerator\ValueObject\Attachment;
 use Brotkrueml\FeedGenerator\ValueObject\Author;
 use Brotkrueml\FeedGenerator\ValueObject\Text;
@@ -36,7 +37,9 @@ final class RssItemNodeTest extends TestCase
 
         $rootElement = $this->document->appendChild($this->document->createElement('root'));
 
-        $this->subject = new RssItemNode($this->document, $rootElement);
+        $extensionProcessorDummy = $this->createStub(XmlExtensionProcessor::class);
+
+        $this->subject = new RssItemNode($this->document, $rootElement, $extensionProcessorDummy);
     }
 
     /**

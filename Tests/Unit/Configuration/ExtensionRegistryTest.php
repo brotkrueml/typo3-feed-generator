@@ -51,15 +51,15 @@ final class ExtensionRegistryTest extends TestCase
     /**
      * @test
      */
-    public function getExtensionForElementReturnsNUllNoRendererCanHandleAnElement(): void
+    public function getExtensionForElementReturnsNullNoRendererCanHandleAnElement(): void
     {
         $extension = $this->buildExtensionClass();
         $subject = new ExtensionRegistry([$extension]);
 
-        $element = new class() implements ExtensionContentInterface {
+        $content = new class() implements ExtensionContentInterface {
         };
 
-        $actual = $subject->getExtensionForContent(FeedFormat::ATOM, $element);
+        $actual = $subject->getExtensionForXmlContent($content);
 
         self::assertNull($actual);
     }
@@ -73,10 +73,10 @@ final class ExtensionRegistryTest extends TestCase
         $extension2 = $this->buildExtensionClass(true, [FeedFormat::ATOM]);
         $subject = new ExtensionRegistry([$extension1, $extension2]);
 
-        $element = new class() implements ExtensionContentInterface {
+        $content = new class() implements ExtensionContentInterface {
         };
 
-        $actual = $subject->getExtensionForContent(FeedFormat::ATOM, $element);
+        $actual = $subject->getExtensionForXmlContent($content);
 
         self::assertSame($extension2, $actual);
     }
@@ -90,10 +90,10 @@ final class ExtensionRegistryTest extends TestCase
         $extension2 = $this->buildExtensionClass(true, [FeedFormat::ATOM]);
         $subject = new ExtensionRegistry([$extension1, $extension2]);
 
-        $element = new class() implements ExtensionContentInterface {
+        $content = new class() implements ExtensionContentInterface {
         };
 
-        $actual = $subject->getExtensionForContent(FeedFormat::ATOM, $element);
+        $actual = $subject->getExtensionForXmlContent($content);
 
         self::assertSame($extension1, $actual);
     }

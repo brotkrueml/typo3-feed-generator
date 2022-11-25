@@ -11,15 +11,11 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer;
 
-use Brotkrueml\FeedGenerator\Configuration\ExtensionRegistryInterface;
-use Brotkrueml\FeedGenerator\Contract\ExtensionContentInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
-use Brotkrueml\FeedGenerator\Contract\JsonExtensionInterface;
-use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
-use Brotkrueml\FeedGenerator\Format\FeedFormat;
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
 use Brotkrueml\FeedGenerator\Renderer\PathResolver;
 use Brotkrueml\FeedGenerator\Renderer\RssRenderer;
+use Brotkrueml\FeedGenerator\Renderer\Xml\XmlExtensionProcessor;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FeedWithEmptyDescription;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FeedWithEmptyLink;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\FeedWithEmptyTitle;
@@ -39,27 +35,14 @@ final class RssRendererTest extends TestCase
 
     protected function setUp(): void
     {
-        $extensionRegistryDummy = new class() implements ExtensionRegistryInterface {
-            public function getExtensionForContent(FeedFormat $format, ExtensionContentInterface $content): JsonExtensionInterface|XmlExtensionInterface
-            {
-                throw new \Exception('unused');
-            }
-
-            /**
-             * @return array{}
-             */
-            public function getAllExtensions(): iterable
-            {
-                return [];
-            }
-        };
+        $extensionProcessorDummy = $this->createStub(XmlExtensionProcessor::class);
 
         $pathResolverStub = $this->createStub(PathResolver::class);
         $pathResolverStub
             ->method('getWebPath')
             ->willReturnCallback(static fn ($path) => $path);
 
-        $this->subject = new RssRenderer($extensionRegistryDummy, $pathResolverStub);
+        $this->subject = new RssRenderer($extensionProcessorDummy, $pathResolverStub);
     }
 
     /**

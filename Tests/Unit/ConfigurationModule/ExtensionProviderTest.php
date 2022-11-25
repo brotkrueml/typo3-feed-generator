@@ -18,7 +18,6 @@ use Brotkrueml\FeedGenerator\Contract\JsonExtensionInterface;
 use Brotkrueml\FeedGenerator\Contract\JsonExtensionRendererInterface;
 use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
 use Brotkrueml\FeedGenerator\Contract\XmlExtensionRendererInterface;
-use Brotkrueml\FeedGenerator\Format\FeedFormat;
 use PHPUnit\Framework\TestCase;
 
 final class ExtensionProviderTest extends TestCase
@@ -159,7 +158,12 @@ final class ExtensionProviderTest extends TestCase
             ) {
             }
 
-            public function getExtensionForContent(FeedFormat $format, ExtensionContentInterface $content): JsonExtensionInterface|XmlExtensionInterface
+            public function getExtensionForJsonContent(ExtensionContentInterface $content): ?JsonExtensionInterface
+            {
+                throw new \Exception('unused');
+            }
+
+            public function getExtensionForXmlContent(ExtensionContentInterface $content): ?XmlExtensionInterface
             {
                 throw new \Exception('unused');
             }

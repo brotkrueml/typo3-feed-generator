@@ -11,15 +11,13 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Renderer;
 
-use Brotkrueml\FeedGenerator\Configuration\ExtensionRegistryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
-use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
-use Brotkrueml\FeedGenerator\Format\FeedFormat;
 use Brotkrueml\FeedGenerator\Renderer\Guard\ValueNotEmptyGuard;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\RssAuthorNode;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\RssImageNode;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\RssItemNode;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\TextNode;
+use Brotkrueml\FeedGenerator\Renderer\Xml\XmlExtensionProcessor;
 
 /**
  * @internal
@@ -28,13 +26,9 @@ final class RssRenderer implements RendererInterface
 {
     private readonly ValueNotEmptyGuard $notEmptyGuard;
     private \DOMDocument $document;
-    /**
-     * @var array<string, string>
-     */
-    private array $usedExtensions = [];
 
     public function __construct(
-        private readonly ExtensionRegistryInterface $extensionRegistry,
+        private readonly XmlExtensionProcessor $extensionProcessor,
         private readonly PathResolver $pathResolver,
     ) {
         $this->notEmptyGuard = new ValueNotEmptyGuard();
@@ -68,7 +62,7 @@ final class RssRenderer implements RendererInterface
         $textNode = new TextNode($this->document, $channelElement);
         $authorNode = new RssAuthorNode($this->document, $channelElement);
         $imageNode = new RssImageNode($this->document, $channelElement);
-        $itemNode = new RssItemNode($this->document, $channelElement);
+        $itemNode = new RssItemNode($this->document, $channelElement, $this->extensionProcessor);
 
         $textNode->add('language', $feed->getLanguage());
         $textNode->add('title', $feed->getTitle());
@@ -86,20 +80,13 @@ final class RssRenderer implements RendererInterface
         $textNode->add('generator', \sprintf('%s (%s)', Generator::NAME, Generator::URI));
         $imageNode->add($feed->getImage());
 
-        foreach ($feed->getExtensionContents() as $content) {
-            $extension = $this->extensionRegistry->getExtensionForContent(FeedFormat::RSS, $content);
-            if (! $extension instanceof XmlExtensionInterface) {
-                continue;
-            }
-            $extension->getXmlRenderer()->render($content, $channelElement, $this->document);
-            $this->usedExtensions[$extension->getQualifiedName()] = $extension->getNamespace();
-        }
+        $this->extensionProcessor->process($feed->getExtensionContents(), $channelElement, $this->document);
 
         foreach ($feed->getItems() as $item) {
             $itemNode->add($item);
         }
 
-        foreach ($this->usedExtensions as $qualifiedName => $namespace) {
+        foreach ($this->extensionProcessor->getUsedExtensions() as $qualifiedName => $namespace) {
             $rss->setAttribute('xmlns:' . $qualifiedName, $namespace);
         }
 

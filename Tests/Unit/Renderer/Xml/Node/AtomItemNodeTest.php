@@ -14,6 +14,7 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer\Xml\Node;
 use Brotkrueml\FeedGenerator\Entity\Item;
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\AtomItemNode;
+use Brotkrueml\FeedGenerator\Renderer\Xml\XmlExtensionProcessor;
 use Brotkrueml\FeedGenerator\ValueObject\Author;
 use Brotkrueml\FeedGenerator\ValueObject\Text;
 use PHPUnit\Framework\TestCase;
@@ -33,7 +34,9 @@ final class AtomItemNodeTest extends TestCase
 
         $rootElement = $this->document->appendChild($this->document->createElement('root'));
 
-        $this->subject = new AtomItemNode($this->document, $rootElement);
+        $extensionProcessorDummy = $this->createStub(XmlExtensionProcessor::class);
+
+        $this->subject = new AtomItemNode($this->document, $rootElement, $extensionProcessorDummy);
     }
 
     /**

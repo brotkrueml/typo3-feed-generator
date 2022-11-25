@@ -11,15 +11,11 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer;
 
-use Brotkrueml\FeedGenerator\Configuration\ExtensionRegistryInterface;
-use Brotkrueml\FeedGenerator\Contract\ExtensionContentInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
-use Brotkrueml\FeedGenerator\Contract\JsonExtensionInterface;
-use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
-use Brotkrueml\FeedGenerator\Format\FeedFormat;
 use Brotkrueml\FeedGenerator\Renderer\AtomRenderer;
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
 use Brotkrueml\FeedGenerator\Renderer\PathResolver;
+use Brotkrueml\FeedGenerator\Renderer\Xml\XmlExtensionProcessor;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FeedWithEmptyDateModified;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FeedWithEmptyId;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\FeedWithEmptyTitle;
@@ -41,27 +37,14 @@ final class AtomRendererTest extends TestCase
 
     protected function setUp(): void
     {
-        $extensionRegistryDummy = new class() implements ExtensionRegistryInterface {
-            public function getExtensionForContent(FeedFormat $format, ExtensionContentInterface $content): JsonExtensionInterface|XmlExtensionInterface
-            {
-                throw new \Exception('unused');
-            }
-
-            /**
-             * @return array{}
-             */
-            public function getAllExtensions(): iterable
-            {
-                return [];
-            }
-        };
+        $extensionProcessorDummy = $this->createStub(XmlExtensionProcessor::class);
 
         $pathResolverStub = $this->createStub(PathResolver::class);
         $pathResolverStub
             ->method('getWebPath')
             ->willReturnCallback(static fn ($path) => $path);
 
-        $this->subject = new AtomRenderer($extensionRegistryDummy, $pathResolverStub);
+        $this->subject = new AtomRenderer($extensionProcessorDummy, $pathResolverStub);
     }
 
     /**

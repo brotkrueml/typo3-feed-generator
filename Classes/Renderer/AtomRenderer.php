@@ -11,10 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Renderer;
 
-use Brotkrueml\FeedGenerator\Configuration\ExtensionRegistryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
-use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
-use Brotkrueml\FeedGenerator\Format\FeedFormat;
 use Brotkrueml\FeedGenerator\Renderer\Guard\ValueNotEmptyGuard;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\AtomAuthorNode;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\AtomCategoryNode;
@@ -22,6 +19,7 @@ use Brotkrueml\FeedGenerator\Renderer\Xml\Node\AtomGeneratorNode;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\AtomItemNode;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\AtomLinkNode;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\TextNode;
+use Brotkrueml\FeedGenerator\Renderer\Xml\XmlExtensionProcessor;
 
 /**
  * @internal
@@ -30,13 +28,9 @@ final class AtomRenderer implements RendererInterface
 {
     private readonly ValueNotEmptyGuard $notEmptyGuard;
     private \DOMDocument $document;
-    /**
-     * @var array<string, string>
-     */
-    private array $usedExtensions = [];
 
     public function __construct(
-        private readonly ExtensionRegistryInterface $extensionRegistry,
+        private readonly XmlExtensionProcessor $extensionProcessor,
         private readonly PathResolver $pathResolver,
     ) {
         $this->notEmptyGuard = new ValueNotEmptyGuard();
@@ -70,7 +64,7 @@ final class AtomRenderer implements RendererInterface
         $categoryNode = new AtomCategoryNode($this->document, $atomElement);
         $generatorNode = new AtomGeneratorNode($this->document, $atomElement);
         $linkNode = new AtomLinkNode($this->document, $atomElement);
-        $itemNode = new AtomItemNode($this->document, $atomElement);
+        $itemNode = new AtomItemNode($this->document, $atomElement, $this->extensionProcessor);
         $textNode = new TextNode($this->document, $atomElement);
 
         $textNode->add('id', $feed->getId());
@@ -91,20 +85,13 @@ final class AtomRenderer implements RendererInterface
             $categoryNode->add($category);
         }
 
-        foreach ($feed->getExtensionContents() as $content) {
-            $extension = $this->extensionRegistry->getExtensionForContent(FeedFormat::ATOM, $content);
-            if (! $extension instanceof XmlExtensionInterface) {
-                continue;
-            }
-            $extension->getXmlRenderer()->render($content, $rootElement, $this->document);
-            $this->usedExtensions[$extension->getQualifiedName()] = $extension->getNamespace();
-        }
+        $this->extensionProcessor->process($feed->getExtensionContents(), $rootElement, $this->document);
 
         foreach ($feed->getItems() as $item) {
             $itemNode->add($item);
         }
 
-        foreach ($this->usedExtensions as $qualifiedName => $namespace) {
+        foreach ($this->extensionProcessor->getUsedExtensions() as $qualifiedName => $namespace) {
             $atomElement->setAttribute('xmlns:' . $qualifiedName, $namespace);
         }
 
