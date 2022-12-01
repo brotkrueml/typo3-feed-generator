@@ -17,6 +17,7 @@ use Brotkrueml\FeedGenerator\Entity\AbstractFeed;
 use Brotkrueml\FeedGenerator\Entity\Item;
 use Brotkrueml\FeedGenerator\ValueObject\Attachment;
 use Brotkrueml\FeedGenerator\ValueObject\Author;
+use Brotkrueml\FeedGenerator\ValueObject\Category;
 
 final class FullItems extends AbstractFeed
 {
@@ -41,6 +42,10 @@ final class FullItems extends AbstractFeed
                 ->addAuthors(
                     new Author('John Doe', uri: 'https://example.org/john-doe'),
                     new Author('Jane Doe'),
+                )
+                ->addCategories(
+                    new Category('some category'),
+                    new Category('another category'),
                 )
                 ->addAttachments(
                     new Attachment('https://example.org/some-attachment.mp4', 'video/mp4', 123456789),

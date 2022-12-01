@@ -61,6 +61,11 @@ final class ItemFixture implements ItemInterface
         return new Collection();
     }
 
+    public function getCategories(): Collection
+    {
+        return new Collection();
+    }
+
     public function getExtensionContents(): Collection
     {
         return new Collection();

@@ -16,6 +16,7 @@ use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\AtomItemNode;
 use Brotkrueml\FeedGenerator\Renderer\Xml\XmlExtensionProcessor;
 use Brotkrueml\FeedGenerator\ValueObject\Author;
+use Brotkrueml\FeedGenerator\ValueObject\Category;
 use Brotkrueml\FeedGenerator\ValueObject\Text;
 use PHPUnit\Framework\TestCase;
 
@@ -309,6 +310,67 @@ XML;
     <updated>2022-11-23T12:13:14+00:00</updated>
     <link href="https://example.org/some-link" rel="alternate" type="text/html"/>
     <content>some content</content>
+  </entry>
+</root>
+XML;
+
+        self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
+    }
+
+    /**
+     * @test
+     */
+    public function oneCategoryGiven(): void
+    {
+        $item = (new Item())
+            ->setId('some-id')
+            ->setTitle('some title')
+            ->setDateModified(new \DateTimeImmutable('2022-11-23 12:13:14'))
+            ->setLink('https://example.org/some-link')
+            ->addCategories(new Category('some category'));
+
+        $this->subject->add($item);
+
+        $expected = <<<XML
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <entry>
+    <id>some-id</id>
+    <title>some title</title>
+    <updated>2022-11-23T12:13:14+00:00</updated>
+    <link href="https://example.org/some-link" rel="alternate" type="text/html"/>
+    <category term="some category"/>
+  </entry>
+</root>
+XML;
+
+        self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
+    }
+
+    /**
+     * @test
+     */
+    public function twoCategoriesGiven(): void
+    {
+        $item = (new Item())
+            ->setId('some-id')
+            ->setTitle('some title')
+            ->setDateModified(new \DateTimeImmutable('2022-11-23 12:13:14'))
+            ->setLink('https://example.org/some-link')
+            ->addCategories(new Category('some category'), new Category('another category'));
+
+        $this->subject->add($item);
+
+        $expected = <<<XML
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <entry>
+    <id>some-id</id>
+    <title>some title</title>
+    <updated>2022-11-23T12:13:14+00:00</updated>
+    <link href="https://example.org/some-link" rel="alternate" type="text/html"/>
+    <category term="some category"/>
+    <category term="another category"/>
   </entry>
 </root>
 XML;

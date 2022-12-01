@@ -14,6 +14,7 @@ namespace Brotkrueml\FeedGenerator\Renderer;
 use Brotkrueml\FeedGenerator\Collection\Collection;
 use Brotkrueml\FeedGenerator\Contract\AttachmentInterface;
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
+use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Renderer\Json\JsonExtensionProcessor;
@@ -90,6 +91,9 @@ final class JsonRenderer implements RendererInterface
             if ($authorsArray !== []) {
                 $itemArray['authors'] = $authorsArray;
             }
+            if (! $item->getCategories()->isEmpty()) {
+                $itemArray['tags'] = $this->buildTagsArray($item->getCategories());
+            }
             if (! $item->getAttachments()->isEmpty()) {
                 $itemArray['attachments'] = $this->buildAttachmentsArray($item->getAttachments());
             }
@@ -121,6 +125,20 @@ final class JsonRenderer implements RendererInterface
         }
 
         return $authorsArray;
+    }
+
+    /**
+     * @param Collection<CategoryInterface> $tags
+     * @return string[]
+     */
+    private function buildTagsArray(Collection $tags): array
+    {
+        $tagsArray = [];
+        foreach ($tags as $tag) {
+            $tagsArray[] = $tag->getTerm();
+        }
+
+        return $tagsArray;
     }
 
     /**

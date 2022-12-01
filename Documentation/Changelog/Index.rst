@@ -16,6 +16,7 @@ Added
 
 
 * Extension API for feeds
+* Categories for items
 
 `0.5.0 <https://github.com/brotkrueml/typo3-feed-generator/compare/v0.4.0...v0.5.0>`_ - 2022-11-18
 ------------------------------------------------------------------------------------------------------

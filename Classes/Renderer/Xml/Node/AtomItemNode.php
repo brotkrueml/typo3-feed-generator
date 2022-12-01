@@ -48,6 +48,7 @@ final class AtomItemNode
         $itemElement = $this->document->createElement('entry');
 
         $authorNode = new AtomAuthorNode($this->document, $itemElement);
+        $categoryNode = new AtomCategoryNode($this->document, $itemElement);
         $linkNode = new AtomLinkNode($this->document, $itemElement);
         $textNode = new TextNode($this->document, $itemElement);
         $textFormatNode = new TextFormatNode($this->document, $itemElement);
@@ -67,6 +68,9 @@ final class AtomItemNode
             $textNode->add('summary', $item->getDescription());
         }
         $textNode->add('content', $item->getContent());
+        foreach ($item->getCategories() as $category) {
+            $categoryNode->add($category);
+        }
         $textNode->add('published', $item->getDatePublished()?->format('c') ?? '');
 
         $this->extensionProcessor->process($item->getExtensionContents(), $itemElement, $this->document);

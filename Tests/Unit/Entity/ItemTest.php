@@ -14,6 +14,7 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\Entity;
 use Brotkrueml\FeedGenerator\Entity\Item;
 use Brotkrueml\FeedGenerator\ValueObject\Attachment;
 use Brotkrueml\FeedGenerator\ValueObject\Author;
+use Brotkrueml\FeedGenerator\ValueObject\Category;
 use Brotkrueml\FeedGenerator\ValueObject\Text;
 use PHPUnit\Framework\TestCase;
 
@@ -38,6 +39,7 @@ final class ItemTest extends TestCase
         self::assertNull($subject->getDatePublished());
         self::assertNull($subject->getDateModified());
         self::assertTrue($subject->getAttachments()->isEmpty());
+        self::assertTrue($subject->getCategories()->isEmpty());
         self::assertTrue($subject->getExtensionContents()->isEmpty());
     }
 
@@ -176,5 +178,20 @@ final class ItemTest extends TestCase
 
         self::assertContains($attachment1, $subject->getAttachments());
         self::assertContains($attachment2, $subject->getAttachments());
+    }
+
+    /**
+     * @test
+     */
+    public function getCategoriesReturnsAttachmentsCorrectly(): void
+    {
+        $category1 = new Category('some category');
+        $category2 = new Category('another category');
+
+        $subject = (new Item())
+            ->addCategories($category1, $category2);
+
+        self::assertContains($category1, $subject->getCategories());
+        self::assertContains($category2, $subject->getCategories());
     }
 }

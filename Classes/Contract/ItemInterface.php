@@ -66,13 +66,19 @@ interface ItemInterface extends CollectableInterface
     /**
      * Get the attachments (enclosure). In accordance with the RSS Best Practices Profile of the RSS Advisory Board,
      * no support is offered for multiple enclosures since such support forms no part of the RSS specification.
-     * JSON feeds support multiple attachments
+     * JSON feeds support multiple attachments.
      * @return Collection<AttachmentInterface>
      */
     public function getAttachments(): Collection;
 
     /**
-     * Get extension contents for the item
+     * Get the categories for the item.
+     * @return Collection<CategoryInterface>
+     */
+    public function getCategories(): Collection;
+
+    /**
+     * Get extension contents for the item.
      * @return Collection<ExtensionContentInterface>
      */
     public function getExtensionContents(): Collection;

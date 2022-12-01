@@ -19,6 +19,7 @@ use Brotkrueml\FeedGenerator\Renderer\Xml\Node\RssItemNode;
 use Brotkrueml\FeedGenerator\Renderer\Xml\XmlExtensionProcessor;
 use Brotkrueml\FeedGenerator\ValueObject\Attachment;
 use Brotkrueml\FeedGenerator\ValueObject\Author;
+use Brotkrueml\FeedGenerator\ValueObject\Category;
 use Brotkrueml\FeedGenerator\ValueObject\Text;
 use PHPUnit\Framework\TestCase;
 
@@ -198,6 +199,35 @@ XML,
   <item>
     <title>Some title</title>
     <enclosure length="123" type="some/type" url="https://example.org/"/>
+  </item>
+</root>
+XML,
+        ];
+
+        yield 'One category is given' => [
+            'item' => (new Item())
+                ->setTitle('Some title')
+                ->addCategories(new Category('some category')),
+            'expected' => <<<XML
+<root>
+  <item>
+    <title>Some title</title>
+    <category>some category</category>
+  </item>
+</root>
+XML,
+        ];
+
+        yield 'Two categories are given' => [
+            'item' => (new Item())
+                ->setTitle('Some title')
+                ->addCategories(new Category('some category'), new Category('another category')),
+            'expected' => <<<XML
+<root>
+  <item>
+    <title>Some title</title>
+    <category>some category</category>
+    <category>another category</category>
   </item>
 </root>
 XML,

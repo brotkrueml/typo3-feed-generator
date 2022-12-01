@@ -8,6 +8,10 @@
 			"url": "https://example.org/some-item-link",
 			"title": "some item title",
 			"summary": "some item description",
+			"tags": [
+				"some category",
+				"another category"
+			],
 			"date_published": "2022-11-11T11:11:11+00:00",
 			"date_modified": "2022-11-12T12:12:12+00:00",
 			"authors": [

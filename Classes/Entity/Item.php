@@ -14,6 +14,7 @@ namespace Brotkrueml\FeedGenerator\Entity;
 use Brotkrueml\FeedGenerator\Collection\Collection;
 use Brotkrueml\FeedGenerator\Contract\AttachmentInterface;
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
+use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
 use Brotkrueml\FeedGenerator\Contract\ExtensionContentInterface;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Brotkrueml\FeedGenerator\Contract\TextInterface;
@@ -39,6 +40,10 @@ final class Item implements ItemInterface
      */
     private readonly Collection $attachments;
     /**
+     * @var Collection<CategoryInterface>
+     */
+    private readonly Collection $categories;
+    /**
      * @var Collection<ExtensionContentInterface>
      */
     private readonly Collection $extensionContents;
@@ -47,6 +52,7 @@ final class Item implements ItemInterface
     {
         $this->attachments = new Collection();
         $this->authors = new Collection();
+        $this->categories = new Collection();
         $this->extensionContents = new Collection();
     }
 
@@ -160,6 +166,21 @@ final class Item implements ItemInterface
     public function addAttachments(AttachmentInterface ...$attachments): self
     {
         $this->attachments->add(...$attachments);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<CategoryInterface>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategories(CategoryInterface ...$categories): self
+    {
+        $this->categories->add(...$categories);
 
         return $this;
     }

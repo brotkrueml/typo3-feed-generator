@@ -55,6 +55,9 @@ final class RssItemNode
         if (! $item->getAuthors()->isEmpty()) {
             $authorNode->add('author', $item->getAuthors()->get(0));
         }
+        foreach ($item->getCategories() as $category) {
+            $textNode->add('category', $category->getTerm());
+        }
         if (! $item->getAttachments()->isEmpty()) {
             $enclosureNode->add($item->getAttachments()->get(0));
         }
