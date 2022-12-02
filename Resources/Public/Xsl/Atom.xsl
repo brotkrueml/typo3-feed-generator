@@ -63,11 +63,6 @@
                     margin-bottom: 0;
                     }
 
-                    img {
-                    float: right;
-                    max-width: 100px;
-                    }
-
                     h1 {
                     font-size: 3.5rem;
                     font-weight: normal;
@@ -77,6 +72,11 @@
                     h2 {
                     font-size: 2.2rem;
                     font-weight: normal;
+                    }
+
+                    img {
+                    max-width: 200px;
+                    height: auto;
                     }
 
                     ul {
@@ -96,6 +96,11 @@
 
                     .summary::after {
                     clear: both;
+                    }
+
+                    .summary img {
+                    float: right;
+                    max-width: 200px;
                     }
                 </style>
             </head>
