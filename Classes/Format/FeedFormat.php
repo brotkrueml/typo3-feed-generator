@@ -11,6 +11,11 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Format;
 
+use Brotkrueml\FeedGenerator\Renderer\AtomRenderer;
+use Brotkrueml\FeedGenerator\Renderer\JsonRenderer;
+use Brotkrueml\FeedGenerator\Renderer\RendererInterface;
+use Brotkrueml\FeedGenerator\Renderer\RssRenderer;
+
 /**
  * @api
  */
@@ -45,6 +50,19 @@ enum FeedFormat
             FeedFormat::ATOM => 'application/atom+xml',
             FeedFormat::JSON => 'application/feed+json',
             FeedFormat::RSS => 'application/rss+xml',
+        };
+    }
+
+    /**
+     * @internal
+     * @return class-string<RendererInterface>
+     */
+    public function renderer(): string
+    {
+        return match ($this) {
+            FeedFormat::ATOM => AtomRenderer::class,
+            FeedFormat::JSON => JsonRenderer::class,
+            FeedFormat::RSS => RssRenderer::class,
         };
     }
 }

@@ -36,21 +36,21 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 final class FeedMiddleware implements MiddlewareInterface, ServiceSubscriberInterface
 {
     public function __construct(
-        private readonly ContainerInterface $locator,
+        private readonly ContainerInterface $renderers,
         private readonly FeedRegistryInterface $feedRegistry,
         private readonly ResponseFactoryInterface $responseFactory,
     ) {
     }
 
     /**
-     * @return array<string, class-string<RendererInterface>>
+     * @return list<class-string<RendererInterface>>
      */
     public static function getSubscribedServices(): array
     {
         return [
-            FeedFormat::ATOM->format() => AtomRenderer::class,
-            FeedFormat::JSON->format() => JsonRenderer::class,
-            FeedFormat::RSS->format() => RssRenderer::class,
+            AtomRenderer::class,
+            JsonRenderer::class,
+            RssRenderer::class,
         ];
     }
 
@@ -78,7 +78,7 @@ final class FeedMiddleware implements MiddlewareInterface, ServiceSubscriberInte
         $normalizedParams = $request->getAttribute('normalizedParams');
         $feedLink = $normalizedParams->getRequestHost() . $configuration->path;
         /** @var RendererInterface $renderer */
-        $renderer = $this->locator->get($configuration->format->format());
+        $renderer = $this->renderers->get($configuration->format->renderer());
         $result = $renderer->render($feed, $feedLink);
 
         $hasStyleSheet = ($configuration->format !== FeedFormat::JSON) && ($feed->getStyleSheet() !== '');
