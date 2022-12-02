@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>some title</title>
         <link>https://example.org/</link>
@@ -10,7 +10,8 @@
             <title>some item title</title>
             <link>https://example.org/some-item</link>
             <description>some description title</description>
-            <author>john-doe@example.org (John Doe)</author>
+            <dc:creator>John Doe</dc:creator>
+            <dc:creator>Jane Doe</dc:creator>
             <content:encoded>&lt;p&gt;some content&lt;/p&gt;</content:encoded>
             <enclosure length="123456" type="some/type" url="https://example.org/some-attachment"/>
             <guid isPermaLink="false">some id</guid>

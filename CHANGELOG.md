@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Link to feed itself in an RSS feed
 - Item content property in RSS feed
 
+### Changed
+- Author in RSS feed now uses dc:creator tag
+
 ## [0.5.0] - 2022-11-18
 
 ### Added

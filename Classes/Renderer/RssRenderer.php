@@ -68,7 +68,7 @@ final class RssRenderer implements RendererInterface
 
         $textNode = new TextNode($this->document, $channelElement);
         $atomLinkNode = new AtomLinkNode($this->document, $channelElement);
-        $authorNode = new RssAuthorNode($this->document, $channelElement);
+        $authorNode = new RssAuthorNode($this->document, $channelElement, $this->namespaces);
         $imageNode = new RssImageNode($this->document, $channelElement);
         $itemNode = new RssItemNode($this->document, $channelElement, $this->extensionProcessor, $this->namespaces);
 
@@ -78,8 +78,8 @@ final class RssRenderer implements RendererInterface
         $atomLinkNode->add($feedLink, 'self', 'application/rss+xml', 'atom');
         $textNode->add('description', $feed->getDescription());
         $textNode->add('copyright', $feed->getCopyright());
-        if (! $feed->getAuthors()->isEmpty()) {
-            $authorNode->add('managingEditor', $feed->getAuthors()->get(0));
+        foreach ($feed->getAuthors() as $author) {
+            $authorNode->add($author);
         }
         $textNode->add('pubDate', $feed->getDatePublished()?->format('r') ?? '');
         $textNode->add('lastBuildDate', $feed->getLastBuildDate()?->format('r') ?? '');

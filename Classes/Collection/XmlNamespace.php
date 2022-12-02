@@ -19,4 +19,5 @@ enum XmlNamespace: string
 {
     case atom = 'http://www.w3.org/2005/Atom';
     case content = 'http://purl.org/rss/1.0/modules/content/';
+    case dc = 'http://purl.org/dc/elements/1.1/';
 }

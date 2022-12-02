@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
     <xsl:template match="/rss/channel">
         <html xmlns="http://www.w3.org/1999/xhtml">
@@ -150,10 +150,12 @@
                 <dd>
                     <xsl:value-of select="pubDate"/>
                 </dd>
-                <xsl:if test="author">
-                    <dt>Author</dt>
+                <xsl:if test="dc:creator">
+                    <dt>Authors</dt>
                     <dd>
-                        <xsl:value-of select="author"/>
+                        <ul>
+                            <xsl:apply-templates select="dc:creator"/>
+                        </ul>
                     </dd>
                 </xsl:if>
                 <xsl:if test="description">
@@ -172,6 +174,12 @@
                 </xsl:if>
             </dl>
         </article>
+    </xsl:template>
+
+    <xsl:template match="dc:creator">
+        <li>
+            <xsl:value-of select="."/>
+        </li>
     </xsl:template>
 
     <xsl:template match="enclosure">

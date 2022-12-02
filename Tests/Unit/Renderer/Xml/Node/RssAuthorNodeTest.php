@@ -11,7 +11,9 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer\Xml\Node;
 
+use Brotkrueml\FeedGenerator\Collection\XmlNamespaceCollection;
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
+use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\RssAuthorNode;
 use Brotkrueml\FeedGenerator\ValueObject\Author;
 use PHPUnit\Framework\TestCase;
@@ -31,7 +33,18 @@ final class RssAuthorNodeTest extends TestCase
 
         $rootElement = $this->document->appendChild($this->document->createElement('root'));
 
-        $this->subject = new RssAuthorNode($this->document, $rootElement);
+        $this->subject = new RssAuthorNode($this->document, $rootElement, new XmlNamespaceCollection());
+    }
+
+    /**
+     * @test
+     */
+    public function nameIsEmptyThenAnExceptionIsThrown(): void
+    {
+        self::expectException(MissingRequiredPropertyException::class);
+        self::expectExceptionMessageMatches('#author#');
+
+        $this->subject->add(new Author(''));
     }
 
     /**
@@ -40,37 +53,19 @@ final class RssAuthorNodeTest extends TestCase
      */
     public function authorNodeIsAddedCorrectly(AuthorInterface $author, string $expected): void
     {
-        $this->subject->add('author', $author);
+        $this->subject->add($author);
 
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
     public function provider(): iterable
     {
-        yield 'Name and email are not given' => [
-            'author' => new Author(''),
-            'expected' => <<<XML
-<?xml version="1.0" encoding="utf-8"?>
-<root/>
-XML,
-        ];
-
         yield 'Only name is given' => [
             'author' => new Author('John Doe'),
             'expected' => <<<XML
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-<author>John Doe</author>
-</root>
-XML,
-        ];
-
-        yield 'Only email is given' => [
-            'author' => new Author('', 'john.doe@example.org'),
-            'expected' => <<<XML
-<?xml version="1.0" encoding="utf-8"?>
-<root>
-<author>john.doe@example.org</author>
+<dc:creator>John Doe</dc:creator>
 </root>
 XML,
         ];
@@ -80,7 +75,7 @@ XML,
             'expected' => <<<XML
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-<author>john.doe@example.org (John Doe)</author>
+<dc:creator>John Doe</dc:creator>
 </root>
 XML,
         ];

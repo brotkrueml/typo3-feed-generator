@@ -48,15 +48,15 @@ final class RssItemNode
 
         $itemElement = $this->document->createElement('item');
         $textNode = new TextNode($this->document, $itemElement);
-        $authorNode = new RssAuthorNode($this->document, $itemElement);
+        $authorNode = new RssAuthorNode($this->document, $itemElement, $this->namespaces);
         $enclosureNode = new RssEnclosureNode($this->document, $itemElement);
         $guidNode = new RssGuidNode($this->document, $itemElement);
 
         $textNode->add('title', $item->getTitle());
         $textNode->add('link', $item->getLink());
         $textNode->add('description', $description);
-        if (! $item->getAuthors()->isEmpty()) {
-            $authorNode->add('author', $item->getAuthors()->get(0));
+        foreach ($item->getAuthors() as $author) {
+            $authorNode->add($author);
         }
         foreach ($item->getCategories() as $category) {
             $textNode->add('category', $category->getTerm());

@@ -86,7 +86,7 @@ See: :any:`Brotkrueml\\FeedGenerator\\Contract\\FeedInterface`
    *  - :php:`getAuthors()`
       - :xml:`<author>`
       - `author`
-      - :xml:`<managingEditor>` (only one)
+      - :xml:`<dc:creator>`
 
    *  - :php:`getCopyright()`
       - :xml:`<rights>`
@@ -211,7 +211,7 @@ See: :any:`Brotkrueml\\FeedGenerator\\Contract\\ItemInterface`
    *  - :php:`getAuthors()`
       - :xml:`<author>`
       - `authors`
-      - :xml:`<author>` (only one)
+      - :xml:`<dc:creator>`
 
    *  - :php:`getCategories()`
       - :xml:`<category term="..." scheme="..." label="..."/>`

@@ -154,13 +154,13 @@ XML,
 <root>
   <item>
     <title>Some title</title>
-    <author>John Doe</author>
+    <dc:creator>John Doe</dc:creator>
   </item>
 </root>
 XML,
         ];
 
-        yield 'Two authors is given, only first is taken' => [
+        yield 'Two authors are given' => [
             'item' => (new Item())
                 ->setTitle('Some title')
                 ->addAuthors(new Author('John Doe'), new Author('Jan Novak')),
@@ -168,7 +168,8 @@ XML,
 <root>
   <item>
     <title>Some title</title>
-    <author>John Doe</author>
+    <dc:creator>John Doe</dc:creator>
+    <dc:creator>Jan Novak</dc:creator>
   </item>
 </root>
 XML,

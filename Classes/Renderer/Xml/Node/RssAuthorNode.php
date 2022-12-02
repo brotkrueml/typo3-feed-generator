@@ -11,7 +11,10 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Renderer\Xml\Node;
 
+use Brotkrueml\FeedGenerator\Collection\XmlNamespace;
+use Brotkrueml\FeedGenerator\Collection\XmlNamespaceCollection;
 use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
+use Brotkrueml\FeedGenerator\Renderer\Guard\ValueNotEmptyGuard;
 
 /**
  * Renders an Atom author node like "<author>jd@example.org (John Doe)</author>"
@@ -19,29 +22,24 @@ use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
  */
 final class RssAuthorNode
 {
+    private readonly ValueNotEmptyGuard $notEmptyGuard;
+
     public function __construct(
         private readonly \DOMDocument $document,
         private readonly \DOMElement $parentElement,
+        private readonly XmlNamespaceCollection $namespaces,
     ) {
+        $this->notEmptyGuard = new ValueNotEmptyGuard();
     }
 
-    public function add(string $name, AuthorInterface $author): void
+    public function add(AuthorInterface $author): void
     {
-        if ($author->getEmail() === '' && $author->getName() === '') {
-            return;
-        }
+        $this->notEmptyGuard->guard('author', $author->getName());
 
         $authorNode = new TextNode($this->document, $this->parentElement);
 
-        if ($author->getEmail() !== '') {
-            $value = $author->getEmail();
-            if ($author->getName() !== '') {
-                $value .= ' (' . $author->getName() . ')';
-            }
-            $authorNode->add($name, $value);
-            return;
-        }
-
-        $authorNode->add($name, $author->getName());
+        // @see https://www.rssboard.org/rss-profile#namespace-elements-dublin-creator
+        $this->namespaces->add(XmlNamespace::dc->name, XmlNamespace::dc->value);
+        $authorNode->add(XmlNamespace::dc->name . ':creator', $author->getName());
     }
 }
