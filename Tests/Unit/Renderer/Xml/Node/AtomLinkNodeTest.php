@@ -66,7 +66,7 @@ final class AtomLinkNodeTest extends TestCase
     /**
      * @test
      */
-    public function allValuesAreGivenThenNodeIsAdded(): void
+    public function allRequiredValuesAreGivenThenNodeIsAdded(): void
     {
         $this->subject->add('https://example.org/', 'alternative', 'text/html');
 
@@ -74,6 +74,23 @@ final class AtomLinkNodeTest extends TestCase
 <?xml version="1.0" encoding="utf-8"?>
 <root>
   <link href="https://example.org/" rel="alternative" type="text/html"/>
+</root>
+XML;
+
+        self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
+    }
+
+    /**
+     * @test
+     */
+    public function namespaceIsGiven(): void
+    {
+        $this->subject->add('https://example.org/some-feed.rss', 'self', 'application/rss+xml', 'atom');
+
+        $expected = <<<XML
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <atom:link href="https://example.org/some-feed.rss" rel="self" type="application/rss+xml"/>
 </root>
 XML;
 

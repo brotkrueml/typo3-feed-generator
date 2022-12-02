@@ -28,13 +28,17 @@ final class AtomLinkNode
         $this->notEmptyGuard = new ValueNotEmptyGuard();
     }
 
-    public function add(string $href, string $rel, string $type): void
+    public function add(string $href, string $rel, string $type, string $namespace = ''): void
     {
         $this->notEmptyGuard->guard('link/href', $href);
         $this->notEmptyGuard->guard('link/rel', $rel);
         $this->notEmptyGuard->guard('link/type', $type);
 
-        $linkNode = $this->document->createElement('link');
+        $name = 'link';
+        if ($namespace !== '') {
+            $name = $namespace . ':' . $name;
+        }
+        $linkNode = $this->document->createElement($name);
         $linkNode->setAttribute('href', $href);
         $linkNode->setAttribute('rel', $rel);
         $linkNode->setAttribute('type', $type);

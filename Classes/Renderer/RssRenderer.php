@@ -13,6 +13,7 @@ namespace Brotkrueml\FeedGenerator\Renderer;
 
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Renderer\Guard\ValueNotEmptyGuard;
+use Brotkrueml\FeedGenerator\Renderer\Xml\Node\AtomLinkNode;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\RssAuthorNode;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\RssImageNode;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\RssItemNode;
@@ -48,9 +49,10 @@ final class RssRenderer implements RendererInterface
             $this->document->appendChild($xslt);
         }
 
-        $rss = $this->document->createElement('rss');
-        $rss->setAttribute('version', '2.0');
-        $root = $this->document->appendChild($rss);
+        $rssElement = $this->document->createElement('rss');
+        $rssElement->setAttribute('version', '2.0');
+        $rssElement->setAttribute('xmlns:atom', 'http://www.w3.org/2005/Atom');
+        $root = $this->document->appendChild($rssElement);
 
         $channelElement = $this->document->createElement('channel');
         $root->appendChild($channelElement);
@@ -60,6 +62,7 @@ final class RssRenderer implements RendererInterface
         $this->notEmptyGuard->guard('description', $feed->getDescription());
 
         $textNode = new TextNode($this->document, $channelElement);
+        $atomLinkNode = new AtomLinkNode($this->document, $channelElement);
         $authorNode = new RssAuthorNode($this->document, $channelElement);
         $imageNode = new RssImageNode($this->document, $channelElement);
         $itemNode = new RssItemNode($this->document, $channelElement, $this->extensionProcessor);
@@ -67,6 +70,7 @@ final class RssRenderer implements RendererInterface
         $textNode->add('language', $feed->getLanguage());
         $textNode->add('title', $feed->getTitle());
         $textNode->add('link', $feed->getLink());
+        $atomLinkNode->add($feedLink, 'self', 'application/rss+xml', 'atom');
         $textNode->add('description', $feed->getDescription());
         $textNode->add('copyright', $feed->getCopyright());
         if (! $feed->getAuthors()->isEmpty()) {
@@ -87,7 +91,7 @@ final class RssRenderer implements RendererInterface
         }
 
         foreach ($this->extensionProcessor->getUsedExtensions() as $qualifiedName => $namespace) {
-            $rss->setAttribute('xmlns:' . $qualifiedName, $namespace);
+            $rssElement->setAttribute('xmlns:' . $qualifiedName, $namespace);
         }
 
         $result = $this->document->saveXML();
