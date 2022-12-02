@@ -12,7 +12,7 @@ Brotkrueml\\FeedGenerator\\Contract\\ImageInterface
 
    .. php:method:: getUrl()
    
-      Get the URI of the image. Required.
+      Get the URL of the image. Required.
       
       :returntype: string
       

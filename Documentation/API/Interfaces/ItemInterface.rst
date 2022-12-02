@@ -42,7 +42,7 @@ Brotkrueml\\FeedGenerator\\Contract\\ItemInterface
       
    .. php:method:: getAuthors()
    
-      Get the data for authors.
+      Get the data for authors. For an RSS feed only one author can be assigned.
       
       :returntype: Brotkrueml\\FeedGenerator\\Collection\\Collection
       
@@ -66,7 +66,19 @@ Brotkrueml\\FeedGenerator\\Contract\\ItemInterface
       Get the attachments (enclosure). In accordance with the RSS Best Practices Profile of the RSS Advisory Board,
       no support is offered for multiple enclosures since such support forms no part of the RSS specification.
       
-      JSON feeds support multiple attachments
+      JSON feeds support multiple attachments.
+      
+      :returntype: Brotkrueml\\FeedGenerator\\Collection\\Collection
+      
+   .. php:method:: getCategories()
+   
+      Get the categories for the item.
+      
+      :returntype: Brotkrueml\\FeedGenerator\\Collection\\Collection
+      
+   .. php:method:: getExtensionContents()
+   
+      Get extension contents for the item.
       
       :returntype: Brotkrueml\\FeedGenerator\\Collection\\Collection
 

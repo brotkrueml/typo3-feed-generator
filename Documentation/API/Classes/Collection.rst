@@ -9,14 +9,14 @@ Brotkrueml\\FeedGenerator\\Collection\\Collection
 .. php:class:: Collection
 
    
-   .. php:method:: add(Brotkrueml\\FeedGenerator\\Contract\\AttachmentInterface|Brotkrueml\\FeedGenerator\\Contract\\AuthorInterface|Brotkrueml\\FeedGenerator\\Contract\\CategoryInterface|Brotkrueml\\FeedGenerator\\Contract\\ItemInterface items)
+   .. php:method:: add(Brotkrueml\\FeedGenerator\\Contract\\CollectableInterface items)
    
       :returntype: self
       
    .. php:method:: get(int index)
    
       :param int $index: the index
-      :returntype: Brotkrueml\\FeedGenerator\\Contract\\AttachmentInterface|Brotkrueml\\FeedGenerator\\Contract\\AuthorInterface|Brotkrueml\\FeedGenerator\\Contract\\CategoryInterface|Brotkrueml\\FeedGenerator\\Contract\\ItemInterface
+      :returntype: Brotkrueml\\FeedGenerator\\Contract\\CollectableInterface
       
    .. php:method:: isEmpty()
    

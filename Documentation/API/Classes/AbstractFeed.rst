@@ -67,4 +67,8 @@ Brotkrueml\\FeedGenerator\\Entity\\AbstractFeed
    .. php:method:: getStyleSheet()
    
       :returntype: string
+      
+   .. php:method:: getExtensionContents()
+   
+      :returntype: Brotkrueml\\FeedGenerator\\Collection\\Collection
 

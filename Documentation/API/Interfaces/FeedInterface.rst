@@ -94,4 +94,10 @@ Brotkrueml\\FeedGenerator\\Contract\\FeedInterface
       The path should be prefixed with "EXT:".
       
       :returntype: string
+      
+   .. php:method:: getExtensionContents()
+   
+      Get extension contents for the feed
+      
+      :returntype: Brotkrueml\\FeedGenerator\\Collection\\Collection
 
