@@ -28,12 +28,12 @@ enum FeedFormat
     /**
      * @internal
      */
-    public function format(): string
+    public function caseSensitive(): string
     {
         return match ($this) {
-            FeedFormat::ATOM => 'atom',
-            FeedFormat::JSON => 'json',
-            FeedFormat::RSS => 'rss',
+            FeedFormat::ATOM => 'Atom',
+            FeedFormat::JSON => 'JSON',
+            FeedFormat::RSS => 'RSS',
         };
     }
 

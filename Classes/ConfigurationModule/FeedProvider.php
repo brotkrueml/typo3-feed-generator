@@ -67,7 +67,7 @@ final class FeedProvider implements ProviderInterface
             }
             $feed += [
                 'Path' => $configuration->path,
-                'Format' => $configuration->format->format(),
+                'Format' => $configuration->format->caseSensitive(),
             ];
 
             $feeds[$configuration->instance::class][] = $feed;

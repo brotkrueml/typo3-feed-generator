@@ -78,7 +78,7 @@ final class ExtensionProvider implements ProviderInterface
             $formatKey = 'Feed format' . (count($formats) > 1 ? 's' : '');
             $item[$formatKey] = \implode(
                 ', ',
-                \array_map(static fn (FeedFormat $format): string => $format->format(), $formats)
+                \array_map(static fn (FeedFormat $format): string => $format->caseSensitive(), $formats)
             );
 
             $result[] = $item;

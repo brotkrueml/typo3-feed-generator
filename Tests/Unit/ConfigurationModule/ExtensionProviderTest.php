@@ -71,7 +71,7 @@ final class ExtensionProviderTest extends TestCase
                 [
                     'Qualified name' => 'some',
                     'About' => 'https://example.org/some',
-                    'Feed format' => 'json',
+                    'Feed format' => 'JSON',
                 ],
             ],
         ];
@@ -85,12 +85,12 @@ final class ExtensionProviderTest extends TestCase
                 [
                     'Qualified name' => 'another',
                     'About' => 'https://example.org/another',
-                    'Feed format' => 'json',
+                    'Feed format' => 'JSON',
                 ],
                 [
                     'Qualified name' => 'some',
                     'About' => 'https://example.org/some',
-                    'Feed format' => 'json',
+                    'Feed format' => 'JSON',
                 ],
             ],
         ];
@@ -105,17 +105,17 @@ final class ExtensionProviderTest extends TestCase
                 [
                     'Qualified name' => 'another',
                     'About' => 'https://example.org/another',
-                    'Feed format' => 'json',
+                    'Feed format' => 'JSON',
                 ],
                 [
                     'Qualified name' => 'some',
                     'About' => 'https://example.org/some',
-                    'Feed format' => 'json',
+                    'Feed format' => 'JSON',
                 ],
                 [
                     'Qualified name' => 'some',
                     'About' => 'https://example.org/some',
-                    'Feed format' => 'json',
+                    'Feed format' => 'JSON',
                 ],
             ],
         ];
@@ -130,18 +130,18 @@ final class ExtensionProviderTest extends TestCase
                 [
                     'Qualified name' => 'json',
                     'About' => 'https://example.org/json',
-                    'Feed format' => 'json',
+                    'Feed format' => 'JSON',
                 ],
                 [
                     'Qualified name' => 'xml',
                     'Namespace' => 'https://example.org/xml',
-                    'Feed formats' => 'atom, rss',
+                    'Feed formats' => 'Atom, RSS',
                 ],
                 [
                     'Qualified name' => 'xml-and-json',
                     'Namespace' => 'https://example.org/xml-and-json',
                     'About' => 'https://example.org/about',
-                    'Feed formats' => 'atom, rss, json',
+                    'Feed formats' => 'Atom, RSS, JSON',
                 ],
             ],
         ];

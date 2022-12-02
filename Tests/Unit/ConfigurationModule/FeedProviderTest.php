@@ -70,7 +70,7 @@ final class FeedProviderTest extends TestCase
             'expected' => [
                 SomeFeed::class => [
                     'Path' => '/some/path.atom',
-                    'Format' => 'atom',
+                    'Format' => 'Atom',
                 ],
             ],
         ];
@@ -83,7 +83,7 @@ final class FeedProviderTest extends TestCase
                 SomeFeed::class => [
                     'Site identifier' => 'some_site',
                     'Path' => '/some/path.atom',
-                    'Format' => 'atom',
+                    'Format' => 'Atom',
                 ],
             ],
         ];
@@ -96,7 +96,7 @@ final class FeedProviderTest extends TestCase
                 SomeFeed::class => [
                     'Site identifiers' => 'some_site, another_site',
                     'Path' => '/some/path.atom',
-                    'Format' => 'atom',
+                    'Format' => 'Atom',
                 ],
             ],
         ];
@@ -110,11 +110,11 @@ final class FeedProviderTest extends TestCase
                 SomeFeed::class => [
                     [
                         'Path' => '/some/path.atom',
-                        'Format' => 'atom',
+                        'Format' => 'Atom',
                     ],
                     [
                         'Path' => '/some/path.rss',
-                        'Format' => 'rss',
+                        'Format' => 'RSS',
                     ],
                 ],
             ],
@@ -130,17 +130,17 @@ final class FeedProviderTest extends TestCase
                 SomeFeed::class => [
                     [
                         'Path' => '/some/path.atom',
-                        'Format' => 'atom',
+                        'Format' => 'Atom',
                     ],
                     [
                         'Path' => '/some/path.rss',
-                        'Format' => 'rss',
+                        'Format' => 'RSS',
                     ],
                 ],
                 EmptyFeed::class => [
                     'Site identifier' => 'another_site',
                     'Path' => '/empty/feed',
-                    'Format' => 'rss',
+                    'Format' => 'RSS',
                 ],
             ],
         ];
