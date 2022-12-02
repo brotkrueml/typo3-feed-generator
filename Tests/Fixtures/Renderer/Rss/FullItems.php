@@ -46,6 +46,7 @@ final class FullItems extends AbstractFeed
                 ->setTitle('some item title')
                 ->setLink('https://example.org/some-item')
                 ->setDescription('some description title')
+                ->setContent('<p>some content</p>')
                 ->addAuthors(
                     new Author('John Doe', 'john-doe@example.org'),
                     new Author('Jane Doe', 'jane-doe@example.org'),

@@ -221,7 +221,7 @@ See: :any:`Brotkrueml\\FeedGenerator\\Contract\\ItemInterface`
    *  - :php:`getContent()`
       - :xml:`<content>`
       - `content_html`
-      - :xml:`—`
+      - :xml:`<content:encoded>`
 
    *  - :php:`getDatePublished()`
       - :xml:`<published>`

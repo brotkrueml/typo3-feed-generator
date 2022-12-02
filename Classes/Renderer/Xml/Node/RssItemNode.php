@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Renderer\Xml\Node;
 
+use Brotkrueml\FeedGenerator\Collection\XmlNamespace;
 use Brotkrueml\FeedGenerator\Collection\XmlNamespaceCollection;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Brotkrueml\FeedGenerator\Contract\TextInterface;
@@ -59,6 +60,10 @@ final class RssItemNode
         }
         foreach ($item->getCategories() as $category) {
             $textNode->add('category', $category->getTerm());
+        }
+        if ($item->getContent() !== '') {
+            $this->namespaces->add(XmlNamespace::content->name, XmlNamespace::content->value);
+            $textNode->add(XmlNamespace::content->name . ':encoded', $item->getContent());
         }
         if (! $item->getAttachments()->isEmpty()) {
             $enclosureNode->add($item->getAttachments()->get(0));

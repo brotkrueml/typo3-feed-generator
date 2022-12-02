@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Extension API for feeds
 - Categories for items
 - Link to feed itself in an RSS feed
+- Item content property in RSS feed
 
 ## [0.5.0] - 2022-11-18
 
