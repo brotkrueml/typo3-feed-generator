@@ -24,7 +24,7 @@ class XmlExtensionProcessor
     /**
      * @var array<string, string>
      */
-    private array $usedExtensions;
+    private array $usedExtensions = [];
 
     public function __construct(
         private readonly ExtensionRegistry $extensionRegistry,
