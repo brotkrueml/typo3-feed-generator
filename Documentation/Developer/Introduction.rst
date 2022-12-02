@@ -156,5 +156,5 @@ objects implementing the
    Not all properties are used in every format. For example, the last build date
    of the feed is only available in an RSS feed and not in an Atom feed.
 
-A list of all configured feeds is available in the :ref:`Configurations
-<configurations-module>` module.
+A list of all configured feeds is available in the :ref:`Configuration
+<configuration-feeds>` module.
