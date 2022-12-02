@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Renderer;
 
+use Brotkrueml\FeedGenerator\Collection\XmlNamespaceCollection;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Renderer\Guard\ValueNotEmptyGuard;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\AtomAuthorNode;
@@ -27,6 +28,7 @@ use Brotkrueml\FeedGenerator\Renderer\Xml\XmlExtensionProcessor;
 final class AtomRenderer implements RendererInterface
 {
     private readonly ValueNotEmptyGuard $notEmptyGuard;
+    private readonly XmlNamespaceCollection $namespaces;
     private \DOMDocument $document;
 
     public function __construct(
@@ -34,6 +36,7 @@ final class AtomRenderer implements RendererInterface
         private readonly PathResolver $pathResolver,
     ) {
         $this->notEmptyGuard = new ValueNotEmptyGuard();
+        $this->namespaces = new XmlNamespaceCollection();
     }
 
     public function render(FeedInterface $feed, string $feedLink): string
@@ -64,7 +67,7 @@ final class AtomRenderer implements RendererInterface
         $categoryNode = new AtomCategoryNode($this->document, $atomElement);
         $generatorNode = new AtomGeneratorNode($this->document, $atomElement);
         $linkNode = new AtomLinkNode($this->document, $atomElement);
-        $itemNode = new AtomItemNode($this->document, $atomElement, $this->extensionProcessor);
+        $itemNode = new AtomItemNode($this->document, $atomElement, $this->extensionProcessor, $this->namespaces);
         $textNode = new TextNode($this->document, $atomElement);
 
         $textNode->add('id', $feed->getId());
@@ -85,13 +88,18 @@ final class AtomRenderer implements RendererInterface
             $categoryNode->add($category);
         }
 
-        $this->extensionProcessor->process($feed->getExtensionContents(), $rootElement, $this->document);
+        $this->extensionProcessor->process(
+            $feed->getExtensionContents(),
+            $rootElement,
+            $this->document,
+            $this->namespaces
+        );
 
         foreach ($feed->getItems() as $item) {
             $itemNode->add($item);
         }
 
-        foreach ($this->extensionProcessor->getUsedExtensions() as $qualifiedName => $namespace) {
+        foreach ($this->namespaces as $qualifiedName => $namespace) {
             $atomElement->setAttribute('xmlns:' . $qualifiedName, $namespace);
         }
 

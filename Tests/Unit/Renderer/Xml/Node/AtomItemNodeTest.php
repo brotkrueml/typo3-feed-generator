@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer\Xml\Node;
 
+use Brotkrueml\FeedGenerator\Collection\XmlNamespaceCollection;
 use Brotkrueml\FeedGenerator\Entity\Item;
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\AtomItemNode;
@@ -37,7 +38,7 @@ final class AtomItemNodeTest extends TestCase
 
         $extensionProcessorDummy = $this->createStub(XmlExtensionProcessor::class);
 
-        $this->subject = new AtomItemNode($this->document, $rootElement, $extensionProcessorDummy);
+        $this->subject = new AtomItemNode($this->document, $rootElement, $extensionProcessorDummy, new XmlNamespaceCollection());
     }
 
     /**

@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Renderer\Xml\Node;
 
+use Brotkrueml\FeedGenerator\Collection\XmlNamespaceCollection;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Brotkrueml\FeedGenerator\Contract\TextInterface;
 use Brotkrueml\FeedGenerator\Renderer\Guard\AtLeastOneValueNotEmptyGuard;
@@ -30,6 +31,7 @@ final class AtomItemNode
         private readonly \DOMDocument $document,
         private readonly \DOMElement $parentElement,
         private readonly XmlExtensionProcessor $extensionProcessor,
+        private readonly XmlNamespaceCollection $namespaces
     ) {
         $this->notEmptyGuard = new ValueNotEmptyGuard();
         $this->atLeastOneValueNotEmptyGuard = new AtLeastOneValueNotEmptyGuard();
@@ -73,7 +75,7 @@ final class AtomItemNode
         }
         $textNode->add('published', $item->getDatePublished()?->format('c') ?? '');
 
-        $this->extensionProcessor->process($item->getExtensionContents(), $itemElement, $this->document);
+        $this->extensionProcessor->process($item->getExtensionContents(), $itemElement, $this->document, $this->namespaces);
 
         $this->parentElement->appendChild($itemElement);
     }

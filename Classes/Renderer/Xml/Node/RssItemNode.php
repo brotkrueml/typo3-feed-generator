@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Renderer\Xml\Node;
 
+use Brotkrueml\FeedGenerator\Collection\XmlNamespaceCollection;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Brotkrueml\FeedGenerator\Contract\TextInterface;
 use Brotkrueml\FeedGenerator\Renderer\Guard\AtLeastOneValueNotEmptyGuard;
@@ -28,6 +29,7 @@ final class RssItemNode
         private readonly \DOMDocument $document,
         private readonly \DOMElement $parentElement,
         private readonly XmlExtensionProcessor $extensionProcessor,
+        private readonly XmlNamespaceCollection $namespaces,
     ) {
         $this->atLeastOneValueNotEmptyGuard = new AtLeastOneValueNotEmptyGuard();
     }
@@ -64,7 +66,7 @@ final class RssItemNode
         $guidNode->add($item->getId() ?: $item->getLink());
         $textNode->add('pubDate', $item->getDatePublished()?->format('r') ?? '');
 
-        $this->extensionProcessor->process($item->getExtensionContents(), $itemElement, $this->document);
+        $this->extensionProcessor->process($item->getExtensionContents(), $itemElement, $this->document, $this->namespaces);
 
         $this->parentElement->appendChild($itemElement);
     }

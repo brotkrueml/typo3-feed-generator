@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer\Xml\Node;
 
+use Brotkrueml\FeedGenerator\Collection\XmlNamespaceCollection;
 use Brotkrueml\FeedGenerator\Contract\ItemInterface;
 use Brotkrueml\FeedGenerator\Entity\Item;
 use Brotkrueml\FeedGenerator\Format\TextFormat;
@@ -40,7 +41,7 @@ final class RssItemNodeTest extends TestCase
 
         $extensionProcessorDummy = $this->createStub(XmlExtensionProcessor::class);
 
-        $this->subject = new RssItemNode($this->document, $rootElement, $extensionProcessorDummy);
+        $this->subject = new RssItemNode($this->document, $rootElement, $extensionProcessorDummy, new XmlNamespaceCollection());
     }
 
     /**

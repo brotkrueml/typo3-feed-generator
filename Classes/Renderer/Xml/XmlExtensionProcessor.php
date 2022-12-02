@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Renderer\Xml;
 
 use Brotkrueml\FeedGenerator\Collection\Collection;
+use Brotkrueml\FeedGenerator\Collection\XmlNamespaceCollection;
 use Brotkrueml\FeedGenerator\Configuration\ExtensionRegistry;
 use Brotkrueml\FeedGenerator\Contract\ExtensionContentInterface;
 use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
@@ -21,11 +22,6 @@ use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
  */
 class XmlExtensionProcessor
 {
-    /**
-     * @var array<string, string>
-     */
-    private array $usedExtensions = [];
-
     public function __construct(
         private readonly ExtensionRegistry $extensionRegistry,
     ) {
@@ -34,24 +30,19 @@ class XmlExtensionProcessor
     /**
      * @param Collection<ExtensionContentInterface> $extensionContents
      */
-    public function process(Collection $extensionContents, \DOMNode $rootElement, \DOMDocument $document): void
-    {
+    public function process(
+        Collection $extensionContents,
+        \DOMNode $rootElement,
+        \DOMDocument $document,
+        XmlNamespaceCollection $namespaces
+    ): void {
         foreach ($extensionContents as $content) {
             $extension = $this->extensionRegistry->getExtensionForXmlContent($content);
             if (! $extension instanceof XmlExtensionInterface) {
                 continue;
             }
             $extension->getXmlRenderer()->render($content, $rootElement, $document);
-
-            $this->usedExtensions[$extension->getQualifiedName()] = $extension->getNamespace();
+            $namespaces->add($extension->getQualifiedName(), $extension->getNamespace());
         }
-    }
-
-    /**
-     * @return array<string, string>
-     */
-    public function getUsedExtensions(): array
-    {
-        return $this->usedExtensions;
     }
 }

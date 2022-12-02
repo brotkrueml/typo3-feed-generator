@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Renderer;
 
+use Brotkrueml\FeedGenerator\Collection\XmlNamespace;
+use Brotkrueml\FeedGenerator\Collection\XmlNamespaceCollection;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Renderer\Guard\ValueNotEmptyGuard;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\AtomLinkNode;
@@ -26,6 +28,7 @@ use Brotkrueml\FeedGenerator\Renderer\Xml\XmlExtensionProcessor;
 final class RssRenderer implements RendererInterface
 {
     private readonly ValueNotEmptyGuard $notEmptyGuard;
+    private readonly XmlNamespaceCollection $namespaces;
     private \DOMDocument $document;
 
     public function __construct(
@@ -33,12 +36,15 @@ final class RssRenderer implements RendererInterface
         private readonly PathResolver $pathResolver,
     ) {
         $this->notEmptyGuard = new ValueNotEmptyGuard();
+        $this->namespaces = new XmlNamespaceCollection();
     }
 
     public function render(FeedInterface $feed, string $feedLink): string
     {
         $this->document = new \DOMDocument('1.0', 'utf-8');
         $this->document->formatOutput = true;
+
+        $this->namespaces->add(XmlNamespace::atom->name, XmlNamespace::atom->value);
 
         if ($feed->getStyleSheet() !== '') {
             $href = $this->pathResolver->getWebPath($feed->getStyleSheet());
@@ -51,7 +57,6 @@ final class RssRenderer implements RendererInterface
 
         $rssElement = $this->document->createElement('rss');
         $rssElement->setAttribute('version', '2.0');
-        $rssElement->setAttribute('xmlns:atom', 'http://www.w3.org/2005/Atom');
         $root = $this->document->appendChild($rssElement);
 
         $channelElement = $this->document->createElement('channel');
@@ -65,7 +70,7 @@ final class RssRenderer implements RendererInterface
         $atomLinkNode = new AtomLinkNode($this->document, $channelElement);
         $authorNode = new RssAuthorNode($this->document, $channelElement);
         $imageNode = new RssImageNode($this->document, $channelElement);
-        $itemNode = new RssItemNode($this->document, $channelElement, $this->extensionProcessor);
+        $itemNode = new RssItemNode($this->document, $channelElement, $this->extensionProcessor, $this->namespaces);
 
         $textNode->add('language', $feed->getLanguage());
         $textNode->add('title', $feed->getTitle());
@@ -84,13 +89,18 @@ final class RssRenderer implements RendererInterface
         $textNode->add('generator', \sprintf('%s (%s)', Generator::NAME, Generator::URI));
         $imageNode->add($feed->getImage());
 
-        $this->extensionProcessor->process($feed->getExtensionContents(), $channelElement, $this->document);
+        $this->extensionProcessor->process(
+            $feed->getExtensionContents(),
+            $channelElement,
+            $this->document,
+            $this->namespaces
+        );
 
         foreach ($feed->getItems() as $item) {
             $itemNode->add($item);
         }
 
-        foreach ($this->extensionProcessor->getUsedExtensions() as $qualifiedName => $namespace) {
+        foreach ($this->namespaces as $qualifiedName => $namespace) {
             $rssElement->setAttribute('xmlns:' . $qualifiedName, $namespace);
         }
 
