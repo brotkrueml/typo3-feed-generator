@@ -203,10 +203,20 @@ See: :any:`Brotkrueml\\FeedGenerator\\Contract\\ItemInterface`
       - JSON property
       - RSS tag
 
+   *  - :php:`getAttachments()`
+      - —
+      - `attachments`
+      - :xml:`<enclosure type="..." length="..." url="..."/>` (only one)
+
    *  - :php:`getAuthors()`
       - :xml:`<author>`
-      - `author`
+      - `authors`
       - :xml:`<author>` (only one)
+
+   *  - :php:`getCategories()`
+      - :xml:`<category term="..." scheme="..." label="..."/>`
+      - `tags`
+      - :xml:`<category>`
 
    *  - :php:`getContent()`
       - :xml:`<content>`
@@ -227,11 +237,6 @@ See: :any:`Brotkrueml\\FeedGenerator\\Contract\\ItemInterface`
       - :xml:`<summary>`
       - `summary`
       - :xml:`<description>`
-
-   *  - :php:`getAttachment()`
-      - —
-      - `attachments`
-      - :xml:`<enclosure type="..." length="..." url="..."/>` (only one)
 
    *  - :php:`getId()`
       - :xml:`<id>`
