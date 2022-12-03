@@ -28,7 +28,7 @@
 	"require-dev": {
 		"brotkrueml/coding-standards": "~3.0.0",
 		"brotkrueml/t3docs-codesnippets-standalone": "dev-main@dev",
-		"ergebnis/composer-normalize": "~2.28.0",
+		"ergebnis/composer-normalize": "~2.29.0",
 		"jiripudil/phpstan-sealed-classes": "^1.0",
 		"php-coveralls/php-coveralls": "^2.5",
 		"phpstan/extension-installer": "^1.1",
