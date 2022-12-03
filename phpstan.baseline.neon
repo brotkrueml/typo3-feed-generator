@@ -1,6 +1,11 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Parameter \\#1 \\$value of function count expects array\\|Countable, iterable\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\JsonExtensionInterface\\|Brotkrueml\\\\FeedGenerator\\\\Contract\\\\XmlExtensionInterface\\> given\\.$#"
+			count: 1
+			path: Classes/ConfigurationModule/ExtensionProvider.php
+
+		-
 			message: "#^Method Brotkrueml\\\\FeedGenerator\\\\Entity\\\\AbstractFeed\\:\\:getAuthors\\(\\) should return Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\AuthorInterface\\> but returns Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\CollectableInterface\\>\\.$#"
 			count: 1
 			path: Classes/Entity/AbstractFeed.php

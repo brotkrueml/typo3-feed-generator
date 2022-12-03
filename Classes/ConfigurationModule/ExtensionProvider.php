@@ -55,7 +55,7 @@ final class ExtensionProvider implements ProviderInterface
     public function getConfiguration(): array
     {
         $extensions = $this->extensionRegistry->getAllExtensions();
-        if ($extensions === []) {
+        if (\count($extensions) === 0) {
             return ['No extensions available'];
         }
 
