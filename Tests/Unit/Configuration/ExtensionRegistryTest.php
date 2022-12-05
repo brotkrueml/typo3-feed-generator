@@ -99,7 +99,6 @@ final class ExtensionRegistryTest extends TestCase
     }
 
     /**
-     * @noRector \Rector\TypeDeclaration\Rector\FunctionLike\ReturnTypeDeclarationRector
      * @param FeedFormat[] $formats
      */
     private function buildExtensionClass(bool $canHandle = false, array $formats = []): JsonExtensionInterface&XmlExtensionInterface

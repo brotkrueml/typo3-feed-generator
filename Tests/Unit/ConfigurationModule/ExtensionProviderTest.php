@@ -45,7 +45,6 @@ final class ExtensionProviderTest extends TestCase
     /**
      * @test
      * @dataProvider providerForGetConfigurations
-     * @noRector AddArrayParamDocTypeRector
      */
     public function getConfigurationsReturnsArrayWithConfigurationsCorrectly(
         array $configurations,
@@ -185,9 +184,6 @@ final class ExtensionProviderTest extends TestCase
         return $subject;
     }
 
-    /**
-     * @noRector \Rector\TypeDeclaration\Rector\FunctionLike\ReturnTypeDeclarationRector
-     */
     private function buildExtensionForXmlAndJson(string $qualifiedName, string $namespace, string $about): JsonExtensionInterface&XmlExtensionInterface
     {
         return new class($qualifiedName, $namespace, $about) implements JsonExtensionInterface, XmlExtensionInterface {

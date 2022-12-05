@@ -159,7 +159,6 @@ final class JsonRenderer implements RendererInterface
             $attachmentArray = [
                 'url' => $attachment->getUrl(),
             ];
-            /** @noRector \Rector\DeadCode\Rector\If_\RemoveAlwaysTrueIfConditionRector */
             if ($attachment->getType() !== '') {
                 $attachmentArray['type'] = $attachment->getType();
             }

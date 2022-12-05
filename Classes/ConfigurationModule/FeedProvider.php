@@ -47,7 +47,6 @@ final class FeedProvider implements ProviderInterface
     }
 
     /**
-     * @noRector AddArrayReturnDocTypeRector
      * @return string[]|array{class-string, array<mixed>}
      */
     public function getConfiguration(): array
@@ -74,7 +73,6 @@ final class FeedProvider implements ProviderInterface
         }
 
         foreach ($feeds as $class => $feedsPerClass) {
-            /** @noRector CountOnNullRector */
             if (\count($feedsPerClass) === 1) {
                 $feeds[$class] = $feedsPerClass[0];
             }

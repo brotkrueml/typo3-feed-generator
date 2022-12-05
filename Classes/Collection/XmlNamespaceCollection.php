@@ -30,7 +30,6 @@ final class XmlNamespaceCollection implements \IteratorAggregate
 
     /**
      * @return \Traversable<string, string>
-     * @noRector \Rector\TypeDeclaration\Rector\FunctionLike\ReturnTypeDeclarationRector
      */
     public function getIterator(): \Traversable
     {

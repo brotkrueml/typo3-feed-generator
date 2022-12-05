@@ -51,7 +51,6 @@ final class Collection implements \IteratorAggregate
 
     /**
      * @return Traversable<T>
-     * @noRector \Rector\TypeDeclaration\Rector\FunctionLike\ReturnTypeDeclarationRector
      */
     public function getIterator(): Traversable
     {

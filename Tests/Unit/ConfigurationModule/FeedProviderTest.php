@@ -45,7 +45,6 @@ final class FeedProviderTest extends TestCase
     /**
      * @test
      * @dataProvider providerForGetConfigurations
-     * @noRector AddArrayParamDocTypeRector
      */
     public function getConfigurationsReturnsArrayWithConfigurationsCorrectly(
         array $configurations,
