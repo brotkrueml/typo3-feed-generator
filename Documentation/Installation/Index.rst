@@ -11,7 +11,7 @@ Installation
    needs at least PHP 8.1.
 
 .. attention::
-   The extension is under development and in alpha state.
+   The extension is under development and in beta state.
 
 The only way to install this extension is by using Composer. In your
 Composer-based TYPO3 project root, just type:
