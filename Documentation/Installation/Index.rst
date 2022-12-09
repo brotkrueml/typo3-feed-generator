@@ -13,7 +13,7 @@ Installation
 .. attention::
    The extension is under development and in beta state.
 
-The only way to install this extension is by using Composer. In your
+The recommended way to install this extension is by using Composer. In your
 Composer-based TYPO3 project root, just type:
 
 .. code-block:: bash
