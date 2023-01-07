@@ -23,7 +23,7 @@
 	"require": {
 		"php": ">=8.1",
 		"ext-dom": "*",
-		"typo3/cms-core": "^11.5 || ^12.0"
+		"typo3/cms-core": "^11.5 || ^12.1"
 	},
 	"require-dev": {
 		"brotkrueml/coding-standards": "~3.0.0",
@@ -31,13 +31,14 @@
 		"ergebnis/composer-normalize": "~2.29.0",
 		"jiripudil/phpstan-sealed-classes": "^1.0",
 		"php-coveralls/php-coveralls": "^2.5",
-		"phpstan/extension-installer": "^1.1",
-		"phpstan/phpstan": "1.9.2",
+		"phpstan/extension-installer": "^1.2",
+		"phpstan/phpstan": "1.9.7",
 		"phpunit/phpunit": "^9.5.23",
-		"rector/rector": "0.15.0",
-		"symfony/yaml": "^5.4 || ^6.1",
+		"rector/rector": "0.15.2",
+		"symfony/yaml": "^5.4 || ^6.2",
 		"symplify/phpstan-rules": "^11.1",
-		"typo3/cms-lowlevel": "^11.5 || ^12.0"
+		"tomasvotruba/cognitive-complexity": "^0.0.5",
+		"typo3/cms-lowlevel": "^11.5 || ^12.1"
 	},
 	"suggest": {
 		"typo3/cms-lowlevel": "Display available feeds and extensions in Configuration module"

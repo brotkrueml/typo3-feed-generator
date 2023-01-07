@@ -9,16 +9,14 @@ parameters:
     level: 9
     paths:
         - Classes
+    cognitive_complexity:
+        class: 20
+        function: 8
     ignoreErrors:
         -
             message: "#^Class has a static method must so must contains \"Static\" in its name$#"
 
 services:
-    -
-        class: Symplify\PHPStanRules\CognitiveComplexity\Rules\ClassLikeCognitiveComplexityRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            maxClassCognitiveComplexity: 13
     -
         class: Symplify\PHPStanRules\Rules\ForbiddenFuncCallRule
         tags: [phpstan.rules.rule]

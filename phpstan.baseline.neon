@@ -6,6 +6,11 @@ parameters:
 			path: Classes/ConfigurationModule/ExtensionProvider.php
 
 		-
+			message: "#^Cognitive complexity for \"Brotkrueml\\\\FeedGenerator\\\\ConfigurationModule\\\\FeedProvider\\:\\:getConfiguration\\(\\)\" is 10, keep it under 8$#"
+			count: 1
+			path: Classes/ConfigurationModule/FeedProvider.php
+
+		-
 			message: "#^Method Brotkrueml\\\\FeedGenerator\\\\Entity\\\\AbstractFeed\\:\\:getAuthors\\(\\) should return Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\AuthorInterface\\> but returns Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\CollectableInterface\\>\\.$#"
 			count: 1
 			path: Classes/Entity/AbstractFeed.php
@@ -31,6 +36,11 @@ parameters:
 			path: Classes/Renderer/AtomRenderer.php
 
 		-
-			message: "#^Class cognitive complexity is 29, keep it under 13$#"
+			message: "#^Class cognitive complexity is 29, keep it under 20$#"
+			count: 1
+			path: Classes/Renderer/JsonRenderer.php
+
+		-
+			message: "#^Cognitive complexity for \"Brotkrueml\\\\FeedGenerator\\\\Renderer\\\\JsonRenderer\\:\\:render\\(\\)\" is 18, keep it under 8$#"
 			count: 1
 			path: Classes/Renderer/JsonRenderer.php
