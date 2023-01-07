@@ -24,7 +24,7 @@ final class ExtensionRegistry implements ExtensionRegistryInterface
      * @param iterable<JsonExtensionInterface|XmlExtensionInterface> $extensions
      */
     public function __construct(
-        private readonly iterable $extensions
+        private readonly iterable $extensions,
     ) {
     }
 

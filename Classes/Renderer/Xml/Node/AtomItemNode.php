@@ -31,7 +31,7 @@ final class AtomItemNode
         private readonly \DOMDocument $document,
         private readonly \DOMElement $parentElement,
         private readonly XmlExtensionProcessor $extensionProcessor,
-        private readonly XmlNamespaceCollection $namespaces
+        private readonly XmlNamespaceCollection $namespaces,
     ) {
         $this->notEmptyGuard = new ValueNotEmptyGuard();
         $this->atLeastOneValueNotEmptyGuard = new AtLeastOneValueNotEmptyGuard();

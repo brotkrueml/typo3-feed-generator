@@ -34,7 +34,7 @@ final class FeedRegistry implements FeedRegistryInterface
         foreach ($configuredFeeds as $configuredFeed) {
             $feedAttributes = \array_map(
                 static fn (\ReflectionAttribute $attrib): Feed => $attrib->newInstance(),
-                (new \ReflectionClass($configuredFeed))->getAttributes(Feed::class)
+                (new \ReflectionClass($configuredFeed))->getAttributes(Feed::class),
             ) ?: throw new \DomainException(
                 \sprintf(
                     'Mandatory attribute "%s" is missing for class "%s" which implements "%s"',
@@ -42,7 +42,7 @@ final class FeedRegistry implements FeedRegistryInterface
                     $configuredFeed::class,
                     FeedInterface::class,
                 ),
-                1647595664
+                1647595664,
             );
 
             $cacheAttributes = (new \ReflectionClass($configuredFeed))->getAttributes(Cache::class);
@@ -69,7 +69,7 @@ final class FeedRegistry implements FeedRegistryInterface
                 $configuration->siteIdentifiers === []
                     || \in_array($siteIdentifier, $configuration->siteIdentifiers, true)
             )
-                && $configuration->path === $path
+                && $configuration->path === $path,
         );
 
         if ($filteredConfigurations === []) {

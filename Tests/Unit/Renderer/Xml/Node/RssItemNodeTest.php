@@ -194,7 +194,7 @@ XML,
                 ->setTitle('Some title')
                 ->addAttachments(
                     new Attachment('https://example.org/', 'some/type', 123),
-                    new Attachment('https://example.come/', 'another/type', 234)
+                    new Attachment('https://example.come/', 'another/type', 234),
                 ),
             'expected' => <<<XML
 <root>

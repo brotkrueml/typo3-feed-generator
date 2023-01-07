@@ -50,7 +50,7 @@ final class RssRenderer implements RendererInterface
             $href = $this->pathResolver->getWebPath($feed->getStyleSheet());
             $xslt = $this->document->createProcessingInstruction(
                 'xml-stylesheet',
-                'type="text/xsl" href="' . $href . '"'
+                'type="text/xsl" href="' . $href . '"',
             );
             $this->document->appendChild($xslt);
         }
@@ -93,7 +93,7 @@ final class RssRenderer implements RendererInterface
             $feed->getExtensionContents(),
             $channelElement,
             $this->document,
-            $this->namespaces
+            $this->namespaces,
         );
 
         foreach ($feed->getItems() as $item) {

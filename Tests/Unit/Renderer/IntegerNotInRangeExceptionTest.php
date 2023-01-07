@@ -26,7 +26,7 @@ final class IntegerNotInRangeExceptionTest extends TestCase
         self::assertInstanceOf(IntegerNotInRangeException::class, $actual);
         self::assertSame(
             'The value of "some_property" must be between 50 and 100, 42 given.',
-            $actual->getMessage()
+            $actual->getMessage(),
         );
         self::assertSame(1668153593, $actual->getCode());
     }

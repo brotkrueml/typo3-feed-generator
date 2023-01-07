@@ -44,7 +44,7 @@ final class ItemWithDescriptionAsString extends AbstractFeed
                 ->setTitle('some item title')
                 ->setDateModified(new \DateTimeImmutable('2022-11-12 12:12:12'))
                 ->setLink('https://example.org/some-item')
-                ->setDescription('some item description as string')
+                ->setDescription('some item description as string'),
         );
     }
 }

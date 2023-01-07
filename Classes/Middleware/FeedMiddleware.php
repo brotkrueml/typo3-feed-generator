@@ -94,7 +94,7 @@ final class FeedMiddleware implements MiddlewareInterface, ServiceSubscriberInte
                 ->withHeader('Cache-Control', 'max-age=' . $configuration->cacheInSeconds)
                 ->withHeader(
                     'Expires',
-                    (new \DateTimeImmutable($configuration->cacheInSeconds . ' seconds'))->format(\DateTimeInterface::RFC7231)
+                    (new \DateTimeImmutable($configuration->cacheInSeconds . ' seconds'))->format(\DateTimeInterface::RFC7231),
                 );
         }
 

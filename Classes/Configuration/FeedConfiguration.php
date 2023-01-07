@@ -27,7 +27,7 @@ final class FeedConfiguration
         public readonly string $path,
         public readonly FeedFormat $format,
         public readonly array $siteIdentifiers,
-        public readonly ?int $cacheInSeconds
+        public readonly ?int $cacheInSeconds,
     ) {
         if (! \is_int($cacheInSeconds)) {
             return;
@@ -39,9 +39,9 @@ final class FeedConfiguration
         throw new \DomainException(
             \sprintf(
                 'The configured cache seconds (%d) is a negative int',
-                $cacheInSeconds
+                $cacheInSeconds,
             ),
-            1655707760
+            1655707760,
         );
     }
 }

@@ -21,9 +21,9 @@ final class IntegerNotInRangeException extends \OutOfRangeException
                 $property,
                 $min,
                 $max,
-                $value
+                $value,
             ),
-            1668153593
+            1668153593,
         );
     }
 }

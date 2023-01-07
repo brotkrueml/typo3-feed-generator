@@ -110,7 +110,7 @@ XML;
     public function nameEmailAndUriAreGiven(): void
     {
         $this->subject->add(
-            new Author('John Doe', 'john.doe@example.org', 'https://example.org/john-doe')
+            new Author('John Doe', 'john.doe@example.org', 'https://example.org/john-doe'),
         );
 
         $expected = <<<XML

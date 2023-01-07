@@ -48,7 +48,7 @@ final class FeedProviderTest extends TestCase
      */
     public function getConfigurationsReturnsArrayWithConfigurationsCorrectly(
         array $configurations,
-        array $expected
+        array $expected,
     ): void {
         $subject = $this->getInstanceOfSubjectUnderTest($configurations);
 

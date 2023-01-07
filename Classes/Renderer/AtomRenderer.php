@@ -48,7 +48,7 @@ final class AtomRenderer implements RendererInterface
             $href = $this->pathResolver->getWebPath($feed->getStyleSheet());
             $xslt = $this->document->createProcessingInstruction(
                 'xml-stylesheet',
-                'type="text/xsl" href="' . $href . '"'
+                'type="text/xsl" href="' . $href . '"',
             );
             $this->document->appendChild($xslt);
         }
@@ -92,7 +92,7 @@ final class AtomRenderer implements RendererInterface
             $feed->getExtensionContents(),
             $rootElement,
             $this->document,
-            $this->namespaces
+            $this->namespaces,
         );
 
         foreach ($feed->getItems() as $item) {

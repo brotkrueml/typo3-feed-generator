@@ -75,10 +75,10 @@ final class ExtensionProvider implements ProviderInterface
                 $item['About'] = $extension->getAbout();
             }
 
-            $formatKey = 'Feed format' . (count($formats) > 1 ? 's' : '');
+            $formatKey = 'Feed format' . (\count($formats) > 1 ? 's' : '');
             $item[$formatKey] = \implode(
                 ', ',
-                \array_map(static fn (FeedFormat $format): string => $format->caseSensitive(), $formats)
+                \array_map(static fn (FeedFormat $format): string => $format->caseSensitive(), $formats),
             );
 
             $result[] = $item;
@@ -86,7 +86,7 @@ final class ExtensionProvider implements ProviderInterface
 
         \usort(
             $result,
-            static fn (array $a, array $b): int => $a['Qualified name'] <=> $b['Qualified name']
+            static fn (array $a, array $b): int => $a['Qualified name'] <=> $b['Qualified name'],
         );
 
         return $result;

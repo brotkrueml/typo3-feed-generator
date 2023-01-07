@@ -56,7 +56,7 @@ final class RssImageNodeTest extends TestCase
         $this->expectErrorMessageMatches('#image/title#');
 
         $this->subject->add(
-            new Image('https://example.org/some-image.png')
+            new Image('https://example.org/some-image.png'),
         );
     }
 
@@ -69,7 +69,7 @@ final class RssImageNodeTest extends TestCase
         $this->expectErrorMessageMatches('#image/link#');
 
         $this->subject->add(
-            new Image('https://example.org/some-image.png', 'Some title')
+            new Image('https://example.org/some-image.png', 'Some title'),
         );
     }
 
@@ -86,8 +86,8 @@ final class RssImageNodeTest extends TestCase
                 'https://example.org/some-image.png',
                 'Some title',
                 'image/png',
-                145
-            )
+                145,
+            ),
         );
     }
 
@@ -104,8 +104,8 @@ final class RssImageNodeTest extends TestCase
                 'https://example.org/some-image.png',
                 'Some title',
                 'image/png',
-                height: 401
-            )
+                height: 401,
+            ),
         );
     }
 
@@ -134,7 +134,7 @@ XML,
             'image' => new Image(
                 'https://example.org/some-image.png',
                 'Some image',
-                'image/png'
+                'image/png',
             ),
             'expected' => <<<XML
 <?xml version="1.0" encoding="utf-8"?>
@@ -153,7 +153,7 @@ XML,
                 'https://example.org/some-image.png',
                 'Some image',
                 'image/png',
-                144
+                144,
             ),
             'expected' => <<<XML
 <?xml version="1.0" encoding="utf-8"?>
@@ -173,7 +173,7 @@ XML,
                 'https://example.org/some-image.png',
                 'Some image',
                 'image/png',
-                height: 400
+                height: 400,
             ),
             'expected' => <<<XML
 <?xml version="1.0" encoding="utf-8"?>
@@ -193,7 +193,7 @@ XML,
                 'https://example.org/some-image.png',
                 'Some image',
                 'image/png',
-                description: 'Some description'
+                description: 'Some description',
             ),
             'expected' => <<<XML
 <?xml version="1.0" encoding="utf-8"?>
@@ -215,7 +215,7 @@ XML,
                 'image/png',
                 123,
                 234,
-                'Some description'
+                'Some description',
             ),
             'expected' => <<<XML
 <?xml version="1.0" encoding="utf-8"?>

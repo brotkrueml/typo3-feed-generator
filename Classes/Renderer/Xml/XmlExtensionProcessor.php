@@ -34,7 +34,7 @@ class XmlExtensionProcessor
         Collection $extensionContents,
         \DOMNode $rootElement,
         \DOMDocument $document,
-        XmlNamespaceCollection $namespaces
+        XmlNamespaceCollection $namespaces,
     ): void {
         foreach ($extensionContents as $content) {
             $extension = $this->extensionRegistry->getExtensionForXmlContent($content);

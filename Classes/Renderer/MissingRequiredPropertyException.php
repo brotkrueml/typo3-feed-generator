@@ -18,9 +18,9 @@ final class MissingRequiredPropertyException extends \RuntimeException
         return new self(
             \sprintf(
                 'Required property "%s" is missing.',
-                $property
+                $property,
             ),
-            1668153106
+            1668153106,
         );
     }
 
@@ -32,9 +32,9 @@ final class MissingRequiredPropertyException extends \RuntimeException
         return new self(
             \sprintf(
                 'At least one of %s must be present.',
-                \implode(' or ', $properties)
+                \implode(' or ', $properties),
             ),
-            1668434363
+            1668434363,
         );
     }
 }

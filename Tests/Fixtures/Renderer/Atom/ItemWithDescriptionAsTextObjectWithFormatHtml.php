@@ -46,7 +46,7 @@ final class ItemWithDescriptionAsTextObjectWithFormatHtml extends AbstractFeed
                 ->setTitle('some item title')
                 ->setDateModified(new \DateTimeImmutable('2022-11-12 12:12:12'))
                 ->setLink('https://example.org/some-item')
-                ->setDescription(new Text('<p>some item description as text object</p>', TextFormat::HTML))
+                ->setDescription(new Text('<p>some item description as text object</p>', TextFormat::HTML)),
         );
     }
 }

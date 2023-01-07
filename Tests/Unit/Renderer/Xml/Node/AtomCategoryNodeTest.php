@@ -102,7 +102,7 @@ XML;
     public function termSchemeAndLabelAreGiven(): void
     {
         $this->subject->add(
-            new Category('some term', 'https://example.org/some-term', 'some label')
+            new Category('some term', 'https://example.org/some-term', 'some label'),
         );
 
         $expected = <<<XML

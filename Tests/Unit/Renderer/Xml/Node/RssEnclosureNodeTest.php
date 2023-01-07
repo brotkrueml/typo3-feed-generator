@@ -41,7 +41,7 @@ final class RssEnclosureNodeTest extends TestCase
         $this->expectErrorMessageMatches('#item/enclosure/url#');
 
         $this->subject->add(
-            new Attachment('')
+            new Attachment(''),
         );
     }
 
@@ -54,7 +54,7 @@ final class RssEnclosureNodeTest extends TestCase
         $this->expectErrorMessageMatches('#item/enclosure/type#');
 
         $this->subject->add(
-            new Attachment('https://example.org/some-enclosure')
+            new Attachment('https://example.org/some-enclosure'),
         );
     }
 
@@ -67,7 +67,7 @@ final class RssEnclosureNodeTest extends TestCase
         $this->expectErrorMessageMatches('#item/enclosure/length#');
 
         $this->subject->add(
-            new Attachment('https://example.org/some-enclosure', 'some/type', 0)
+            new Attachment('https://example.org/some-enclosure', 'some/type', 0),
         );
     }
 
@@ -77,7 +77,7 @@ final class RssEnclosureNodeTest extends TestCase
     public function allValuesAreGivenThenNodeIsAdded(): void
     {
         $this->subject->add(
-            new Attachment('https://example.org/some-enclosure', 'some/type', 123456)
+            new Attachment('https://example.org/some-enclosure', 'some/type', 123456),
         );
 
         $expected = <<<XML

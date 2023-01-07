@@ -17,7 +17,7 @@ final class IndexNotFoundException extends \OutOfBoundsException
     {
         return new self(
             \sprintf('Index "%s" not found for collection', $index),
-            1668412374
+            1668412374,
         );
     }
 }
