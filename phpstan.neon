@@ -1,8 +1,9 @@
 includes:
     - phpstan.baseline.neon
-    - .Build/vendor/symplify/phpstan-rules/config/array-rules.neon
-    - .Build/vendor/symplify/phpstan-rules/config/forbidden-static-rules.neon
     - .Build/vendor/symplify/phpstan-rules/config/regex-rules.neon
+
+rules:
+    - Symplify\PHPStanRules\Rules\NoReturnArrayVariableListRule
 
 parameters:
     phpVersion: 80100
@@ -12,9 +13,6 @@ parameters:
     cognitive_complexity:
         class: 20
         function: 8
-    ignoreErrors:
-        -
-            message: "#^Class has a static method must so must contains \"Static\" in its name$#"
 
 services:
     -
