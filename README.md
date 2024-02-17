@@ -8,4 +8,5 @@ Generator for Atom, JSON and RSS feeds in TYPO3
 
 > The extension is under development and in beta state.
 
-The extension supports TYPO3 v11 LTS and TYPO3 v12, and requires at least PHP 8.1.
+The extension supports TYPO3 v12 LTS.
+Use version 0.6 for compatibility with TYPO3 v11 LTS.

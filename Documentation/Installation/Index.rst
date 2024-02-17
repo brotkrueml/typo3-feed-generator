@@ -7,8 +7,8 @@ Installation
 ============
 
 .. note::
-   The extension in version |release| supports TYPO3 v11 LTS and TYPO3 v12, and
-   needs at least PHP 8.1.
+   The extension in version |release| supports TYPO3 v12 LTS.
+   Use version 0.6 for compatibility with TYPO3 v11 LTS.
 
 .. attention::
    The extension is under development and in beta state.
