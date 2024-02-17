@@ -13,6 +13,4 @@ namespace Brotkrueml\FeedGenerator\Tests\Fixtures\ValueObject;
 
 use Brotkrueml\FeedGenerator\Contract\ExtensionContentInterface;
 
-final class ExtensionContentFixture implements ExtensionContentInterface
-{
-}
+final class ExtensionContentFixture implements ExtensionContentInterface {}

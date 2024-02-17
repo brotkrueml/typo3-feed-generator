@@ -11,6 +11,4 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Renderer;
 
-final class RendererException extends \RuntimeException
-{
-}
+final class RendererException extends \RuntimeException {}

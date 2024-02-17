@@ -33,7 +33,7 @@ final class FeedRegistry implements FeedRegistryInterface
         $configurations = [];
         foreach ($configuredFeeds as $configuredFeed) {
             $feedAttributes = \array_map(
-                static fn (\ReflectionAttribute $attrib): Feed => $attrib->newInstance(),
+                static fn(\ReflectionAttribute $attrib): Feed => $attrib->newInstance(),
                 (new \ReflectionClass($configuredFeed))->getAttributes(Feed::class),
             ) ?: throw new \DomainException(
                 \sprintf(
@@ -65,7 +65,7 @@ final class FeedRegistry implements FeedRegistryInterface
     {
         $filteredConfigurations = \array_filter(
             $this->configurations,
-            static fn (FeedConfiguration $configuration): bool => (
+            static fn(FeedConfiguration $configuration): bool => (
                 $configuration->siteIdentifiers === []
                     || \in_array($siteIdentifier, $configuration->siteIdentifiers, true)
             )

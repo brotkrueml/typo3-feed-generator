@@ -26,8 +26,7 @@ final class JsonRenderer implements RendererInterface
 {
     public function __construct(
         private readonly JsonExtensionProcessor $extensionProcessor,
-    ) {
-    }
+    ) {}
 
     public function render(FeedInterface $feed, string $feedLink): string
     {

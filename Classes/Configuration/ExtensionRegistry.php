@@ -25,8 +25,7 @@ final class ExtensionRegistry implements ExtensionRegistryInterface
      */
     public function __construct(
         private readonly iterable $extensions,
-    ) {
-    }
+    ) {}
 
     public function getExtensionForJsonContent(ExtensionContentInterface $content): ?JsonExtensionInterface
     {

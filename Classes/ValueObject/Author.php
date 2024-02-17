@@ -22,8 +22,7 @@ final class Author implements AuthorInterface
         private readonly string $name,
         private readonly string $email = '',
         private readonly string $uri = '',
-    ) {
-    }
+    ) {}
 
     public function getName(): string
     {

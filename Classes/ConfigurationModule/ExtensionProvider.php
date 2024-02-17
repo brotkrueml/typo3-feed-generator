@@ -26,8 +26,7 @@ final class ExtensionProvider implements ProviderInterface
 
     public function __construct(
         private readonly ExtensionRegistryInterface $extensionRegistry,
-    ) {
-    }
+    ) {}
 
     /**
      * @param array{identifier: string} $attributes
@@ -78,7 +77,7 @@ final class ExtensionProvider implements ProviderInterface
             $formatKey = 'Feed format' . (\count($formats) > 1 ? 's' : '');
             $item[$formatKey] = \implode(
                 ', ',
-                \array_map(static fn (FeedFormat $format): string => $format->caseSensitive(), $formats),
+                \array_map(static fn(FeedFormat $format): string => $format->caseSensitive(), $formats),
             );
 
             $result[] = $item;
@@ -86,7 +85,7 @@ final class ExtensionProvider implements ProviderInterface
 
         \usort(
             $result,
-            static fn (array $a, array $b): int => $a['Qualified name'] <=> $b['Qualified name'],
+            static fn(array $a, array $b): int => $a['Qualified name'] <=> $b['Qualified name'],
         );
 
         return $result;

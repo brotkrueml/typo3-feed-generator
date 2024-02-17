@@ -20,8 +20,7 @@ final class RssGuidNode
     public function __construct(
         private readonly \DOMDocument $document,
         private readonly \DOMElement $parentElement,
-    ) {
-    }
+    ) {}
 
     public function add(string $guid): void
     {

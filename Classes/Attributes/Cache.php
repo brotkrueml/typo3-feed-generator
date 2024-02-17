@@ -25,6 +25,5 @@ final class Cache
      */
     public function __construct(
         public readonly int $seconds,
-    ) {
-    }
+    ) {}
 }

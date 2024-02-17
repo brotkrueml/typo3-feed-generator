@@ -25,8 +25,7 @@ final class Attachment implements AttachmentInterface
         private readonly string $url,
         private readonly string $type = '',
         private readonly int $length = 0,
-    ) {
-    }
+    ) {}
 
     public function getUrl(): string
     {

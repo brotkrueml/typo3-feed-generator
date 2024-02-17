@@ -22,8 +22,7 @@ final class Text implements TextInterface
     public function __construct(
         private readonly string $text,
         private readonly TextFormat $format = TextFormat::TEXT,
-    ) {
-    }
+    ) {}
 
     public function getText(): string
     {

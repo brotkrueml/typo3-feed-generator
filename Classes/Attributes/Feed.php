@@ -24,6 +24,5 @@ final class Feed
         public readonly string $path,
         public readonly FeedFormat $format,
         public readonly array $siteIdentifiers = [],
-    ) {
-    }
+    ) {}
 }

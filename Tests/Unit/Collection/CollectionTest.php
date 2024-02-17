@@ -74,8 +74,7 @@ final class CollectionTest extends TestCase
     {
         self::expectNotToPerformAssertions();
 
-        $extensionContent = new class() implements ExtensionContentInterface {
-        };
+        $extensionContent = new class() implements ExtensionContentInterface {};
 
         $this->subject->add($extensionContent);
     }

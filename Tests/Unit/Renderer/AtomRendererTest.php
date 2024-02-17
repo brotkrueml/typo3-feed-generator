@@ -42,7 +42,7 @@ final class AtomRendererTest extends TestCase
         $pathResolverStub = $this->createStub(PathResolver::class);
         $pathResolverStub
             ->method('getWebPath')
-            ->willReturnCallback(static fn ($path) => $path);
+            ->willReturnCallback(static fn($path) => $path);
 
         $this->subject = new AtomRenderer($extensionProcessorDummy, $pathResolverStub);
     }

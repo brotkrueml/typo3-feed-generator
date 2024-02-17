@@ -56,8 +56,7 @@ final class ExtensionRegistryTest extends TestCase
         $extension = $this->buildExtensionClass();
         $subject = new ExtensionRegistry([$extension]);
 
-        $content = new class() implements ExtensionContentInterface {
-        };
+        $content = new class() implements ExtensionContentInterface {};
 
         $actual = $subject->getExtensionForXmlContent($content);
 
@@ -73,8 +72,7 @@ final class ExtensionRegistryTest extends TestCase
         $extension2 = $this->buildExtensionClass(true, [FeedFormat::ATOM]);
         $subject = new ExtensionRegistry([$extension1, $extension2]);
 
-        $content = new class() implements ExtensionContentInterface {
-        };
+        $content = new class() implements ExtensionContentInterface {};
 
         $actual = $subject->getExtensionForXmlContent($content);
 
@@ -90,8 +88,7 @@ final class ExtensionRegistryTest extends TestCase
         $extension2 = $this->buildExtensionClass(true, [FeedFormat::ATOM]);
         $subject = new ExtensionRegistry([$extension1, $extension2]);
 
-        $content = new class() implements ExtensionContentInterface {
-        };
+        $content = new class() implements ExtensionContentInterface {};
 
         $actual = $subject->getExtensionForXmlContent($content);
 
@@ -107,8 +104,7 @@ final class ExtensionRegistryTest extends TestCase
             public function __construct(
                 private readonly bool $canHandle,
                 private readonly array $formats,
-            ) {
-            }
+            ) {}
 
             /**
              * @return FeedFormat[]
@@ -154,9 +150,7 @@ final class ExtensionRegistryTest extends TestCase
             public function getXmlRenderer(): XmlExtensionRendererInterface
             {
                 return new class() implements XmlExtensionRendererInterface {
-                    public function render(ExtensionContentInterface $content, \DOMNode $parent, \DOMDocument $document): void
-                    {
-                    }
+                    public function render(ExtensionContentInterface $content, \DOMNode $parent, \DOMDocument $document): void {}
                 };
             }
         };

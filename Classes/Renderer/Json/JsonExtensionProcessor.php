@@ -28,8 +28,7 @@ class JsonExtensionProcessor
 
     public function __construct(
         private readonly ExtensionRegistry $extensionRegistry,
-    ) {
-    }
+    ) {}
 
     /**
      * @param Collection<ExtensionContentInterface> $extensionContents

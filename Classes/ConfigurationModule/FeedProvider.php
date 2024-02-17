@@ -23,8 +23,7 @@ final class FeedProvider implements ProviderInterface
 
     public function __construct(
         private readonly FeedRegistryInterface $feedRegistry,
-    ) {
-    }
+    ) {}
 
     /**
      * @param array{identifier: string} $attributes

@@ -29,8 +29,7 @@ final class Image implements ImageInterface
         private readonly int $width = 0,
         private readonly int $height = 0,
         private readonly string $description = '',
-    ) {
-    }
+    ) {}
 
     public function getUrl(): string
     {

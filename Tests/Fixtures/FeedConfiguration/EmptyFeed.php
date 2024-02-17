@@ -13,6 +13,4 @@ namespace Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration;
 
 use Brotkrueml\FeedGenerator\Entity\AbstractFeed;
 
-final class EmptyFeed extends AbstractFeed
-{
-}
+final class EmptyFeed extends AbstractFeed {}

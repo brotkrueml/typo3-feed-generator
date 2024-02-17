@@ -154,8 +154,7 @@ final class ExtensionProviderTest extends TestCase
         $registry = new class($extensions) implements ExtensionRegistryInterface {
             public function __construct(
                 private readonly array $extensions,
-            ) {
-            }
+            ) {}
 
             public function getExtensionForJsonContent(ExtensionContentInterface $content): ?JsonExtensionInterface
             {
@@ -191,8 +190,7 @@ final class ExtensionProviderTest extends TestCase
                 private readonly string $qualifiedName,
                 private readonly string $namespace,
                 private readonly string $about,
-            ) {
-            }
+            ) {}
 
             public function canHandle(ExtensionContentInterface $content): bool
             {
@@ -232,8 +230,7 @@ final class ExtensionProviderTest extends TestCase
             public function __construct(
                 private readonly string $qualifiedName,
                 private readonly string $about,
-            ) {
-            }
+            ) {}
 
             public function canHandle(ExtensionContentInterface $content): bool
             {
@@ -263,8 +260,7 @@ final class ExtensionProviderTest extends TestCase
             public function __construct(
                 private readonly string $qualifiedName,
                 private readonly string $namespace,
-            ) {
-            }
+            ) {}
 
             public function canHandle(ExtensionContentInterface $content): bool
             {

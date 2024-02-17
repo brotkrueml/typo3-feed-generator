@@ -153,8 +153,7 @@ final class FeedProviderTest extends TestCase
         $registry = new class($configurations) implements FeedRegistryInterface {
             public function __construct(
                 private readonly array $configurations,
-            ) {
-            }
+            ) {}
 
             public function getConfigurationBySiteIdentifierAndPath(string $siteIdentifier, string $path): ?FeedConfiguration
             {

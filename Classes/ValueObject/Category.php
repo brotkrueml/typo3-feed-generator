@@ -22,8 +22,7 @@ final class Category implements CategoryInterface
         private readonly string $term,
         private readonly string $scheme = '',
         private readonly string $label = '',
-    ) {
-    }
+    ) {}
 
     public function getTerm(): string
     {

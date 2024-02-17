@@ -22,6 +22,4 @@ use JiriPudil\SealedClasses\Sealed;
     JsonExtensionRendererInterface::class,
     XmlExtensionRendererInterface::class,
 ])]
-interface ExtensionRendererInterface
-{
-}
+interface ExtensionRendererInterface {}

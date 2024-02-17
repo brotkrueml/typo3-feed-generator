@@ -39,8 +39,7 @@ final class FeedMiddleware implements MiddlewareInterface, ServiceSubscriberInte
         private readonly ContainerInterface $renderers,
         private readonly FeedRegistryInterface $feedRegistry,
         private readonly ResponseFactoryInterface $responseFactory,
-    ) {
-    }
+    ) {}
 
     /**
      * @return list<class-string<RendererInterface>>

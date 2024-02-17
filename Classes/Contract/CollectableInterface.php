@@ -24,6 +24,4 @@ use JiriPudil\SealedClasses\Sealed;
     CategoryInterface::class,
     ItemInterface::class,
 ])]
-interface CollectableInterface
-{
-}
+interface CollectableInterface {}
