@@ -75,7 +75,6 @@
 			"dev-main": "0.7.x-dev"
 		},
 		"typo3/cms": {
-			"app-dir": ".Build",
 			"extension-key": "feed_generator",
 			"web-dir": ".Build/web"
 		}
