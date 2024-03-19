@@ -27,7 +27,6 @@
 	},
 	"require-dev": {
 		"brotkrueml/coding-standards": "~5.1.0",
-		"brotkrueml/t3docs-codesnippets-standalone": "dev-main@dev",
 		"ergebnis/composer-normalize": "~2.42.0",
 		"jiripudil/phpstan-sealed-classes": "^1.1",
 		"php-coveralls/php-coveralls": "^2.7",
