@@ -12,6 +12,8 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer\Xml\Node;
 
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\RssGuidNode;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class RssGuidNodeTest extends TestCase
@@ -29,10 +31,8 @@ final class RssGuidNodeTest extends TestCase
         $this->subject = new RssGuidNode($this->document, $rootElement);
     }
 
-    /**
-     * @test
-     * @dataProvider provider
-     */
+    #[Test]
+    #[DataProvider('provider')]
     public function guidIsEmptyThenNoNodeIsAdded(string $guid, string $expected): void
     {
         $this->subject->add($guid);
@@ -40,7 +40,7 @@ final class RssGuidNodeTest extends TestCase
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    public function provider(): iterable
+    public static function provider(): iterable
     {
         yield 'guid is empty' => [
             'guid' => '',

@@ -13,6 +13,7 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer\Xml\Node;
 
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\AtomGeneratorNode;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class AtomGeneratorNodeTest extends TestCase
@@ -30,9 +31,7 @@ final class AtomGeneratorNodeTest extends TestCase
         $this->subject = new AtomGeneratorNode($this->document, $rootElement);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function nameIsEmptyThenAnExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -41,9 +40,7 @@ final class AtomGeneratorNodeTest extends TestCase
         $this->subject->add('', 'https://example.org/');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function onlyNameIsGiven(): void
     {
         $this->subject->add('foo');
@@ -58,9 +55,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function nameAndUriAreGiven(): void
     {
         $this->subject->add('foo', 'https://example.org/foo');
@@ -75,9 +70,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function nameAndVersionAreGiven(): void
     {
         $this->subject->add('foo', version: '1.2');
@@ -92,9 +85,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function nameUriAndVersionAreGiven(): void
     {
         $this->subject->add('foo', 'https://example.org/foo', '1.2');

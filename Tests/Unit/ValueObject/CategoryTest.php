@@ -12,13 +12,12 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Unit\ValueObject;
 
 use Brotkrueml\FeedGenerator\ValueObject\Category;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class CategoryTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function propertiesAreInitialisedCorrectlyWhenNotGiven(): void
     {
         $subject = new Category('some-term');
@@ -28,9 +27,7 @@ final class CategoryTest extends TestCase
         self::assertSame('', $subject->getLabel());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getSchemeReturnsSchemeCorrectly(): void
     {
         $subject = new Category('some-term', 'https://example.org/some-scheme');
@@ -38,9 +35,7 @@ final class CategoryTest extends TestCase
         self::assertSame('https://example.org/some-scheme', $subject->getScheme());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getLabelReturnsLabelCorrectly(): void
     {
         $subject = new Category('some-term', label: 'Some Label');

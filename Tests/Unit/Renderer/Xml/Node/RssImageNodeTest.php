@@ -16,11 +16,12 @@ use Brotkrueml\FeedGenerator\Renderer\IntegerNotInRangeException;
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\RssImageNode;
 use Brotkrueml\FeedGenerator\ValueObject\Image;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Brotkrueml\FeedGenerator\Renderer\Xml\Node\RssImageNode
- */
+#[CoversClass(RssImageNode::class)]
 final class RssImageNodeTest extends TestCase
 {
     private \DOMDocument $document;
@@ -36,9 +37,7 @@ final class RssImageNodeTest extends TestCase
         $this->subject = new RssImageNode($this->document, $rootElement);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function urlIsEmptyThenAnExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -47,9 +46,7 @@ final class RssImageNodeTest extends TestCase
         $this->subject->add(new Image(''));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function titleIsEmptyThenAnExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -60,9 +57,7 @@ final class RssImageNodeTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function linkIsEmptyThenAnExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -73,9 +68,7 @@ final class RssImageNodeTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function widthIsToLargeThenAnExceptionIsThrown(): void
     {
         $this->expectException(IntegerNotInRangeException::class);
@@ -91,9 +84,7 @@ final class RssImageNodeTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function heightIsToLargeThenAnExceptionIsThrown(): void
     {
         $this->expectException(IntegerNotInRangeException::class);
@@ -109,10 +100,8 @@ final class RssImageNodeTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @dataProvider provider
-     */
+    #[Test]
+    #[DataProvider('provider')]
     public function nodeIsAddedCorrectly(?ImageInterface $image, string $expected): void
     {
         $this->subject->add($image);
@@ -120,7 +109,7 @@ final class RssImageNodeTest extends TestCase
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXml());
     }
 
-    public function provider(): iterable
+    public static function provider(): iterable
     {
         yield 'Image is null' => [
             'image' => null,

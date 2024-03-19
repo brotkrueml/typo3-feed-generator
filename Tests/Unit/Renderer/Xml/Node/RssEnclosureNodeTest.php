@@ -15,6 +15,7 @@ use Brotkrueml\FeedGenerator\Renderer\IntegerNotInRangeException;
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\RssEnclosureNode;
 use Brotkrueml\FeedGenerator\ValueObject\Attachment;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class RssEnclosureNodeTest extends TestCase
@@ -32,9 +33,7 @@ final class RssEnclosureNodeTest extends TestCase
         $this->subject = new RssEnclosureNode($this->document, $rootElement);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function urlIsEmptyThenExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -45,9 +44,7 @@ final class RssEnclosureNodeTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function typeIsEmptyThenExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -58,9 +55,7 @@ final class RssEnclosureNodeTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function lengthIsZeroThenExceptionIsThrown(): void
     {
         $this->expectException(IntegerNotInRangeException::class);
@@ -71,9 +66,7 @@ final class RssEnclosureNodeTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function allValuesAreGivenThenNodeIsAdded(): void
     {
         $this->subject->add(

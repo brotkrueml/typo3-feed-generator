@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer\Xml\Node;
 
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\TextNode;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class TextNodeTest extends TestCase
@@ -29,9 +30,7 @@ final class TextNodeTest extends TestCase
         $this->subject = new TextNode($this->document, $rootElement);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function valueIsEmptyThenNoNodeIsAppended(): void
     {
         $this->subject->add('foo', '');
@@ -44,9 +43,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function valueIsNotEmptyThenNodeIsAppended(): void
     {
         $this->subject->add('foo', 'bar');
@@ -60,9 +57,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function multipleCallsAddMultipleNodes(): void
     {
         $this->subject->add('foo', 'bar');

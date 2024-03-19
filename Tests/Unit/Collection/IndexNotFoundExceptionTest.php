@@ -12,13 +12,12 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Collection;
 
 use Brotkrueml\FeedGenerator\Collection\IndexNotFoundException;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class IndexNotFoundExceptionTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function forIndex(): void
     {
         $actual = IndexNotFoundException::forIndex(42);

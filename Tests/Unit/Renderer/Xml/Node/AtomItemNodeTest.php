@@ -19,11 +19,11 @@ use Brotkrueml\FeedGenerator\Renderer\Xml\XmlExtensionProcessor;
 use Brotkrueml\FeedGenerator\ValueObject\Author;
 use Brotkrueml\FeedGenerator\ValueObject\Category;
 use Brotkrueml\FeedGenerator\ValueObject\Text;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Brotkrueml\FeedGenerator\Renderer\Xml\Node\AtomItemNode
- */
+#[CoversClass(AtomItemNode::class)]
 final class AtomItemNodeTest extends TestCase
 {
     private \DOMDocument $document;
@@ -41,9 +41,7 @@ final class AtomItemNodeTest extends TestCase
         $this->subject = new AtomItemNode($this->document, $rootElement, $extensionProcessorDummy, new XmlNamespaceCollection());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function idIsEmptyThenAnExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -57,9 +55,7 @@ final class AtomItemNodeTest extends TestCase
         $this->subject->add($item);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function titleIsEmptyThenAnExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -73,9 +69,7 @@ final class AtomItemNodeTest extends TestCase
         $this->subject->add($item);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function dateModifiedIsEmptyThenAnExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -89,9 +83,7 @@ final class AtomItemNodeTest extends TestCase
         $this->subject->add($item);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function linkAndContentAreEmptyThenAnExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -105,9 +97,7 @@ final class AtomItemNodeTest extends TestCase
         $this->subject->add($item);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function minimumItemWithLinkGiven(): void
     {
         $item = (new Item())
@@ -133,9 +123,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function minimumItemWithContentGiven(): void
     {
         $item = (new Item())
@@ -161,9 +149,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function oneAuthorGiven(): void
     {
         $item = (new Item())
@@ -193,9 +179,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function twoAuthorsGiven(): void
     {
         $item = (new Item())
@@ -228,9 +212,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function descriptionAsStringGiven(): void
     {
         $item = (new Item())
@@ -258,9 +240,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function descriptionAsTextObjectGiven(): void
     {
         $item = (new Item())
@@ -288,9 +268,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function contentIsNotEmpty(): void
     {
         $item = (new Item())
@@ -318,9 +296,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function oneCategoryGiven(): void
     {
         $item = (new Item())
@@ -348,9 +324,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function twoCategoriesGiven(): void
     {
         $item = (new Item())
@@ -379,9 +353,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function datePublishedIsNotEmpty(): void
     {
         $item = (new Item())

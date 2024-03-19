@@ -14,11 +14,11 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer\Xml\Node;
 use Brotkrueml\FeedGenerator\Format\TextFormat;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\TextFormatNode;
 use Brotkrueml\FeedGenerator\ValueObject\Text;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Brotkrueml\FeedGenerator\Renderer\Xml\Node\TextFormatNode
- */
+#[CoversClass(TextFormatNode::class)]
 final class TextFormatNodeTest extends TestCase
 {
     private \DOMDocument $document;
@@ -34,9 +34,7 @@ final class TextFormatNodeTest extends TestCase
         $this->subject = new TextFormatNode($this->document, $rootElement);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function valueIsEmptyThenNoNodeIsAppended(): void
     {
         $this->subject->add('foo', new Text('', TextFormat::HTML));
@@ -49,9 +47,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function valueIsNotEmptyThenNodeIsAppended(): void
     {
         $this->subject->add('foo', new Text('bar', TextFormat::HTML));
@@ -66,9 +62,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function multipleCallsAddMultipleNodes(): void
     {
         $this->subject->add('foo', new Text('bar', TextFormat::HTML));

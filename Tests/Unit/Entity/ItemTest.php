@@ -16,16 +16,14 @@ use Brotkrueml\FeedGenerator\ValueObject\Attachment;
 use Brotkrueml\FeedGenerator\ValueObject\Author;
 use Brotkrueml\FeedGenerator\ValueObject\Category;
 use Brotkrueml\FeedGenerator\ValueObject\Text;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Brotkrueml\FeedGenerator\Entity\Item
- */
+#[CoversClass(Item::class)]
 final class ItemTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function propertiesAreInitialisedCorrectlyWhenNotGiven(): void
     {
         $subject = new Item();
@@ -43,9 +41,7 @@ final class ItemTest extends TestCase
         self::assertTrue($subject->getExtensionContents()->isEmpty());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getIdReturnsPublicIdCorrectly(): void
     {
         $subject = (new Item())
@@ -54,9 +50,7 @@ final class ItemTest extends TestCase
         self::assertSame('some id', $subject->getId());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getTitleReturnsTitleCorrectly(): void
     {
         $subject = (new Item())
@@ -65,9 +59,7 @@ final class ItemTest extends TestCase
         self::assertSame('some title', $subject->getTitle());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getDescriptionReturnsDescriptionAsStringCorrectly(): void
     {
         $subject = (new Item())
@@ -76,9 +68,7 @@ final class ItemTest extends TestCase
         self::assertSame('some description', $subject->getDescription());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getDescriptionReturnsDescriptionAsTextObjectCorrectly(): void
     {
         $description = new Text('some description');
@@ -89,9 +79,7 @@ final class ItemTest extends TestCase
         self::assertSame($description, $subject->getDescription());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getContentReturnsContentCorrectly(): void
     {
         $subject = (new Item())
@@ -100,9 +88,7 @@ final class ItemTest extends TestCase
         self::assertSame('some content', $subject->getContent());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getLinkReturnsLinkCorrectly(): void
     {
         $subject = (new Item())
@@ -111,9 +97,7 @@ final class ItemTest extends TestCase
         self::assertSame('some link', $subject->getLink());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getAuthorsReturnsOneAuthorCorrectly(): void
     {
         $author = new Author('Some author');
@@ -124,9 +108,7 @@ final class ItemTest extends TestCase
         self::assertSame($author, $subject->getAuthors()->get(0));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getAuthorsReturnsTwoAuthorsCorrectly(): void
     {
         $author1 = new Author('Some author');
@@ -139,9 +121,7 @@ final class ItemTest extends TestCase
         self::assertSame($author2, $subject->getAuthors()->get(1));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getDatePublishedReturnsDatePublishedCorrectly(): void
     {
         $datePublished = new \DateTimeImmutable();
@@ -152,9 +132,7 @@ final class ItemTest extends TestCase
         self::assertSame($datePublished, $subject->getDatePublished());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getDateModifiedReturnsDateModifiedCorrectly(): void
     {
         $dateModified = new \DateTimeImmutable();
@@ -165,9 +143,7 @@ final class ItemTest extends TestCase
         self::assertSame($dateModified, $subject->getDateModified());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getAttachmentsReturnsAttachmentsCorrectly(): void
     {
         $attachment1 = new Attachment('https://example.org/video.mp4');
@@ -180,9 +156,7 @@ final class ItemTest extends TestCase
         self::assertContains($attachment2, $subject->getAttachments());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getCategoriesReturnsAttachmentsCorrectly(): void
     {
         $category1 = new Category('some category');

@@ -14,11 +14,11 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer\Xml\Node;
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\AtomCategoryNode;
 use Brotkrueml\FeedGenerator\ValueObject\Category;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Brotkrueml\FeedGenerator\Renderer\Xml\Node\AtomCategoryNode
- */
+#[CoversClass(AtomCategoryNode::class)]
 final class AtomCategoryNodeTest extends TestCase
 {
     private \DOMDocument $document;
@@ -34,9 +34,7 @@ final class AtomCategoryNodeTest extends TestCase
         $this->subject = new AtomCategoryNode($this->document, $rootElement);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function termIsEmptyThenAnExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -45,9 +43,7 @@ final class AtomCategoryNodeTest extends TestCase
         $this->subject->add(new Category(''));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function onlyTermIsGiven(): void
     {
         $this->subject->add(new Category('some term'));
@@ -62,9 +58,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function termAndSchemaAreGiven(): void
     {
         $this->subject->add(new Category('some term', 'https://example.org/some-term'));
@@ -79,9 +73,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function termAndLabelAreGiven(): void
     {
         $this->subject->add(new Category('some term', label: 'some label'));
@@ -96,9 +88,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function termSchemeAndLabelAreGiven(): void
     {
         $this->subject->add(

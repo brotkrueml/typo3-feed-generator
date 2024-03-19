@@ -22,14 +22,16 @@ use Brotkrueml\FeedGenerator\ValueObject\Attachment;
 use Brotkrueml\FeedGenerator\ValueObject\Author;
 use Brotkrueml\FeedGenerator\ValueObject\Category;
 use Brotkrueml\FeedGenerator\ValueObject\Text;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Brotkrueml\FeedGenerator\Renderer\Xml\Node\RssItemNode
- */
+#[CoversClass(RssItemNode::class)]
 final class RssItemNodeTest extends TestCase
 {
     private \DOMDocument $document;
+    private \DOMElement $rootElement;
     private RssItemNode $subject;
 
     protected function setUp(): void
@@ -37,16 +39,14 @@ final class RssItemNodeTest extends TestCase
         $this->document = new \DOMDocument('1.0', 'utf-8');
         $this->document->formatOutput = true;
 
-        $rootElement = $this->document->appendChild($this->document->createElement('root'));
+        $this->rootElement = $this->document->appendChild($this->document->createElement('root'));
 
         $extensionProcessorDummy = $this->createStub(XmlExtensionProcessor::class);
 
-        $this->subject = new RssItemNode($this->document, $rootElement, $extensionProcessorDummy, new XmlNamespaceCollection());
+        $this->subject = new RssItemNode($this->document, $this->rootElement, $extensionProcessorDummy, new XmlNamespaceCollection());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function titleAndDescriptionAsStringAreEmptyThenExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -55,9 +55,7 @@ final class RssItemNodeTest extends TestCase
         $this->subject->add(new Item());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function titleAndDescriptionAsTextObjectAreEmptyThenExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -66,22 +64,25 @@ final class RssItemNodeTest extends TestCase
         $this->subject->add((new Item())->setDescription(new Text('')));
     }
 
-    /**
-     * @test
-     * @dataProvider provider
-     */
-    public function someScenarios(ItemInterface $item, string $expected): void
+    #[Test]
+    #[DataProvider('provider')]
+    public function someScenarios(ItemInterface $item, array $namespaces, string $expected): void
     {
+        foreach ($namespaces as $prefix => $uri) {
+            $this->rootElement->setAttribute('xmlns:' . $prefix, $uri);
+        }
+
         $this->subject->add($item);
 
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    public function provider(): iterable
+    public static function provider(): iterable
     {
         yield 'Only title is given' => [
             'item' => (new Item())
                 ->setTitle('Some title'),
+            'namespaces' => [],
             'expected' => <<<XML
 <root>
   <item>
@@ -94,6 +95,7 @@ XML,
         yield 'Only description as string is given' => [
             'item' => (new Item())
                 ->setDescription('Some description'),
+            'namespaces' => [],
             'expected' => <<<XML
 <root>
   <item>
@@ -106,6 +108,7 @@ XML,
         yield 'Only description as Text object is given' => [
             'item' => (new Item())
                 ->setDescription(new Text('Some description', TextFormat::HTML)),
+            'namespaces' => [],
             'expected' => <<<XML
 <root>
   <item>
@@ -119,6 +122,7 @@ XML,
             'item' => (new Item())
                 ->setTitle('Some title')
                 ->setLink('https://example.org/'),
+            'namespaces' => [],
             'expected' => <<<XML
 <root>
   <item>
@@ -135,6 +139,7 @@ XML,
                 ->setTitle('Some title')
                 ->setLink('https://example.org/')
                 ->setId('some-id'),
+            'namespaces' => [],
             'expected' => <<<XML
 <root>
   <item>
@@ -150,8 +155,11 @@ XML,
             'item' => (new Item())
                 ->setTitle('Some title')
                 ->addAuthors(new Author('John Doe')),
+            'namespaces' => [
+                'dc' => 'http://purl.org/dc/elements/1.1/',
+            ],
             'expected' => <<<XML
-<root>
+<root xmlns:dc="http://purl.org/dc/elements/1.1/">
   <item>
     <title>Some title</title>
     <dc:creator>John Doe</dc:creator>
@@ -164,8 +172,11 @@ XML,
             'item' => (new Item())
                 ->setTitle('Some title')
                 ->addAuthors(new Author('John Doe'), new Author('Jan Novak')),
+            'namespaces' => [
+                'dc' => 'http://purl.org/dc/elements/1.1/',
+            ],
             'expected' => <<<XML
-<root>
+<root xmlns:dc="http://purl.org/dc/elements/1.1/">
   <item>
     <title>Some title</title>
     <dc:creator>John Doe</dc:creator>
@@ -179,6 +190,7 @@ XML,
             'item' => (new Item())
                 ->setTitle('Some title')
                 ->addAttachments(new Attachment('https://example.org/', 'some/type', 123)),
+            'namespaces' => [],
             'expected' => <<<XML
 <root>
   <item>
@@ -196,6 +208,7 @@ XML,
                     new Attachment('https://example.org/', 'some/type', 123),
                     new Attachment('https://example.come/', 'another/type', 234),
                 ),
+            'namespaces' => [],
             'expected' => <<<XML
 <root>
   <item>
@@ -210,6 +223,7 @@ XML,
             'item' => (new Item())
                 ->setTitle('Some title')
                 ->addCategories(new Category('some category')),
+            'namespaces' => [],
             'expected' => <<<XML
 <root>
   <item>
@@ -224,6 +238,7 @@ XML,
             'item' => (new Item())
                 ->setTitle('Some title')
                 ->addCategories(new Category('some category'), new Category('another category')),
+            'namespaces' => [],
             'expected' => <<<XML
 <root>
   <item>
@@ -239,6 +254,7 @@ XML,
             'item' => (new Item())
                 ->setTitle('Some title')
                 ->setDatePublished(new \DateTimeImmutable('2022-11-24 20:20:20')),
+            'namespaces' => [],
             'expected' => <<<XML
 <root>
   <item>

@@ -18,13 +18,13 @@ use Brotkrueml\FeedGenerator\Contract\JsonExtensionInterface;
 use Brotkrueml\FeedGenerator\Contract\JsonExtensionRendererInterface;
 use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
 use Brotkrueml\FeedGenerator\Contract\XmlExtensionRendererInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class ExtensionProviderTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function getIdentifierReturnsCorrectIdentifier(): void
     {
         $subject = $this->getInstanceOfSubjectUnderTest([]);
@@ -32,9 +32,7 @@ final class ExtensionProviderTest extends TestCase
         self::assertSame('some.identifier', $subject->getIdentifier());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getLabelReturnsCorrectLabel(): void
     {
         $subject = $this->getInstanceOfSubjectUnderTest([]);
@@ -42,10 +40,8 @@ final class ExtensionProviderTest extends TestCase
         self::assertSame('Feed Generator: Extensions', $subject->getLabel());
     }
 
-    /**
-     * @test
-     * @dataProvider providerForGetConfigurations
-     */
+    #[Test]
+    #[DataProvider('providerForGetConfigurations')]
     public function getConfigurationsReturnsArrayWithConfigurationsCorrectly(
         array $configurations,
         array $expected,
@@ -55,7 +51,7 @@ final class ExtensionProviderTest extends TestCase
         self::assertSame($expected, $subject->getConfiguration());
     }
 
-    public function providerForGetConfigurations(): iterable
+    public static function providerForGetConfigurations(): iterable
     {
         yield 'No configurations available' => [
             'configurations' => [],
@@ -64,7 +60,7 @@ final class ExtensionProviderTest extends TestCase
 
         yield 'One extension is available' => [
             'configurations' => [
-                $this->buildExtensionForJson('some', 'https://example.org/some'),
+                self::buildExtensionForJson('some', 'https://example.org/some'),
             ],
             'expected' => [
                 [
@@ -77,8 +73,8 @@ final class ExtensionProviderTest extends TestCase
 
         yield 'Two extensions are available which are sorted by qualified name' => [
             'configurations' => [
-                $this->buildExtensionForJson('some', 'https://example.org/some'),
-                $this->buildExtensionForJson('another', 'https://example.org/another'),
+                self::buildExtensionForJson('some', 'https://example.org/some'),
+                self::buildExtensionForJson('another', 'https://example.org/another'),
             ],
             'expected' => [
                 [
@@ -96,9 +92,9 @@ final class ExtensionProviderTest extends TestCase
 
         yield 'Two extensions with same qualified name and namespace' => [
             'configurations' => [
-                $this->buildExtensionForJson('another', 'https://example.org/another'),
-                $this->buildExtensionForJson('some', 'https://example.org/some'),
-                $this->buildExtensionForJson('some', 'https://example.org/some'),
+                self::buildExtensionForJson('another', 'https://example.org/another'),
+                self::buildExtensionForJson('some', 'https://example.org/some'),
+                self::buildExtensionForJson('some', 'https://example.org/some'),
             ],
             'expected' => [
                 [
@@ -121,9 +117,9 @@ final class ExtensionProviderTest extends TestCase
 
         yield 'Two extensions with different formats' => [
             'configurations' => [
-                $this->buildExtensionForXmlAndJson('xml-and-json', 'https://example.org/xml-and-json', 'https://example.org/about'),
-                $this->buildExtensionForJson('json', 'https://example.org/json'),
-                $this->buildExtensionForXml('xml', 'https://example.org/xml'),
+                self::buildExtensionForXmlAndJson('xml-and-json', 'https://example.org/xml-and-json', 'https://example.org/about'),
+                self::buildExtensionForJson('json', 'https://example.org/json'),
+                self::buildExtensionForXml('xml', 'https://example.org/xml'),
             ],
             'expected' => [
                 [
@@ -183,7 +179,7 @@ final class ExtensionProviderTest extends TestCase
         return $subject;
     }
 
-    private function buildExtensionForXmlAndJson(string $qualifiedName, string $namespace, string $about): JsonExtensionInterface&XmlExtensionInterface
+    private static function buildExtensionForXmlAndJson(string $qualifiedName, string $namespace, string $about): JsonExtensionInterface&XmlExtensionInterface
     {
         return new class($qualifiedName, $namespace, $about) implements JsonExtensionInterface, XmlExtensionInterface {
             public function __construct(
@@ -224,7 +220,7 @@ final class ExtensionProviderTest extends TestCase
         };
     }
 
-    private function buildExtensionForJson(string $qualifiedName, string $about): JsonExtensionInterface
+    private static function buildExtensionForJson(string $qualifiedName, string $about): JsonExtensionInterface
     {
         return new class($qualifiedName, $about) implements JsonExtensionInterface {
             public function __construct(
@@ -254,7 +250,7 @@ final class ExtensionProviderTest extends TestCase
         };
     }
 
-    private function buildExtensionForXml(string $qualifiedName, string $namespace): XmlExtensionInterface
+    private static function buildExtensionForXml(string $qualifiedName, string $namespace): XmlExtensionInterface
     {
         return new class($qualifiedName, $namespace) implements XmlExtensionInterface {
             public function __construct(

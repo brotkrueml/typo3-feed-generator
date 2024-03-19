@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\If_\RemoveAlwaysTrueIfConditionRector;
 use Rector\Php74\Rector\LNumber\AddLiteralSeparatorToNumberRector;
+use Rector\PHPUnit\Set\PHPUnitSetList;
 
 return RectorConfig::configure()
     ->withPaths([
@@ -25,6 +26,9 @@ return RectorConfig::configure()
         typeDeclarations: true,
         earlyReturn: true,
     )
+    ->withSets([
+        PHPUnitSetList::PHPUNIT_100,
+    ])
     ->withRootFiles()
     ->withSkip([
         AddLiteralSeparatorToNumberRector::class,

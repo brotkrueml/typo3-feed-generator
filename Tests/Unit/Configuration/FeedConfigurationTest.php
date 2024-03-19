@@ -14,14 +14,14 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\Configuration;
 use Brotkrueml\FeedGenerator\Configuration\FeedConfiguration;
 use Brotkrueml\FeedGenerator\Format\FeedFormat;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration\SomeFeed;
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class FeedConfigurationTest extends TestCase
 {
-    /**
-     * @test
-     * @doesNotPerformAssertions
-     */
+    #[Test]
+    #[DoesNotPerformAssertions]
     public function instantiatingWithCacheInSecondsWithNullIsValid(): void
     {
         new FeedConfiguration(
@@ -33,10 +33,8 @@ final class FeedConfigurationTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @doesNotPerformAssertions
-     */
+    #[Test]
+    #[DoesNotPerformAssertions]
     public function instantiatingWithCacheInSecondsWith0IsValid(): void
     {
         new FeedConfiguration(
@@ -48,9 +46,7 @@ final class FeedConfigurationTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function instantiatingWithCacheInSecondsWithANegativeNumberThrowsException(): void
     {
         $this->expectException(\DomainException::class);

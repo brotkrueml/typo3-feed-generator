@@ -18,13 +18,13 @@ use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Format\FeedFormat;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration\EmptyFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\FeedConfiguration\SomeFeed;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class FeedProviderTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function getIdentifierReturnsCorrectIdentifier(): void
     {
         $subject = $this->getInstanceOfSubjectUnderTest([]);
@@ -32,9 +32,7 @@ final class FeedProviderTest extends TestCase
         self::assertSame('some.identifier', $subject->getIdentifier());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getLabelReturnsCorrectLabel(): void
     {
         $subject = $this->getInstanceOfSubjectUnderTest([]);
@@ -42,10 +40,8 @@ final class FeedProviderTest extends TestCase
         self::assertSame('Feed Generator: Feeds', $subject->getLabel());
     }
 
-    /**
-     * @test
-     * @dataProvider providerForGetConfigurations
-     */
+    #[Test]
+    #[DataProvider('providerForGetConfigurations')]
     public function getConfigurationsReturnsArrayWithConfigurationsCorrectly(
         array $configurations,
         array $expected,
@@ -55,7 +51,7 @@ final class FeedProviderTest extends TestCase
         self::assertSame($expected, $subject->getConfiguration());
     }
 
-    public function providerForGetConfigurations(): iterable
+    public static function providerForGetConfigurations(): iterable
     {
         yield 'No configurations available' => [
             'configurations' => [],

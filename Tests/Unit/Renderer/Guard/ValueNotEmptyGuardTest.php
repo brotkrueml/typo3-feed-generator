@@ -13,6 +13,8 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer\Guard;
 
 use Brotkrueml\FeedGenerator\Renderer\Guard\ValueNotEmptyGuard;
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class ValueNotEmptyGuardTest extends TestCase
@@ -24,10 +26,8 @@ final class ValueNotEmptyGuardTest extends TestCase
         $this->subject = new ValueNotEmptyGuard();
     }
 
-    /**
-     * @test
-     * @dataProvider providerForEmptyValueThrowsException
-     */
+    #[Test]
+    #[DataProvider('providerForEmptyValueThrowsException')]
     public function emptyValueThrowsException(string|null $value): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -36,7 +36,7 @@ final class ValueNotEmptyGuardTest extends TestCase
         $this->subject->guard('foo/bar', $value);
     }
 
-    public function providerForEmptyValueThrowsException(): iterable
+    public static function providerForEmptyValueThrowsException(): iterable
     {
         yield 'Empty string as value' => [
             'value' => '',
@@ -47,10 +47,8 @@ final class ValueNotEmptyGuardTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider providerForValueGivenIsValid
-     */
+    #[Test]
+    #[DataProvider('providerForValueGivenIsValid')]
     public function valueGivenIsValid(string|\DateTimeInterface $value): void
     {
         $this->expectNotToPerformAssertions();
@@ -58,7 +56,7 @@ final class ValueNotEmptyGuardTest extends TestCase
         $this->subject->guard('foo/bar', $value);
     }
 
-    public function providerForValueGivenIsValid(): iterable
+    public static function providerForValueGivenIsValid(): iterable
     {
         yield 'String' => [
             'value' => 'some random string',

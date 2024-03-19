@@ -13,6 +13,7 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer\Guard;
 
 use Brotkrueml\FeedGenerator\Renderer\Guard\AtLeastOneValueNotEmptyGuard;
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class AtLeastOneValueNotEmptyGuardTest extends TestCase
@@ -24,9 +25,7 @@ final class AtLeastOneValueNotEmptyGuardTest extends TestCase
         $this->subject = new AtLeastOneValueNotEmptyGuard();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function allValuesGivenAreValid(): void
     {
         $this->expectNotToPerformAssertions();
@@ -40,9 +39,7 @@ final class AtLeastOneValueNotEmptyGuardTest extends TestCase
         $this->subject->guard($data);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function atLeastOneValueGivenIsValid(): void
     {
         $this->expectNotToPerformAssertions();
@@ -56,9 +53,7 @@ final class AtLeastOneValueNotEmptyGuardTest extends TestCase
         $this->subject->guard($data);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function allEmptyValueThrowsException(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);

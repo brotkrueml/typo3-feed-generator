@@ -12,13 +12,12 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Unit\ValueObject;
 
 use Brotkrueml\FeedGenerator\ValueObject\Attachment;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class AttachmentTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function propertiesAreInitialisedCorrectlyWhenNotGiven(): void
     {
         $subject = new Attachment('https://example.org/video.mp4');
@@ -28,9 +27,7 @@ final class AttachmentTest extends TestCase
         self::assertSame(0, $subject->getLength());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getTypeReturnsTypeCorrectly(): void
     {
         $subject = new Attachment('https://example.org/video.mp4', 'video/mp4');
@@ -38,9 +35,7 @@ final class AttachmentTest extends TestCase
         self::assertSame('video/mp4', $subject->getType());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getLengthReturnsLengthCorrectly(): void
     {
         $subject = new Attachment('https://example.org/video.mp4', length: 1234567);

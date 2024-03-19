@@ -21,6 +21,8 @@ use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Json\FullFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Json\FullItems;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Json\ItemWithEmptyId;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Json\MinimumFeed;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class JsonRendererTest extends TestCase
@@ -34,9 +36,7 @@ final class JsonRendererTest extends TestCase
         $this->subject = new JsonRenderer($extensionProcessorDummy);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function emptyFeedTitleThrowsException(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -45,9 +45,7 @@ final class JsonRendererTest extends TestCase
         $this->subject->render(new FeedWithEmptyTitle(), 'https://example.org/feed.json');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function emptyFeedItemsThrowsException(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -56,9 +54,7 @@ final class JsonRendererTest extends TestCase
         $this->subject->render(new FeedWithEmptyItems(), 'https://example.org/feed.json');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function emptyItemIdThrowsException(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -67,10 +63,8 @@ final class JsonRendererTest extends TestCase
         $this->subject->render(new ItemWithEmptyId(), 'https://example.org/feed.json');
     }
 
-    /**
-     * @test
-     * @dataProvider providerForFeed
-     */
+    #[Test]
+    #[DataProvider('providerForFeed')]
     public function differentScenarios(FeedInterface $feed, string $expectedFile): void
     {
         $actual = $this->subject->render($feed, 'https://example.org/feed.json');
@@ -78,7 +72,7 @@ final class JsonRendererTest extends TestCase
         self::assertJsonStringEqualsJsonFile($expectedFile, $actual);
     }
 
-    public function providerForFeed(): iterable
+    public static function providerForFeed(): iterable
     {
         yield 'Minimum feed' => [
             'feed' => new MinimumFeed(),

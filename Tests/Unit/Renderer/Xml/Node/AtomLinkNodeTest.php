@@ -13,11 +13,13 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer\Xml\Node;
 
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\AtomLinkNode;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class AtomLinkNodeTest extends TestCase
 {
     private \DOMDocument $document;
+    private \DOMElement $rootElement;
     private AtomLinkNode $subject;
 
     protected function setUp(): void
@@ -25,14 +27,12 @@ final class AtomLinkNodeTest extends TestCase
         $this->document = new \DOMDocument('1.0', 'utf-8');
         $this->document->formatOutput = true;
 
-        $rootElement = $this->document->appendChild($this->document->createElement('root'));
+        $this->rootElement = $this->document->appendChild($this->document->createElement('root'));
 
-        $this->subject = new AtomLinkNode($this->document, $rootElement);
+        $this->subject = new AtomLinkNode($this->document, $this->rootElement);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function hrefIsEmptyThenExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -41,9 +41,7 @@ final class AtomLinkNodeTest extends TestCase
         $this->subject->add('', 'alternative', 'text/html');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function relIsEmptyThenExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -52,9 +50,7 @@ final class AtomLinkNodeTest extends TestCase
         $this->subject->add('https://example.org/', '', 'text/html');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function typeIsEmptyThenExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -63,9 +59,7 @@ final class AtomLinkNodeTest extends TestCase
         $this->subject->add('https://example.org/', 'alternative', '');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function allRequiredValuesAreGivenThenNodeIsAdded(): void
     {
         $this->subject->add('https://example.org/', 'alternative', 'text/html');
@@ -80,16 +74,16 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function namespaceIsGiven(): void
     {
+        $this->rootElement->setAttribute('xmlns:atom', 'http://www.w3.org/2005/Atom');
+
         $this->subject->add('https://example.org/some-feed.rss', 'self', 'application/rss+xml', 'atom');
 
         $expected = <<<XML
 <?xml version="1.0" encoding="utf-8"?>
-<root>
+<root xmlns:atom="http://www.w3.org/2005/Atom">
   <atom:link href="https://example.org/some-feed.rss" rel="self" type="application/rss+xml"/>
 </root>
 XML;

@@ -12,16 +12,14 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Entity;
 
 use Brotkrueml\FeedGenerator\Entity\AbstractFeed;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Brotkrueml\FeedGenerator\Entity\AbstractFeed
- */
+#[CoversClass(AbstractFeed::class)]
 final class AbstractFeedTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function ensureDefaultValuesAreSetCorrectly(): void
     {
         $subject = new class() extends AbstractFeed {};

@@ -12,13 +12,12 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer;
 
 use Brotkrueml\FeedGenerator\Renderer\IntegerNotInRangeException;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class IntegerNotInRangeExceptionTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function forProperty(): void
     {
         $actual = IntegerNotInRangeException::forProperty('some_property', 42, 50, 100);

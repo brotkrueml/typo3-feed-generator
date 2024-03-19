@@ -29,6 +29,8 @@ use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\MinimumCategoryFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\MinimumFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\MinimumFeedAuthor;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Atom\MinimumItems;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class AtomRendererTest extends TestCase
@@ -47,9 +49,7 @@ final class AtomRendererTest extends TestCase
         $this->subject = new AtomRenderer($extensionProcessorDummy, $pathResolverStub);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function emptyFeedIdThrowsException(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -58,9 +58,7 @@ final class AtomRendererTest extends TestCase
         $this->subject->render(new FeedWithEmptyId(), 'https://example.org/feed.atom');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function emptyFeedTitleThrowsException(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -69,9 +67,7 @@ final class AtomRendererTest extends TestCase
         $this->subject->render(new FeedWithEmptyTitle(), 'https://example.org/feed.atom');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function emptyFeedDateModifiedThrowsException(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -80,10 +76,8 @@ final class AtomRendererTest extends TestCase
         $this->subject->render(new FeedWithEmptyDateModified(), 'https://example.org/feed.atom');
     }
 
-    /**
-     * @test
-     * @dataProvider providerForFeed
-     */
+    #[Test]
+    #[DataProvider('providerForFeed')]
     public function differentScenarios(FeedInterface $feed, string $expectedFile): void
     {
         $actual = $this->subject->render($feed, 'https://example.org/feed.atom');
@@ -91,7 +85,7 @@ final class AtomRendererTest extends TestCase
         self::assertXmlStringEqualsXmlFile($expectedFile, $actual);
     }
 
-    public function providerForFeed(): iterable
+    public static function providerForFeed(): iterable
     {
         yield 'Minimum feed' => [
             'feed' => new MinimumFeed(),

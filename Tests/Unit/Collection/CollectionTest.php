@@ -18,6 +18,7 @@ use Brotkrueml\FeedGenerator\Tests\Fixtures\Entity\ItemFixture;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\ValueObject\AttachmentFixture;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\ValueObject\AuthorFixture;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\ValueObject\CategoryFixture;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class CollectionTest extends TestCase
@@ -29,17 +30,13 @@ final class CollectionTest extends TestCase
         $this->subject = new Collection();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function collectionIsInitiallyEmpty(): void
     {
         self::assertTrue($this->subject->isEmpty());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getThrowsExceptionWhenIndexIsNotAvailable(): void
     {
         $this->expectException(IndexNotFoundException::class);
@@ -47,9 +44,7 @@ final class CollectionTest extends TestCase
         $this->subject->get(0);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addAcceptsAnImplementationOfAttachmentInterface(): void
     {
         self::expectNotToPerformAssertions();
@@ -57,9 +52,7 @@ final class CollectionTest extends TestCase
         $this->subject->add(new AttachmentFixture());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addAcceptsAnImplementationOfAuthorInterface(): void
     {
         self::expectNotToPerformAssertions();
@@ -67,9 +60,7 @@ final class CollectionTest extends TestCase
         $this->subject->add(new AuthorFixture());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addAcceptsAnImplementationOfExtensionContentInterface(): void
     {
         self::expectNotToPerformAssertions();
@@ -79,9 +70,7 @@ final class CollectionTest extends TestCase
         $this->subject->add($extensionContent);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addAcceptsAnImplementationOfCategoryInterface(): void
     {
         self::expectNotToPerformAssertions();
@@ -89,9 +78,7 @@ final class CollectionTest extends TestCase
         $this->subject->add(new CategoryFixture());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addAcceptsAnImplementationOfItemInterface(): void
     {
         self::expectNotToPerformAssertions();
@@ -99,17 +86,13 @@ final class CollectionTest extends TestCase
         $this->subject->add(new ItemFixture());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addReturnsCollectionItself(): void
     {
         self::assertSame($this->subject, $this->subject->add());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addAndGetWithOneItem(): void
     {
         $author = new AuthorFixture();
@@ -119,9 +102,7 @@ final class CollectionTest extends TestCase
         self::assertSame($author, $this->subject->get(0));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addAndGetWithTwoItems(): void
     {
         $author1 = new AuthorFixture();
@@ -133,9 +114,7 @@ final class CollectionTest extends TestCase
         self::assertSame($author2, $this->subject->get(1));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function isEmptyReturnsFalseWhenAnItemIsAvailable(): void
     {
         $author = new AuthorFixture();
@@ -145,9 +124,7 @@ final class CollectionTest extends TestCase
         self::assertFalse($this->subject->isEmpty());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getIterator(): void
     {
         $author1 = new AuthorFixture();

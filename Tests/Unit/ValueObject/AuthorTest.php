@@ -12,13 +12,12 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Unit\ValueObject;
 
 use Brotkrueml\FeedGenerator\ValueObject\Author;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class AuthorTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function propertiesAreInitialisedCorrectlyWhenNotGiven(): void
     {
         $subject = new Author('Some Name');
@@ -28,9 +27,7 @@ final class AuthorTest extends TestCase
         self::assertSame('', $subject->getEmail());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getEmailReturnsEmailCorrectly(): void
     {
         $subject = new Author('Some Name', 'some email');
@@ -38,9 +35,7 @@ final class AuthorTest extends TestCase
         self::assertSame('some email', $subject->getEmail());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getUriReturnsUriCorrectly(): void
     {
         $subject = new Author('Some Name', uri: 'some uri');

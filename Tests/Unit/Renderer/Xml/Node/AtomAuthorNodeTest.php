@@ -14,11 +14,11 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer\Xml\Node;
 use Brotkrueml\FeedGenerator\Renderer\MissingRequiredPropertyException;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\AtomAuthorNode;
 use Brotkrueml\FeedGenerator\ValueObject\Author;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Brotkrueml\FeedGenerator\Renderer\Xml\Node\AtomAuthorNode
- */
+#[CoversClass(AtomAuthorNode::class)]
 final class AtomAuthorNodeTest extends TestCase
 {
     private \DOMDocument $document;
@@ -34,9 +34,7 @@ final class AtomAuthorNodeTest extends TestCase
         $this->subject = new AtomAuthorNode($this->document, $rootElement);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function nameIsEmptyThenAnExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -45,9 +43,7 @@ final class AtomAuthorNodeTest extends TestCase
         $this->subject->add(new Author(''));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function onlyNameIsGiven(): void
     {
         $this->subject->add(new Author('John Doe'));
@@ -64,9 +60,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function nameAndEmailAreGiven(): void
     {
         $this->subject->add(new Author('John Doe', 'john.doe@example.org'));
@@ -84,9 +78,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function nameAndUriAreGiven(): void
     {
         $this->subject->add(new Author('John Doe', uri: 'https://example.org/john-doe'));
@@ -104,9 +96,7 @@ XML;
         self::assertXmlStringEqualsXmlString($expected, $this->document->saveXML());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function nameEmailAndUriAreGiven(): void
     {
         $this->subject->add(

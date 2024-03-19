@@ -13,6 +13,7 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\Renderer\Guard;
 
 use Brotkrueml\FeedGenerator\Renderer\Guard\IntegerRangeGuard;
 use Brotkrueml\FeedGenerator\Renderer\IntegerNotInRangeException;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class IntegerRangeGuardTest extends TestCase
@@ -24,9 +25,7 @@ final class IntegerRangeGuardTest extends TestCase
         $this->subject = new IntegerRangeGuard();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function exceptionIsThrownIfValueIsTooLow(): void
     {
         $this->expectException(IntegerNotInRangeException::class);
@@ -35,9 +34,7 @@ final class IntegerRangeGuardTest extends TestCase
         $this->subject->guard('foobar', 42, 100, 500);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function exceptionIsThrownIfValueIsTooHigh(): void
     {
         $this->expectException(IntegerNotInRangeException::class);
@@ -46,9 +43,7 @@ final class IntegerRangeGuardTest extends TestCase
         $this->subject->guard('foobar', 42, 0, 10);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function valueIsMinimum(): void
     {
         $this->expectNotToPerformAssertions();
@@ -56,9 +51,7 @@ final class IntegerRangeGuardTest extends TestCase
         $this->subject->guard('foobar', 42, 42, 100);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function valueIsMaximum(): void
     {
         $this->expectNotToPerformAssertions();
@@ -66,9 +59,7 @@ final class IntegerRangeGuardTest extends TestCase
         $this->subject->guard('foobar', 42, 0, 42);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function valueIsInRange(): void
     {
         $this->expectNotToPerformAssertions();

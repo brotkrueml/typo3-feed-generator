@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Tests\Unit\Collection;
 
 use Brotkrueml\FeedGenerator\Collection\XmlNamespaceCollection;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class XmlNamespaceCollectionTest extends TestCase
@@ -23,9 +24,7 @@ final class XmlNamespaceCollectionTest extends TestCase
         $this->subject = new XmlNamespaceCollection();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function collectionIsEmptyAfterInitialisation(): void
     {
         $actual = 0;
@@ -36,9 +35,7 @@ final class XmlNamespaceCollectionTest extends TestCase
         self::assertSame(0, $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addCalledMultipleTimesWithDifferentNamespaces(): void
     {
         $this->subject->add('one', 'http://example.org/one');
@@ -59,9 +56,7 @@ final class XmlNamespaceCollectionTest extends TestCase
         self::assertSame('http://example.org/three', $actual['three']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addCalledTwiceWithSameQualifiedNameOverridesFirstOne(): void
     {
         $this->subject->add('foo', 'http://example.org/foo');

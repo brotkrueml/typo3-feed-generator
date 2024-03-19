@@ -27,6 +27,8 @@ use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\ItemAttachmentWithEmpty
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\ItemWithEmptyTitleAndDescription;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\MinimumFeed;
 use Brotkrueml\FeedGenerator\Tests\Fixtures\Renderer\Rss\MinimumItems;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class RssRendererTest extends TestCase
@@ -45,9 +47,7 @@ final class RssRendererTest extends TestCase
         $this->subject = new RssRenderer($extensionProcessorDummy, $pathResolverStub);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function emptyFeedTitleThrowsException(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -56,9 +56,7 @@ final class RssRendererTest extends TestCase
         $this->subject->render(new FeedWithEmptyTitle(), 'https://example.org/feed.rss');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function emptyFeedLinkThrowsException(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -67,9 +65,7 @@ final class RssRendererTest extends TestCase
         $this->subject->render(new FeedWithEmptyLink(), 'https://example.org/feed.rss');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function emptyFeedDescriptionThrowsException(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -78,9 +74,7 @@ final class RssRendererTest extends TestCase
         $this->subject->render(new FeedWithEmptyDescription(), 'https://example.org/feed.rss');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function emptyTitleAndDescriptionInItemThrowsException(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -89,9 +83,7 @@ final class RssRendererTest extends TestCase
         $this->subject->render(new ItemWithEmptyTitleAndDescription(), 'https://example.org/feed.rss');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function emptyAttachmentUriInItemThrowsException(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -100,9 +92,7 @@ final class RssRendererTest extends TestCase
         $this->subject->render(new ItemAttachmentWithEmptyUri(), 'https://example.org/feed.rss');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function emptyAttachmentTypeInItemThrowsException(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
@@ -111,10 +101,8 @@ final class RssRendererTest extends TestCase
         $this->subject->render(new ItemAttachmentWithEmptyType(), 'https://example.org/feed.rss');
     }
 
-    /**
-     * @test
-     * @dataProvider providerForFeed
-     */
+    #[Test]
+    #[DataProvider('providerForFeed')]
     public function differentScenarios(FeedInterface $feed, string $expectedFile): void
     {
         $actual = $this->subject->render($feed, 'https://example.org/feed.rss');
@@ -122,7 +110,7 @@ final class RssRendererTest extends TestCase
         self::assertXmlStringEqualsXmlFile($expectedFile, $actual);
     }
 
-    public function providerForFeed(): iterable
+    public static function providerForFeed(): iterable
     {
         yield 'Minimum feed' => [
             'feed' => new MinimumFeed(),

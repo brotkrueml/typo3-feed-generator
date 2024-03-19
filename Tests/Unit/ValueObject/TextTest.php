@@ -13,13 +13,12 @@ namespace Brotkrueml\FeedGenerator\Tests\Unit\ValueObject;
 
 use Brotkrueml\FeedGenerator\Format\TextFormat;
 use Brotkrueml\FeedGenerator\ValueObject\Text;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class TextTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function formatIsInitialisedAsTextWhenNotGiven(): void
     {
         $subject = new Text('some text');
@@ -27,9 +26,7 @@ final class TextTest extends TestCase
         self::assertSame(TextFormat::TEXT, $subject->getFormat());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getterReturnPropertiesPreviouslySet(): void
     {
         $subject = new Text('some text', TextFormat::HTML);

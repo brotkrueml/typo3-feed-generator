@@ -18,13 +18,12 @@ use Brotkrueml\FeedGenerator\Contract\JsonExtensionRendererInterface;
 use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
 use Brotkrueml\FeedGenerator\Contract\XmlExtensionRendererInterface;
 use Brotkrueml\FeedGenerator\Format\FeedFormat;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class ExtensionRegistryTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function getAllExtensionsReturnsEmptyArrayIfNoExtensionsAreRegistered(): void
     {
         $subject = new ExtensionRegistry([]);
@@ -32,9 +31,7 @@ final class ExtensionRegistryTest extends TestCase
         self::assertSame([], $subject->getAllExtensions());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getAllExtensionsReturnsAllRegisteredExtensions(): void
     {
         $extension1 = $this->buildExtensionClass();
@@ -48,9 +45,7 @@ final class ExtensionRegistryTest extends TestCase
         self::assertContains($extension2, $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getExtensionForElementReturnsNullNoRendererCanHandleAnElement(): void
     {
         $extension = $this->buildExtensionClass();
@@ -63,9 +58,7 @@ final class ExtensionRegistryTest extends TestCase
         self::assertNull($actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getExtensionForElementReturnsExtensionCorrectly(): void
     {
         $extension1 = $this->buildExtensionClass(formats: [FeedFormat::ATOM]);
@@ -79,9 +72,7 @@ final class ExtensionRegistryTest extends TestCase
         self::assertSame($extension2, $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getExtensionForElementReturnsRendererTheFirstAvailableRenderer(): void
     {
         $extension1 = $this->buildExtensionClass(true, [FeedFormat::ATOM]);
