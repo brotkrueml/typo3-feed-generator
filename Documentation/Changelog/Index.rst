@@ -8,8 +8,11 @@ All notable changes to this project will be documented in this file.
 The format is based on `Keep a Changelog <https://keepachangelog.com/en/1.0.0/>`_\ ,
 and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 
-`Unreleased <https://github.com/brotkrueml/typo3-feed-generator/compare/v0.6.0...HEAD>`_
+`Unreleased <https://github.com/brotkrueml/typo3-feed-generator/compare/v0.7.0...HEAD>`_
 --------------------------------------------------------------------------------------------
+
+`0.7.0 <https://github.com/brotkrueml/typo3-feed-generator/compare/v0.6.0...v0.7.0>`_ - 2024-03-19
+------------------------------------------------------------------------------------------------------
 
 Added
 ^^^^^

@@ -15,7 +15,7 @@
     />
     <project
         title="Feed Generator"
-        release="0.7.0-dev"
+        release="0.7.0"
         version="0.7"
         copyright="since 2022 by Chris Müller"
     />
