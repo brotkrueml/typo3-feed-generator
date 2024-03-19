@@ -36,7 +36,7 @@ final class AtomLinkNodeTest extends TestCase
     public function hrefIsEmptyThenExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectErrorMessageMatches('#link/href#');
+        $this->expectExceptionMessageMatches('#link/href#');
 
         $this->subject->add('', 'alternative', 'text/html');
     }
@@ -47,7 +47,7 @@ final class AtomLinkNodeTest extends TestCase
     public function relIsEmptyThenExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectErrorMessageMatches('#link/rel#');
+        $this->expectExceptionMessageMatches('#link/rel#');
 
         $this->subject->add('https://example.org/', '', 'text/html');
     }
@@ -58,7 +58,7 @@ final class AtomLinkNodeTest extends TestCase
     public function typeIsEmptyThenExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectErrorMessageMatches('#link/type#');
+        $this->expectExceptionMessageMatches('#link/type#');
 
         $this->subject->add('https://example.org/', 'alternative', '');
     }

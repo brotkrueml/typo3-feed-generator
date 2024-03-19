@@ -50,7 +50,7 @@ final class RssItemNodeTest extends TestCase
     public function titleAndDescriptionAsStringAreEmptyThenExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectErrorMessageMatches('#item/title.+item/description#');
+        $this->expectExceptionMessageMatches('#item/title.+item/description#');
 
         $this->subject->add(new Item());
     }
@@ -61,7 +61,7 @@ final class RssItemNodeTest extends TestCase
     public function titleAndDescriptionAsTextObjectAreEmptyThenExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectErrorMessageMatches('#item/title.+item/description#');
+        $this->expectExceptionMessageMatches('#item/title.+item/description#');
 
         $this->subject->add((new Item())->setDescription(new Text('')));
     }

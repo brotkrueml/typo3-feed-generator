@@ -31,7 +31,7 @@ final class ValueNotEmptyGuardTest extends TestCase
     public function emptyValueThrowsException(string|null $value): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectErrorMessageMatches('#foo/bar#');
+        $this->expectExceptionMessageMatches('#foo/bar#');
 
         $this->subject->guard('foo/bar', $value);
     }

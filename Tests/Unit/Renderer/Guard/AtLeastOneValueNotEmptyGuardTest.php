@@ -62,7 +62,7 @@ final class AtLeastOneValueNotEmptyGuardTest extends TestCase
     public function allEmptyValueThrowsException(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectErrorMessageMatches('#foo.+qoo.+baz#');
+        $this->expectExceptionMessageMatches('#foo.+qoo.+baz#');
 
         $data = [
             'foo' => '',

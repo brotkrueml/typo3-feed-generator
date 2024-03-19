@@ -42,7 +42,7 @@ final class RssImageNodeTest extends TestCase
     public function urlIsEmptyThenAnExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectErrorMessageMatches('#image/url#');
+        $this->expectExceptionMessageMatches('#image/url#');
 
         $this->subject->add(new Image(''));
     }
@@ -53,7 +53,7 @@ final class RssImageNodeTest extends TestCase
     public function titleIsEmptyThenAnExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectErrorMessageMatches('#image/title#');
+        $this->expectExceptionMessageMatches('#image/title#');
 
         $this->subject->add(
             new Image('https://example.org/some-image.png'),
@@ -66,7 +66,7 @@ final class RssImageNodeTest extends TestCase
     public function linkIsEmptyThenAnExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectErrorMessageMatches('#image/link#');
+        $this->expectExceptionMessageMatches('#image/link#');
 
         $this->subject->add(
             new Image('https://example.org/some-image.png', 'Some title'),
@@ -79,7 +79,7 @@ final class RssImageNodeTest extends TestCase
     public function widthIsToLargeThenAnExceptionIsThrown(): void
     {
         $this->expectException(IntegerNotInRangeException::class);
-        $this->expectErrorMessageMatches('#image/width#');
+        $this->expectExceptionMessageMatches('#image/width#');
 
         $this->subject->add(
             new Image(
@@ -97,7 +97,7 @@ final class RssImageNodeTest extends TestCase
     public function heightIsToLargeThenAnExceptionIsThrown(): void
     {
         $this->expectException(IntegerNotInRangeException::class);
-        $this->expectErrorMessageMatches('#image/height#');
+        $this->expectExceptionMessageMatches('#image/height#');
 
         $this->subject->add(
             new Image(

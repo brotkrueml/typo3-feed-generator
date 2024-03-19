@@ -40,7 +40,7 @@ final class AtomCategoryNodeTest extends TestCase
     public function termIsEmptyThenAnExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectErrorMessageMatches('#category#');
+        $this->expectExceptionMessageMatches('#category#');
 
         $this->subject->add(new Category(''));
     }

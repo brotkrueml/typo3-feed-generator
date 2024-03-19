@@ -47,7 +47,7 @@ final class AtomItemNodeTest extends TestCase
     public function idIsEmptyThenAnExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectErrorMessageMatches('#entry/id#');
+        $this->expectExceptionMessageMatches('#entry/id#');
 
         $item = (new Item())
             ->setId('')
@@ -63,7 +63,7 @@ final class AtomItemNodeTest extends TestCase
     public function titleIsEmptyThenAnExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectErrorMessageMatches('#entry/title#');
+        $this->expectExceptionMessageMatches('#entry/title#');
 
         $item = (new Item())
             ->setId('some-id')
@@ -79,7 +79,7 @@ final class AtomItemNodeTest extends TestCase
     public function dateModifiedIsEmptyThenAnExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectErrorMessageMatches('#entry/updated#');
+        $this->expectExceptionMessageMatches('#entry/updated#');
 
         $item = (new Item())
             ->setId('some-id')
@@ -95,7 +95,7 @@ final class AtomItemNodeTest extends TestCase
     public function linkAndContentAreEmptyThenAnExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectErrorMessageMatches('#entry/link.+entry/content#');
+        $this->expectExceptionMessageMatches('#entry/link.+entry/content#');
 
         $item = (new Item())
             ->setId('some-id')

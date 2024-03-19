@@ -40,7 +40,7 @@ final class AtomAuthorNodeTest extends TestCase
     public function nameIsEmptyThenAnExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectErrorMessageMatches('#author/name#');
+        $this->expectExceptionMessageMatches('#author/name#');
 
         $this->subject->add(new Author(''));
     }

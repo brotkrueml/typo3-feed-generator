@@ -38,7 +38,7 @@ final class RssEnclosureNodeTest extends TestCase
     public function urlIsEmptyThenExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectErrorMessageMatches('#item/enclosure/url#');
+        $this->expectExceptionMessageMatches('#item/enclosure/url#');
 
         $this->subject->add(
             new Attachment(''),
@@ -51,7 +51,7 @@ final class RssEnclosureNodeTest extends TestCase
     public function typeIsEmptyThenExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectErrorMessageMatches('#item/enclosure/type#');
+        $this->expectExceptionMessageMatches('#item/enclosure/type#');
 
         $this->subject->add(
             new Attachment('https://example.org/some-enclosure'),
@@ -64,7 +64,7 @@ final class RssEnclosureNodeTest extends TestCase
     public function lengthIsZeroThenExceptionIsThrown(): void
     {
         $this->expectException(IntegerNotInRangeException::class);
-        $this->expectErrorMessageMatches('#item/enclosure/length#');
+        $this->expectExceptionMessageMatches('#item/enclosure/length#');
 
         $this->subject->add(
             new Attachment('https://example.org/some-enclosure', 'some/type', 0),

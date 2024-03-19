@@ -36,7 +36,7 @@ final class AtomGeneratorNodeTest extends TestCase
     public function nameIsEmptyThenAnExceptionIsThrown(): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
-        $this->expectErrorMessageMatches('#generator#');
+        $this->expectExceptionMessageMatches('#generator#');
 
         $this->subject->add('', 'https://example.org/');
     }

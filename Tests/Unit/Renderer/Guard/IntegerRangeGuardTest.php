@@ -30,7 +30,7 @@ final class IntegerRangeGuardTest extends TestCase
     public function exceptionIsThrownIfValueIsTooLow(): void
     {
         $this->expectException(IntegerNotInRangeException::class);
-        $this->expectErrorMessageMatches('#foobar#');
+        $this->expectExceptionMessageMatches('#foobar#');
 
         $this->subject->guard('foobar', 42, 100, 500);
     }
@@ -41,7 +41,7 @@ final class IntegerRangeGuardTest extends TestCase
     public function exceptionIsThrownIfValueIsTooHigh(): void
     {
         $this->expectException(IntegerNotInRangeException::class);
-        $this->expectErrorMessageMatches('#foobar#');
+        $this->expectExceptionMessageMatches('#foobar#');
 
         $this->subject->guard('foobar', 42, 0, 10);
     }
