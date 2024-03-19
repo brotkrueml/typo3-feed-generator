@@ -19,5 +19,4 @@
         version="0.7"
         copyright="since 2022 by Chris Müller"
     />
-    <inventory id="ext_lowlevel" url="https://docs.typo3.org/c/typo3/cms-lowlevel/12.4/en-us/"/>
 </guides>
