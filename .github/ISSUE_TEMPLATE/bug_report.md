@@ -22,10 +22,10 @@ If applicable, add screenshots to help explain your problem.
 
 ### Environment
 
-- Feed Generator version(s): [e.g. 0.1.0]
-- TYPO3 version(s): [e.g. 11.5.8]
+- Feed Generator version(s): [e.g. 0.7.0]
+- TYPO3 version(s): [e.g. 13.4.2]
 - Is your TYPO3 installation set up with Composer (Composer Mode): [yes, no]
-- OS: [e.g. OSX 10.13.4, Windows 10, Debian 11]
+- OS: [e.g. OSX 15.1.1, Windows 11, Debian 12]
 
 ### Possible Solution
 
