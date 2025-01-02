@@ -1,6 +1,7 @@
 # Feed Generator for TYPO3
 
-[![CI Status](https://github.com/brotkrueml/typo3-feed-generator/workflows/CI/badge.svg?branch=main)](https://github.com/brotkrueml/typo3-feed-generator/actions?query=workflow%3ACI)
+[![CI](https://github.com/brotkrueml/typo3-feed-generator/actions/workflows/ci.yml/badge.svg)](https://github.com/brotkrueml/typo3-feed-generator/actions/workflows/ci.yml)
+[![Documentation](https://github.com/brotkrueml/typo3-feed-generator/actions/workflows/docs.yml/badge.svg)](https://github.com/brotkrueml/typo3-feed-generator/actions/workflows/docs.yml)
 [![Latest Stable Version](https://img.shields.io/packagist/v/brotkrueml/typo3-feed-generator.svg?label=stable)](https://packagist.org/packages/brotkrueml/typo3-feed-generator)
 
 Generator for Atom, JSON and RSS feeds in TYPO3
