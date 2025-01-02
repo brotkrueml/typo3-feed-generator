@@ -7,8 +7,7 @@ Installation
 ============
 
 .. note::
-   The extension in version |release| supports TYPO3 v12 LTS and TYPO3 v13.
-   Use version 0.6 for compatibility with TYPO3 v11 LTS.
+   The extension in version |release| supports TYPO3 v12 LTS and TYPO3 v13 LTS.
 
 .. attention::
    The extension is under development and in beta state.
