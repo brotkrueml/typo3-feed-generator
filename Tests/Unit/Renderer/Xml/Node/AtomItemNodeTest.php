@@ -36,7 +36,7 @@ final class AtomItemNodeTest extends TestCase
 
         $rootElement = $this->document->appendChild($this->document->createElement('root'));
 
-        $extensionProcessorDummy = $this->createStub(XmlExtensionProcessor::class);
+        $extensionProcessorDummy = self::createStub(XmlExtensionProcessor::class);
 
         $this->subject = new AtomItemNode($this->document, $rootElement, $extensionProcessorDummy, new XmlNamespaceCollection());
     }

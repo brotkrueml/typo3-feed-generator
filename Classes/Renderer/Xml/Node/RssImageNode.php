@@ -53,11 +53,11 @@ final class RssImageNode
         $textNode->add('link', $image->getLink());
         if ($image->getWidth() > 0) {
             $this->integerRangeGuard->guard('image/width', $image->getWidth(), 0, self::IMAGE_MAX_WIDTH);
-            $textNode->add('width', (string)$image->getWidth());
+            $textNode->add('width', (string) $image->getWidth());
         }
         if ($image->getHeight() > 0) {
             $this->integerRangeGuard->guard('image/height', $image->getHeight(), 0, self::IMAGE_MAX_HEIGHT);
-            $textNode->add('height', (string)$image->getHeight());
+            $textNode->add('height', (string) $image->getHeight());
         }
         $textNode->add('description', $image->getDescription());
 

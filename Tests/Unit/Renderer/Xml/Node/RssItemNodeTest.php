@@ -41,7 +41,7 @@ final class RssItemNodeTest extends TestCase
 
         $this->rootElement = $this->document->appendChild($this->document->createElement('root'));
 
-        $extensionProcessorDummy = $this->createStub(XmlExtensionProcessor::class);
+        $extensionProcessorDummy = self::createStub(XmlExtensionProcessor::class);
 
         $this->subject = new RssItemNode($this->document, $this->rootElement, $extensionProcessorDummy, new XmlNamespaceCollection());
     }

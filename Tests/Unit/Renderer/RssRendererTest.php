@@ -37,9 +37,9 @@ final class RssRendererTest extends TestCase
 
     protected function setUp(): void
     {
-        $extensionProcessorDummy = $this->createStub(XmlExtensionProcessor::class);
+        $extensionProcessorDummy = self::createStub(XmlExtensionProcessor::class);
 
-        $pathResolverStub = $this->createStub(PathResolver::class);
+        $pathResolverStub = self::createStub(PathResolver::class);
         $pathResolverStub
             ->method('getWebPath')
             ->willReturnCallback(static fn($path) => $path);

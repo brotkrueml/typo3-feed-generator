@@ -22,7 +22,7 @@ final class AbstractFeedTest extends TestCase
     #[Test]
     public function ensureDefaultValuesAreSetCorrectly(): void
     {
-        $subject = new class() extends AbstractFeed {};
+        $subject = new class extends AbstractFeed {};
 
         self::assertSame('', $subject->getId());
         self::assertSame('', $subject->getTitle());

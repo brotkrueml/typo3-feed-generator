@@ -28,7 +28,7 @@ final class ValueNotEmptyGuardTest extends TestCase
 
     #[Test]
     #[DataProvider('providerForEmptyValueThrowsException')]
-    public function emptyValueThrowsException(string|null $value): void
+    public function emptyValueThrowsException(?string $value): void
     {
         $this->expectException(MissingRequiredPropertyException::class);
         $this->expectExceptionMessageMatches('#foo/bar#');

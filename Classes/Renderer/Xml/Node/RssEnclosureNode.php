@@ -40,7 +40,7 @@ final class RssEnclosureNode
 
         $enclosureElement = $this->document->createElement('enclosure');
         $enclosureElement->setAttribute('url', $enclosure->getUrl());
-        $enclosureElement->setAttribute('length', (string)$enclosure->getLength());
+        $enclosureElement->setAttribute('length', (string) $enclosure->getLength());
         $enclosureElement->setAttribute('type', $enclosure->getType());
 
         $this->parentElement->appendChild($enclosureElement);

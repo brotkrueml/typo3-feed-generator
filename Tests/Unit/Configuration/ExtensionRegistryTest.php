@@ -51,7 +51,7 @@ final class ExtensionRegistryTest extends TestCase
         $extension = $this->buildExtensionClass();
         $subject = new ExtensionRegistry([$extension]);
 
-        $content = new class() implements ExtensionContentInterface {};
+        $content = new class implements ExtensionContentInterface {};
 
         $actual = $subject->getExtensionForXmlContent($content);
 
@@ -65,7 +65,7 @@ final class ExtensionRegistryTest extends TestCase
         $extension2 = $this->buildExtensionClass(true, [FeedFormat::ATOM]);
         $subject = new ExtensionRegistry([$extension1, $extension2]);
 
-        $content = new class() implements ExtensionContentInterface {};
+        $content = new class implements ExtensionContentInterface {};
 
         $actual = $subject->getExtensionForXmlContent($content);
 
@@ -79,7 +79,7 @@ final class ExtensionRegistryTest extends TestCase
         $extension2 = $this->buildExtensionClass(true, [FeedFormat::ATOM]);
         $subject = new ExtensionRegistry([$extension1, $extension2]);
 
-        $content = new class() implements ExtensionContentInterface {};
+        $content = new class implements ExtensionContentInterface {};
 
         $actual = $subject->getExtensionForXmlContent($content);
 
@@ -127,7 +127,7 @@ final class ExtensionRegistryTest extends TestCase
 
             public function getJsonRenderer(): JsonExtensionRendererInterface
             {
-                return new class() implements JsonExtensionRendererInterface {
+                return new class implements JsonExtensionRendererInterface {
                     /**
                      * @return array<string, mixed>
                      */
@@ -140,7 +140,7 @@ final class ExtensionRegistryTest extends TestCase
 
             public function getXmlRenderer(): XmlExtensionRendererInterface
             {
-                return new class() implements XmlExtensionRendererInterface {
+                return new class implements XmlExtensionRendererInterface {
                     public function render(ExtensionContentInterface $content, \DOMNode $parent, \DOMDocument $document): void {}
                 };
             }

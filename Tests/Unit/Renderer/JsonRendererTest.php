@@ -31,7 +31,7 @@ final class JsonRendererTest extends TestCase
 
     protected function setUp(): void
     {
-        $extensionProcessorDummy = $this->createStub(JsonExtensionProcessor::class);
+        $extensionProcessorDummy = self::createStub(JsonExtensionProcessor::class);
 
         $this->subject = new JsonRenderer($extensionProcessorDummy);
     }
