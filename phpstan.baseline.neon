@@ -1,46 +1,61 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Parameter \\#1 \\$value of function count expects array\\|Countable, iterable\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\JsonExtensionInterface\\|Brotkrueml\\\\FeedGenerator\\\\Contract\\\\XmlExtensionInterface\\> given\\.$#"
+			message: '#^Parameter \#1 \$value of function count expects array\|Countable, iterable\<Brotkrueml\\FeedGenerator\\Contract\\JsonExtensionInterface\|Brotkrueml\\FeedGenerator\\Contract\\XmlExtensionInterface\> given\.$#'
+			identifier: argument.type
 			count: 1
 			path: Classes/ConfigurationModule/ExtensionProvider.php
 
 		-
-			message: "#^Cognitive complexity for \"Brotkrueml\\\\FeedGenerator\\\\ConfigurationModule\\\\FeedProvider\\:\\:getConfiguration\\(\\)\" is 10, keep it under 8$#"
+			message: '#^Cognitive complexity for "Brotkrueml\\FeedGenerator\\ConfigurationModule\\FeedProvider\:\:getConfiguration\(\)" is 10, keep it under 8$#'
+			identifier: complexity.functionLike
 			count: 1
 			path: Classes/ConfigurationModule/FeedProvider.php
 
 		-
-			message: "#^Method Brotkrueml\\\\FeedGenerator\\\\Entity\\\\AbstractFeed\\:\\:getAuthors\\(\\) should return Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\AuthorInterface\\> but returns Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\CollectableInterface\\>\\.$#"
+			message: '#^Method Brotkrueml\\FeedGenerator\\Entity\\AbstractFeed\:\:getAuthors\(\) should return Brotkrueml\\FeedGenerator\\Collection\\Collection\<Brotkrueml\\FeedGenerator\\Contract\\AuthorInterface\> but returns Brotkrueml\\FeedGenerator\\Collection\\Collection\<Brotkrueml\\FeedGenerator\\Contract\\CollectableInterface\>\.$#'
+			identifier: return.type
 			count: 1
 			path: Classes/Entity/AbstractFeed.php
 
 		-
-			message: "#^Method Brotkrueml\\\\FeedGenerator\\\\Entity\\\\AbstractFeed\\:\\:getCategories\\(\\) should return Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\CategoryInterface\\> but returns Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\CollectableInterface\\>\\.$#"
+			message: '#^Method Brotkrueml\\FeedGenerator\\Entity\\AbstractFeed\:\:getCategories\(\) should return Brotkrueml\\FeedGenerator\\Collection\\Collection\<Brotkrueml\\FeedGenerator\\Contract\\CategoryInterface\> but returns Brotkrueml\\FeedGenerator\\Collection\\Collection\<Brotkrueml\\FeedGenerator\\Contract\\CollectableInterface\>\.$#'
+			identifier: return.type
 			count: 1
 			path: Classes/Entity/AbstractFeed.php
 
 		-
-			message: "#^Method Brotkrueml\\\\FeedGenerator\\\\Entity\\\\AbstractFeed\\:\\:getExtensionContents\\(\\) should return Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\ExtensionContentInterface\\> but returns Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\CollectableInterface\\>\\.$#"
+			message: '#^Method Brotkrueml\\FeedGenerator\\Entity\\AbstractFeed\:\:getExtensionContents\(\) should return Brotkrueml\\FeedGenerator\\Collection\\Collection\<Brotkrueml\\FeedGenerator\\Contract\\ExtensionContentInterface\> but returns Brotkrueml\\FeedGenerator\\Collection\\Collection\<Brotkrueml\\FeedGenerator\\Contract\\CollectableInterface\>\.$#'
+			identifier: return.type
 			count: 1
 			path: Classes/Entity/AbstractFeed.php
 
 		-
-			message: "#^Method Brotkrueml\\\\FeedGenerator\\\\Entity\\\\AbstractFeed\\:\\:getItems\\(\\) should return Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\ItemInterface\\> but returns Brotkrueml\\\\FeedGenerator\\\\Collection\\\\Collection\\<Brotkrueml\\\\FeedGenerator\\\\Contract\\\\CollectableInterface\\>\\.$#"
+			message: '#^Method Brotkrueml\\FeedGenerator\\Entity\\AbstractFeed\:\:getItems\(\) should return Brotkrueml\\FeedGenerator\\Collection\\Collection\<Brotkrueml\\FeedGenerator\\Contract\\ItemInterface\> but returns Brotkrueml\\FeedGenerator\\Collection\\Collection\<Brotkrueml\\FeedGenerator\\Contract\\CollectableInterface\>\.$#'
+			identifier: return.type
 			count: 1
 			path: Classes/Entity/AbstractFeed.php
 
 		-
-			message: "#^Call to an undefined method DOMNode\\:\\:setAttribute\\(\\)\\.$#"
+			message: '#^Call to an undefined method DOMNode\:\:setAttribute\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: Classes/Renderer/AtomRenderer.php
 
 		-
-			message: "#^Class cognitive complexity is 29, keep it under 20$#"
+			message: '#^Class cognitive complexity is 29, keep it under 20$#'
+			identifier: complexity.classLike
 			count: 1
 			path: Classes/Renderer/JsonRenderer.php
 
 		-
-			message: "#^Cognitive complexity for \"Brotkrueml\\\\FeedGenerator\\\\Renderer\\\\JsonRenderer\\:\\:render\\(\\)\" is 18, keep it under 8$#"
+			message: '#^Cognitive complexity for "Brotkrueml\\FeedGenerator\\Renderer\\JsonRenderer\:\:render\(\)" is 18, keep it under 8$#'
+			identifier: complexity.functionLike
+			count: 1
+			path: Classes/Renderer/JsonRenderer.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between non\-empty\-string and '''' will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
 			count: 1
 			path: Classes/Renderer/JsonRenderer.php
