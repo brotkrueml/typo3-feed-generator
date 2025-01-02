@@ -103,12 +103,3 @@ jobs:
         if: always()
         run: |
           make rector-dry
-      - name: Generate code coverage
-        run: |
-          XDEBUG_MODE=coverage .Build/bin/phpunit -c Tests/phpunit.xml.dist --coverage-text --coverage-clover .Build/logs/clover.xml
-      - name: Send code coverage report to coveralls.io
-        if: github.event_name != 'pull_request'
-        run: .Build/bin/php-coveralls -v
-        env:
-          COVERALLS_RUN_LOCALLY: 1
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
