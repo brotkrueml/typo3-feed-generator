@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/brotkrueml/typo3-feed-generator/actions/workflows/ci.yml/badge.svg)](https://github.com/brotkrueml/typo3-feed-generator/actions/workflows/ci.yml)
 [![Documentation](https://github.com/brotkrueml/typo3-feed-generator/actions/workflows/docs.yml/badge.svg)](https://github.com/brotkrueml/typo3-feed-generator/actions/workflows/docs.yml)
+[![codecov](https://codecov.io/gh/brotkrueml/typo3-feed-generator/graph/badge.svg?token=76DVBIMSLQ)](https://codecov.io/gh/brotkrueml/typo3-feed-generator)
 [![Latest Stable Version](https://img.shields.io/packagist/v/brotkrueml/typo3-feed-generator.svg?label=stable)](https://packagist.org/packages/brotkrueml/typo3-feed-generator)
 
 Generator for Atom, JSON and RSS feeds in TYPO3
