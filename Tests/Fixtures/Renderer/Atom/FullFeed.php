@@ -59,7 +59,7 @@ final class FullFeed implements FeedInterface
         return null;
     }
 
-    public function getDateModified(): ?\DateTimeInterface
+    public function getDateModified(): \DateTimeInterface
     {
         return new \DateTimeImmutable('2022-11-11 11:11:11');
     }
@@ -79,7 +79,7 @@ final class FullFeed implements FeedInterface
         return 'some copyright';
     }
 
-    public function getImage(): ?ImageInterface
+    public function getImage(): ImageInterface
     {
         return new Image('https://example.org/some-image');
     }

@@ -55,7 +55,7 @@ final class FullFeed implements FeedInterface
             );
     }
 
-    public function getDatePublished(): ?\DateTimeInterface
+    public function getDatePublished(): \DateTimeInterface
     {
         return new \DateTimeImmutable('2022-11-11 11:11:11');
     }
@@ -65,7 +65,7 @@ final class FullFeed implements FeedInterface
         return null;
     }
 
-    public function getLastBuildDate(): ?\DateTimeInterface
+    public function getLastBuildDate(): \DateTimeInterface
     {
         return new \DateTimeImmutable('2022-11-12 12:12:12');
     }
@@ -80,7 +80,7 @@ final class FullFeed implements FeedInterface
         return 'some copyright';
     }
 
-    public function getImage(): ?ImageInterface
+    public function getImage(): ImageInterface
     {
         return new Image(
             'https://example.org/some-image',

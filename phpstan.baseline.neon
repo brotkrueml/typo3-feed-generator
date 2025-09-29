@@ -37,7 +37,7 @@ parameters:
 			path: Classes/Entity/AbstractFeed.php
 
 		-
-			message: '#^Call to an undefined method DOMNode\:\:setAttribute\(\)\.$#'
+			message: '#^Call to an undefined method \(DOMNode\|false\)\:\:setAttribute\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: Classes/Renderer/AtomRenderer.php

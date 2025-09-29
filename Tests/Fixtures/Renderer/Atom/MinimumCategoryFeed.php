@@ -39,7 +39,7 @@ final class MinimumCategoryFeed extends AbstractFeed
         return 'some title';
     }
 
-    public function getDateModified(): ?\DateTimeInterface
+    public function getDateModified(): \DateTimeInterface
     {
         return new \DateTimeImmutable('2022-11-11 11:11:11');
     }

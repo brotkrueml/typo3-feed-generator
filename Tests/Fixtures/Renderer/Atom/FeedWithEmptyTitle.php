@@ -35,7 +35,7 @@ final class FeedWithEmptyTitle extends AbstractFeed
         return 'some link';
     }
 
-    public function getDateModified(): ?\DateTimeInterface
+    public function getDateModified(): \DateTimeInterface
     {
         return new \DateTimeImmutable('2011-11-11 11:11:11');
     }

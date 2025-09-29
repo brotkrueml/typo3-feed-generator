@@ -58,7 +58,7 @@ final class FullFeed extends AbstractFeed
         return 'en-GB';
     }
 
-    public function getImage(): ?ImageInterface
+    public function getImage(): ImageInterface
     {
         return new Image('https://example.org/some-image');
     }

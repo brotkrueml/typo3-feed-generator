@@ -55,17 +55,17 @@ final class SomeFeed implements FeedInterface
         );
     }
 
-    public function getDatePublished(): ?\DateTimeInterface
+    public function getDatePublished(): \DateTimeInterface
     {
         return new \DateTimeImmutable('01.08.2022 11:11:11');
     }
 
-    public function getDateModified(): ?\DateTimeInterface
+    public function getDateModified(): \DateTimeInterface
     {
         return new \DateTimeImmutable('01.08.2022 12:12:12');
     }
 
-    public function getLastBuildDate(): ?\DateTimeInterface
+    public function getLastBuildDate(): \DateTimeInterface
     {
         return new \DateTimeImmutable('01.08.2022 13:13:13');
     }
@@ -80,7 +80,7 @@ final class SomeFeed implements FeedInterface
         return 'some copyright';
     }
 
-    public function getImage(): ?ImageInterface
+    public function getImage(): ImageInterface
     {
         return new Image('some uri');
     }
