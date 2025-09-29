@@ -11,15 +11,10 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Contract;
 
-use JiriPudil\SealedClasses\Sealed;
-
 /**
  * Marker interface for an extension renderer. Every extension must implement a renderer which adds
  * the content from an extension element to the feed or item.
  * @api
+ * @phpstan-sealed JsonExtensionRendererInterface|XmlExtensionRendererInterface
  */
-#[Sealed(permits: [
-    JsonExtensionRendererInterface::class,
-    XmlExtensionRendererInterface::class,
-])]
 interface ExtensionRendererInterface {}

@@ -11,17 +11,9 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Contract;
 
-use JiriPudil\SealedClasses\Sealed;
-
 /**
  * Marker interface used for interfaces/classes which can be added to a Collection
  * @internal
+ * @phpstan-sealed AttachmentInterface|AuthorInterface|ExtensionContentInterface|CategoryInterface|ItemInterface
  */
-#[Sealed(permits: [
-    AttachmentInterface::class,
-    AuthorInterface::class,
-    ExtensionContentInterface::class,
-    CategoryInterface::class,
-    ItemInterface::class,
-])]
 interface CollectableInterface {}

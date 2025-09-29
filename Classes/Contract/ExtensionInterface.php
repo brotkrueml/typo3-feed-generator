@@ -11,17 +11,12 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Contract;
 
-use JiriPudil\SealedClasses\Sealed;
-
 /**
  * Marker interface for an extension class. Every extension must implement one of the
  * two interfaces that extend this one to be recognised as extension.
  * @internal
+ * @phpstan-sealed JsonExtensionInterface|XmlExtensionInterface
  */
-#[Sealed(permits: [
-    JsonExtensionInterface::class,
-    XmlExtensionInterface::class,
-])]
 interface ExtensionInterface
 {
     public function canHandle(ExtensionContentInterface $content): bool;
