@@ -60,8 +60,8 @@ final class FeedProvider implements ProviderInterface
         foreach ($configurations as $configuration) {
             $feed = [];
             if ($configuration->siteIdentifiers !== []) {
-                $feed['Site identifier' . (\count($configuration->siteIdentifiers) > 1 ? 's' : '')] =
-                    \implode(', ', $configuration->siteIdentifiers);
+                $feed['Site identifier' . (\count($configuration->siteIdentifiers) > 1 ? 's' : '')]
+                    = \implode(', ', $configuration->siteIdentifiers);
             }
             $feed += [
                 'Path' => $configuration->path,
