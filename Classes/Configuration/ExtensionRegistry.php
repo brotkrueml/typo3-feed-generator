@@ -14,6 +14,7 @@ namespace Brotkrueml\FeedGenerator\Configuration;
 use Brotkrueml\FeedGenerator\Contract\ExtensionContentInterface;
 use Brotkrueml\FeedGenerator\Contract\JsonExtensionInterface;
 use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
 /**
  * @internal
@@ -24,6 +25,7 @@ final readonly class ExtensionRegistry implements ExtensionRegistryInterface
      * @param iterable<JsonExtensionInterface|XmlExtensionInterface> $extensions
      */
     public function __construct(
+        #[AutowireIterator(tag: 'tx_feed_generator.extension')]
         private iterable $extensions,
     ) {}
 

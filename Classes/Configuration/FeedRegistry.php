@@ -14,6 +14,7 @@ namespace Brotkrueml\FeedGenerator\Configuration;
 use Brotkrueml\FeedGenerator\Attributes\Cache;
 use Brotkrueml\FeedGenerator\Attributes\Feed;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
 /**
  * @internal
@@ -28,8 +29,10 @@ final readonly class FeedRegistry implements FeedRegistryInterface
     /**
      * @param iterable<FeedInterface> $configuredFeeds
      */
-    public function __construct(iterable $configuredFeeds)
-    {
+    public function __construct(
+        #[AutowireIterator(tag: 'tx_feed_generator.feed')]
+        iterable $configuredFeeds,
+    ) {
         $configurations = [];
         foreach ($configuredFeeds as $configuredFeed) {
             $feedAttributes = \array_map(

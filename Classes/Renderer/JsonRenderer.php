@@ -18,10 +18,12 @@ use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
 use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 use Brotkrueml\FeedGenerator\Renderer\Json\JsonExtensionProcessor;
+use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 
 /**
  * @internal
  */
+#[Autoconfigure(public: true)]
 final readonly class JsonRenderer implements RendererInterface
 {
     public function __construct(

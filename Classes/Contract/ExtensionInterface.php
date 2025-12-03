@@ -11,12 +11,15 @@ declare(strict_types=1);
 
 namespace Brotkrueml\FeedGenerator\Contract;
 
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
+
 /**
  * Marker interface for an extension class. Every extension must implement one of the
  * two interfaces that extend this one to be recognised as extension.
  * @internal
  * @phpstan-sealed JsonExtensionInterface|XmlExtensionInterface
  */
+#[AutoconfigureTag(name: 'tx_feed_generator.extension')]
 interface ExtensionInterface
 {
     public function canHandle(ExtensionContentInterface $content): bool;

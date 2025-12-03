@@ -12,10 +12,12 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\Contract;
 
 use Brotkrueml\FeedGenerator\Collection\Collection;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 /**
  * Interface for a feed.
  */
+#[AutoconfigureTag(name: 'tx_feed_generator.feed')]
 interface FeedInterface
 {
     /**

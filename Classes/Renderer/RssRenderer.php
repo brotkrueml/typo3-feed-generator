@@ -21,10 +21,12 @@ use Brotkrueml\FeedGenerator\Renderer\Xml\Node\RssImageNode;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\RssItemNode;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\TextNode;
 use Brotkrueml\FeedGenerator\Renderer\Xml\XmlExtensionProcessor;
+use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 
 /**
  * @internal
  */
+#[Autoconfigure(public: true)]
 final class RssRenderer implements RendererInterface
 {
     private readonly ValueNotEmptyGuard $notEmptyGuard;

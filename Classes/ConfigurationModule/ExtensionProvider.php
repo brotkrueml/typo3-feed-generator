@@ -15,11 +15,18 @@ use Brotkrueml\FeedGenerator\Configuration\ExtensionRegistryInterface;
 use Brotkrueml\FeedGenerator\Contract\JsonExtensionInterface;
 use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
 use Brotkrueml\FeedGenerator\Format\FeedFormat;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use TYPO3\CMS\Lowlevel\ConfigurationModuleProvider\ProviderInterface;
 
 /**
  * @internal
  */
+#[AutoconfigureTag(
+    name: 'lowlevel.configuration.module.provider',
+    attributes: [
+        'identifier' => 'feed-generator/extension-provider',
+    ],
+)]
 final class ExtensionProvider implements ProviderInterface
 {
     private string $identifier;

@@ -9,14 +9,20 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\FeedGenerator;
-
-use Brotkrueml\FeedGenerator\Contract\ExtensionInterface;
-use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-return static function (ContainerConfigurator $configurator, ContainerBuilder $builder) {
-    $builder->registerForAutoconfiguration(ExtensionInterface::class)->addTag('tx_feed_generator.extension');
-    $builder->registerForAutoconfiguration(FeedInterface::class)->addTag('tx_feed_generator.feed');
+return static function (ContainerConfigurator $configurator, ContainerBuilder $builder): void {
+    $services = $configurator->services();
+    $services->defaults()
+        ->autowire()
+        ->autoconfigure();
+
+    $services->load('Brotkrueml\FeedGenerator\\', __DIR__ . '/../Classes/*')
+        ->exclude([
+            __DIR__ . '/../Classes/Attributes',
+            __DIR__ . '/../Classes/Configuration/FeedConfiguration',
+            __DIR__ . '/../Classes/Entity',
+            __DIR__ . '/../Classes/ValueObject',
+        ]);
 };

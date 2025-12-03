@@ -21,10 +21,12 @@ use Brotkrueml\FeedGenerator\Renderer\Xml\Node\AtomItemNode;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\AtomLinkNode;
 use Brotkrueml\FeedGenerator\Renderer\Xml\Node\TextNode;
 use Brotkrueml\FeedGenerator\Renderer\Xml\XmlExtensionProcessor;
+use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 
 /**
  * @internal
  */
+#[Autoconfigure(public: true)]
 final class AtomRenderer implements RendererInterface
 {
     private readonly ValueNotEmptyGuard $notEmptyGuard;

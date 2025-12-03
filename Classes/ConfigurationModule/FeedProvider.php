@@ -12,11 +12,18 @@ declare(strict_types=1);
 namespace Brotkrueml\FeedGenerator\ConfigurationModule;
 
 use Brotkrueml\FeedGenerator\Configuration\FeedRegistryInterface;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use TYPO3\CMS\Lowlevel\ConfigurationModuleProvider\ProviderInterface;
 
 /**
  * @internal
  */
+#[AutoconfigureTag(
+    name: 'lowlevel.configuration.module.provider',
+    attributes: [
+        'identifier' => 'feed-generator/feed-provider',
+    ],
+)]
 final class FeedProvider implements ProviderInterface
 {
     private string $identifier;
