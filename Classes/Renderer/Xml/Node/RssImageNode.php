@@ -19,17 +19,17 @@ use Brotkrueml\FeedGenerator\Renderer\Guard\ValueNotEmptyGuard;
  * Renders an XML node like "<image><url>https://example.org/some-image</url><title>Some image</title>...</image>"
  * @internal
  */
-final class RssImageNode
+final readonly class RssImageNode
 {
     private const IMAGE_MAX_HEIGHT = 400;
     private const IMAGE_MAX_WIDTH = 144;
 
-    private readonly ValueNotEmptyGuard $notEmptyGuard;
-    private readonly IntegerRangeGuard $integerRangeGuard;
+    private ValueNotEmptyGuard $notEmptyGuard;
+    private IntegerRangeGuard $integerRangeGuard;
 
     public function __construct(
-        private readonly \DOMDocument $document,
-        private readonly \DOMElement $parentElement,
+        private \DOMDocument $document,
+        private \DOMElement $parentElement,
     ) {
         $this->notEmptyGuard = new ValueNotEmptyGuard();
         $this->integerRangeGuard = new IntegerRangeGuard();

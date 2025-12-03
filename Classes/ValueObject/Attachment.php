@@ -16,15 +16,15 @@ use Brotkrueml\FeedGenerator\Contract\AttachmentInterface;
 /**
  * @api
  */
-final class Attachment implements AttachmentInterface
+final readonly class Attachment implements AttachmentInterface
 {
     /**
      * @param int<0, max> $length
      */
     public function __construct(
-        private readonly string $url,
-        private readonly string $type = '',
-        private readonly int $length = 0,
+        private string $url,
+        private string $type = '',
+        private int $length = 0,
     ) {}
 
     public function getUrl(): string

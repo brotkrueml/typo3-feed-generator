@@ -19,14 +19,14 @@ use Brotkrueml\FeedGenerator\Renderer\Guard\ValueNotEmptyGuard;
  * Renders an XML node like "<enclosure url="https://example.org/some-attachment" length="123456" type="some/type"/>"
  * @internal
  */
-final class RssEnclosureNode
+final readonly class RssEnclosureNode
 {
-    private readonly ValueNotEmptyGuard $notEmptyGuard;
-    private readonly IntegerRangeGuard $integerRangeGuard;
+    private ValueNotEmptyGuard $notEmptyGuard;
+    private IntegerRangeGuard $integerRangeGuard;
 
     public function __construct(
-        private readonly \DOMDocument $document,
-        private readonly \DOMElement $parentElement,
+        private \DOMDocument $document,
+        private \DOMElement $parentElement,
     ) {
         $this->notEmptyGuard = new ValueNotEmptyGuard();
         $this->integerRangeGuard = new IntegerRangeGuard();

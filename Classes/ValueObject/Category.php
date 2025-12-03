@@ -16,12 +16,12 @@ use Brotkrueml\FeedGenerator\Contract\CategoryInterface;
 /**
  * @api
  */
-final class Category implements CategoryInterface
+final readonly class Category implements CategoryInterface
 {
     public function __construct(
-        private readonly string $term,
-        private readonly string $scheme = '',
-        private readonly string $label = '',
+        private string $term,
+        private string $scheme = '',
+        private string $label = '',
     ) {}
 
     public function getTerm(): string

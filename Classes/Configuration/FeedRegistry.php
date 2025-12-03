@@ -18,12 +18,12 @@ use Brotkrueml\FeedGenerator\Contract\FeedInterface;
 /**
  * @internal
  */
-final class FeedRegistry implements FeedRegistryInterface
+final readonly class FeedRegistry implements FeedRegistryInterface
 {
     /**
      * @var FeedConfiguration[]
      */
-    private readonly array $configurations;
+    private array $configurations;
 
     /**
      * @param iterable<FeedInterface> $configuredFeeds

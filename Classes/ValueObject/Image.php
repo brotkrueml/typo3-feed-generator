@@ -16,19 +16,19 @@ use Brotkrueml\FeedGenerator\Contract\ImageInterface;
 /**
  * @api
  */
-final class Image implements ImageInterface
+final readonly class Image implements ImageInterface
 {
     /**
      * @param int<0, 144> $width
      * @param int<0, 400> $height
      */
     public function __construct(
-        private readonly string $url,
-        private readonly string $title = '',
-        private readonly string $link = '',
-        private readonly int $width = 0,
-        private readonly int $height = 0,
-        private readonly string $description = '',
+        private string $url,
+        private string $title = '',
+        private string $link = '',
+        private int $width = 0,
+        private int $height = 0,
+        private string $description = '',
     ) {}
 
     public function getUrl(): string

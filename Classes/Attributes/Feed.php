@@ -15,14 +15,14 @@ use Attribute;
 use Brotkrueml\FeedGenerator\Format\FeedFormat;
 
 #[Attribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
-final class Feed
+final readonly class Feed
 {
     /**
      * @param string[] $siteIdentifiers
      */
     public function __construct(
-        public readonly string $path,
-        public readonly FeedFormat $format,
-        public readonly array $siteIdentifiers = [],
+        public string $path,
+        public FeedFormat $format,
+        public array $siteIdentifiers = [],
     ) {}
 }

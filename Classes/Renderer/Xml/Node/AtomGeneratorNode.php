@@ -17,13 +17,13 @@ use Brotkrueml\FeedGenerator\Renderer\Guard\ValueNotEmptyGuard;
  * Renders an Atom generator node like "<generator uri="https://example.org/">Some Generator</generator>"
  * @internal
  */
-final class AtomGeneratorNode
+final readonly class AtomGeneratorNode
 {
-    private readonly ValueNotEmptyGuard $notEmptyGuard;
+    private ValueNotEmptyGuard $notEmptyGuard;
 
     public function __construct(
-        private readonly \DOMDocument $document,
-        private readonly \DOMElement $parentElement,
+        private \DOMDocument $document,
+        private \DOMElement $parentElement,
     ) {
         $this->notEmptyGuard = new ValueNotEmptyGuard();
     }

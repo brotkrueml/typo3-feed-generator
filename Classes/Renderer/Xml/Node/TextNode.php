@@ -15,11 +15,11 @@ namespace Brotkrueml\FeedGenerator\Renderer\Xml\Node;
  * Renders an XML node like "<name>value</name>"
  * @internal
  */
-final class TextNode
+final readonly class TextNode
 {
     public function __construct(
-        private readonly \DOMDocument $document,
-        private readonly \DOMElement $parentElement,
+        private \DOMDocument $document,
+        private \DOMElement $parentElement,
     ) {}
 
     public function add(string $name, string $value): void

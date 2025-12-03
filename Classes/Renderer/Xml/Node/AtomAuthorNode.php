@@ -18,13 +18,13 @@ use Brotkrueml\FeedGenerator\Renderer\Guard\ValueNotEmptyGuard;
  * Renders an Atom author node like "<author><name>John Doe</name><email>jd@example.org</email><uri>https://example.org/jd></uri></author>"
  * @internal
  */
-final class AtomAuthorNode
+final readonly class AtomAuthorNode
 {
-    private readonly ValueNotEmptyGuard $notEmptyGuard;
+    private ValueNotEmptyGuard $notEmptyGuard;
 
     public function __construct(
-        private readonly \DOMDocument $document,
-        private readonly \DOMElement $parentElement,
+        private \DOMDocument $document,
+        private \DOMElement $parentElement,
     ) {
         $this->notEmptyGuard = new ValueNotEmptyGuard();
     }

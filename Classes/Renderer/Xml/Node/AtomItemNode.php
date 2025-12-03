@@ -22,16 +22,16 @@ use Brotkrueml\FeedGenerator\Renderer\Xml\XmlExtensionProcessor;
  * Renders an Atom entry node like "<entry>...</entry>"
  * @internal
  */
-final class AtomItemNode
+final readonly class AtomItemNode
 {
-    private readonly ValueNotEmptyGuard $notEmptyGuard;
-    private readonly AtLeastOneValueNotEmptyGuard $atLeastOneValueNotEmptyGuard;
+    private ValueNotEmptyGuard $notEmptyGuard;
+    private AtLeastOneValueNotEmptyGuard $atLeastOneValueNotEmptyGuard;
 
     public function __construct(
-        private readonly \DOMDocument $document,
-        private readonly \DOMElement $parentElement,
-        private readonly XmlExtensionProcessor $extensionProcessor,
-        private readonly XmlNamespaceCollection $namespaces,
+        private \DOMDocument $document,
+        private \DOMElement $parentElement,
+        private XmlExtensionProcessor $extensionProcessor,
+        private XmlNamespaceCollection $namespaces,
     ) {
         $this->notEmptyGuard = new ValueNotEmptyGuard();
         $this->atLeastOneValueNotEmptyGuard = new AtLeastOneValueNotEmptyGuard();

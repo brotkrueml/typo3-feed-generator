@@ -17,11 +17,11 @@ use Brotkrueml\FeedGenerator\Contract\TextInterface;
  * Renders an XML node like "<name type="html">value</name>"
  * @internal
  */
-final class TextFormatNode
+final readonly class TextFormatNode
 {
     public function __construct(
-        private readonly \DOMDocument $document,
-        private readonly \DOMElement $parentElement,
+        private \DOMDocument $document,
+        private \DOMElement $parentElement,
     ) {}
 
     public function add(string $name, TextInterface $value): void

@@ -18,13 +18,13 @@ use Brotkrueml\FeedGenerator\Renderer\Guard\ValueNotEmptyGuard;
  * Renders an Atom category node like "<category term="some-category" schema="https://example.org/" label="Some category/>"
  * @internal
  */
-final class AtomCategoryNode
+final readonly class AtomCategoryNode
 {
-    private readonly ValueNotEmptyGuard $notEmptyGuard;
+    private ValueNotEmptyGuard $notEmptyGuard;
 
     public function __construct(
-        private readonly \DOMDocument $document,
-        private readonly \DOMElement $parentElement,
+        private \DOMDocument $document,
+        private \DOMElement $parentElement,
     ) {
         $this->notEmptyGuard = new ValueNotEmptyGuard();
     }

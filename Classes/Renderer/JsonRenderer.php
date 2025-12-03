@@ -22,10 +22,10 @@ use Brotkrueml\FeedGenerator\Renderer\Json\JsonExtensionProcessor;
 /**
  * @internal
  */
-final class JsonRenderer implements RendererInterface
+final readonly class JsonRenderer implements RendererInterface
 {
     public function __construct(
-        private readonly JsonExtensionProcessor $extensionProcessor,
+        private JsonExtensionProcessor $extensionProcessor,
     ) {}
 
     public function render(FeedInterface $feed, string $feedLink): string

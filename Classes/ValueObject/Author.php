@@ -16,12 +16,12 @@ use Brotkrueml\FeedGenerator\Contract\AuthorInterface;
 /**
  * @api
  */
-final class Author implements AuthorInterface
+final readonly class Author implements AuthorInterface
 {
     public function __construct(
-        private readonly string $name,
-        private readonly string $email = '',
-        private readonly string $uri = '',
+        private string $name,
+        private string $email = '',
+        private string $uri = '',
     ) {}
 
     public function getName(): string

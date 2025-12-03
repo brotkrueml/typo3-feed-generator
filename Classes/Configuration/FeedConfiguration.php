@@ -17,17 +17,17 @@ use Brotkrueml\FeedGenerator\Format\FeedFormat;
 /**
  * @internal
  */
-final class FeedConfiguration
+final readonly class FeedConfiguration
 {
     /**
      * @param string[] $siteIdentifiers
      */
     public function __construct(
-        public readonly FeedInterface $instance,
-        public readonly string $path,
-        public readonly FeedFormat $format,
-        public readonly array $siteIdentifiers,
-        public readonly ?int $cacheInSeconds,
+        public FeedInterface $instance,
+        public string $path,
+        public FeedFormat $format,
+        public array $siteIdentifiers,
+        public ?int $cacheInSeconds,
     ) {
         if (! \is_int($cacheInSeconds)) {
             return;

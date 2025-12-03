@@ -18,13 +18,13 @@ use Brotkrueml\FeedGenerator\Contract\XmlExtensionInterface;
 /**
  * @internal
  */
-final class ExtensionRegistry implements ExtensionRegistryInterface
+final readonly class ExtensionRegistry implements ExtensionRegistryInterface
 {
     /**
      * @param iterable<JsonExtensionInterface|XmlExtensionInterface> $extensions
      */
     public function __construct(
-        private readonly iterable $extensions,
+        private iterable $extensions,
     ) {}
 
     public function getExtensionForJsonContent(ExtensionContentInterface $content): ?JsonExtensionInterface

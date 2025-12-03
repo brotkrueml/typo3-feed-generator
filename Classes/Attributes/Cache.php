@@ -18,12 +18,12 @@ use Attribute;
  * in the HTTP response of a feed.
  */
 #[Attribute(Attribute::TARGET_CLASS)]
-final class Cache
+final readonly class Cache
 {
     /**
      * @param int<0, max> $seconds
      */
     public function __construct(
-        public readonly int $seconds,
+        public int $seconds,
     ) {}
 }

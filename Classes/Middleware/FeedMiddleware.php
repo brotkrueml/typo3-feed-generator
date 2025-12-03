@@ -33,12 +33,12 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 /**
  * @internal
  */
-final class FeedMiddleware implements MiddlewareInterface, ServiceSubscriberInterface
+final readonly class FeedMiddleware implements MiddlewareInterface, ServiceSubscriberInterface
 {
     public function __construct(
-        private readonly ContainerInterface $renderers,
-        private readonly FeedRegistryInterface $feedRegistry,
-        private readonly ResponseFactoryInterface $responseFactory,
+        private ContainerInterface $renderers,
+        private FeedRegistryInterface $feedRegistry,
+        private ResponseFactoryInterface $responseFactory,
     ) {}
 
     /**

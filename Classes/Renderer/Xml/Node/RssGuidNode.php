@@ -15,11 +15,11 @@ namespace Brotkrueml\FeedGenerator\Renderer\Xml\Node;
  * Renders an Atom author node like "<guid isPermaLink="false">1234</guid>"
  * @internal
  */
-final class RssGuidNode
+final readonly class RssGuidNode
 {
     public function __construct(
-        private readonly \DOMDocument $document,
-        private readonly \DOMElement $parentElement,
+        private \DOMDocument $document,
+        private \DOMElement $parentElement,
     ) {}
 
     public function add(string $guid): void
