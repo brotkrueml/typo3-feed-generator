@@ -11,7 +11,8 @@ Generator for Atom, JSON and RSS feeds in TYPO3
 
 ## Versions and support
 
-| Latest release | TYPO3       | PHP   | Updates will contain             |
-|----------------|-------------|-------|----------------------------------|
-| 0.7.x          | 12.4 / 13.4 | ≥ 8.1 | Features, security and bug fixes |
-| 0.6.x          | 11.5 / 12.4 | ≥ 8.1 | End of life (since Mar 2024)     |
+| Latest release | TYPO3       | PHP   | Updates will contain                          |
+|----------------|-------------|-------|-----------------------------------------------|
+| 0.8.x          | 13.4 / 14.x | ≥ 8.2 | Features, security and bug fixes              |
+| 0.7.x          | 12.4 / 13.4 | ≥ 8.1 | Security and bug fixes (EOL expected Apr 2026 |
+| 0.6.x          | 11.5 / 12.4 | ≥ 8.1 | End of life (since Mar 2024)                  |

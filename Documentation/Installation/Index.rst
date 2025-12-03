@@ -7,7 +7,7 @@ Installation
 ============
 
 .. note::
-   The extension in version |release| supports TYPO3 v12 LTS and TYPO3 v13 LTS.
+   The extension in version |release| supports TYPO3 v13 LTS and TYPO3 v14.
 
 .. attention::
    The extension is under development and in beta state.
@@ -21,7 +21,7 @@ Composer-based TYPO3 project root, just type:
 
 and the recent stable version will be installed.
 
-In a legacy installation, you can also install the extension from the
+In a classic installation, you can also install the extension from the
 `TYPO3 Extension Repository (TER)`_.
 
 The extension configuration offers some basic configuration which is
